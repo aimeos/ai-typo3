@@ -1,0 +1,14 @@
+language: php
+php:
+  - hhvm
+  - 5.5
+  - 5.4
+  - 5.3
+before_script:
+  - git clone --depth=50 --branch=master git://github.com/Arcavias/arcavias-core.git ../arcavias-core
+  - cd ../arcavias-core
+  - mv ../ai-typo3 ext/
+  - composer install || sleep 60 && composer install
+  - mysql -e 'create database aimeos;'
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
+script: "vendor/bin/phing setup && vendor/bin/phing -Ddir=ext/ai-typo3 testext && vendor/bin/phing -Ddir=ext/ai-typo3 checkext"

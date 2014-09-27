@@ -1,0 +1,22 @@
+{
+	"name": "aimeos/ai-typo3",
+	"description": "Aimeos extension for integration into TYPO3",
+	"homepage": "http://aimeos.org",
+	"type": "aimeos-extension",
+	"license": "LGPL-3.0",
+	"support": {
+		"source": "https://github.com/Aimeos/ai-typo3",
+		"issues": "https://github.com/Aimeos/ai-typo3/issues",
+		"forum": "https://help.aimeos.org",
+		"wiki": "https://docs.aimeos.org"
+	},
+	"autoload": {
+		"psr-0": {
+			"MShop": "lib/custom/src",
+			"MW": "lib/custom/src"
+		},
+		"classmap": [
+			"lib/custom/src"
+		]
+	}
+}

@@ -1,0 +1,3 @@
+coverage
+*.junit.xml
+*.log
