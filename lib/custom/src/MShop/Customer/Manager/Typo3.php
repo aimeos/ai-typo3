@@ -320,7 +320,6 @@ class MShop_Customer_Manager_Typo3
 		if( !$item->isModified() ) { return; }
 
 		$context = $this->_getContext();
-		$config = $context->getConfig();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
