@@ -100,7 +100,7 @@ class T3lib_Mail_Message
 	{
 	}
 
-	public function embedd( $part )
+	public function embed( $part )
 	{
 	}
 }

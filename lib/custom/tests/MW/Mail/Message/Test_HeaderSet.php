@@ -10,6 +10,10 @@
  */
 class Test_HeaderSet
 {
+	/**
+	 * @param string $name
+	 * @param string $value
+	 */
 	public function addTextHeader( $name, $value )
 	{
 	}
