@@ -35,6 +35,7 @@ class MW_Setup_Task_CustomerAddTypo3TestData extends MW_Setup_Task_CustomerAddTe
 		$this->_msg( 'Adding TYPO3 customer test data', 0 );
 		$this->_additional->setEditor( 'ai-typo3:unittest' );
 
+		$parentIds = array();
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer.php';
 

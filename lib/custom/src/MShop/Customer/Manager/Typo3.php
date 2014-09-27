@@ -370,7 +370,7 @@ class MShop_Customer_Manager_Typo3
 				$stmt->bind( 24, $this->_pid ); // TYPO3 PID value
 			}
 
-			$result = $stmt->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $fetch === true )
 			{

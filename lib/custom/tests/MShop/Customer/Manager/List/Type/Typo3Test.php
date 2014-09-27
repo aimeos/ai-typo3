@@ -121,6 +121,7 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
 		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.list.type.code', 'default' );

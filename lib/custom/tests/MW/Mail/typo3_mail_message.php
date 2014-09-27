@@ -89,9 +89,18 @@ class T3lib_Mail_Message
 
 	public function getHeaders()
 	{
+		return new Test_HeaderSet();
 	}
 
 	public function send()
+	{
+	}
+
+	public function attach( $part )
+	{
+	}
+
+	public function embedd( $part )
 	{
 	}
 }

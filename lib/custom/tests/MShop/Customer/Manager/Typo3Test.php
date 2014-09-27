@@ -164,6 +164,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'Franz-Xaver Gabler' );
 		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer3@metaways.de' );

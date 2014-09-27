@@ -248,6 +248,7 @@ class MShop_Customer_Manager_List_Typo3Test extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.list.id', null );
 		$expr[] = $search->compare( '!=', 'customer.list.siteid', null );
 		$expr[] = $search->compare( '>', 'customer.list.parentid', 0 );

@@ -182,6 +182,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$total = 0;
 		$search = $this->_object->createSearch();
 
+		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
