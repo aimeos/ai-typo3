@@ -91,6 +91,10 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 class Tx_Extbase_MVC_Web_Routing_UriBuilder
 {
+	/**
+	 * @param string|null $action
+	 * @param string $controller
+	 */
 	public function uriFor( $action, array $params, $controller )
 	{
 		return '';
@@ -101,16 +105,25 @@ class Tx_Extbase_MVC_Web_Routing_UriBuilder
 		return $this;
 	}
 
+	/**
+	 * @param string|null $target
+	 */
 	public function setTargetPageUid( $target )
 	{
 		return $this;
 	}
 
+	/**
+	 * @param integer $pageType
+	 */
 	public function setTargetPageType( $pageType )
 	{
 		return $this;
 	}
 
+	/**
+	 * @param boolean $absoluteUri
+	 */
 	public function setCreateAbsoluteUri( $absoluteUri )
 	{
 		return $this;
@@ -121,11 +134,17 @@ class Tx_Extbase_MVC_Web_Routing_UriBuilder
 		return $this;
 	}
 
+	/**
+	 * @param boolean $chash
+	 */
 	public function setUseCacheHash( $chash )
 	{
 		return $this;
 	}
 
+	/**
+	 * @param boolean $nocache
+	 */
 	public function setNoCache( $nocache )
 	{
 		return $this;

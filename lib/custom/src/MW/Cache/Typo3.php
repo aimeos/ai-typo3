@@ -54,7 +54,7 @@ class MW_Cache_Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $keys List of key strings that identify the cache entries
+	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 */
 	public function deleteList( array $keys )
@@ -70,7 +70,7 @@ class MW_Cache_Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings that are associated to one or more
+	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 */
 	public function deleteByTags( array $tags )
@@ -102,7 +102,7 @@ class MW_Cache_Typo3
 	 * @inheritDoc
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
-	 * @param mixed $default Value returned if requested key isn't found
+	 * @param string $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
 	public function get( $name, $default = null )
@@ -120,7 +120,7 @@ class MW_Cache_Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
@@ -145,7 +145,7 @@ class MW_Cache_Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $tags List of tag strings associated to the requested cache entries
+	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
@@ -177,7 +177,7 @@ class MW_Cache_Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param string $key Key string for the given value like product/id/123
+	 * @param string $name Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache

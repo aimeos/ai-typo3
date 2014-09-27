@@ -61,6 +61,10 @@ class Tslib_FeUserAuth
 {
 	private $_session = array();
 
+	/**
+	 * @param string $type
+	 * @param string $key
+	 */
 	public function getKey( $type , $key )
 	{
 		if ( isset($this->_session[$key]) ) {
@@ -68,6 +72,10 @@ class Tslib_FeUserAuth
 		}
 	}
 
+	/**
+	 * @param string $type
+	 * @param string $key
+	 */
 	public function setKey( $type , $key , $data )
 	{
 		$this->_session[$key] = $data;

@@ -219,7 +219,7 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $_context Context object with required objects
+	 * @param MShop_Context_Interface $context Context object with required objects
 	 */
 	public function __construct( MShop_Context_Item_Interface $context )
 	{
@@ -449,7 +449,6 @@ class MShop_Customer_Manager_Typo3
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @param MShop_Common_Item_Address_Interface $address billingaddress of customer item
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )

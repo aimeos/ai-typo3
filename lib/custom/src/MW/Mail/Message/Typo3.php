@@ -207,9 +207,9 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 
 
 	/**
-	 * Returns the internal Zend mail object.
+	 * Returns the internal TYPO3 mail message object.
 	 *
-	 * @return Zend_Mail Zend mail object
+	 * @return t3lib_mail_Message TYPO3 mail message object
 	 */
 	public function getObject()
 	{

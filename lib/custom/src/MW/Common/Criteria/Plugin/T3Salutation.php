@@ -20,7 +20,7 @@ class MW_Common_Criteria_Plugin_T3Salutation implements MW_Common_Criteria_Plugi
 	 * Translates the MShop value into its TYPO3 equivalent.
 	 *
 	 * @param string $value Address constant from MShop_Common_Item_Address_Abstract
-	 * @return string TYPO3 gender value or 99 if nothing matches
+	 * @return integer TYPO3 gender value or 99 if nothing matches
 	 */
 	public function translate( $value )
 	{
