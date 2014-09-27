@@ -48,27 +48,23 @@ class MW_View_Helper_Url_Typo3
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
-		$absoluteUri = ( isset( $config['absoluteUri'] ) && $config['absoluteUri'] == 1 ? true : false );
-		$nocache = ( isset( $config['nocache'] ) && $config['nocache'] == 1 ? true : false );
-		$chash = ( isset( $config['chash'] ) && $config['chash'] == 0 ? false : true );
-		$pageType = ( isset( $config['type'] ) ? (int) $config['type'] : 0 );
-		$format = ( isset( $config['format'] ) ? $config['format'] : '' );
-
 		$additional = array();
 		if( isset( $config['eID'] ) ) {
 			$additional['eID'] = $config['eID'];
 		}
 
+		$values = $this->_getValues( $config );
+
 		$this->_uriBuilder
 			->reset()
 			->setTargetPageUid( $target )
-			->setTargetPageType( $pageType )
-			->setCreateAbsoluteUri( $absoluteUri )
-			->setArguments( $additional )
-			->setUseCacheHash( $chash )
-			->setNoCache( $nocache )
-			->setFormat( $format )
-			->setSection( join( '/', $trailing ) );
+			->setSection( join( '/', $trailing ) )
+			->setCreateAbsoluteUri( $values['absoluteUri'] )
+			->setTargetPageType( $values['pageType'] )
+			->setUseCacheHash( $values['chash'] )
+			->setNoCache( $values['nocache'] )
+			->setFormat( $values['format'] )
+			->setArguments( $additional );
 
 		// Slashes in URL parameters confuses the router
 		foreach( $params as $key => $value ) {
@@ -76,5 +72,45 @@ class MW_View_Helper_Url_Typo3
 		}
 
 		return $this->_uriBuilder->uriFor( $action, $params, ucfirst( $controller ) );
+	}
+
+
+	/**
+	 * Returns the sanitized configuration values.
+	 *
+	 * @param array $config Associative list of key/value pairs
+	 * @return array Associative list of sanitized key/value pairs
+	 */
+	protected function _getValues( array $config )
+	{
+		$values = array(
+			'absoluteUri' => false,
+			'nocache' => false,
+			'chash' => true,
+			'pageType' => 0,
+			'format' => '',
+		);
+
+		if( isset( $config['absoluteUri'] ) ) {
+			$values['absoluteUri'] = (bool) $config['absoluteUri'];
+		}
+
+		if( isset( $config['nocache'] ) ) {
+			$values['nocache'] = (bool) $config['nocache'];
+		}
+
+		if( isset( $config['chash'] ) ) {
+			$values['chash'] = (bool) $config['chash'];
+		}
+
+		if( isset( $config['type'] ) ) {
+			$values['type'] = (int) $config['type'];
+		}
+
+		if( isset( $config['format'] ) ) {
+			$values['format'] = (string) $config['format'];
+		}
+
+		return $values;
 	}
 }

@@ -72,14 +72,27 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 		$this->_msg( 'Optimize list indexes in TYPO3 extension', 0 );
 		$this->_status( '' );
 
-		foreach( $stmts['add'] as $table => $stmtList )
+		$this->_addConstraints( $stmts['add'] );
+		$this->_deleteConstraints( $stmts['delete'] );
+		$this->_dropIndexes( $stmts['indexes'] );
+	}
+
+
+	/**
+	 * Adds the new constraints to the tables.
+	 *
+	 * @param array $stmts Associative list of table names and list of statements
+	 */
+	protected function _addConstraints( array $stmts )
+	{
+		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{
 				$this->_msg( sprintf( 'Adding constraint "%1$s": ', $name ), 1 );
 
 				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->constraintExists( $table, $name ) === false
+						&& $this->_schema->constraintExists( $table, $name ) === false
 				) {
 					$this->_execute( $stmt );
 					$this->_status( 'done' );
@@ -88,8 +101,17 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 				}
 			}
 		}
+	}
 
-		foreach( $stmts['delete'] as $table => $stmtList )
+
+	/**
+	 * Deletes existing constraints from the tables.
+	 *
+	 * @param array $stmts Associative list of table names and list of statements
+	 */
+	protected function _deleteConstraints( array $stmts )
+	{
+		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{
@@ -105,8 +127,17 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 				}
 			}
 		}
+	}
 
-		foreach( $stmts['indexes'] as $table => $stmtList )
+
+	/**
+	 * Drops existing indexes from the tables.
+	 *
+	 * @param array $stmts Associative list of table names and list of statements
+	 */
+	protected function _dropIndexes( array $stmts )
+	{
+		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{

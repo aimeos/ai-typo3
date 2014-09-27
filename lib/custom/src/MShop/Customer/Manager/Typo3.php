@@ -327,17 +327,83 @@ class MShop_Customer_Manager_Typo3
 		try
 		{
 			$id = $item->getId();
-
-			$path = 'mshop/customer/manager/typo3/item/';
-			$path .= ( $id === null ) ? 'insert' : 'update';
-
-			$sql = $config->get( $path, $path );
-
-			$stmt = $conn->create( $sql );
 			$billingAddress = $item->getPaymentAddress();
 
-			$addressParts = ( ( $part = $billingAddress->getAddress2() ) != '' ? ' ' . $part : '' );
-			$addressParts .= ( ( $part = $billingAddress->getAddress3() ) != '' ? ' ' . $part : '' );
+			if( $id === null )
+			{
+				/** mshop/customer/manager/typo3/item/insert
+				 * Inserts a new customer record into the database table
+				 *
+				 * Items with no ID yet (i.e. the ID is NULL) will be created in
+				 * the database and the newly created ID retrieved afterwards
+				 * using the "newid" SQL statement.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer item to the statement before they are
+				 * sent to the database server. The number of question marks must
+				 * be the same as the number of columns listed in the INSERT
+				 * statement. The order of the columns must correspond to the
+				 * order in the saveItems() method, so the correct values are
+				 * bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for inserting records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/typo3/item/update
+				 * @see mshop/customer/manager/typo3/item/newid
+				 * @see mshop/customer/manager/typo3/item/delete
+				 * @see mshop/customer/manager/typo3/item/search
+				 * @see mshop/customer/manager/typo3/item/count
+				 */
+				$path = 'mshop/customer/manager/typo3/item/insert';
+			}
+			else
+			{
+				/** mshop/customer/manager/typo3/item/update
+				 * Updates an existing customer record in the database
+				 *
+				 * Items which already have an ID (i.e. the ID is not NULL) will
+				 * be updated in the database.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer item to the statement before they are
+				 * sent to the database server. The order of the columns must
+				 * correspond to the order in the saveItems() method, so the
+				 * correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/typo3/item/insert
+				 * @see mshop/customer/manager/typo3/item/newid
+				 * @see mshop/customer/manager/typo3/item/delete
+				 * @see mshop/customer/manager/typo3/item/search
+				 * @see mshop/customer/manager/typo3/item/count
+				 */
+				$path = 'mshop/customer/manager/typo3/item/update';
+			}
+
+			$stmt = $this->_getCachedStatement( $conn, $path );
+
+			$address = $billingAddress->getAddress1();
+
+			if( ( $part = $billingAddress->getAddress2() ) != '' ) {
+				$address .= ' ' . $part;
+			}
+
+			if( ( $part = $billingAddress->getAddress3() ) != '' ) {
+				$address .= ' ' . $part;
+			}
 
 			// TYPO3 fe_users.static_info_country is a three letter ISO code instead a two letter one
 			$stmt->bind( 1, $item->getLabel() );
@@ -348,7 +414,7 @@ class MShop_Customer_Manager_Typo3
 			$stmt->bind( 6, $billingAddress->getTitle() );
 			$stmt->bind( 7, $billingAddress->getFirstname() );
 			$stmt->bind( 8, $billingAddress->getLastname() );
-			$stmt->bind( 9, $billingAddress->getAddress1() . $addressParts );
+			$stmt->bind( 9, $address );
 			$stmt->bind( 10, $billingAddress->getPostal() );
 			$stmt->bind( 11, $billingAddress->getCity() );
 			$stmt->bind( 12, $billingAddress->getState() );
@@ -365,6 +431,7 @@ class MShop_Customer_Manager_Typo3
 
 			if( $id !== null ) {
 				$stmt->bind( 23, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$item->setId( $id );
 			} else {
 				$stmt->bind( 23, time() ); // Creation time
 				$stmt->bind( 24, $this->_pid ); // TYPO3 PID value
@@ -372,14 +439,40 @@ class MShop_Customer_Manager_Typo3
 
 			$stmt->execute()->finish();
 
-			if( $fetch === true )
+			if( $id === null && $fetch === true )
 			{
-				if( $id === null ) {
-					$path = 'mshop/customer/manager/typo3/item/newid';
-					$item->setId( $this->_newId( $conn, $config->get($path, $path) ) );
-				} else {
-					$item->setId( $id );
-				}
+				/** mshop/customer/manager/typo3/item/newid
+				 * Retrieves the ID generated by the database when inserting a new record
+				 *
+				 * As soon as a new record is inserted into the database table,
+				 * the database server generates a new and unique identifier for
+				 * that record. This ID can be used for retrieving, updating and
+				 * deleting that specific record from the table again.
+				 *
+				 * For MySQL:
+				 *  SELECT LAST_INSERT_ID()
+				 * For PostgreSQL:
+				 *  SELECT currval('seq_mcus_id')
+				 * For SQL Server:
+				 *  SELECT SCOPE_IDENTITY()
+				 * For Oracle:
+				 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
+				 *
+				 * There's no way to retrive the new ID by a SQL statements that
+				 * fits for most database servers as they implement their own
+				 * specific way.
+				 *
+				 * @param string SQL statement for retrieving the last inserted record ID
+				 * @since 2014.03
+				 * @category Developer
+				 * @see mshop/customer/manager/typo3/item/insert
+				 * @see mshop/customer/manager/typo3/item/update
+				 * @see mshop/customer/manager/typo3/item/delete
+				 * @see mshop/customer/manager/typo3/item/search
+				 * @see mshop/customer/manager/typo3/item/count
+				 */
+				$path = 'mshop/customer/manager/typo3/item/newid';
+				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn );
@@ -453,11 +546,7 @@ class MShop_Customer_Manager_Typo3
 	 */
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		if( !isset( $this->_addressManager ) ) {
-			$this->_addressManager = $this->getSubManager( 'address' );
-		}
-
-		$address = $this->_addressManager->createItem();
+		$address = $this->_getAddressManager()->createItem();
 		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'date_of_birth', $values ) ) {
@@ -487,4 +576,18 @@ class MShop_Customer_Manager_Typo3
 		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems );
 	}
 
+
+	/**
+	 * Returns the address sub-manager.
+	 *
+	 * @return MShop_Common_Manager_Interface Customer address manager
+	 */
+	protected function _getAddressManager()
+	{
+		if( !isset( $this->_addressManager ) ) {
+			$this->_addressManager = $this->getSubManager( 'address' );
+		}
+
+		return $this->_addressManager;
+	}
 }
