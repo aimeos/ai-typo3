@@ -10,21 +10,10 @@
  */
 class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 {
-	protected $_context;
-	protected $_item = null;
-	protected $_object = null;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Customer_Manager_Typo3Test');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
+	private $_context;
+	private $_object;
+	private $_editor;
+	private $_item;
 
 
 	/**
@@ -33,6 +22,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$this->_context = TestHelper::getContext();
+		$this->_editor = $this->_context->getEditor();
 		$this->_context->getConfig()->set( 'mshop/customer/manager/typo3/pid-default', 999999 );
 		$this->_object = new MShop_Customer_Manager_Typo3( $this->_context );
 	}
@@ -217,7 +207,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unit.web.site' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 2 );
-		$expr[] = $search->compare( '==', 'customer.address.editor', 'typo3:unittest' );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->_editor );
 		$expr[] = $search->compare( '>', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.address.ctime', '1970-01-01 00:00:00' );
 
@@ -232,7 +222,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '>', 'customer.list.position', 0 );
 		$expr[] = $search->compare( '>=', 'customer.list.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.editor', 'typo3:unittest' );
+		$expr[] = $search->compare( '==', 'customer.list.editor', $this->_editor );
 
 		$expr[] = $search->compare( '!=', 'customer.list.type.id', null );
 		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
@@ -242,7 +232,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', 'typo3:unittest' );
+		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->_editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->_object->searchItems( $search, array(), $total );

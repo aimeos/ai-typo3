@@ -34,7 +34,7 @@ class MW_Setup_Task_CustomerListAddTypo3TestData
 		}
 
 		$this->_msg( 'Adding customer-list TYPO3 test data', 0 );
-		$this->_additional->setEditor( 'typo3:unittest' );
+		$this->_additional->setEditor( 'ai-typo3:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer-list.php';

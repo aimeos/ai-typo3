@@ -10,19 +10,8 @@
  */
 class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 {
-	protected $_object = null;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MShop_Customer_Manager_Address_Typo3Test');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
+	private $_object;
+	private $_editor = '';
 
 
 	/**
@@ -30,6 +19,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		$this->_editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Typo3' );
 		$this->_object = $manager->getSubManager( 'address', 'Typo3' );
 	}
@@ -95,7 +85,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( 'www.metaways.de', $actual->getWebsite() );
 		$this->assertEquals( 0, $actual->getFlag() );
 		$this->assertEquals( 0, $actual->getPosition() );
-		$this->assertEquals( 'typo3:unittest', $actual->getEditor() );
+		$this->assertEquals( $this->_editor, $actual->getEditor() );
 	}
 
 
@@ -214,7 +204,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.metaways.de' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
-		$expr[] = $search->compare( '==', 'customer.address.editor', 'typo3:unittest' );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->_editor );
 		$expr[] = $search->compare( '>', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.address.ctime', '1970-01-01 00:00:00' );
 

@@ -11,7 +11,8 @@
  */
 class MW_Session_Typo3Test extends MW_Unittest_Testcase
 {
-	protected $_object;
+	private $_object;
+
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

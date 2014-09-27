@@ -10,19 +10,7 @@
  */
 class MW_Common_Criteria_Plugin_T3SalutationTest extends MW_Unittest_Testcase
 {
-	protected $_object;
-
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite('MW_Common_Criteria_Plugin_T3SalutationTest');
-		PHPUnit_TextUI_TestRunner::run($suite);
-	}
+	private $_object;
 
 
 	/**
