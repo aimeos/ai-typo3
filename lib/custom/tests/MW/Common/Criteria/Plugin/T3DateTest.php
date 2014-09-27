@@ -1,9 +1,11 @@
 <?php
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2014
  */
+
 
 /**
  * Test class for MW_Common_Criteria_Plugin_T3Date
