@@ -61,7 +61,7 @@ class MW_View_Helper_Url_Typo3
 			->setTargetPageUid( $target )
 			->setSection( join( '/', $trailing ) )
 			->setCreateAbsoluteUri( $values['absoluteUri'] )
-			->setTargetPageType( $values['pageType'] )
+			->setTargetPageType( $values['type'] )
 			->setUseCacheHash( $values['chash'] )
 			->setNoCache( $values['nocache'] )
 			->setFormat( $values['format'] )
@@ -88,8 +88,8 @@ class MW_View_Helper_Url_Typo3
 			'absoluteUri' => false,
 			'nocache' => false,
 			'chash' => true,
-			'pageType' => 0,
 			'format' => '',
+			'type' => 0,
 		);
 
 		if( isset( $config['absoluteUri'] ) ) {
