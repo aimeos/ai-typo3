@@ -1,6 +1,7 @@
 {
 	"name": "aimeos/ai-typo3",
 	"description": "Aimeos extension for integration into TYPO3",
+	"keywords": ["aimeos", "adapter", "typo3", "cms"],
 	"homepage": "http://aimeos.org",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
@@ -9,6 +10,9 @@
 		"issues": "https://github.com/Aimeos/ai-typo3/issues",
 		"forum": "https://help.aimeos.org",
 		"wiki": "https://docs.aimeos.org"
+	},
+	"require": {
+		"php": ">=5.2.0"
 	},
 	"autoload": {
 		"psr-0": {
