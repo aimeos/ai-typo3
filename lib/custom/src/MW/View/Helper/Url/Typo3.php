@@ -69,10 +69,10 @@ class MW_View_Helper_Url_Typo3
 
 		// Slashes in URL parameters confuses the router
 		foreach( $params as $key => $value ) {
-			$params[$key] = str_replace( '/', '', $value );
+			$params[$key] = str_replace( '/', '_', $value );
 		}
 
-		return $this->_uriBuilder->uriFor( $action, $params, ucfirst( $controller ) );
+		return $this->_uriBuilder->uriFor( $action, $params, ucfirst( $controller ), $values['extension'], $values['plugin'] );
 	}
 
 
@@ -85,12 +85,22 @@ class MW_View_Helper_Url_Typo3
 	protected function _getValues( array $config )
 	{
 		$values = array(
+			'plugin' => null,
+			'extension' => null,
 			'absoluteUri' => false,
 			'nocache' => false,
 			'chash' => true,
 			'format' => '',
 			'type' => 0,
 		);
+
+		if( isset( $config['plugin'] ) ) {
+			$values['plugin'] = (string) $config['plugin'];
+		}
+
+		if( isset( $config['extension'] ) ) {
+			$values['extension'] = (string) $config['extension'];
+		}
 
 		if( isset( $config['absoluteUri'] ) ) {
 			$values['absoluteUri'] = (bool) $config['absoluteUri'];
