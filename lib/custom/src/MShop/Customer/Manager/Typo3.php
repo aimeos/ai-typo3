@@ -322,7 +322,8 @@ class MShop_Customer_Manager_Typo3
 
 		$context = $this->_getContext();
 		$dbm = $context->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
@@ -496,7 +497,8 @@ class MShop_Customer_Manager_Typo3
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->_getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
+		$dbname = $this->_getResourceName();
+		$conn = $dbm->acquire( $dbname );
 		$map = array();
 
 		try
