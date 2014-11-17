@@ -476,11 +476,11 @@ class MShop_Customer_Manager_Typo3
 				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 	}
@@ -513,11 +513,11 @@ class MShop_Customer_Manager_Typo3
 				$map[ $row['id'] ] = $row;
 			}
 
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname );
 		}
 		catch( Exception $e )
 		{
-			$dbm->release( $conn );
+			$dbm->release( $conn, $dbname  );
 			throw $e;
 		}
 
