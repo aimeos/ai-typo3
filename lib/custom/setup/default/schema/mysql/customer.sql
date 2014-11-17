@@ -68,17 +68,7 @@ CREATE TABLE "fe_users_address" (
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_t3feuad_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_t3feuad_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-CONSTRAINT "fk_t3feuad_langid"
-	FOREIGN KEY ("langid")
-	REFERENCES "mshop_locale_language" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_t3feuad_refid" ON "fe_users_address" ("refid");
@@ -128,12 +118,7 @@ CREATE TABLE "fe_users_list_type" (
 CONSTRAINT "pk_t3feulity_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_t3feulity_sid_dom_code"
-	UNIQUE ("siteid", "domain", "code"),
-CONSTRAINT "fk_t3feulity_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	UNIQUE ("siteid", "domain", "code")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE INDEX "idx_t3feulity_sid_status" ON "fe_users_list_type" ("siteid", "status");
@@ -180,11 +165,6 @@ CONSTRAINT "pk_t3feuli_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_t3feuli_sid_dm_rid_tid_pid"
 	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
-CONSTRAINT "fk_t3feuli_siteid"
-	FOREIGN KEY ("siteid")
-	REFERENCES "mshop_locale_site" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_t3feuli_typeid"
 	FOREIGN KEY ( "typeid" )
 	REFERENCES "fe_users_list_type" ("id")
