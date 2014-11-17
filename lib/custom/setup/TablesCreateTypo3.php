@@ -23,7 +23,7 @@ class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			dirname(realpath(__FILE__)) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'customer.sql',
+			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'customer.sql',
 		);
 
 		$this->_setup( $files );
