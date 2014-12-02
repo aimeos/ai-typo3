@@ -6,7 +6,7 @@ php:
   - 5.4
   - 5.3
 before_script:
-  - git clone --depth=50 --branch=master git://github.com/aimeos/arcavias-core.git ../arcavias-core
+  - git clone --depth=50 --branch=master git://github.com/Arcavias/arcavias-core.git ../arcavias-core
   - cd ../arcavias-core
   - mv ../ai-typo3 ext/
   - composer install || sleep 60 && composer install
