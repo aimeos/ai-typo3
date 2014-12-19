@@ -20,6 +20,7 @@ class MW_View_Helper_Url_Typo3
 	implements MW_View_Helper_Interface
 {
 	private $_uriBuilder;
+	private $_fixed;
 
 
 	/**
@@ -27,12 +28,14 @@ class MW_View_Helper_Url_Typo3
 	 *
 	 * @param MW_View_Interface $view View instance with registered view helpers
 	 * @param Tx_Extbase_MVC_Web_Routing_UriBuilder $uriBuilder TYPO3 URI builder
+	 * @param array $fixed Fixed parameters that should be added to each URL
 	 */
-	public function __construct( MW_View_Interface $view, Tx_Extbase_MVC_Web_Routing_UriBuilder $uriBuilder )
+	public function __construct( MW_View_Interface $view, Tx_Extbase_MVC_Web_Routing_UriBuilder $uriBuilder, array $fixed )
 	{
 		parent::__construct( $view );
 
 		$this->_uriBuilder = $uriBuilder;
+		$this->_fixed = $fixed;
 	}
 
 
@@ -71,6 +74,7 @@ class MW_View_Helper_Url_Typo3
 		foreach( $params as $key => $value ) {
 			$params[$key] = str_replace( '/', '_', $value );
 		}
+		$params = $params + $this->_fixed;
 
 		return $this->_uriBuilder->uriFor( $action, $params, ucfirst( $controller ), $values['extension'], $values['plugin'] );
 	}
