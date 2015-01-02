@@ -7,8 +7,8 @@
  */
 
 
-require_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'typo3_mail_message.php' );
-require_once( __DIR__ . DIRECTORY_SEPARATOR . 'Test_HeaderSet.php' );
+require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'MailMessage.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Test_HeaderSet.php';
 
 
 class MW_Mail_Message_Typo3Test extends MW_Unittest_Testcase
@@ -25,7 +25,7 @@ class MW_Mail_Message_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_mock = $this->getMock( 'T3lib_Mail_Message' );
+		$this->_mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
 		$this->_object = new MW_Mail_Message_Typo3( $this->_mock, 'UTF-8' );
 	}
 
@@ -159,6 +159,6 @@ class MW_Mail_Message_Typo3Test extends MW_Unittest_Testcase
 
 	public function testGetObject()
 	{
-		$this->assertInstanceOf( 't3lib_mail_Message', $this->_object->getObject() );
+		$this->assertInstanceOf( 'TYPO3\\CMS\\Core\\Mail\\MailMessage', $this->_object->getObject() );
 	}
 }

@@ -23,10 +23,10 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	/**
 	 * Initializes the message instance.
 	 *
-	 * @param t3lib_mail_Message $object TYPO3 mail object
+	 * @param TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
 	 * @param string $charset Default charset of the message
 	 */
-	public function __construct( t3lib_mail_Message $object, $charset )
+	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object, $charset )
 	{
 		$object->setCharset( $charset );
 
@@ -210,7 +210,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	/**
 	 * Returns the internal TYPO3 mail message object.
 	 *
-	 * @return t3lib_mail_Message TYPO3 mail message object
+	 * @return TYPO3\CMS\Core\Mail\MailMessage TYPO3 mail message object
 	 */
 	public function getObject()
 	{

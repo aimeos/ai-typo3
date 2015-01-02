@@ -24,7 +24,7 @@ class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_mock = $this->getMock( 'T3Cache' );
+		$this->_mock = $this->getMock( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' );
 		$this->_object = new MW_Cache_Typo3( array(), $this->_mock );
 	}
 

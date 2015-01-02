@@ -23,9 +23,9 @@ class MW_Session_Typo3 implements MW_Session_Interface
 	/**
 	 * Initializes the Typo3 session object.
 	 *
-	 * @param tslib_feUserAuth Typo3 frontend user object from $GLOBALS['TSFE']->fe_user
+	 * @param TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication Typo3 frontend user object from $GLOBALS['TSFE']->fe_user
 	 */
-	public function __construct( tslib_feUserAuth $feuser )
+	public function __construct( TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication $feuser )
 	{
 		$this->_feuser = $feuser;
 	}

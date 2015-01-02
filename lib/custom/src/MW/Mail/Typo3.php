@@ -23,9 +23,9 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param t3lib_mail_Message $object TYPO3 mail object
+	 * @param TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
 	 */
-	public function __construct( t3lib_mail_Message $object )
+	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object )
 	{
 		$this->_object = $object;
 	}

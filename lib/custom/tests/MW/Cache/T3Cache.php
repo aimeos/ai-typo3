@@ -6,6 +6,8 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
+namespace TYPO3\CMS\Core\Cache\Frontend;
+
 
 interface FrontendInterface
 {

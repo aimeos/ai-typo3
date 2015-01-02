@@ -7,6 +7,9 @@
  */
 
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication.php';
+
+
 /**
  * Test class for MW_Session_Typo3.
  */
@@ -23,7 +26,7 @@ class MW_Session_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$mock = new Tslib_FeUserAuth();
+		$mock = new TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication();
 		$this->_object = new MW_Session_Typo3($mock);
 	}
 
@@ -53,36 +56,5 @@ class MW_Session_Typo3Test extends MW_Unittest_Testcase
 
 		$this->_object->set('test', '234');
 		$this->assertEquals( '234', $this->_object->get( 'test' ) );
-	}
-}
-
-
-
-class Tslib_FeUserAuth
-{
-	private $_session = array();
-
-	/**
-	 * @param string $type
-	 * @param string $key
-	 */
-	public function getKey( $type , $key )
-	{
-		if ( isset($this->_session[$key]) ) {
-			return $this->_session[$key];
-		}
-	}
-
-	/**
-	 * @param string $type
-	 * @param string $key
-	 */
-	public function setKey( $type , $key , $data )
-	{
-		$this->_session[$key] = $data;
-	}
-
-	public function storeSessionData()
-	{
 	}
 }

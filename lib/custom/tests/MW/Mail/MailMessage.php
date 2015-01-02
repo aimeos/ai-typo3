@@ -7,10 +7,13 @@
  */
 
 
+namespace TYPO3\CMS\Core\Mail;
+
+
 /**
  * TYPO3 mail stub required for tests.
  */
-class T3lib_Mail_Message
+class MailMessage
 {
 	/**
 	 * @param string $charset

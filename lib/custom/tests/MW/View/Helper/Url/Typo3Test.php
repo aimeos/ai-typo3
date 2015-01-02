@@ -7,6 +7,9 @@
  */
 
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'UriBuilder.php';
+
+
 /**
  * Test class for MW_View_Helper_Url_Typo3.
  */
@@ -41,7 +44,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransform()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'uriFor') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'uriFor' )
@@ -56,7 +59,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformAbsolute()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setCreateAbsoluteUri') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
@@ -71,7 +74,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformNocache()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setNoCache') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setNoCache' )
@@ -86,7 +89,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformChash()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setUseCacheHash') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
@@ -101,7 +104,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformType()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setTargetPageType') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
@@ -116,7 +119,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformFormat()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setFormat') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setFormat' )
@@ -131,7 +134,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformEID()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setArguments') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setArguments' )
@@ -146,7 +149,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 	public function testTransformParams()
 	{
-		$mock = $this->getMockBuilder( 'Tx_Extbase_MVC_Web_Routing_UriBuilder' )
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'uriFor') )->getMock();
 
 		$mock->expects( $this->once() )->method( 'uriFor' )
@@ -156,79 +159,5 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 		$params = array( 'test' => 'my/value' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
-	}
-}
-
-
-
-class Tx_Extbase_MVC_Web_Routing_UriBuilder
-{
-	/**
-	 * @param string|null $action
-	 * @param string $controller
-	 */
-	public function uriFor( $action, array $params, $controller )
-	{
-		return '';
-	}
-
-	public function reset()
-	{
-		return $this;
-	}
-
-	/**
-	 * @param string|null $target
-	 */
-	public function setTargetPageUid( $target )
-	{
-		return $this;
-	}
-
-	/**
-	 * @param integer $pageType
-	 */
-	public function setTargetPageType( $pageType )
-	{
-		return $this;
-	}
-
-	/**
-	 * @param boolean $absoluteUri
-	 */
-	public function setCreateAbsoluteUri( $absoluteUri )
-	{
-		return $this;
-	}
-
-	public function setArguments( $additional )
-	{
-		return $this;
-	}
-
-	/**
-	 * @param boolean $chash
-	 */
-	public function setUseCacheHash( $chash )
-	{
-		return $this;
-	}
-
-	/**
-	 * @param boolean $nocache
-	 */
-	public function setNoCache( $nocache )
-	{
-		return $this;
-	}
-
-	public function setFormat( $format )
-	{
-		return $this;
-	}
-
-	public function setSection( $trailing )
-	{
-		return $this;
 	}
 }
