@@ -14,7 +14,7 @@ class UriBuilder
 	 * @param string|null $action
 	 * @param string $controller
 	 */
-	public function uriFor( $action, array $params, $controller )
+	public function uriFor( $action, array $params, $controller, $extension, $plugin )
 	{
 		return '';
 	}
