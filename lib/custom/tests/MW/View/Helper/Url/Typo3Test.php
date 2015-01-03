@@ -147,6 +147,22 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 	}
 
 
+	public function testTransformExtensionPlugin()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+		->setMethods( array( 'uriFor') )->getMock();
+
+		$mock->expects( $this->once() )->method( 'uriFor' )
+		->with( $this->equalTo( null ), $this->equalTo( array( 'site' => 'unittest' ) ),
+				$this->equalTo( null ), $this->equalTo( 'testext' ), $this->equalTo( 'testplugin' ) );
+
+		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
+
+		$config = array( 'extension' => 'testext', 'plugin' => 'testplugin' );
+		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+	}
+
+
 	public function testTransformParams()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
