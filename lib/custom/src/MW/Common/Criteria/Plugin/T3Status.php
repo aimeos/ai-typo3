@@ -25,7 +25,7 @@ class MW_Common_Criteria_Plugin_T3Status implements MW_Common_Criteria_Plugin_In
 	 */
 	public function translate( $value )
 	{
-		return ( $value ? 0 : 1 );
+		return ( $value === 1 ? 0 : 1 );
 	}
 
 
@@ -37,6 +37,6 @@ class MW_Common_Criteria_Plugin_T3Status implements MW_Common_Criteria_Plugin_In
 	 */
 	public function reverse( $value )
 	{
-		return ( $value ? 0 : 1 );
+		return ( $value === 1 ? 0 : 1 );
 	}
 }

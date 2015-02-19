@@ -187,6 +187,13 @@ class MShop_Customer_Manager_Typo3
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
 		),
+		'customer.vdate'=> array(
+			'label' => 'Customer verification date',
+			'code' => 'customer.vdate',
+			'internalcode' => 't3feu."vdate"',
+			'type' => 'date',
+			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+		),
 		'customer.ctime'=> array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
@@ -240,31 +247,6 @@ class MShop_Customer_Manager_Typo3
 		$this->_plugins['customer.mtime'] = $this->_reverse['tstamp'] = $plugin;
 
 		$this->_pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
-	}
-
-
-	/**
-	 * Creates a criteria object for searching.
-	 *
-	 * @param boolean $default Include default criteria like the status
-	 * @return MW_Common_Criteria_Interface Search criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		if( $default === true )
-		{
-			$dbm = $this->_getContext()->getDatabaseManager();
-			$conn = $dbm->acquire();
-
-			$object = new MW_Common_Criteria_SQL( $conn );
-			$object->setConditions( $object->compare( '==', 'customer.status', 1 ) );
-
-			$dbm->release( $conn );
-
-			return $object;
-		}
-
-		return parent::createSearch();
 	}
 
 
