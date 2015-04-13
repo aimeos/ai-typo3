@@ -265,6 +265,20 @@ class MShop_Customer_Manager_Typo3
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'classes/customer/manager/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
+	}
+
+
+	/**
 	 * Instantiates a new customer item object.
 	 *
 	 * @return MShop_Customer_Item_Interface New customer item object
