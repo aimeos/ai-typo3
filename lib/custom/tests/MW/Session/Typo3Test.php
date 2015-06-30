@@ -7,7 +7,7 @@
  */
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication';
 
 
 /**

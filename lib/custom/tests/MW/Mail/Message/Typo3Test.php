@@ -7,7 +7,7 @@
  */
 
 
-require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'MailMessage.php';
+require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'MailMessage';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Test_HeaderSet.php';
 
 

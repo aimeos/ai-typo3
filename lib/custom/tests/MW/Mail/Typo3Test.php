@@ -7,7 +7,7 @@
  */
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'MailMessage.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'MailMessage';
 
 
 class MW_Mail_Typo3Test extends MW_Unittest_Testcase
