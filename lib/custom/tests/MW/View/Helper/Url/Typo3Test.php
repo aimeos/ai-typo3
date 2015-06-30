@@ -45,10 +45,9 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 	public function testTransform()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'uriFor') )->getMock();
+			->setMethods( array( 'buildFrontendUri') )->getMock();
 
-		$mock->expects( $this->once() )->method( 'uriFor' )
-			->with( $this->equalTo( null ), $this->equalTo( array( 'site' => 'unittest' ) ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
 		$fixed = array( 'site' => 'unittest' );
 		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, $fixed );
@@ -137,8 +136,10 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setArguments') )->getMock();
 
+		$param = array( 'eID' => 123, 'ai' => array( 'controller' => null, 'action' => null ) );
+
 		$mock->expects( $this->once() )->method( 'setArguments' )
-			->with( $this->equalTo( array( 'eID' => 123 ) ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
 
 		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
 
@@ -147,29 +148,12 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 	}
 
 
-	public function testTransformExtensionPlugin()
-	{
-		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-		->setMethods( array( 'uriFor') )->getMock();
-
-		$mock->expects( $this->once() )->method( 'uriFor' )
-		->with( $this->equalTo( null ), $this->equalTo( array( 'site' => 'unittest' ) ),
-				$this->equalTo( null ), $this->equalTo( 'testext' ), $this->equalTo( 'testplugin' ) );
-
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
-
-		$config = array( 'extension' => 'testext', 'plugin' => 'testplugin' );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
-	}
-
-
 	public function testTransformParams()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'uriFor') )->getMock();
+			->setMethods( array( 'buildFrontendUri') )->getMock();
 
-		$mock->expects( $this->once() )->method( 'uriFor' )
-			->with( $this->equalTo( null ), $this->equalTo( array( 'test' => 'my_value', 'site' => 'unittest' ) ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
 		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
 

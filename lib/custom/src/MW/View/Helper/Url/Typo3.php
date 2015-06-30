@@ -20,6 +20,7 @@ class MW_View_Helper_Url_Typo3
 	implements MW_View_Helper_Interface
 {
 	private $_uriBuilder;
+	private $_prefix;
 	private $_fixed;
 
 
@@ -30,10 +31,11 @@ class MW_View_Helper_Url_Typo3
 	 * @param TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder TYPO3 URI builder
 	 * @param array $fixed Fixed parameters that should be added to each URL
 	 */
-	public function __construct( MW_View_Interface $view, TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder, array $fixed )
+	public function __construct( MW_View_Interface $view, \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder, array $fixed )
 	{
 		parent::__construct( $view );
 
+		$this->_prefix = $uriBuilder->getArgumentPrefix();
 		$this->_uriBuilder = $uriBuilder;
 		$this->_fixed = $fixed;
 	}
@@ -52,9 +54,21 @@ class MW_View_Helper_Url_Typo3
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
-		$additional = array();
+		// Slashes in URL parameters confuses the router
+		foreach( $params as $key => $value ) {
+			$params[$key] = str_replace( '/', '_', $value );
+		}
+
+		$params = $params + $this->_fixed;
+		$params['controller'] = $controller;
+		$params['action'] = $action;
+
+		if( $this->_prefix != '' ) {
+			$params = array( $this->_prefix => $params );
+		}
+
 		if( isset( $config['eID'] ) ) {
-			$additional['eID'] = $config['eID'];
+			$params['eID'] = $config['eID'];
 		}
 
 		$values = $this->_getValues( $config );
@@ -68,15 +82,9 @@ class MW_View_Helper_Url_Typo3
 			->setUseCacheHash( $values['chash'] )
 			->setNoCache( $values['nocache'] )
 			->setFormat( $values['format'] )
-			->setArguments( $additional );
+			->setArguments( $params );
 
-		// Slashes in URL parameters confuses the router
-		foreach( $params as $key => $value ) {
-			$params[$key] = str_replace( '/', '_', $value );
-		}
-		$params = $params + $this->_fixed;
-
-		return $this->_uriBuilder->uriFor( $action, $params, ucfirst( $controller ), $values['extension'], $values['plugin'] );
+		return $this->_uriBuilder->buildFrontendUri();
 	}
 
 
