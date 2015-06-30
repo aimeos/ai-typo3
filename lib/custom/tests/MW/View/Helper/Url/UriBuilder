@@ -15,7 +15,7 @@ class UriBuilder
 		return 'ai';
 	}
 
-	public function buildFrontendUri()
+	public function uriFor( $action, array $params, $controller, $extension, $plugin )
 	{
 		return '';
 	}
