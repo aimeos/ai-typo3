@@ -59,19 +59,24 @@ class MW_View_Helper_Url_Typo3
 			$params[$key] = str_replace( '/', '_', $value );
 		}
 
-		$params = $params + $this->_fixed;
-		$params['controller'] = $controller;
-		$params['action'] = $action;
+		$arguments = $this->_fixed;
+		$arguments['controller'] = $controller;
+		$arguments['action'] = $action;
 
-		if( $this->_prefix != '' ) {
-			$params = array( $this->_prefix => $params );
+		$values = $this->_getValues( $config );
+
+		if( $this->_prefix != '' )
+		{
+			if( $values['namespace'] === true ) {
+				$params = array( $this->_prefix => $arguments + $params );
+			} else {
+				$params = $params + array( $this->_prefix => $arguments );
+			}
 		}
 
 		if( isset( $config['eID'] ) ) {
 			$params['eID'] = $config['eID'];
 		}
-
-		$values = $this->_getValues( $config );
 
 		$this->_uriBuilder
 			->reset()
@@ -100,6 +105,7 @@ class MW_View_Helper_Url_Typo3
 			'plugin' => null,
 			'extension' => null,
 			'absoluteUri' => false,
+			'namespace' => true,
 			'nocache' => false,
 			'chash' => true,
 			'format' => '',
@@ -116,6 +122,10 @@ class MW_View_Helper_Url_Typo3
 
 		if( isset( $config['absoluteUri'] ) ) {
 			$values['absoluteUri'] = (bool) $config['absoluteUri'];
+		}
+
+		if( isset( $config['namespace'] ) ) {
+			$values['namespace'] = (bool) $config['namespace'];
 		}
 
 		if( isset( $config['nocache'] ) ) {

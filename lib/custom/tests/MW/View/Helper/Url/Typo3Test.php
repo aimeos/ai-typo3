@@ -160,4 +160,20 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$params = array( 'test' => 'my/value' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
 	}
+
+
+	public function testTransformNoNamespace()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+			->setMethods( array( 'buildFrontendUri', 'getArgumentPrefix' ) )->getMock();
+
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
+		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->will( $this->returnValue( 'ai' ) );
+
+		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
+
+		$params = array( 'test' => 'my/value' );
+		$config = array( 'namespace' => false );
+		$this->assertEquals( '', $object->transform( null, null, null, $params, array(), $config ) );
+	}
 }
