@@ -2,14 +2,14 @@
 	"name": "aimeos/ai-typo3",
 	"description": "Aimeos extension for integration into TYPO3",
 	"keywords": ["aimeos", "adapter", "typo3", "cms"],
-	"homepage": "http://aimeos.org",
+	"homepage": "https://aimeos.org",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
 		"source": "https://github.com/Aimeos/ai-typo3",
 		"issues": "https://github.com/Aimeos/ai-typo3/issues",
-		"forum": "https://help.aimeos.org",
-		"wiki": "https://docs.aimeos.org"
+		"forum": "https://aimeos.org/help",
+		"wiki": "https://aimeos.org/docs"
 	},
 	"repositories": [
 		{
