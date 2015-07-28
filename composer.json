@@ -1,8 +1,8 @@
 {
 	"name": "aimeos/ai-typo3",
-	"description": "Aimeos extension for integration into TYPO3",
-	"keywords": ["aimeos", "adapter", "typo3", "cms"],
-	"homepage": "https://aimeos.org",
+	"description": "TYPO3 adapter for Aimeos web shops and e-commerce solutions",
+	"keywords": ["aimeos", "adapter", "typo3", "cms", "shop", "e-commerce"],
+	"homepage": "https://aimeos.org/TYPO3",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
