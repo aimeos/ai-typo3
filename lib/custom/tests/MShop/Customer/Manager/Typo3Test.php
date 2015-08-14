@@ -241,6 +241,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+		$this->assertEquals( array( 1, 2, 3 ), reset( $result )->getGroups() );
 
 
 		// search without base criteria

@@ -32,7 +32,7 @@ return array(
 				t3feu."address" AS "address1", t3feu."zip" AS "postal", t3feu."city", t3feu."zone" AS "state",
 				t3feu."language" AS "langid", tsc."cn_iso_2" AS "countryid", t3feu."telephone", t3feu."email",
 				t3feu."fax" AS "telefax", t3feu."www" AS "website", t3feu."date_of_birth", t3feu."disable", t3feu."password",
-				t3feu."crdate", t3feu."tstamp"
+				t3feu."crdate", t3feu."tstamp", t3feu."usergroup" as "groups"
 			FROM "fe_users" as t3feu
 			LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 			:joins

@@ -571,6 +571,10 @@ class MShop_Customer_Manager_Typo3
 			$values['langid'] = strtolower( $values['langid'] );
 		}
 
+		if( array_key_exists( 'groups', $values ) ) {
+			$values['groups'] = explode( ',', $values['groups'] );
+		}
+
 		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems );
 	}
 
