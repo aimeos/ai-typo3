@@ -30,7 +30,7 @@ class MW_Setup_Task_TablesAddTypo3TestData extends MW_Setup_Task_Abstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'TablesCreateTypo3' );
 	}
 
 

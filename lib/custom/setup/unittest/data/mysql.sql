@@ -1,7 +1,7 @@
 --
 -- License LGPLv3, http://opensource.org/licenses/LGPL-3.0
 -- Copyright (c) Metaways Infosystems GmbH, 2011
--- Copyright (c) Aimeos (aimeos.org), 2014
+-- Copyright (c) Aimeos (aimeos.org), 2014-2015
 --
 
 
@@ -70,6 +70,26 @@ CREATE TABLE IF NOT EXISTS `fe_users` (
 	KEY `is_online` (`is_online`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `fe_groups` (
+  `tx_extbase_type` varchar(255) NOT NULL DEFAULT '0',
+  `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) unsigned NOT NULL DEFAULT '0',
+  `tstamp` int(11) unsigned NOT NULL DEFAULT '0',
+  `crdate` int(11) unsigned NOT NULL DEFAULT '0',
+  `cruser_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(50) NOT NULL DEFAULT '',
+  `hidden` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `lockToDomain` varchar(50) NOT NULL DEFAULT '',
+  `deleted` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `description` text NOT NULL,
+  `subgroup` tinytext NOT NULL,
+  `TSconfig` text NOT NULL,
+  `felogin_redirectPid` tinytext,
+  `tx_phpunit_is_dummy_record` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`uid`),
+  KEY `parent` (`pid`),
+  KEY `phpunit_dummy` (`tx_phpunit_is_dummy_record`)
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `static_countries` (
   `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -100,26 +120,30 @@ CREATE TABLE IF NOT EXISTS `static_countries` (
 START TRANSACTION;
 
 
-SET @siteid = ( SELECT `id` FROM `mshop_locale_site` WHERE `code` = 'unittest' );
-
 --
 -- Typo3 tables
 --
-DELETE FROM `fe_users` WHERE `lockToDomain` = 'www.unittest.metaways.de';
+DELETE FROM `fe_users_address` WHERE refid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
+DELETE FROM `fe_users_list` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
+DELETE FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org';
+DELETE FROM `fe_groups` WHERE `lockToDomain` = 'unittest.aimeos.org';
 
 
 --
 -- Typo3 frontend users
 --
 INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'www.unittest.metaways.de', 'Max Mustermann', 'unitCustomer1@metaways.de', 0, 'Metaways GmbH', 'DE999999999', 'Dr.', 'Max', 'Mustermann', 'Musterstraße 1a', '20001', 'Musterstadt', 'Hamburg', 'de', 'DEU', '01234567890', 'unitCustomer1@metaways.de', '01234567890', 'www.metaways.de', 157762800, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1294916626, 1294916616, '');
-SET @fe_userid1 = ( SELECT LAST_INSERT_ID() );
+	VALUES ( 'unittest.aimeos.org', 'Max Mustermann', 'unitCustomer1@metaways.de', 0, 'Metaways GmbH', 'DE999999999', 'Dr.', 'Max', 'Mustermann', 'Musterstraße 1a', '20001', 'Musterstadt', 'Hamburg', 'de', 'DEU', '01234567890', 'unitCustomer1@metaways.de', '01234567890', 'www.metaways.de', 157762800, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1294916626, 1294916616, '');
 INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'www.unittest.metaways.de', 'Erika Mustermann', 'unitCustomer2@metaways.de', 1, 'Metaways GmbH', 'DE999999999', 'Prof. Dr.', 'Erika', 'Mustermann', 'Heidestraße 17', '45632', 'Köln', '', 'de', 'DEU', '09876543210', 'unitCustomer2@metaways.de', '09876543210', 'www.metaways.de', 315529200, '1', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916627, 1294916617, '1');
-SET @fe_userid2 = ( SELECT LAST_INSERT_ID() );
+	VALUES ( 'unittest.aimeos.org', 'Erika Mustermann', 'unitCustomer2@metaways.de', 1, 'Metaways GmbH', 'DE999999999', 'Prof. Dr.', 'Erika', 'Mustermann', 'Heidestraße 17', '45632', 'Köln', '', 'de', 'DEU', '09876543210', 'unitCustomer2@metaways.de', '09876543210', 'www.metaways.de', 315529200, '1', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916627, 1294916617, '1');
 INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'www.unittest.metaways.de', 'Franz-Xaver Gabler', 'unitCustomer3@metaways.de', 0, 'Metaways GmbH', 'DE999999999', '', 'Franz-Xaver', 'Gabler', 'Phantasiestraße 2', '23643', 'Berlin', 'Berlin', 'de', 'DEU', '01234509876', 'unitCustomer3@metaways.de', '055544333212', 'www.metaways.de', 473382000, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916628, 1294916618, '1,2,3');
-SET @fe_userid3 = ( SELECT LAST_INSERT_ID() );
+	VALUES ( 'unittest.aimeos.org', 'Franz-Xaver Gabler', 'unitCustomer3@metaways.de', 0, 'Metaways GmbH', 'DE999999999', '', 'Franz-Xaver', 'Gabler', 'Phantasiestraße 2', '23643', 'Berlin', 'Berlin', 'de', 'DEU', '01234509876', 'unitCustomer3@metaways.de', '055544333212', 'www.metaways.de', 473382000, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916628, 1294916618, '1,2,3');
+
+--
+-- Typo3 frontend groups
+--
+INSERT INTO `fe_groups` ( `lockToDomain`, `title`, `tstamp`, `crdate`, `tx_phpunit_is_dummy_record`)
+	VALUES ( 'unittest.aimeos.org', 'Unit test group', 1294916626, 1294916616, 1);
 
 --
 -- Typo3 countries
