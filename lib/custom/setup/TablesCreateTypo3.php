@@ -13,6 +13,17 @@
 class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 {
 	/**
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return array List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return array( 'TablesCreateMShop' );
+	}
+
+
+	/**
 	 * Returns the list of task names which depends on this task.
 	 *
 	 * @return array List of task names
@@ -21,8 +32,8 @@ class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 	{
 		return array( 'MShopAddTypeData' );
 	}
-	
-	
+
+
 	/**
 	 * Executes the task for MySQL databases.
 	 */

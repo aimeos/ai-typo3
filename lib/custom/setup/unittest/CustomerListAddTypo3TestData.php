@@ -20,7 +20,7 @@ class MW_Setup_Task_CustomerListAddTypo3TestData
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateTypo3', 'CustomerAddTypo3TestData', 'LocaleAddTestData', 'TextAddTestData' );
+		return array( 'CustomerAddTypo3TestData', 'LocaleAddTestData', 'TextAddTestData' );
 	}
 
 
