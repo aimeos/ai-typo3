@@ -220,6 +220,7 @@ class MShop_Customer_Manager_Typo3
 
 	private $_plugins = array();
 	private $_reverse = array();
+	private $_helper;
 	private $_pid;
 
 
@@ -544,6 +545,7 @@ class MShop_Customer_Manager_Typo3
 	 */
 	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
+		$helper = $this->_getPasswordHelper();
 		$address = $this->_getAddressManager()->createItem();
 		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
 
@@ -575,7 +577,7 @@ class MShop_Customer_Manager_Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems );
+		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, null, $helper );
 	}
 
 
@@ -591,5 +593,39 @@ class MShop_Customer_Manager_Typo3
 		}
 
 		return $this->_addressManager;
+	}
+
+
+	/**
+	 * Returns a password helper object based on the configuration.
+	 *
+	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
+	 * @throws MShop_Exception If the name is invalid or the class isn't found
+	 */
+	protected function _getPasswordHelper()
+	{
+		if( $this->_helper ) {
+			return $this->_helper;
+		}
+
+		$iface = 'MShop_Common_Item_Helper_Password_Interface';
+		$classname = 'MShop_Common_Item_Helper_Password_Typo3';
+
+		if( class_exists( $classname ) === false ) {
+			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		}
+
+		$context = $this->_getContext();
+		$object = ( method_exists( $context, 'getHasherTypo3' ) ? $context->getHasherTypo3() : null );
+
+		$helper = new $classname( array( 'object' => $object ) );
+
+		if( !( $helper instanceof $iface ) ) {
+			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+		}
+
+		$this->_helper = $helper;
+
+		return $helper;
 	}
 }
