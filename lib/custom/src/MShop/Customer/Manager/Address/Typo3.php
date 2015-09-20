@@ -257,7 +257,7 @@ class MShop_Customer_Manager_Address_Typo3
 	 */
 	protected function _getConfigPath()
 	{
-		return 'mshop/customer/manager/address/typo3/item/';
+		return 'mshop/customer/manager/address/typo3/item';
 	}
 
 
