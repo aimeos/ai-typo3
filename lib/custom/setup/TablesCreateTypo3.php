@@ -39,7 +39,7 @@ class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 	 */
 	protected function _mysql()
 	{
-		$this->_msg( 'Creating Arcavias TYPO3 tables', 0 );
+		$this->_msg( 'Creating Aimeos TYPO3 tables', 0 );
 		$this->_status( '' );
 
 		$ds = DIRECTORY_SEPARATOR;

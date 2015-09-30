@@ -8,13 +8,13 @@
 
 class TestHelper
 {
-	private static $_arcavias;
+	private static $_aimeos;
 	private static $_context = array();
 
 
 	public static function bootstrap()
 	{
-		$mshop = self::_getArcavias();
+		$mshop = self::_getAimeos();
 
 		$includepaths = $mshop->getIncludePaths();
 		$includepaths[] = get_include_path();
@@ -32,18 +32,18 @@ class TestHelper
 	}
 
 
-	private static function _getArcavias()
+	private static function _getAimeos()
 	{
-		if( !isset( self::$_arcavias ) )
+		if( !isset( self::$_aimeos ) )
 		{
-			require_once 'Arcavias.php';
-			spl_autoload_register( 'Arcavias::autoload' );
+			require_once 'Aimeos.php';
+			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$_arcavias = new Arcavias( array( $extdir ), false );
+			self::$_aimeos = new Aimeos( array( $extdir ), false );
 		}
 
-		return self::$_arcavias;
+		return self::$_aimeos;
 	}
 
 
@@ -53,7 +53,7 @@ class TestHelper
 	private static function _createContext( $site )
 	{
 		$ctx = new MShop_Context_Item_Default();
-		$mshop = self::_getArcavias();
+		$mshop = self::_getAimeos();
 
 
 		$paths = $mshop->getConfigPaths( 'mysql' );

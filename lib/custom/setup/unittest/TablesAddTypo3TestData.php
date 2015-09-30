@@ -39,7 +39,7 @@ class MW_Setup_Task_TablesAddTypo3TestData extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_msg('Setting up Arcavias TYPO3 test data', 0);
+		$this->_msg('Setting up Aimeos TYPO3 test data', 0);
 		$this->_status('');
 
 		$file = dirname( realpath( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';

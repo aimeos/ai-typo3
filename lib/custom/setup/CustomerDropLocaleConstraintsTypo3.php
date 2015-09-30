@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license LGPLv3, http://www.arcavias.com/en/license
+ * @license LGPLv3, http://www.aimeos.com/en/license
  * @copyright Aimeos (aimeos.org), 2014
  */
 
