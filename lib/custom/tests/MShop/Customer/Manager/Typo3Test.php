@@ -58,7 +58,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@metaways.de' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@example.com' ) );
 		$items = $this->_object->searchItems( $search );
 
 		if( ( $expected = reset( $items ) ) === false ) {
@@ -71,9 +71,9 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( $expected, $actual );
 
 		$this->assertEquals( 'Max Mustermann', $actual->getLabel() );
-		$this->assertEquals( 'unitCustomer1@metaways.de', $actual->getCode() );
+		$this->assertEquals( 'unitCustomer1@example.com', $actual->getCode() );
 		$this->assertEquals( 'mr', $billing->getSalutation() );
-		$this->assertEquals( 'Metaways GmbH', $billing->getCompany() );
+		$this->assertEquals( 'Example company LLC', $billing->getCompany() );
 		$this->assertEquals( 'Dr.', $billing->getTitle() );
 		$this->assertEquals( 'Max', $billing->getFirstname() );
 		$this->assertEquals( 'Mustermann', $billing->getLastname() );
@@ -86,9 +86,9 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( 'de', $billing->getLanguageId() );
 		$this->assertEquals( 'DE', $billing->getCountryId() );
 		$this->assertEquals( '01234567890', $billing->getTelephone() );
-		$this->assertEquals( 'unitCustomer1@metaways.de', $billing->getEMail() );
+		$this->assertEquals( 'unitCustomer1@example.com', $billing->getEMail() );
 		$this->assertEquals( '01234567890', $billing->getTelefax() );
-		$this->assertEquals( 'www.metaways.de', $billing->getWebsite() );
+		$this->assertEquals( 'www.example.com', $billing->getWebsite() );
 		$this->assertEquals( 1, $actual->getStatus() );
 		$this->assertEquals( '5f4dcc3b5aa765d61d8327deb882cf99', $actual->getPassword() );
 		$this->assertEquals( '2011-01-13 11:03:36', $actual->getTimeCreated() );
@@ -100,7 +100,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@metaways.de' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@example.com' ) );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -168,9 +168,9 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'Franz-Xaver Gabler' );
-		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer3@metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer3@example.com' );
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
-		$expr[] = $search->compare( '==', 'customer.company', 'Metaways GmbH' );
+		$expr[] = $search->compare( '==', 'customer.company', 'Example company LLC' );
 		$expr[] = $search->compare( '==', 'customer.title', '' );
 		$expr[] = $search->compare( '==', 'customer.firstname', 'Franz-Xaver' );
 		$expr[] = $search->compare( '==', 'customer.lastname', 'Gabler' );
@@ -179,9 +179,9 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.city', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.state', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.telephone', '01234509876' );
-		$expr[] = $search->compare( '==', 'customer.email', 'unitCustomer3@metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.email', 'unitCustomer3@example.com' );
 		$expr[] = $search->compare( '==', 'customer.telefax', '055544333212' );
-		$expr[] = $search->compare( '==', 'customer.website', 'www.metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '!=', 'customer.password', '' );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
@@ -204,7 +204,7 @@ class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '1234567890' );
-		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer3@metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer3@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '1234567891' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unit.web.site' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );

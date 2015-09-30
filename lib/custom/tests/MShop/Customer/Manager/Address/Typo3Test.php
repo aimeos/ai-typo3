@@ -55,7 +55,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	public function testGetItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@metaways.de' ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@example.com' ) );
 		$items = $this->_object->searchItems( $search );
 
 		if( ( $expected = reset( $items ) ) === false ) {
@@ -67,7 +67,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( $expected, $actual );
 
 		$this->assertEquals( 'mr', $actual->getSalutation() );
-		$this->assertEquals( 'Metaways', $actual->getCompany() );
+		$this->assertEquals( 'Example Company', $actual->getCompany() );
 		$this->assertEquals( 'DE999999999', $actual->getVatID() );
 		$this->assertEquals( 'Dr', $actual->getTitle() );
 		$this->assertEquals( 'Our', $actual->getFirstname() );
@@ -81,9 +81,9 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( 'de', $actual->getLanguageId() );
 		$this->assertEquals( 'DE', $actual->getCountryId() );
 		$this->assertEquals( '055544332211', $actual->getTelephone() );
-		$this->assertEquals( 'unitCustomer1@metaways.de', $actual->getEMail() );
+		$this->assertEquals( 'unitCustomer1@example.com', $actual->getEMail() );
 		$this->assertEquals( '055544332212', $actual->getTelefax() );
-		$this->assertEquals( 'www.metaways.de', $actual->getWebsite() );
+		$this->assertEquals( 'www.example.com', $actual->getWebsite() );
 		$this->assertEquals( 0, $actual->getFlag() );
 		$this->assertEquals( 0, $actual->getPosition() );
 		$this->assertEquals( $this->_editor, $actual->getEditor() );
@@ -93,7 +93,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@metaways.de' ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@example.com' ) );
 		$results = $this->_object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -187,7 +187,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
-		$expr[] = $search->compare( '==', 'customer.address.company', 'Metaways GmbH' );
+		$expr[] = $search->compare( '==', 'customer.address.company', 'Example company LLC' );
 		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'customer.address.title', 'Dr.' );
 		$expr[] = $search->compare( '==', 'customer.address.firstname', 'Good' );
@@ -201,9 +201,9 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544332212' );
-		$expr[] = $search->compare( '==', 'customer.address.website', 'www.metaways.de' );
+		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->_editor );
