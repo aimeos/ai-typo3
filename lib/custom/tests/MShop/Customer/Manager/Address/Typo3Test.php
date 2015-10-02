@@ -11,8 +11,8 @@
  */
 class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_editor = '';
+	private $object;
+	private $editor = '';
 
 
 	/**
@@ -20,9 +20,9 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_editor = TestHelper::getContext()->getEditor();
+		$this->editor = TestHelper::getContext()->getEditor();
 		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Typo3' );
-		$this->_object = $manager->getSubManager( 'address', 'Typo3' );
+		$this->object = $manager->getSubManager( 'address', 'Typo3' );
 	}
 
 
@@ -31,14 +31,14 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 		MShop_Factory::clear();
 	}
 
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute )
+		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
@@ -47,22 +47,22 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 
 	public function testCreateItem()
 	{
-		$item = $this->_object->createItem();
+		$item = $this->object->createItem();
 		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $item );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@example.com' ) );
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $items ) ) === false ) {
 			throw new Exception( 'No customer address found' );
 		}
 
-		$actual = $this->_object->getItem( $expected->getId() );
+		$actual = $this->object->getItem( $expected->getId() );
 
 		$this->assertEquals( $expected, $actual );
 
@@ -86,30 +86,30 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$this->assertEquals( 'www.example.com', $actual->getWebsite() );
 		$this->assertEquals( 0, $actual->getFlag() );
 		$this->assertEquals( 0, $actual->getPosition() );
-		$this->assertEquals( $this->_editor, $actual->getEditor() );
+		$this->assertEquals( $this->editor, $actual->getEditor() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@example.com' ) );
-		$results = $this->_object->searchItems( $search );
+		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new Exception( 'No customer address found' );
 		}
 
 		$item->setId( null );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCompany( 'unitTest' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $item->getId() );
+		$this->object->deleteItem( $item->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -168,20 +168,20 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getItem( $item->getId() );
+		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
 	}
 
 
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
@@ -206,26 +206,26 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->_editor );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 		$expr[] = $search->compare( '>', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.address.ctime', '1970-01-01 00:00:00' );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->_object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 
 
 		// search without base criteria
-		$search = $this->_object->createSearch();
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch();
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 4, count( $results ) );
 
 
 		// search with base criteria
-		$search = $this->_object->createSearch(true);
-		$results = $this->_object->searchItems( $search );
+		$search = $this->object->createSearch(true);
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 4, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
@@ -237,13 +237,13 @@ class MShop_Customer_Manager_Address_Typo3Test extends MW_Unittest_Testcase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'address', 'unknown' );
+		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

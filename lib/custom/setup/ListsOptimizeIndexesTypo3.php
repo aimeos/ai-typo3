@@ -12,7 +12,7 @@
  */
 class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 {
-	private $_mysql = array(
+	private $mysql = array(
 		'add' => array(
 			'fe_users_list' => array(
 				'unq_t3feuli_sid_dm_rid_tid_pid' => 'ALTER TABLE "fe_users_list" ADD CONSTRAINT "unq_t3feuli_sid_dm_rid_tid_pid" UNIQUE ("siteid", "domain", "refid", "typeid", "parentid")',
@@ -57,9 +57,9 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_process( $this->_mysql );
+		$this->process( $this->mysql );
 	}
 
 
@@ -68,14 +68,14 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
-	protected function _process( array $stmts )
+	protected function process( array $stmts )
 	{
-		$this->_msg( 'Optimize list indexes in TYPO3 extension', 0 );
-		$this->_status( '' );
+		$this->msg( 'Optimize list indexes in TYPO3 extension', 0 );
+		$this->status( '' );
 
-		$this->_addConstraints( $stmts['add'] );
-		$this->_deleteConstraints( $stmts['delete'] );
-		$this->_dropIndexes( $stmts['indexes'] );
+		$this->addConstraints( $stmts['add'] );
+		$this->deleteConstraints( $stmts['delete'] );
+		$this->dropIndexes( $stmts['indexes'] );
 	}
 
 
@@ -84,21 +84,21 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative list of table names and list of statements
 	 */
-	protected function _addConstraints( array $stmts )
+	protected function addConstraints( array $stmts )
 	{
 		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{
-				$this->_msg( sprintf( 'Adding constraint "%1$s": ', $name ), 1 );
+				$this->msg( sprintf( 'Adding constraint "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-						&& $this->_schema->constraintExists( $table, $name ) === false
+				if( $this->schema->tableExists( $table ) === true
+						&& $this->schema->constraintExists( $table, $name ) === false
 				) {
-					$this->_execute( $stmt );
-					$this->_status( 'done' );
+					$this->execute( $stmt );
+					$this->status( 'done' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}
@@ -110,21 +110,21 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative list of table names and list of statements
 	 */
-	protected function _deleteConstraints( array $stmts )
+	protected function deleteConstraints( array $stmts )
 	{
 		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{
-				$this->_msg( sprintf( 'Deleting constraint "%1$s": ', $name ), 1 );
+				$this->msg( sprintf( 'Deleting constraint "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->constraintExists( $table, $name ) === true
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->constraintExists( $table, $name ) === true
 				) {
-					$this->_execute( $stmt );
-					$this->_status( 'done' );
+					$this->execute( $stmt );
+					$this->status( 'done' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}
@@ -136,21 +136,21 @@ class MW_Setup_Task_ListsOptimizeIndexesTypo3 extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $stmts Associative list of table names and list of statements
 	 */
-	protected function _dropIndexes( array $stmts )
+	protected function dropIndexes( array $stmts )
 	{
 		foreach( $stmts as $table => $stmtList )
 		{
 			foreach ( $stmtList as $name => $stmt )
 			{
-				$this->_msg( sprintf( 'Dropping index "%1$s": ', $name ), 1 );
+				$this->msg( sprintf( 'Dropping index "%1$s": ', $name ), 1 );
 
-				if( $this->_schema->tableExists( $table ) === true
-					&& $this->_schema->indexExists( $table, $name ) === true
+				if( $this->schema->tableExists( $table ) === true
+					&& $this->schema->indexExists( $table, $name ) === true
 				) {
-					$this->_execute( $stmt );
-					$this->_status( 'done' );
+					$this->execute( $stmt );
+					$this->status( 'done' );
 				} else {
-					$this->_status( 'OK' );
+					$this->status( 'OK' );
 				}
 			}
 		}

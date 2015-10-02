@@ -12,8 +12,8 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Cache';
 
 class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -24,8 +24,8 @@ class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_mock = $this->getMock( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' );
-		$this->_object = new MW_Cache_Typo3( array(), $this->_mock );
+		$this->mock = $this->getMock( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' );
+		$this->object = new MW_Cache_Typo3( array(), $this->mock );
 	}
 
 	/**
@@ -36,125 +36,125 @@ class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_mock, $this->_object );
+		unset( $this->mock, $this->object );
 	}
 
 
 	public function testDelete()
 	{
-		$this->_mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( 'key' ) );
-		$this->_object->delete( 'key' );
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( 'key' ) );
+		$this->object->delete( 'key' );
 	}
 
 
 	public function testDeleteWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
 		$object->delete( 'key' );
 	}
 
 
 	public function testDeleteList()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'remove' )->with( $this->equalTo( 'key' ) );
-		$this->_object->deleteList( array( 'key', 'key' ) );
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'remove' )->with( $this->equalTo( 'key' ) );
+		$this->object->deleteList( array( 'key', 'key' ) );
 	}
 
 
 	public function testDeleteListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
 		$object->deleteList( array( 'key' ) );
 	}
 
 
 	public function testDeleteByTags()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'flushByTag' )->with( $this->equalTo( 'tag' ) );
-		$this->_object->deleteByTags( array( 'tag', 'tag' ) );
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'flushByTag' )->with( $this->equalTo( 'tag' ) );
+		$this->object->deleteByTags( array( 'tag', 'tag' ) );
 	}
 
 
 	public function testDeleteByTagsWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
+		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
 		$object->deleteByTags( array( 'tag' ) );
 	}
 
 
 	public function testFlush()
 	{
-		$this->_mock->expects( $this->once() )->method( 'flush' );
-		$this->_object->flush();
+		$this->mock->expects( $this->once() )->method( 'flush' );
+		$this->object->flush();
 	}
 
 
 	public function testFlushWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-siteid' ) );
+		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-siteid' ) );
 		$object->flush();
 	}
 
 
 	public function testGet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->once() )->method( 'get' )
 			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( 'value' ) );
 
-		$this->assertEquals( 'value', $this->_object->get( 'key', 'default' ) );
+		$this->assertEquals( 'value', $this->object->get( 'key', 'default' ) );
 	}
 
 
 	public function testGetWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
+		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
 		$object->get( 'key', 'default' );
 	}
 
 
 	public function testGetList()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'get' )
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
 			->will( $this->returnValue( 'value' ) );
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
-		$this->assertEquals( $expected, $this->_object->getList( array( 'key1', 'key2' ) ) );
+		$this->assertEquals( $expected, $this->object->getList( array( 'key1', 'key2' ) ) );
 	}
 
 
 	public function testGetListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
+		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
 		$object->getList( array( 'key' ) );
 	}
 
 
 	public function testGetListByTags()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'getByTag' )
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'getByTag' )
 			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( array( 'key' => 'value' ) ) );
 
-		$this->assertEquals( array( 'key' => 'value' ), $this->_object->getListByTags( array( 'key', 'key' ) ) );
+		$this->assertEquals( array( 'key' => 'value' ), $this->object->getListByTags( array( 'key', 'key' ) ) );
 	}
 
 
 	public function testGetListByTagsWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'getByTag' )
+		$this->mock->expects( $this->once() )->method( 'getByTag' )
 			->with( $this->equalTo( '1-key' ) )->will( $this->returnValue( array( '1-key' => 'value' ) ) );
 
 		$this->assertEquals( array( 'key' => 'value' ), $object->getListByTags( array( 'key' ) ) );
@@ -163,21 +163,21 @@ class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 
 	public function testSet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'set' )
+		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( 'key' ), $this->equalTo( 'value' ),
 				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
 			);
 
-		$this->_object->set( 'key', 'value', array( 'tag' ), '2000-01-01 00:00:00' );
+		$this->object->set( 'key', 'value', array( 'tag' ), '2000-01-01 00:00:00' );
 	}
 
 
 	public function testSetWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'set' )
+		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( '1-key' ), $this->equalTo( 'value' ),
 				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
@@ -189,22 +189,22 @@ class MW_Cache_Typo3Test extends MW_Unittest_Testcase
 
 	public function testSetList()
 	{
-		$this->_mock->expects( $this->once() )->method( 'set' )
+		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( 'key' ), $this->equalTo( 'value' ),
 				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
 			);
 
 		$expires = array( 'key' => '2000-01-01 00:00:00' );
-		$this->_object->setList( array( 'key' => 'value' ), array( 'key' => array( 'tag' ) ), $expires );
+		$this->object->setList( array( 'key' => 'value' ), array( 'key' => array( 'tag' ) ), $expires );
 	}
 
 
 	public function testSetListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->_mock );
+		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
 
-		$this->_mock->expects( $this->once() )->method( 'set' )
+		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( '1-key' ), $this->equalTo( 'value' ),
 				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )

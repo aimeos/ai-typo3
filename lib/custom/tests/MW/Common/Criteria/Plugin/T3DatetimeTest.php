@@ -11,7 +11,7 @@
  */
 class MW_Common_Criteria_Plugin_T3DatetimeTest extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -19,7 +19,7 @@ class MW_Common_Criteria_Plugin_T3DatetimeTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Common_Criteria_Plugin_T3Datetime();
+		$this->object = new MW_Common_Criteria_Plugin_T3Datetime();
 	}
 
 
@@ -28,42 +28,42 @@ class MW_Common_Criteria_Plugin_T3DatetimeTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset($this->object);
 	}
 
 
 	public function testTranslate()
 	{
-		$this->assertEquals( 3661, $this->_object->translate( '1970-01-01 01:01:01' ) );
+		$this->assertEquals( 3661, $this->object->translate( '1970-01-01 01:01:01' ) );
 	}
 
 
 	public function testTranslateNull()
 	{
-		$this->assertEquals( 0, $this->_object->translate( null ) );
+		$this->assertEquals( 0, $this->object->translate( null ) );
 	}
 
 
 	public function testTranslateNegative()
 	{
-		$this->assertEquals( -1, $this->_object->translate( '1969-12-31 23:59:59' ) );
+		$this->assertEquals( -1, $this->object->translate( '1969-12-31 23:59:59' ) );
 	}
 
 
 	public function testReverse()
 	{
-		$this->assertEquals( '1970-01-01 01:01:01', $this->_object->reverse( 3661 ) );
+		$this->assertEquals( '1970-01-01 01:01:01', $this->object->reverse( 3661 ) );
 	}
 
 
 	public function testReverseZero()
 	{
-		$this->assertEquals( null, $this->_object->reverse( 0 ) );
+		$this->assertEquals( null, $this->object->reverse( 0 ) );
 	}
 
 
 	public function testReverseNegative()
 	{
-		$this->assertEquals( '1969-12-31 23:59:59', $this->_object->reverse( -1 ) );
+		$this->assertEquals( '1969-12-31 23:59:59', $this->object->reverse( -1 ) );
 	}
 }

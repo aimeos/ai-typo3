@@ -17,7 +17,7 @@
  */
 class MW_Session_Typo3 implements MW_Session_Interface
 {
-	private $_feuser = null;
+	private $feuser = null;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_Session_Typo3 implements MW_Session_Interface
 	 */
 	public function __construct( TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication $feuser )
 	{
-		$this->_feuser = $feuser;
+		$this->feuser = $feuser;
 	}
 
 
@@ -43,7 +43,7 @@ class MW_Session_Typo3 implements MW_Session_Interface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( ( $value = $this->_feuser->getKey('ses', $name) ) !== null ) {
+		if( ( $value = $this->feuser->getKey('ses', $name) ) !== null ) {
 			return $value;
 		}
 
@@ -63,6 +63,6 @@ class MW_Session_Typo3 implements MW_Session_Interface
 	 */
 	public function set( $name, $value )
 	{
-		$this->_feuser->setKey( 'ses', $name, $value );
+		$this->feuser->setKey( 'ses', $name, $value );
 	}
 }

@@ -17,7 +17,7 @@
  */
 class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -30,7 +30,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	{
 		$object->setCharset( $charset );
 
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -43,7 +43,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addFrom( $email, $name = null )
 	{
-		$this->_object->addFrom( $email, $name );
+		$this->object->addFrom( $email, $name );
 		return $this;
 	}
 
@@ -57,7 +57,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addTo( $email, $name = null )
 	{
-		$this->_object->addTo( $email, $name );
+		$this->object->addTo( $email, $name );
 		return $this;
 	}
 
@@ -71,7 +71,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addCc( $email, $name = null )
 	{
-		$this->_object->addCc( $email, $name );
+		$this->object->addCc( $email, $name );
 		return $this;
 	}
 
@@ -85,7 +85,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addBcc( $email, $name = null )
 	{
-		$this->_object->addBcc( $email, $name );
+		$this->object->addBcc( $email, $name );
 		return $this;
 	}
 
@@ -99,7 +99,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addReplyTo( $email, $name = null )
 	{
-		$this->_object->addReplyTo( $email, $name );
+		$this->object->addReplyTo( $email, $name );
 		return $this;
 	}
 
@@ -113,7 +113,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function addHeader( $name, $value )
 	{
-		$hs = $this->_object->getHeaders();
+		$hs = $this->object->getHeaders();
 		$hs->addTextHeader( $name, $value );
 		return $this;
 	}
@@ -128,7 +128,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function setSender( $email, $name = null )
 	{
-		$this->_object->setSender( $email, $name );
+		$this->object->setSender( $email, $name );
 		return $this;
 	}
 
@@ -141,7 +141,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function setSubject( $subject )
 	{
-		$this->_object->setSubject( $subject );
+		$this->object->setSubject( $subject );
 		return $this;
 	}
 
@@ -154,7 +154,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function setBody( $message )
 	{
-		$this->_object->setBody( $message );
+		$this->object->setBody( $message );
 		return $this;
 	}
 
@@ -167,7 +167,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function setBodyHtml( $message )
 	{
-		$this->_object->addPart( $message, 'text/html' );
+		$this->object->addPart( $message, 'text/html' );
 		return $this;
 	}
 
@@ -186,7 +186,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 		$part = Swift_Attachment::newInstance( $data, $filename, $mimetype );
 		$part->setDisposition( $disposition );
 
-		$this->_object->attach( $part );
+		$this->object->attach( $part );
 		return $this;
 	}
 
@@ -203,7 +203,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	{
 		$part = Swift_EmbeddedFile::newInstance( $data, $mimetype, $filename );
 
-		return $this->_object->embed( $part );
+		return $this->object->embed( $part );
 	}
 
 
@@ -214,7 +214,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function getObject()
 	{
-		return $this->_object;
+		return $this->object;
 	}
 
 
@@ -223,6 +223,6 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 */
 	public function __clone()
 	{
-		$this->_object = clone $this->_object;
+		$this->object = clone $this->object;
 	}
 }

@@ -19,7 +19,7 @@ class MShop_Customer_Manager_List_Type_Typo3
 	extends MShop_Customer_Manager_List_Type_Default
 	implements MShop_Customer_Manager_List_Type_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.list.type.id' => array(
 			'code'=>'customer.list.type.id',
 			'internalcode'=>'t3feulity."id"',
@@ -99,7 +99,7 @@ class MShop_Customer_Manager_List_Type_Typo3
 	{
 		$path = 'classes/customer/manager/list/type/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -112,7 +112,7 @@ class MShop_Customer_Manager_List_Type_Typo3
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', 'list/type/' . $manager, ( $name === null ? 'Typo3' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'list/type/' . $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
 
 
@@ -121,7 +121,7 @@ class MShop_Customer_Manager_List_Type_Typo3
 	 *
 	 * @return string Configuration path (mshop/customer/manager/list/type/typo3/item/)
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		return 'mshop/customer/manager/list/type/typo3/item/';
 	}
@@ -132,8 +132,8 @@ class MShop_Customer_Manager_List_Type_Typo3
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

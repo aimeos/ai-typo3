@@ -12,7 +12,7 @@
  */
 class MW_Common_Criteria_Plugin_T3SalutationTest extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class MW_Common_Criteria_Plugin_T3SalutationTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Common_Criteria_Plugin_T3Salutation();
+		$this->object = new MW_Common_Criteria_Plugin_T3Salutation();
 	}
 
 
@@ -29,49 +29,49 @@ class MW_Common_Criteria_Plugin_T3SalutationTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset($this->object);
 	}
 
 
 	public function testTranslate()
 	{
-		$this->assertEquals( 99, $this->_object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN ) );
+		$this->assertEquals( 99, $this->object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN ) );
 	}
 
 
 	public function testTranslateCompany()
 	{
-		$this->assertEquals( 99, $this->_object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY ) );
+		$this->assertEquals( 99, $this->object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_COMPANY ) );
 	}
 
 
 	public function testTranslateMale()
 	{
-		$this->assertEquals( 0, $this->_object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MR ) );
+		$this->assertEquals( 0, $this->object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MR ) );
 	}
 
 
 	public function testTranslateFemale()
 	{
-		$this->assertEquals( 1, $this->_object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MRS ) );
-		$this->assertEquals( 1, $this->_object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MISS ) );
+		$this->assertEquals( 1, $this->object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MRS ) );
+		$this->assertEquals( 1, $this->object->translate( MShop_Common_Item_Address_Abstract::SALUTATION_MISS ) );
 	}
 
 
 	public function testReverse()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN, $this->_object->reverse( 99 ) );
+		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_UNKNOWN, $this->object->reverse( 99 ) );
 	}
 
 
 	public function testReverseMale()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MR, $this->_object->reverse( 0 ) );
+		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MR, $this->object->reverse( 0 ) );
 	}
 
 
 	public function testReverseFemale()
 	{
-		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MRS, $this->_object->reverse( 1 ) );
+		$this->assertEquals( MShop_Common_Item_Address_Abstract::SALUTATION_MRS, $this->object->reverse( 1 ) );
 	}
 }

@@ -17,7 +17,7 @@
 class MShop_Context_Item_Typo3
 	extends MShop_Context_Item_Default
 {
-	private $_hasher;
+	private $hasher;
 
 
 	/**
@@ -27,7 +27,7 @@ class MShop_Context_Item_Typo3
 	 */
 	public function getHasherTypo3()
 	{
-		return $this->_hasher;
+		return $this->hasher;
 	}
 
 
@@ -38,6 +38,6 @@ class MShop_Context_Item_Typo3
 	 */
 	public function setHasherTypo3( \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object )
 	{
-		$this->_hasher = $object;
+		$this->hasher = $object;
 	}
 }

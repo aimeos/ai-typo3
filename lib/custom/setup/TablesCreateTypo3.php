@@ -37,10 +37,10 @@ class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function _mysql()
+	protected function mysql()
 	{
-		$this->_msg( 'Creating Aimeos TYPO3 tables', 0 );
-		$this->_status( '' );
+		$this->msg( 'Creating Aimeos TYPO3 tables', 0 );
+		$this->status( '' );
 
 		$ds = DIRECTORY_SEPARATOR;
 
@@ -48,6 +48,6 @@ class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
 			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'customer.sql',
 		);
 
-		$this->_setup( $files );
+		$this->setup( $files );
 	}
 }

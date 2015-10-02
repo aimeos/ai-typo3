@@ -15,7 +15,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication';
  */
 class MW_Session_Typo3Test extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_Session_Typo3Test extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$mock = new TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication();
-		$this->_object = new MW_Session_Typo3($mock);
+		$this->object = new MW_Session_Typo3($mock);
 	}
 
 	/**
@@ -38,23 +38,23 @@ class MW_Session_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset($this->object);
 	}
 
 	public function testGet()
 	{
-		$this->assertEquals('', $this->_object->get('test'));
+		$this->assertEquals('', $this->object->get('test'));
 
-		$this->_object->set('test', '123456789');
-		$this->assertEquals('123456789', $this->_object->get('test'));
+		$this->object->set('test', '123456789');
+		$this->assertEquals('123456789', $this->object->get('test'));
 	}
 
 	public function testSet()
 	{
-		$this->_object->set('test', '123');
-		$this->assertEquals( '123', $this->_object->get( 'test' ) );
+		$this->object->set('test', '123');
+		$this->assertEquals( '123', $this->object->get( 'test' ) );
 
-		$this->_object->set('test', '234');
-		$this->assertEquals( '234', $this->_object->get( 'test' ) );
+		$this->object->set('test', '234');
+		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }

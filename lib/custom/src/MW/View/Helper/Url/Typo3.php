@@ -19,9 +19,9 @@ class MW_View_Helper_Url_Typo3
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_uriBuilder;
-	private $_prefix;
-	private $_fixed;
+	private $uriBuilder;
+	private $prefix;
+	private $fixed;
 
 
 	/**
@@ -35,9 +35,9 @@ class MW_View_Helper_Url_Typo3
 	{
 		parent::__construct( $view );
 
-		$this->_prefix = $uriBuilder->getArgumentPrefix();
-		$this->_uriBuilder = $uriBuilder;
-		$this->_fixed = $fixed;
+		$this->prefix = $uriBuilder->getArgumentPrefix();
+		$this->uriBuilder = $uriBuilder;
+		$this->fixed = $fixed;
 	}
 
 
@@ -59,18 +59,18 @@ class MW_View_Helper_Url_Typo3
 			$params[$key] = str_replace( '/', '_', $value );
 		}
 
-		$arguments = $this->_fixed;
+		$arguments = $this->fixed;
 		$arguments['controller'] = $controller;
 		$arguments['action'] = $action;
 
-		$values = $this->_getValues( $config );
+		$values = $this->getValues( $config );
 
-		if( $this->_prefix != '' )
+		if( $this->prefix != '' )
 		{
 			if( $values['namespace'] === true ) {
-				$params = array( $this->_prefix => $arguments + $params );
+				$params = array( $this->prefix => $arguments + $params );
 			} else {
-				$params = $params + array( $this->_prefix => $arguments );
+				$params = $params + array( $this->prefix => $arguments );
 			}
 		}
 
@@ -78,7 +78,7 @@ class MW_View_Helper_Url_Typo3
 			$params['eID'] = $config['eID'];
 		}
 
-		$this->_uriBuilder
+		$this->uriBuilder
 			->reset()
 			->setTargetPageUid( $target )
 			->setSection( join( '/', $trailing ) )
@@ -89,7 +89,7 @@ class MW_View_Helper_Url_Typo3
 			->setFormat( $values['format'] )
 			->setArguments( $params );
 
-		return $this->_uriBuilder->buildFrontendUri();
+		return $this->uriBuilder->buildFrontendUri();
 	}
 
 
@@ -99,7 +99,7 @@ class MW_View_Helper_Url_Typo3
 	 * @param array $config Associative list of key/value pairs
 	 * @return array Associative list of sanitized key/value pairs
 	 */
-	protected function _getValues( array $config )
+	protected function getValues( array $config )
 	{
 		$values = array(
 			'plugin' => null,

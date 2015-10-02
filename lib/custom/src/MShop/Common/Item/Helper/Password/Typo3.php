@@ -16,7 +16,7 @@
  */
 class MShop_Common_Item_Helper_Password_Typo3 implements MShop_Common_Item_Helper_Password_Interface
 {
-	private $_hasher;
+	private $hasher;
 
 
 	/**
@@ -30,7 +30,7 @@ class MShop_Common_Item_Helper_Password_Typo3 implements MShop_Common_Item_Helpe
 			throw new MShop_Exception( sprintf( 'No TYPO3 password hash object available' ) );
 		}
 
-		$this->_hasher = $options['object'];
+		$this->hasher = $options['object'];
 	}
 
 
@@ -43,6 +43,6 @@ class MShop_Common_Item_Helper_Password_Typo3 implements MShop_Common_Item_Helpe
 	 */
 	public function encode( $password, $salt = null )
 	{
-		return ( isset( $this->_hasher ) ? $this->_hasher->getHashedPassword( $password, $salt ) : $password );
+		return ( isset( $this->hasher ) ? $this->hasher->getHashedPassword( $password, $salt ) : $password );
 	}
 }

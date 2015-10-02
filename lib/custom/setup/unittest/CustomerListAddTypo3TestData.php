@@ -27,15 +27,15 @@ class MW_Setup_Task_CustomerListAddTypo3TestData
 	/**
 	 * Adds customer test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding customer-list TYPO3 test data', 0 );
-		$this->_additional->setEditor( 'ai-typo3:unittest' );
+		$this->msg( 'Adding customer-list TYPO3 test data', 0 );
+		$this->additional->setEditor( 'ai-typo3:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'customer-list.php';
@@ -50,9 +50,9 @@ class MW_Setup_Task_CustomerListAddTypo3TestData
 		}
 
 		$refIds = array();
-		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
-		$this->_addCustomerListData( $testdata, $refIds, 'Typo3' );
+		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$this->addCustomerListData( $testdata, $refIds, 'Typo3' );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

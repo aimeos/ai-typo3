@@ -15,7 +15,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'UriBuilder';
  */
 class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 {
-	private $_view;
+	private $view;
 
 
 	/**
@@ -26,7 +26,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_view = new MW_View_Default();
+		$this->view = new MW_View_Default();
 	}
 
 
@@ -38,7 +38,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_view );
+		unset( $this->view );
 	}
 
 
@@ -50,7 +50,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
 		$fixed = array( 'site' => 'unittest' );
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, $fixed );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, $fixed );
 
 		$this->assertEquals( '', $object->transform() );
 	}
@@ -64,7 +64,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'absoluteUri' => 1 );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -79,7 +79,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setNoCache' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'nocache' => 1 );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -94,7 +94,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'chash' => 1 );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -109,7 +109,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
 			->with( $this->equalTo( 123 ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'type' => 123 );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -124,7 +124,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setFormat' )
 			->with( $this->equalTo( 'xml' ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'format' => 'xml' );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -141,7 +141,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'setArguments' )
 			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array() );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array() );
 
 		$config = array( 'eID' => 123 );
 		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
@@ -155,7 +155,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
@@ -170,7 +170,7 @@ class MW_View_Helper_Url_Typo3Test extends MW_Unittest_Testcase
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->will( $this->returnValue( 'ai' ) );
 
-		$object = new MW_View_Helper_Url_Typo3( $this->_view, $mock, array( 'site' => 'unittest' ) );
+		$object = new MW_View_Helper_Url_Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
 		$config = array( 'namespace' => false );

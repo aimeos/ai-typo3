@@ -18,7 +18,7 @@
 class MShop_Customer_Manager_Typo3
 	extends MShop_Customer_Manager_Default
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
@@ -218,10 +218,10 @@ class MShop_Customer_Manager_Typo3
 		),
 	);
 
-	private $_plugins = array();
-	private $_reverse = array();
-	private $_helper;
-	private $_pid;
+	private $plugins = array();
+	private $reverse = array();
+	private $helper;
+	private $pid;
 
 
 
@@ -235,19 +235,19 @@ class MShop_Customer_Manager_Typo3
 		parent::__construct( $context );
 
 		$plugin = new MW_Common_Criteria_Plugin_T3Salutation();
-		$this->_plugins['customer.salutation'] = $this->_reverse['gender'] = $plugin;
+		$this->plugins['customer.salutation'] = $this->reverse['gender'] = $plugin;
 
 		$plugin = new MW_Common_Criteria_Plugin_T3Status();
-		$this->_plugins['customer.status'] = $this->_reverse['disable'] = $plugin;
+		$this->plugins['customer.status'] = $this->reverse['disable'] = $plugin;
 
 		$plugin = new MW_Common_Criteria_Plugin_T3Date();
-		$this->_plugins['customer.birthday'] = $this->_reverse['date_of_birth'] = $plugin;
+		$this->plugins['customer.birthday'] = $this->reverse['date_of_birth'] = $plugin;
 
 		$plugin = new MW_Common_Criteria_Plugin_T3Datetime();
-		$this->_plugins['customer.ctime'] = $this->_reverse['crdate'] = $plugin;
-		$this->_plugins['customer.mtime'] = $this->_reverse['tstamp'] = $plugin;
+		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
+		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 
-		$this->_pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 	}
 
 
@@ -261,7 +261,7 @@ class MShop_Customer_Manager_Typo3
 	{
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
 	}
 
 
@@ -273,7 +273,7 @@ class MShop_Customer_Manager_Typo3
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -286,7 +286,7 @@ class MShop_Customer_Manager_Typo3
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		return $this->createItemBase();
 	}
 
 
@@ -298,7 +298,7 @@ class MShop_Customer_Manager_Typo3
 	public function deleteItems( array $ids )
 	{
 		$path = 'mshop/customer/manager/typo3/item/delete';
-		$this->_deleteItems( $ids, $this->_getContext()->getConfig()->get( $path, $path ), false, 'uid' );
+		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ), false, 'uid' );
 	}
 
 
@@ -317,9 +317,9 @@ class MShop_Customer_Manager_Typo3
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -391,7 +391,7 @@ class MShop_Customer_Manager_Typo3
 				$path = 'mshop/customer/manager/typo3/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$address = $billingAddress->getAddress1();
 
@@ -406,7 +406,7 @@ class MShop_Customer_Manager_Typo3
 			// TYPO3 fe_users.static_info_country is a three letter ISO code instead a two letter one
 			$stmt->bind( 1, $item->getLabel() );
 			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $this->_plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 4, $billingAddress->getCompany() );
 			$stmt->bind( 5, $billingAddress->getVatID() );
 			$stmt->bind( 6, $billingAddress->getTitle() );
@@ -421,8 +421,8 @@ class MShop_Customer_Manager_Typo3
 			$stmt->bind( 15, $billingAddress->getEmail() );
 			$stmt->bind( 16, $billingAddress->getTelefax() );
 			$stmt->bind( 17, $billingAddress->getWebsite() );
-			$stmt->bind( 18, $this->_plugins['customer.birthday']->translate( $item->getBirthday() ), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 19, $this->_plugins['customer.status']->translate( $item->getStatus() ), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 18, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 19, $this->plugins['customer.status']->translate( $item->getStatus() ), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 20, $item->getPassword() );
 			$stmt->bind( 21, time(), MW_DB_Statement_Abstract::PARAM_INT ); // Modification time
 			$stmt->bind( 22, $billingAddress->getCountryId() );
@@ -432,7 +432,7 @@ class MShop_Customer_Manager_Typo3
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 23, time() ); // Creation time
-				$stmt->bind( 24, $this->_pid ); // TYPO3 PID value
+				$stmt->bind( 24, $this->pid ); // TYPO3 PID value
 			}
 
 			$stmt->execute()->finish();
@@ -470,7 +470,7 @@ class MShop_Customer_Manager_Typo3
 				 * @see mshop/customer/manager/typo3/item/count
 				 */
 				$path = 'mshop/customer/manager/typo3/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -493,8 +493,8 @@ class MShop_Customer_Manager_Typo3
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->getContext()->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$map = array();
 
@@ -505,7 +505,7 @@ class MShop_Customer_Manager_Typo3
 			$cfgPathCount = 'mshop/customer/manager/typo3/item/count';
 			$required = array( 'customer' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->_plugins );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = $row;
 			}
@@ -518,7 +518,7 @@ class MShop_Customer_Manager_Typo3
 			throw $e;
 		}
 
-		return $this->_buildItems( $map, $ref, 'customer' );
+		return $this->buildItems( $map, $ref, 'customer' );
 	}
 
 
@@ -531,7 +531,7 @@ class MShop_Customer_Manager_Typo3
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', $manager, ( $name === null ? 'Typo3' : $name ) );
+		return $this->getSubManagerBase( 'customer', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
 
 
@@ -543,30 +543,30 @@ class MShop_Customer_Manager_Typo3
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		$helper = $this->_getPasswordHelper();
-		$address = $this->_getAddressManager()->createItem();
-		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
+		$helper = $this->getPasswordHelper();
+		$address = $this->getAddressManager()->createItem();
+		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'date_of_birth', $values ) ) {
-			$values['birthday'] = $this->_reverse['date_of_birth']->reverse( $values['date_of_birth'] );
+			$values['birthday'] = $this->reverse['date_of_birth']->reverse( $values['date_of_birth'] );
 		}
 
 		if( array_key_exists( 'gender', $values ) ) {
-			$values['salutation'] = $this->_reverse['gender']->reverse( $values['gender'] );
+			$values['salutation'] = $this->reverse['gender']->reverse( $values['gender'] );
 		}
 
 		if( array_key_exists( 'disable', $values ) ) {
-			$values['status'] = $this->_reverse['disable']->reverse( $values['disable'] );
+			$values['status'] = $this->reverse['disable']->reverse( $values['disable'] );
 		}
 
 		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['mtime'] = $this->_reverse['tstamp']->reverse( $values['tstamp'] );
+			$values['mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
 		}
 
 		if( array_key_exists( 'crdate', $values ) ) {
-			$values['ctime'] = $this->_reverse['crdate']->reverse( $values['crdate'] );
+			$values['ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
 		if( array_key_exists( 'langid', $values ) ) {
@@ -586,13 +586,13 @@ class MShop_Customer_Manager_Typo3
 	 *
 	 * @return MShop_Common_Manager_Interface Customer address manager
 	 */
-	protected function _getAddressManager()
+	protected function getAddressManager()
 	{
-		if( !isset( $this->_addressManager ) ) {
-			$this->_addressManager = $this->getSubManager( 'address' );
+		if( !isset( $this->addressManager ) ) {
+			$this->addressManager = $this->getSubManager( 'address' );
 		}
 
-		return $this->_addressManager;
+		return $this->addressManager;
 	}
 
 
@@ -602,10 +602,10 @@ class MShop_Customer_Manager_Typo3
 	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
 	 * @throws MShop_Exception If the name is invalid or the class isn't found
 	 */
-	protected function _getPasswordHelper()
+	protected function getPasswordHelper()
 	{
-		if( $this->_helper ) {
-			return $this->_helper;
+		if( $this->helper ) {
+			return $this->helper;
 		}
 
 		$iface = 'MShop_Common_Item_Helper_Password_Interface';
@@ -615,7 +615,7 @@ class MShop_Customer_Manager_Typo3
 			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$object = ( method_exists( $context, 'getHasherTypo3' ) ? $context->getHasherTypo3() : null );
 
 		$helper = new $classname( array( 'object' => $object ) );
@@ -624,7 +624,7 @@ class MShop_Customer_Manager_Typo3
 			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
-		$this->_helper = $helper;
+		$this->helper = $helper;
 
 		return $helper;
 	}

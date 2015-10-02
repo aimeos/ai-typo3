@@ -18,9 +18,9 @@ class MAdmin_Cache_Proxy_Typo3
 	extends \MAdmin_Cache_Proxy_Default
 	implements \MW_Cache_Interface
 {
-	private $_object;
-	private $_context;
-	private $_cache;
+	private $object;
+	private $context;
+	private $cache;
 
 
 	/**
@@ -31,8 +31,8 @@ class MAdmin_Cache_Proxy_Typo3
 	 */
 	public function __construct( \MShop_Context_Item_Interface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
-		$this->_context = $context;
-		$this->_cache = $cache;
+		$this->context = $context;
+		$this->cache = $cache;
 	}
 
 
@@ -41,15 +41,15 @@ class MAdmin_Cache_Proxy_Typo3
 	 *
 	 * @return \MW_Cache_Interface Cache object
 	 */
-	protected function _getObject()
+	protected function getObject()
 	{
-		if( !isset( $this->_object ) )
+		if( !isset( $this->object ) )
 		{
-			$siteid = $this->_context->getLocale()->getSiteId();
-			$conf = array( 'siteid' => $this->_context->getConfig()->get( 'madmin/cache/prefix' ) . $siteid );
-			$this->_object = \MW_Cache_Factory::createManager( 'Typo3', $conf, $this->_cache );
+			$siteid = $this->context->getLocale()->getSiteId();
+			$conf = array( 'siteid' => $this->context->getConfig()->get( 'madmin/cache/prefix' ) . $siteid );
+			$this->object = \MW_Cache_Factory::createManager( 'Typo3', $conf, $this->cache );
 		}
 
-		return $this->_object;
+		return $this->object;
 	}
 }

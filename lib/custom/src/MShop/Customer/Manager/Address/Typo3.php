@@ -19,7 +19,7 @@ class MShop_Customer_Manager_Address_Typo3
 	extends MShop_Customer_Manager_Address_Default
 	implements MShop_Customer_Manager_Address_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.address.id' => array(
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
@@ -217,7 +217,7 @@ class MShop_Customer_Manager_Address_Typo3
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/address/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -233,7 +233,7 @@ class MShop_Customer_Manager_Address_Typo3
 	{
 		$path = 'classes/customer/manager/address/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -246,7 +246,7 @@ class MShop_Customer_Manager_Address_Typo3
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', 'address/' . $manager, ( $name === null ? 'Typo3' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'address/' . $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
 
 
@@ -255,7 +255,7 @@ class MShop_Customer_Manager_Address_Typo3
 	 *
 	 * @return string Configuration path (mshop/customer/manager/address/typo3/item/)
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		return 'mshop/customer/manager/address/typo3/item';
 	}
@@ -266,8 +266,8 @@ class MShop_Customer_Manager_Address_Typo3
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

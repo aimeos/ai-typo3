@@ -18,7 +18,7 @@ class MShop_Customer_Manager_Group_Typo3
 	extends MShop_Customer_Manager_Group_Default
 	implements MShop_Customer_Manager_Group_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.group.id' => array(
 			'code' => 'customer.group.id',
 			'internalcode' => 't3feg."uid"',
@@ -63,8 +63,8 @@ class MShop_Customer_Manager_Group_Typo3
 		),
 	);
 
-	private $_plugins = array();
-	private $_reverse = array();
+	private $plugins = array();
+	private $reverse = array();
 
 
 	/**
@@ -77,8 +77,8 @@ class MShop_Customer_Manager_Group_Typo3
 		parent::__construct( $context );
 
 		$plugin = new MW_Common_Criteria_Plugin_T3Datetime();
-		$this->_plugins['customer.ctime'] = $this->_reverse['crdate'] = $plugin;
-		$this->_plugins['customer.mtime'] = $this->_reverse['tstamp'] = $plugin;
+		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
+		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 	}
 
 
@@ -91,7 +91,7 @@ class MShop_Customer_Manager_Group_Typo3
 	{
 		$path = 'classes/customer/manager/group/submanagers';
 
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -118,7 +118,7 @@ class MShop_Customer_Manager_Group_Typo3
 	{
 		$path = 'classes/customer/manager/group/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -131,7 +131,7 @@ class MShop_Customer_Manager_Group_Typo3
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer/group', $manager, ( $name === null ? 'Typo3' : $name ) );
+		return $this->getSubManagerBase( 'customer/group', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
 
 
@@ -159,10 +159,10 @@ class MShop_Customer_Manager_Group_Typo3
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
 		$map = array();
-		$context = $this->_getContext();
+		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -262,10 +262,10 @@ class MShop_Customer_Manager_Group_Typo3
 			 */
 			$cfgPathCount = 'mshop/customer/manager/group/typo3/item/count';
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $this->_createItem( $row );
+				$map[$row['id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -288,16 +288,16 @@ class MShop_Customer_Manager_Group_Typo3
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return MShop_Customer_Item_Interface New customer item
 	 */
-	protected function _createItem( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		$values['siteid'] = $this->_getContext()->getLocale()->getSiteId();
+		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['mtime'] = $this->_reverse['tstamp']->reverse( $values['tstamp'] );
+			$values['mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
 		}
 
 		if( array_key_exists( 'crdate', $values ) ) {
-			$values['ctime'] = $this->_reverse['crdate']->reverse( $values['crdate'] );
+			$values['ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
 		return new MShop_Customer_Item_Group_Default( $values );

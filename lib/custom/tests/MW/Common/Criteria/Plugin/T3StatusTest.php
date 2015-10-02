@@ -12,7 +12,7 @@
  */
 class MW_Common_Criteria_Plugin_T3StatusTest extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -20,7 +20,7 @@ class MW_Common_Criteria_Plugin_T3StatusTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
-		$this->_object = new MW_Common_Criteria_Plugin_T3Status();
+		$this->object = new MW_Common_Criteria_Plugin_T3Status();
 	}
 
 
@@ -29,30 +29,30 @@ class MW_Common_Criteria_Plugin_T3StatusTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset($this->_object);
+		unset($this->object);
 	}
 
 
 	public function testTranslate()
 	{
-		$this->assertEquals( 0, $this->_object->translate( 1 ) );
+		$this->assertEquals( 0, $this->object->translate( 1 ) );
 	}
 
 
 	public function testTranslateDisabled()
 	{
-		$this->assertEquals( 1, $this->_object->translate( 0 ) );
+		$this->assertEquals( 1, $this->object->translate( 0 ) );
 	}
 
 
 	public function testReverse()
 	{
-		$this->assertEquals( 1, $this->_object->reverse( 0 ) );
+		$this->assertEquals( 1, $this->object->reverse( 0 ) );
 	}
 
 
 	public function testReverseDisabled()
 	{
-		$this->assertEquals( 0, $this->_object->reverse( 1 ) );
+		$this->assertEquals( 0, $this->object->reverse( 1 ) );
 	}
 }
