@@ -293,7 +293,7 @@ class MShop_Customer_Manager_List_Typo3Test extends MW_Unittest_Testcase
 		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context, 'Typo3' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3@metaways.de' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3@example.com' ) );
 		$search->setSlice( 0, 1 );
 
 		$results = $manager->searchItems( $search );
