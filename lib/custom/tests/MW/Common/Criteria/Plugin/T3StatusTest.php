@@ -10,7 +10,7 @@
 /**
  * Test class for MW_Common_Criteria_Plugin_T3Status
  */
-class MW_Common_Criteria_Plugin_T3StatusTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_Plugin_T3StatusTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 

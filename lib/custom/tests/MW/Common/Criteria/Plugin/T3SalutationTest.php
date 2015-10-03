@@ -10,7 +10,7 @@
 /**
  * Test class for MW_Common_Criteria_Plugin_T3Salutation
  */
-class MW_Common_Criteria_Plugin_T3SalutationTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_Plugin_T3SalutationTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 

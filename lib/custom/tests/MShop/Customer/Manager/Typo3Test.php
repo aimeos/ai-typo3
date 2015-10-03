@@ -9,7 +9,7 @@
 /**
  * Test class for MShop_Customer_Manager_Typo3
  */
-class MShop_Customer_Manager_Typo3Test extends MW_Unittest_Testcase
+class MShop_Customer_Manager_Typo3Test extends PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;

@@ -11,7 +11,7 @@ require_once dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'MailMessage';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Test_HeaderSet.php';
 
 
-class MW_Mail_Message_Typo3Test extends MW_Unittest_Testcase
+class MW_Mail_Message_Typo3Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
