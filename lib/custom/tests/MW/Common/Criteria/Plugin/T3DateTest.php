@@ -10,7 +10,7 @@
 /**
  * Test class for MW_Common_Criteria_Plugin_T3Date
  */
-class MW_Common_Criteria_Plugin_T3DateTest extends MW_Unittest_Testcase
+class MW_Common_Criteria_Plugin_T3DateTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 

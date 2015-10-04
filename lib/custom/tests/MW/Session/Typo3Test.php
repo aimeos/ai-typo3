@@ -13,7 +13,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication';
 /**
  * Test class for MW_Session_Typo3.
  */
-class MW_Session_Typo3Test extends MW_Unittest_Testcase
+class MW_Session_Typo3Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
