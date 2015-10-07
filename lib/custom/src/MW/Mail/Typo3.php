@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MW\Mail;
+
+
 /**
  * TYPO3 implementation for creating and sending e-mails.
  *
  * @package MW
  * @subpackage Mail
  */
-class MW_Mail_Typo3 implements MW_Mail_Interface
+class Typo3 implements \Aimeos\MW\Mail\Iface
 {
 	private $object;
 
@@ -23,9 +26,9 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
+	 * @param \TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
 	 */
-	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object )
+	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object )
 	{
 		$this->object = $object;
 	}
@@ -35,20 +38,20 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	 * Creates a new e-mail message object.
 	 *
 	 * @param string $charset Default charset of the message
-	 * @return MW_Mail_Message_Interface E-mail message object
+	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
 	public function createMessage( $charset = 'UTF-8' )
 	{
-		return new MW_Mail_Message_Typo3( clone $this->object, $charset );
+		return new \Aimeos\MW\Mail\Message\Typo3( clone $this->object, $charset );
 	}
 
 
 	/**
 	 * Sends the e-mail message to the mail server.
 	 *
-	 * @param MW_Mail_Message_Interface $message E-mail message object
+	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 */
-	public function send( MW_Mail_Message_Interface $message )
+	public function send( \Aimeos\MW\Mail\Message\Iface $message )
 	{
 		$message->getObject()->send();
 	}

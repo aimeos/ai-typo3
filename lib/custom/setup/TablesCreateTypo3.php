@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required tables.
  */
-class MW_Setup_Task_TablesCreateTypo3 extends MW_Setup_Task_TablesCreateMShop
+class TablesCreateTypo3 extends \Aimeos\MW\Setup\Task\TablesCreateMShop
 {
 	/**
 	 * Returns the list of task names which this task depends on.

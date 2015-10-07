@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MW\Mail\Message;
+
+
 /**
  * Zend implementation for creating e-mails.
  *
  * @package MW
  * @subpackage Mail
  */
-class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
+class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 {
 	private $object;
 
@@ -23,10 +26,10 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	/**
 	 * Initializes the message instance.
 	 *
-	 * @param TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
+	 * @param \TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
 	 * @param string $charset Default charset of the message
 	 */
-	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object, $charset )
+	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object, $charset )
 	{
 		$object->setCharset( $charset );
 
@@ -39,7 +42,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user sending the e-mail or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addFrom( $email, $name = null )
 	{
@@ -53,7 +56,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address of the target mailbox
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addTo( $email, $name = null )
 	{
@@ -67,7 +70,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address for a copy
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addCc( $email, $name = null )
 	{
@@ -81,7 +84,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Destination address for a hidden copy
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addBcc( $email, $name = null )
 	{
@@ -95,7 +98,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email E-mail address which should receive all replies
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addReplyTo( $email, $name = null )
 	{
@@ -109,7 +112,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $name Name of the custom e-mail header
 	 * @param string $value Text content of the custom e-mail header
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addHeader( $name, $value )
 	{
@@ -124,7 +127,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user who sent the message or null for no name
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setSender( $email, $name = null )
 	{
@@ -137,7 +140,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 * Sets the subject of the message.
 	 *
 	 * @param string $subject Subject of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setSubject( $subject )
 	{
@@ -150,7 +153,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 * Sets the text body of the message.
 	 *
 	 * @param string $message Text body of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setBody( $message )
 	{
@@ -163,7 +166,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 * Sets the HTML body of the message.
 	 *
 	 * @param string $message HTML body of the message
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function setBodyHtml( $message )
 	{
@@ -179,7 +182,7 @@ class MW_Mail_Message_Typo3 implements MW_Mail_Message_Interface
 	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
 	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
-	 * @return MW_Mail_Message_Interface Message object
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
 	public function addAttachment( $data, $mimetype, $filename, $disposition = 'attachment' )
 	{

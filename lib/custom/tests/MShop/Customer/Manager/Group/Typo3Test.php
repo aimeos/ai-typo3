@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Common\Manager\Group;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Common_Manager_Group_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object = null;
 	private $editor = '';
@@ -14,10 +15,10 @@ class MShop_Common_Manager_Group_Typo3Test extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
 
-		$this->object = new MShop_Customer_Manager_Group_Typo3( $context );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Group\Typo3( $context );
 	}
 
 
@@ -35,16 +36,16 @@ class MShop_Common_Manager_Group_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testSaveItem()
 	{
-		$item = new MShop_Customer_Item_Group_Default();
+		$item = new \Aimeos\MShop\Customer\Item\Group\Standard();
 
-		$this->setExpectedException( 'MShop_Customer_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
 		$this->object->saveItem( $item );
 	}
 
 
 	public function testDeleteItem()
 	{
-		$this->setExpectedException( 'MShop_Customer_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
 		$this->object->deleteItem( -1 );
 	}
 

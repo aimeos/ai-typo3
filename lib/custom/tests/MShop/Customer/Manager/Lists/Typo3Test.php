@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists;
+
+
 /**
- * Test class for MShop_Customer_Manager_List_Typo3Test.
+ * Test class for \Aimeos\MShop\Customer\Manager\Lists\Typo3Test.
  */
-class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -25,10 +28,10 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Typo3' );
-		$this->object = $manager->getSubManager( 'list', 'Typo3' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Typo3' );
+		$this->object = $manager->getSubManager( 'lists', 'Typo3' );
 	}
 
 
@@ -41,14 +44,14 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		unset( $this->object );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testAggregate()
 	{
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'customer.list.domain' );
+		$result = $this->object->aggregate( $search, 'customer.lists.domain' );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
@@ -59,7 +62,7 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $item );
 	}
 
 
@@ -70,7 +73,7 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -84,7 +87,7 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No item found' );
+			throw new \Exception( 'No item found' );
 		}
 
 		$item->setId(null);
@@ -134,7 +137,7 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -145,11 +148,11 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -170,15 +173,15 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second customer list item' );
+			throw new \Exception( 'No second customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -199,15 +202,15 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new Exception( 'No first customer list item' );
+			throw new \Exception( 'No first customer list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new Exception( 'No second customer list item' );
+			throw new \Exception( 'No second customer list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new Exception( 'No last customer list item' );
+			throw new \Exception( 'No last customer list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -228,29 +231,29 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'customer.list.id', null );
-		$expr[] = $search->compare( '!=', 'customer.list.siteid', null );
-		$expr[] = $search->compare( '>', 'customer.list.parentid', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.domain', 'text' );
-		$expr[] = $search->compare( '>', 'customer.list.typeid', 0 );
-		$expr[] = $search->compare( '>', 'customer.list.refid', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '>', 'customer.list.position', 0 );
-		$expr[] = $search->compare( '==', 'customer.list.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.id', null );
+		$expr[] = $search->compare( '!=', 'customer.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'customer.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.domain', 'text' );
+		$expr[] = $search->compare( '>', 'customer.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '>', 'customer.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
-		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.list.type.label', 'Default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice(0, 2);
@@ -264,13 +267,13 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 
 		//search without base criteria
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.list.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$this->assertEquals( 4, count( $this->object->searchItems($search) ) );
 
 		//search with base criteria
 		$search = $this->object->createSearch(true);
 		$conditions = array(
-			$search->compare( '==', 'customer.list.editor', $this->editor ),
+			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -280,17 +283,17 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager('type') );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager('type', 'Typo3') );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type') );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type', 'Typo3') );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
 		$this->object->getSubManager('unknown');
 	}
 
 
 	protected function getListItems()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( $this->context, 'Typo3' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Typo3' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3@example.com' ) );
@@ -299,18 +302,18 @@ class MShop_Customer_Manager_List_Typo3Test extends PHPUnit_Framework_TestCase
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No customer item found' );
+			throw new \Exception( 'No customer item found' );
 		}
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'customer.list.parentid', $item->getId() ),
-			$search->compare( '==', 'customer.list.domain', 'text' ),
-			$search->compare( '==', 'customer.list.editor', $this->editor ),
-			$search->compare( '==', 'customer.list.type.code', 'default' ),
+			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'customer.lists.domain', 'text' ),
+			$search->compare( '==', 'customer.lists.editor', $this->editor ),
+			$search->compare( '==', 'customer.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'customer.list.position' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'customer.lists.position' ) ) );
 
 		return $this->object->searchItems( $search );
 	}

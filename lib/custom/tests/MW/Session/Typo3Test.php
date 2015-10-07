@@ -7,13 +7,16 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication';
 
 
 /**
- * Test class for MW_Session_Typo3.
+ * Test class for \Aimeos\MW\Session\Typo3.
  */
-class MW_Session_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -26,8 +29,8 @@ class MW_Session_Typo3Test extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$mock = new TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication();
-		$this->object = new MW_Session_Typo3($mock);
+		$mock = new \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication();
+		$this->object = new \Aimeos\MW\Session\Typo3($mock);
 	}
 
 	/**

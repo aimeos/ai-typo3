@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache\Proxy;
+
+
 /**
  * Cache proxy for creating the TYPO3 cache object on demand.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Proxy_Typo3
-	extends \MAdmin_Cache_Proxy_Default
-	implements \MW_Cache_Interface
+class Typo3
+	extends \\Aimeos\MAdmin\Cache\Proxy\Standard
+	implements \\Aimeos\MW\Cache\Iface
 {
 	private $object;
 	private $context;
@@ -26,10 +29,10 @@ class MAdmin_Cache_Proxy_Typo3
 	/**
 	 * Initializes the cache controller.
 	 *
-	 * @param \MShop_Context_Item_Interface $context MShop context object
+	 * @param \\Aimeos\MShop\Context\Item\Iface $context MShop context object
 	 * @param \TYPO3\Flow\Cache\Frontend\StringFrontend $cache Flow cache object
 	 */
-	public function __construct( \MShop_Context_Item_Interface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
+	public function __construct( \\Aimeos\MShop\Context\Item\Iface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
 		$this->context = $context;
 		$this->cache = $cache;
@@ -39,7 +42,7 @@ class MAdmin_Cache_Proxy_Typo3
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return \MW_Cache_Interface Cache object
+	 * @return \\Aimeos\MW\Cache\Iface Cache object
 	 */
 	protected function getObject()
 	{
@@ -47,7 +50,7 @@ class MAdmin_Cache_Proxy_Typo3
 		{
 			$siteid = $this->context->getLocale()->getSiteId();
 			$conf = array( 'siteid' => $this->context->getConfig()->get( 'madmin/cache/prefix' ) . $siteid );
-			$this->object = \MW_Cache_Factory::createManager( 'Typo3', $conf, $this->cache );
+			$this->object = \\Aimeos\MW\Cache\Factory::createManager( 'Typo3', $conf, $this->cache );
 		}
 
 		return $this->object;

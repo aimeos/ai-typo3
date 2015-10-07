@@ -6,10 +6,13 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
+namespace Aimeos\MShop\Customer\Manager\Address;
+
+
 /**
- * Test class for MShop_Customer_Manager_Address_Typo3
+ * Test class for \Aimeos\MShop\Customer\Manager\Address\Typo3
  */
-class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -20,8 +23,8 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Typo3' );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Typo3' );
 		$this->object = $manager->getSubManager( 'address', 'Typo3' );
 	}
 
@@ -32,7 +35,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 	protected function tearDown()
 	{
 		unset( $this->object );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
@@ -40,7 +43,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -48,7 +51,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $item );
 	}
 
 
@@ -59,7 +62,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 		$items = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new Exception( 'No customer address found' );
+			throw new \Exception( 'No customer address found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -97,7 +100,7 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new Exception( 'No customer address found' );
+			throw new \Exception( 'No customer address found' );
 		}
 
 		$item->setId( null );
@@ -167,14 +170,14 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -236,14 +239,14 @@ class MShop_Customer_Manager_Address_Typo3Test extends PHPUnit_Framework_TestCas
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

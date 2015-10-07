@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Cache';
 
 
-class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +28,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->mock = $this->getMock( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' );
-		$this->object = new MW_Cache_Typo3( array(), $this->mock );
+		$this->object = new \Aimeos\MW\Cache\Typo3( array(), $this->mock );
 	}
 
 	/**
@@ -49,7 +52,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testDeleteWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
 		$object->delete( 'key' );
@@ -65,7 +68,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testDeleteListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
 		$object->deleteList( array( 'key' ) );
@@ -81,7 +84,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testDeleteByTagsWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
 		$object->deleteByTags( array( 'tag' ) );
@@ -97,7 +100,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testFlushWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-siteid' ) );
 		$object->flush();
@@ -115,7 +118,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testGetWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
 		$object->get( 'key', 'default' );
@@ -134,7 +137,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testGetListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
 		$object->getList( array( 'key' ) );
@@ -152,7 +155,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testGetListByTagsWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'getByTag' )
 			->with( $this->equalTo( '1-key' ) )->will( $this->returnValue( array( '1-key' => 'value' ) ) );
@@ -175,7 +178,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testSetWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
@@ -202,7 +205,7 @@ class MW_Cache_Typo3Test extends PHPUnit_Framework_TestCase
 
 	public function testSetListWithSiteId()
 	{
-		$object = new MW_Cache_Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(

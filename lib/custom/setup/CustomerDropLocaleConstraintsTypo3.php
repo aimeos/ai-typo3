@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from feusers_* tables.
  */
-class MW_Setup_Task_CustomerDropLocaleConstraintsTypo3 extends MW_Setup_Task_Abstract
+class CustomerDropLocaleConstraintsTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users_list_type' => array(

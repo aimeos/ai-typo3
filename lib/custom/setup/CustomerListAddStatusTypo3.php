@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds status column to list table.
  */
-class MW_Setup_Task_CustomerListAddStatusTypo3 extends MW_Setup_Task_Abstract
+class CustomerListAddStatusTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users_list' => array (

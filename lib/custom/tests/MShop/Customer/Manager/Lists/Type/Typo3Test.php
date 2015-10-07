@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists\Type;
+
+
 /**
- * Test class for MShop_Customer_Manager_List_Type_Typo3Test.
+ * Test class for \Aimeos\MShop\Customer\Manager\Lists\Type\Typo3Test.
  */
-class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
@@ -24,10 +27,10 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$this->editor = TestHelper::getContext()->getEditor();
-		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Typo3' );
+		$this->editor = \TestHelper::getContext()->getEditor();
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Typo3' );
 
-		$listManager = $manager->getSubManager( 'list', 'Typo3' );
+		$listManager = $manager->getSubManager( 'lists', 'Typo3' );
 		$this->object = $listManager->getSubManager( 'type', 'Typo3' );
 	}
 
@@ -41,14 +44,14 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 	protected function tearDown()
 	{
 		unset( $this->object );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( 'MShop_Common_Item_Type_Interface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
 	}
 
 
@@ -59,7 +62,7 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 		$results = $this->object->searchItems($search);
 
 		if( ( $expected = reset($results) ) === false ) {
-			throw new Exception( 'No list type item found' );
+			throw new \Exception( 'No list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -73,7 +76,7 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 		$results = $this->object->searchItems($search);
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new Exception( 'No type item found' );
+			throw new \Exception( 'No type item found' );
 		}
 
 		$item->setId(null);
@@ -112,7 +115,7 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException('MShop_Exception');
+		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -123,15 +126,15 @@ class MShop_Customer_Manager_List_Type_Typo3Test extends PHPUnit_Framework_TestC
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'customer.list.type.id', 0 );
-		$expr[] = $search->compare( '!=', 'customer.list.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.list.type.label', 'Default' );
-		$expr[] = $search->compare( '==', 'customer.list.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.list.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.list.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.list.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice(0, 1);

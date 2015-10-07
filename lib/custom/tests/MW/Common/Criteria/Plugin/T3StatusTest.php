@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Plugin;
+
+
 /**
- * Test class for MW_Common_Criteria_Plugin_T3Status
+ * Test class for \Aimeos\MW\Common\Criteria\Plugin\T3Status
  */
-class MW_Common_Criteria_Plugin_T3StatusTest extends PHPUnit_Framework_TestCase
+class T3StatusTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -20,7 +23,7 @@ class MW_Common_Criteria_Plugin_T3StatusTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Common_Criteria_Plugin_T3Status();
+		$this->object = new \Aimeos\MW\Common\Criteria\Plugin\T3Status();
 	}
 
 

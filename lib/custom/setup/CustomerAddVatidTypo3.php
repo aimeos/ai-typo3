@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds vaid column to fe_users tables.
  */
-class MW_Setup_Task_CustomerAddVatidTypo3 extends MW_Setup_Task_Abstract
+class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users' => 'ALTER TABLE "fe_users" ADD "vatid" VARCHAR(32) AFTER "company"',

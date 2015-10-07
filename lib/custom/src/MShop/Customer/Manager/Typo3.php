@@ -9,14 +9,17 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
  * Typo3 implementation of the customer class.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Typo3
-	extends MShop_Customer_Manager_Default
+class Typo3
+	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
 		'customer.id' => array(
@@ -24,189 +27,189 @@ class MShop_Customer_Manager_Typo3
 			'code' => 'customer.id',
 			'internalcode' => 't3feu."uid"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
 		'customer.label' => array(
 			'label' => 'Customer name',
 			'code' => 'customer.label',
 			'internalcode' => 't3feu."name"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
 			'internalcode' => 't3feu."username"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.salutation' => array(
 			'label' => 'Customer salutation',
 			'code' => 'customer.salutation',
 			'internalcode' => 't3feu."gender"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.company'=> array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
 			'internalcode' => 't3feu."company"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.vatid'=> array(
 			'label' => 'Customer VAT ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 't3feu."vatid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
 			'internalcode' => 't3feu."title"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Customer firstname',
 			'code' => 'customer.firstname',
 			'internalcode' => 't3feu."first_name"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Customer lastname',
 			'code' => 'customer.lastname',
 			'internalcode' => 't3feu."last_name"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Customer address part one',
 			'code' => 'customer.address1',
 			'internalcode' => 't3feu."address"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Customer address part two',
 			'code' => 'customer.address2',
 			'internalcode' => 't3feu."address"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Customer address part three',
 			'code' => 'customer.address3',
 			'internalcode' => 't3feu."address"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Customer postal',
 			'code' => 'customer.postal',
 			'internalcode' => 't3feu."zip"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'Customer city',
 			'code' => 'customer.city',
 			'internalcode' => 't3feu."city"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'Customer state',
 			'code' => 'customer.state',
 			'internalcode' => 't3feu."zone"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Customer language',
 			'code' => 'customer.languageid',
 			'internalcode' => 't3feu."language"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
 			'internalcode' => 'tsc."cn_iso_2"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Customer telephone',
 			'code' => 'customer.telephone',
 			'internalcode' => 't3feu."telephone"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'Customer email',
 			'code' => 'customer.email',
 			'internalcode' => 't3feu."email"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 't3feu."fax"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Customer website',
 			'code' => 'customer.website',
 			'internalcode' => 't3feu."www"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
 			'internalcode' => 't3feu."date_of_birth"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.password'=> array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
 			'internalcode' => 't3feu."password"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.status'=> array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
 			'internalcode' => 't3feu."disable"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
 		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 't3feu."vdate"',
 			'type' => 'date',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.ctime'=> array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
 			'internalcode' => 't3feu."crdate"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.mtime'=> array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
 			'internalcode' => 't3feu."tstamp"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		// not available
 		'customer.editor'=> array(
@@ -214,7 +217,7 @@ class MShop_Customer_Manager_Typo3
 			'code'=>'customer.editor',
 			'internalcode'=>'1',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -228,22 +231,22 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param MShop_Context_Interface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Iface $context Context object with required objects
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
-		$plugin = new MW_Common_Criteria_Plugin_T3Salutation();
+		$plugin = new \Aimeos\MW\Common\Criteria\Plugin\T3Salutation();
 		$this->plugins['customer.salutation'] = $this->reverse['gender'] = $plugin;
 
-		$plugin = new MW_Common_Criteria_Plugin_T3Status();
+		$plugin = new \Aimeos\MW\Common\Criteria\Plugin\T3Status();
 		$this->plugins['customer.status'] = $this->reverse['disable'] = $plugin;
 
-		$plugin = new MW_Common_Criteria_Plugin_T3Date();
+		$plugin = new \Aimeos\MW\Common\Criteria\Plugin\T3Date();
 		$this->plugins['customer.birthday'] = $this->reverse['date_of_birth'] = $plugin;
 
-		$plugin = new MW_Common_Criteria_Plugin_T3Datetime();
+		$plugin = new \Aimeos\MW\Common\Criteria\Plugin\T3Datetime();
 		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
 		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 
@@ -255,13 +258,13 @@ class MShop_Customer_Manager_Typo3
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
 	}
 
 
@@ -273,7 +276,7 @@ class MShop_Customer_Manager_Typo3
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -282,7 +285,7 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Instantiates a new customer item object.
 	 *
-	 * @return MShop_Customer_Item_Interface New customer item object
+	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
 	 */
 	public function createItem()
 	{
@@ -305,14 +308,14 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Saves a customer item object.
 	 *
-	 * @param MShop_Customer_Item_Interface $item Customer item object
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Customer_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Customer\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -406,7 +409,7 @@ class MShop_Customer_Manager_Typo3
 			// TYPO3 fe_users.static_info_country is a three letter ISO code instead a two letter one
 			$stmt->bind( 1, $item->getLabel() );
 			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 3, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $billingAddress->getCompany() );
 			$stmt->bind( 5, $billingAddress->getVatID() );
 			$stmt->bind( 6, $billingAddress->getTitle() );
@@ -421,14 +424,14 @@ class MShop_Customer_Manager_Typo3
 			$stmt->bind( 15, $billingAddress->getEmail() );
 			$stmt->bind( 16, $billingAddress->getTelefax() );
 			$stmt->bind( 17, $billingAddress->getWebsite() );
-			$stmt->bind( 18, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 19, $this->plugins['customer.status']->translate( $item->getStatus() ), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 18, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 19, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 20, $item->getPassword() );
-			$stmt->bind( 21, time(), MW_DB_Statement_Abstract::PARAM_INT ); // Modification time
+			$stmt->bind( 21, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
 			$stmt->bind( 22, $billingAddress->getCountryId() );
 
 			if( $id !== null ) {
-				$stmt->bind( 23, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 23, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 23, time() ); // Creation time
@@ -475,7 +478,7 @@ class MShop_Customer_Manager_Typo3
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -486,12 +489,12 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Customer_Item_Interface
-	 * @throws MShop_Customer_Exception If creating items failed
+	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
+	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -500,7 +503,7 @@ class MShop_Customer_Manager_Typo3
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/typo3/item/search';
 			$cfgPathCount = 'mshop/customer/manager/typo3/item/count';
 			$required = array( 'customer' );
@@ -512,7 +515,7 @@ class MShop_Customer_Manager_Typo3
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname  );
 			throw $e;
@@ -541,7 +544,7 @@ class MShop_Customer_Manager_Typo3
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @return MShop_Customer_Item_Interface New customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
@@ -577,14 +580,14 @@ class MShop_Customer_Manager_Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
-		return new MShop_Customer_Item_Default( $address, $values, $listItems, $refItems, null, $helper );
+		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, null, $helper );
 	}
 
 
 	/**
 	 * Returns the address sub-manager.
 	 *
-	 * @return MShop_Common_Manager_Interface Customer address manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Customer address manager
 	 */
 	protected function getAddressManager()
 	{
@@ -599,8 +602,8 @@ class MShop_Customer_Manager_Typo3
 	/**
 	 * Returns a password helper object based on the configuration.
 	 *
-	 * @return MShop_Common_Item_Helper_Password_Interface Password helper object
-	 * @throws MShop_Exception If the name is invalid or the class isn't found
+	 * @return \Aimeos\MShop\Common\Item\Helper\Password\Iface Password helper object
+	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
 	 */
 	protected function getPasswordHelper()
 	{
@@ -608,11 +611,11 @@ class MShop_Customer_Manager_Typo3
 			return $this->helper;
 		}
 
-		$iface = 'MShop_Common_Item_Helper_Password_Interface';
-		$classname = 'MShop_Common_Item_Helper_Password_Typo3';
+		$iface = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface';
+		$classname = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Typo3';
 
 		if( class_exists( $classname ) === false ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$context = $this->getContext();
@@ -621,7 +624,7 @@ class MShop_Customer_Manager_Typo3
 		$helper = new $classname( array( 'object' => $object ) );
 
 		if( !( $helper instanceof $iface ) ) {
-			throw new MShop_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
 		$this->helper = $helper;

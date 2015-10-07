@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds config column to list table.
  */
-class MW_Setup_Task_CustomerListAddConfigTypo3 extends MW_Setup_Task_Abstract
+class CustomerListAddConfigTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users_list' => 'ALTER TABLE "fe_users_list" ADD "config" TEXT NOT NULL AFTER "end"',

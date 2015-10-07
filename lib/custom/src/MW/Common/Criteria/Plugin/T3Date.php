@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Plugin;
+
+
 /**
  * Criteria plugin for TYPO3 date values.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Plugin_T3Date implements MW_Common_Criteria_Plugin_Interface
+class T3Date implements \Aimeos\MW\Common\Criteria\Plugin\Iface
 {
 	/**
 	 * Translates ISO dates into seconds relative to the epoch.

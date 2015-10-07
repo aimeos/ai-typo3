@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
  * TYPO3 implementation of the password helper item
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Password_Typo3 implements MShop_Common_Item_Helper_Password_Interface
+class Typo3 implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $hasher;
 
@@ -27,7 +30,7 @@ class MShop_Common_Item_Helper_Password_Typo3 implements MShop_Common_Item_Helpe
 	public function __construct( array $options )
 	{
 		if( !array_key_exists( 'object', $options ) ) {
-			throw new MShop_Exception( sprintf( 'No TYPO3 password hash object available' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No TYPO3 password hash object available' ) );
 		}
 
 		$this->hasher = $options['object'];

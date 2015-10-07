@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Mail\Message;
+
+
 /**
  * Swiftmailer message stub required for tests.
  */
-class Test_HeaderSet
+class TestHeaderSet
 {
 	/**
 	 * @param string $name

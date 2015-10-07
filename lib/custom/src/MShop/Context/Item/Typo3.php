@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Context\Item;
+
+
 /**
  * Typo3 implementation of the context item
  *
  * @package MShop
  * @subpackage Context
  */
-class MShop_Context_Item_Typo3
-	extends MShop_Context_Item_Default
+class Typo3
+	extends \Aimeos\MShop\Context\Item\Standard
 {
 	private $hasher;
 

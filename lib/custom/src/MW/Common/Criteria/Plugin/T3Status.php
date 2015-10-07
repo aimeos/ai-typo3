@@ -9,13 +9,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Plugin;
+
+
 /**
  * Criteria plugin for TYPO3 status/disable.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Plugin_T3Status implements MW_Common_Criteria_Plugin_Interface
+class T3Status implements \Aimeos\MW\Common\Criteria\Plugin\Iface
 {
 	/**
 	 * Translates the MShop value into its TYPO3 equivalent.

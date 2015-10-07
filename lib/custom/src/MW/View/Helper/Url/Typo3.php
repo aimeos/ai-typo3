@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
  * View helper class for building URLs.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Url_Typo3
-	extends MW_View_Helper_Abstract
-	implements MW_View_Helper_Interface
+class Typo3
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $uriBuilder;
 	private $prefix;
@@ -27,11 +30,11 @@ class MW_View_Helper_Url_Typo3
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param MW_View_Interface $view View instance with registered view helpers
-	 * @param TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder TYPO3 URI builder
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder TYPO3 URI builder
 	 * @param array $fixed Fixed parameters that should be added to each URL
 	 */
-	public function __construct( MW_View_Interface $view, \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder, array $fixed )
+	public function __construct( \Aimeos\MW\View\Iface $view, \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder, array $fixed )
 	{
 		parent::__construct( $view );
 

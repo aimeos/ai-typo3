@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * TYPO3 caching implementation.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_Typo3
-	extends MW_Cache_Abstract
-	implements MW_Cache_Interface
+class Typo3
+	extends \Aimeos\MW\Cache\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $object;
 	private $prefix;

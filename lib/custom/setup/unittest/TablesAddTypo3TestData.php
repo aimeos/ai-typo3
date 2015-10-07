@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds default records to tables.
  */
-class MW_Setup_Task_TablesAddTypo3TestData extends MW_Setup_Task_Abstract
+class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -57,7 +60,7 @@ class MW_Setup_Task_TablesAddTypo3TestData extends MW_Setup_Task_Abstract
 		$this->msg(sprintf('Adding records from "%1$s"', basename($filename)), 1);
 
 		if( ( $content = file_get_contents( $filename ) ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Unable to get content from file "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filename ) );
 		}
 
 		$this->execute( $content );

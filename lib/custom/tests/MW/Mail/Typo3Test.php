@@ -7,10 +7,13 @@
  */
 
 
+namespace Aimeos\MW\Mail;
+
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'MailMessage';
 
 
-class MW_Mail_Typo3Test extends PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +28,7 @@ class MW_Mail_Typo3Test extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
-		$this->object = new MW_Mail_Typo3( $this->mock );
+		$this->object = new \Aimeos\MW\Mail\Typo3( $this->mock );
 	}
 
 	/**
@@ -42,7 +45,7 @@ class MW_Mail_Typo3Test extends PHPUnit_Framework_TestCase
 	public function testCreateMessage()
 	{
 		$result = $this->object->createMessage( 'ISO-8859-1' );
-		$this->assertInstanceOf( 'MW_Mail_Message_Interface', $result );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Message\\Iface', $result );
 	}
 
 
