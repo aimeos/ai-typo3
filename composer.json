@@ -20,15 +20,15 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.2.0"
+		"php": ">=5.3.3"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
-		"psr-0": {
-			"MShop": "lib/custom/src",
-			"MW": "lib/custom/src"
+		"psr-4": {
+			"Aimeos\\MShop\\": "lib/custom/src/MShop",
+			"Aimeos\\MW\\": "lib/custom/src/MW"
 		},
 		"classmap": [
 			"lib/custom/src"
