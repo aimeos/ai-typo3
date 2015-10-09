@@ -92,7 +92,7 @@ class Typo3
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/customer/manager/group/submanagers';
+		$path = 'mshop/customer/manager/group/submanagers';
 
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
@@ -119,7 +119,7 @@ class Typo3
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/customer/manager/group/submanagers';
+		$path = 'mshop/customer/manager/group/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}

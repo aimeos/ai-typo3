@@ -137,7 +137,7 @@ class Typo3
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/customer/manager/lists/submanagers';
+		$path = 'mshop/customer/manager/lists/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
