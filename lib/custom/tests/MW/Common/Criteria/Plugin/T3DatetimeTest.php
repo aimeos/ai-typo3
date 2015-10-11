@@ -6,11 +6,11 @@
  * @copyright Aimeos (aimeos.org), 2014
  */
 
-namespace Aimeos\MW\Common\Criteria\Plugin;
+namespace Aimeos\MW\Criteria\Plugin;
 
 
 /**
- * Test class for \Aimeos\MW\Common\Criteria\Plugin\T3Datetime
+ * Test class for \Aimeos\MW\Criteria\Plugin\T3Datetime
  */
 class T3DatetimeTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class T3DatetimeTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MW\Common\Criteria\Plugin\T3Datetime();
+		$this->object = new \Aimeos\MW\Criteria\Plugin\T3Datetime();
 	}
 
 
