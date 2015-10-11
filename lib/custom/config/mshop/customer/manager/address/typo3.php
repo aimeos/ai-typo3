@@ -7,19 +7,23 @@
  */
 
 return array(
-	'item' => array(
-		'delete' => '
+	'delete' => array(
+		'ansi' => '
 			DELETE FROM "fe_users_address"
 			WHERE :cond
 			AND siteid = ?
 		',
-		'insert' => '
+	),
+	'insert' => array(
+		'ansi' => '
 			INSERT INTO "fe_users_address" ("siteid", "refid", "company", "vatid","salutation","title",
 				"firstname","lastname","address1","address2","address3","postal","city","state",
 				"countryid","langid","telephone","email","telefax","website","flag","pos", "mtime", "editor", "ctime" )
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		',
-		'update' => '
+	),
+	'update' => array(
+		'ansi' => '
 			UPDATE "fe_users_address"
 			SET "siteid"=?, "refid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?, "firstname"=?, "lastname"=?,
 				"address1"=?, "address2"=?, "address3"=?, "postal"=?, "city"=?, "state"=?, "countryid"=?,
@@ -27,7 +31,9 @@ return array(
 				"mtime"=?, "editor"=?
 			WHERE "id"=?
 		',
-		'search' => '
+	),
+	'search' => array(
+		'ansi' => '
 			SELECT t3feuad."id", t3feuad."siteid", t3feuad."refid", t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
 				t3feuad."firstname", t3feuad."lastname", t3feuad."address1", t3feuad."address2", t3feuad."address3",
 				t3feuad."postal", t3feuad."city", t3feuad."state", t3feuad."countryid", t3feuad."langid", t3feuad."telephone",
@@ -39,7 +45,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT t3feuad."id"
@@ -49,5 +57,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
+	),
+	'newid' => array(
+		'mysql' => 'SELECT LAST_INSERT_ID()'
 	),
 );

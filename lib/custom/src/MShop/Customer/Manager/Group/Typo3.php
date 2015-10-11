@@ -173,7 +173,7 @@ class Typo3
 			$required = array( 'customer.group' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
-			/** mshop/customer/manager/group/typo3/item/search
+			/** mshop/customer/manager/group/typo3/search
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the customer
@@ -218,11 +218,11 @@ class Typo3
 			 * @param string SQL statement for searching items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/typo3/item/count
+			 * @see mshop/customer/manager/group/typo3/count
 			 */
-			$cfgPathSearch = 'mshop/customer/manager/group/typo3/item/search';
+			$cfgPathSearch = 'mshop/customer/manager/group/typo3/search';
 
-			/** mshop/customer/manager/group/typo3/item/count
+			/** mshop/customer/manager/group/typo3/count
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the customer
@@ -261,9 +261,9 @@ class Typo3
 			 * @param string SQL statement for counting items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/typo3/item/search
+			 * @see mshop/customer/manager/group/typo3/search
 			 */
-			$cfgPathCount = 'mshop/customer/manager/group/typo3/item/count';
+			$cfgPathCount = 'mshop/customer/manager/group/typo3/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

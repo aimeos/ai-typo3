@@ -163,7 +163,7 @@ class Typo3
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/lists/typo3/item/';
+		return 'mshop/customer/manager/lists/typo3/';
 	}
 
 

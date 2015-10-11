@@ -260,7 +260,7 @@ class Typo3
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/address/typo3/item';
+		return 'mshop/customer/manager/address/typo3/';
 	}
 
 

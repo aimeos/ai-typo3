@@ -7,18 +7,22 @@
  */
 
 return array(
-	'item' => array(
-		'delete' => '
+	'delete' => array(
+		'ansi' => '
 			DELETE FROM "fe_users"
 			WHERE :cond
 		',
-		'insert' => '
+	),
+	'insert' => array(
+		'ansi' => '
 			INSERT INTO "fe_users" ("name", "username", "gender", "company", "vatid", "title", "first_name", "last_name",
 				"address", "zip", "city", "zone", "language", "telephone", "email",
 				"fax", "www", "date_of_birth", "disable", "password", "tstamp", "static_info_country", "crdate", "pid")
 			SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ),?,? FROM DUAL
 		',
-		'update' => '
+	),
+	'update' => array(
+		'ansi' => '
 			UPDATE "fe_users"
 			SET "name"=?, "username"=?, "gender"=?, "company"=?, "vatid"=?, "title"=?, "first_name"=?, "last_name"=?,
 				"address"=?, "zip"=?, "city"=?, "zone"=?, "language"=?, "telephone"=?, "email"=?,
@@ -26,7 +30,9 @@ return array(
 				"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 )
 			WHERE "uid"=?
 		',
-		'search' => '
+	),
+	'search' => array(
+		'ansi' => '
 			SELECT DISTINCT t3feu."uid" AS "id", t3feu."name" AS "label", t3feu."username" AS "code", t3feu."gender",
 				t3feu."company", t3feu."vatid", t3feu."title", t3feu."first_name" AS "firstname", t3feu."last_name" AS "lastname",
 				t3feu."address" AS "address1", t3feu."zip" AS "postal", t3feu."city", t3feu."zone" AS "state",
@@ -41,7 +47,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT t3feu."uid"
@@ -53,5 +61,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
+	),
+	'newid' => array(
+		'mysql' => 'SELECT LAST_INSERT_ID()'
 	),
 );

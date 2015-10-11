@@ -6,8 +6,8 @@
  */
 
 return array(
-	'item' => array(
-		'search' => '
+	'search' => array(
+		'ansi' => '
 			SELECT DISTINCT t3feg."uid" AS "id", t3feg."title" AS "code",
 				t3feg."title" AS "label", t3feg."crdate", t3feg."tstamp"
 			FROM "fe_groups" AS t3feg
@@ -16,7 +16,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT t3feg."uid"
