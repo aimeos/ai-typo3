@@ -192,7 +192,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
-		$expr[] = $search->compare( '!=', 'customer.address.refid', null );
+		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'company' );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'unitcompany' );
 		$expr[] = $search->compare( '==', 'customer.address.title', 'unittitle' );

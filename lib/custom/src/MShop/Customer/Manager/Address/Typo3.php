@@ -27,7 +27,7 @@ class Typo3
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
 			'internalcode' => 't3feuad."id"',
-			'internaldeps' => array( 'LEFT JOIN "fe_users_address" AS t3feuad ON ( t3feu."uid" = t3feuad."refid" )' ),
+			'internaldeps' => array( 'LEFT JOIN "fe_users_address" AS t3feuad ON ( t3feu."uid" = t3feuad."parentid" )' ),
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -40,10 +40,10 @@ class Typo3
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.address.refid' => array(
-			'label' => 'Customer address reference ID',
-			'code' => 'customer.address.refid',
-			'internalcode' => 't3feuad."refid"',
+		'customer.address.parentid' => array(
+			'label' => 'Customer address parent ID',
+			'code' => 'customer.address.parentid',
+			'internalcode' => 't3feuad."parentid"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,

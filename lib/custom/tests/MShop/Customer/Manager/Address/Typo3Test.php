@@ -118,6 +118,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
+		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
 		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID() );
@@ -145,6 +146,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
+		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
 		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID() );
@@ -189,6 +191,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
+		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'Example company LLC' );
 		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );

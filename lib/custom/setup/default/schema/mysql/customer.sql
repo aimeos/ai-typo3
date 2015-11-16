@@ -19,8 +19,8 @@ CREATE TABLE "fe_users_address" (
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
-	-- reference id for customer
-	"refid" INTEGER NOT NULL,
+	-- parent id for customer
+	"parentid" INTEGER NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
 	-- vatid
@@ -71,7 +71,7 @@ CONSTRAINT "pk_t3feuad_id"
 	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_t3feuad_refid" ON "fe_users_address" ("refid");
+CREATE INDEX "idx_t3feuad_pid" ON "fe_users_address" ("parentid");
 
 CREATE INDEX "idx_t3feuad_sid_ln_fn" ON "fe_users_address" ("siteid", "lastname", "firstname");
 

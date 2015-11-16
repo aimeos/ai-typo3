@@ -16,7 +16,7 @@ return array(
 	),
 	'insert' => array(
 		'ansi' => '
-			INSERT INTO "fe_users_address" ("siteid", "refid", "company", "vatid","salutation","title",
+			INSERT INTO "fe_users_address" ("siteid", "parentid", "company", "vatid","salutation","title",
 				"firstname","lastname","address1","address2","address3","postal","city","state",
 				"countryid","langid","telephone","email","telefax","website","flag","pos", "mtime", "editor", "ctime" )
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -25,7 +25,7 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "fe_users_address"
-			SET "siteid"=?, "refid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?, "firstname"=?, "lastname"=?,
+			SET "siteid"=?, "parentid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?, "firstname"=?, "lastname"=?,
 				"address1"=?, "address2"=?, "address3"=?, "postal"=?, "city"=?, "state"=?, "countryid"=?,
 				"langid"=?, "telephone"=?, "email"=?, "telefax"=?, "website"=?, "flag"=?, "pos"=?,
 				"mtime"=?, "editor"=?
@@ -34,7 +34,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT t3feuad."id", t3feuad."siteid", t3feuad."refid", t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
+			SELECT t3feuad."id", t3feuad."siteid", t3feuad."parentid", t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
 				t3feuad."firstname", t3feuad."lastname", t3feuad."address1", t3feuad."address2", t3feuad."address3",
 				t3feuad."postal", t3feuad."city", t3feuad."state", t3feuad."countryid", t3feuad."langid", t3feuad."telephone",
 				t3feuad."email", t3feuad."telefax", t3feuad."website", t3feuad."flag", t3feuad."pos",

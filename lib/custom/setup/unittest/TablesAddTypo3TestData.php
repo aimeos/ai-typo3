@@ -45,7 +45,7 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg('Setting up Aimeos TYPO3 test data', 0);
 		$this->status('');
 
-		$file = dirname( realpath( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
+		$file = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
 		$this->process( $file );
 	}
 
