@@ -15,6 +15,11 @@ class UriBuilder
 		return 'ai';
 	}
 
+	public function buildBackendUri()
+	{
+		return '';
+	}
+
 	public function buildFrontendUri()
 	{
 		return '';

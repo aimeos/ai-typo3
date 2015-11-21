@@ -57,11 +57,6 @@ class Typo3
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
-		// Slashes in URL parameters confuses the router
-		foreach( $params as $key => $value ) {
-			$params[$key] = str_replace( '/', '_', $value );
-		}
-
 		$arguments = $this->fixed;
 		$arguments['controller'] = $controller;
 		$arguments['action'] = $action;
@@ -91,6 +86,10 @@ class Typo3
 			->setNoCache( $values['nocache'] )
 			->setFormat( $values['format'] )
 			->setArguments( $params );
+
+		if( isset( $config['BE'] ) && $config['BE'] == true ) {
+			return $this->uriBuilder->buildBackendUri();
+		}
 
 		return $this->uriBuilder->buildFrontendUri();
 	}

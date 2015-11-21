@@ -151,6 +151,20 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testTransformBackend()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+		->setMethods( array( 'buildBackendUri') )->getMock();
+
+		$mock->expects( $this->once() )->method( 'buildBackendUri' );
+
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
+
+		$params = array( 'test' => 'my/value' );
+		$this->assertEquals( '', $object->transform( null, null, null, $params, array(), array( 'BE' => 1 ) ) );
+	}
+
+
 	public function testTransformParams()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
