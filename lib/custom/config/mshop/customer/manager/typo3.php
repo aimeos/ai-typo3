@@ -33,12 +33,19 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT t3feu."uid" AS "id", t3feu."name" AS "label", t3feu."username" AS "code", t3feu."gender",
-				t3feu."company", t3feu."vatid", t3feu."title", t3feu."first_name" AS "firstname", t3feu."last_name" AS "lastname",
-				t3feu."address" AS "address1", t3feu."zip" AS "postal", t3feu."city", t3feu."zone" AS "state",
-				t3feu."language" AS "langid", tsc."cn_iso_2" AS "countryid", t3feu."telephone", t3feu."email",
-				t3feu."fax" AS "telefax", t3feu."www" AS "website", t3feu."date_of_birth", t3feu."disable", t3feu."password",
-				t3feu."crdate", t3feu."tstamp", t3feu."usergroup" as "groups"
+			SELECT DISTINCT t3feu."uid" AS "customer.id", t3feu."name" AS "customer.label",
+				t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
+				t3feu."company" AS "customer.company", t3feu."vatid" AS "customer.vatid",
+				t3feu."first_name" AS "customer.firstname", t3feu."last_name" AS "customer.lastname",
+				t3feu."address" AS "customer.address1", t3feu."zip" AS "customer.postal",
+				t3feu."city" AS "customer.city", t3feu."zone" AS "customer.state",
+				tsc."cn_iso_2" AS "customer.countryid", t3feu."language" AS "customer.languageid",
+				t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
+				t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
+				t3feu."password" AS "customer.password", t3feu."gender",
+				t3feu."date_of_birth", t3feu."disable",
+				t3feu."crdate", t3feu."tstamp",
+				t3feu."usergroup" as "groups"
 			FROM "fe_users" as t3feu
 			LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 			:joins

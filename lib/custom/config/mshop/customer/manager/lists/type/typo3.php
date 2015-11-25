@@ -30,8 +30,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT t3feulity."id", t3feulity."siteid", t3feulity."code", t3feulity."domain", t3feulity."label", t3feulity."status",
-				t3feulity."mtime", t3feulity."editor", t3feulity."ctime"
+			SELECT t3feulity."id" AS "customer.lists.type.id", t3feulity."siteid" AS "customer.lists.type.siteid",
+				t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
+				t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
+				t3feulity."mtime" AS "customer.lists.type.mtime", t3feulity."editor" AS "customer.lists.type.editor",
+				t3feulity."ctime" AS "customer.lists.type.ctime"
 			FROM "fe_users_list_type" AS t3feulity
 			:joins
 			WHERE

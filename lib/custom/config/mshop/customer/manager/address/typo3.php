@@ -34,11 +34,19 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT t3feuad."id", t3feuad."siteid", t3feuad."parentid", t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
-				t3feuad."firstname", t3feuad."lastname", t3feuad."address1", t3feuad."address2", t3feuad."address3",
-				t3feuad."postal", t3feuad."city", t3feuad."state", t3feuad."countryid", t3feuad."langid", t3feuad."telephone",
-				t3feuad."email", t3feuad."telefax", t3feuad."website", t3feuad."flag", t3feuad."pos",
-				t3feuad."mtime", t3feuad."editor", t3feuad."ctime"
+			SELECT t3feuad."id" AS "customer.address.id", t3feuad."siteid" AS "customer.address.siteid",
+				t3feuad."parentid" AS "customer.address.parentid", t3feuad."pos" AS "customer.address.position",
+				t3feuad."company" AS "customer.address.company", t3feuad."vatid" AS "customer.address.vatid",
+				t3feuad."salutation" AS "customer.address.salutation", t3feuad."title" AS "customer.address.title",
+				t3feuad."firstname" AS "customer.address.firstname", t3feuad."lastname" AS "customer.address.lastname",
+				t3feuad."address1" AS "customer.address.address1", t3feuad."address2" AS "customer.address.address2",
+				t3feuad."address3" AS "customer.address.address3", t3feuad."postal" AS "customer.address.postal",
+				t3feuad."city" AS "customer.address.city", t3feuad."state" AS "customer.address.state",
+				t3feuad."countryid" AS "customer.address.countryid", t3feuad."langid" AS "customer.address.languageid",
+				t3feuad."telephone" AS "customer.address.telephone", t3feuad."email" AS "customer.address.email",
+				t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
+				t3feuad."flag" AS "customer.address.flag", t3feuad."mtime" AS "customer.address.mtime",
+				t3feuad."editor" AS "customer.address.editor", t3feuad."ctime" AS "customer.address.ctime"
 			FROM "fe_users_address" AS t3feuad
 			:joins
 			WHERE :cond

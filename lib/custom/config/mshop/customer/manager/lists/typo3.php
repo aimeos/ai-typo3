@@ -73,9 +73,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT t3feuli."id", t3feuli."parentid", t3feuli."siteid", t3feuli."typeid",
-				t3feuli."domain", t3feuli."refid", t3feuli."start", t3feuli."end", t3feuli."config", t3feuli."pos",
-				t3feuli."status", t3feuli."mtime", t3feuli."editor", t3feuli."ctime"
+			SELECT t3feuli."id" AS "customer.lists.id", t3feuli."parentid" AS "customer.lists.parentid",
+				t3feuli."siteid" AS "customer.lists.siteid", t3feuli."typeid" AS "customer.lists.typeid",
+				t3feuli."domain" AS "customer.lists.domain", t3feuli."refid" AS "customer.lists.refid",
+				t3feuli."start" AS "customer.lists.datestart", t3feuli."end" AS "customer.lists.dateend",
+				t3feuli."config" AS "customer.lists.config", t3feuli."pos" AS "customer.lists.position",
+				t3feuli."status" AS "customer.lists.status", t3feuli."mtime" AS "customer.lists.mtime",
+				t3feuli."editor" AS "customer.lists.editor", t3feuli."ctime" AS "customer.lists.ctime"
 			FROM "fe_users_list" AS t3feuli
 			:joins
 			WHERE :cond

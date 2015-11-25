@@ -510,7 +510,7 @@ class Typo3
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[ $row['id'] ] = $row;
+				$map[ $row['customer.id'] ] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -550,30 +550,26 @@ class Typo3
 	{
 		$helper = $this->getPasswordHelper();
 		$address = $this->getAddressManager()->createItem();
-		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'date_of_birth', $values ) ) {
-			$values['birthday'] = $this->reverse['date_of_birth']->reverse( $values['date_of_birth'] );
+			$values['customer.birthday'] = $this->reverse['date_of_birth']->reverse( $values['date_of_birth'] );
 		}
 
 		if( array_key_exists( 'gender', $values ) ) {
-			$values['salutation'] = $this->reverse['gender']->reverse( $values['gender'] );
+			$values['customer.salutation'] = $this->reverse['gender']->reverse( $values['gender'] );
 		}
 
 		if( array_key_exists( 'disable', $values ) ) {
-			$values['status'] = $this->reverse['disable']->reverse( $values['disable'] );
+			$values['customer.status'] = $this->reverse['disable']->reverse( $values['disable'] );
 		}
 
 		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
+			$values['customer.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
 		}
 
 		if( array_key_exists( 'crdate', $values ) ) {
-			$values['ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
-		}
-
-		if( array_key_exists( 'langid', $values ) ) {
-			$values['langid'] = strtolower( $values['langid'] );
+			$values['customer.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
 		if( array_key_exists( 'groups', $values ) ) {

@@ -8,8 +8,8 @@
 return array(
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT t3feg."uid" AS "id", t3feg."title" AS "code",
-				t3feg."title" AS "label", t3feg."crdate", t3feg."tstamp"
+			SELECT DISTINCT t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
+				t3feg."title" AS "customer.group.label", t3feg."crdate", t3feg."tstamp"
 			FROM "fe_groups" AS t3feg
 			:joins
 			WHERE :cond

@@ -268,7 +268,7 @@ class Typo3
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $this->createItemBase( $row );
+				$map[$row['customer.group.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -293,14 +293,14 @@ class Typo3
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['customer.group.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
+			$values['customer.group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
 		}
 
 		if( array_key_exists( 'crdate', $values ) ) {
-			$values['ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
+			$values['customer.group.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
 		return new \Aimeos\MShop\Customer\Item\Group\Standard( $values );
