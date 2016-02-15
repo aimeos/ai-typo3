@@ -48,7 +48,7 @@ class Typo3
 
 		$psr7request = $this->createRequest( $files, $query, $post, $cookies, $server );
 
-		\Aimeos\MW\View\Helper\Base::__construct( $view, $psr7request );
+		parent::__construct( $view, $psr7request );
 	}
 
 

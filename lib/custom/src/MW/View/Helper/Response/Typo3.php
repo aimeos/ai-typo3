@@ -28,6 +28,6 @@ class Typo3
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view )
 	{
-		\Aimeos\MW\View\Helper\Base::__construct( $view, new \Zend\Diactoros\Response() );
+		parent::__construct( $view, new \Zend\Diactoros\Response() );
 	}
 }
