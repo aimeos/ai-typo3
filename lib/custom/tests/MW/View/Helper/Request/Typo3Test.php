@@ -14,6 +14,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
+		if( !class_exists( '\Zend\Diactoros\ServerRequestFactory' ) ) {
+			$this->markTestSkipped( '\Zend\Diactoros\ServerRequestFactory is not available' );
+		}
+
 		$view = new \Aimeos\MW\View\Standard();
 		$server = array( 'REMOTE_ADDR' => '127.0.0.1' );
 		$this->object = new \Aimeos\MW\View\Helper\Request\Typo3( $view, 123, array(), array(), array(), array(), $server );
