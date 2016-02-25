@@ -79,7 +79,7 @@ CREATE INDEX "idx_t3feuad_sid_ad1_ad2" ON "fe_users_address" ("siteid", "address
 
 CREATE INDEX "idx_t3feuad_sid_post_ci" ON "fe_users_address" ("siteid", "postal", "city");
 
-CREATE INDEX "idx_t3feuad_sid_rid" ON "fe_users_address" ("siteid", "refid");
+CREATE INDEX "idx_t3feuad_sid_rid" ON "fe_users_address" ("siteid", "parentid");
 
 CREATE INDEX "idx_t3feuad_sid_lastname" ON "fe_users_address" ("siteid", "lastname");
 
@@ -89,7 +89,7 @@ CREATE INDEX "idx_t3feuad_sid_city" ON "fe_users_address" ("siteid", "city");
 
 CREATE INDEX "idx_t3feuad_sid_addr1" ON "fe_users_address" ("siteid", "address1");
 
-CREATE INDEX "idx_t3feuad_sid_rid" ON "fe_users_address" ("siteid", "email");
+CREATE INDEX "idx_t3feuad_sid_email" ON "fe_users_address" ("siteid", "email");
 
 
 --
