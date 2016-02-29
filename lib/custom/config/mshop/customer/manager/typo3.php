@@ -17,8 +17,8 @@ return array(
 		'ansi' => '
 			INSERT INTO "fe_users" ("name", "username", "gender", "company", "vatid", "title", "first_name", "last_name",
 				"address", "zip", "city", "zone", "language", "telephone", "email",
-				"fax", "www", "date_of_birth", "disable", "password", "tstamp", "static_info_country", "crdate", "pid")
-			SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ),?,? FROM DUAL
+				"fax", "www", "date_of_birth", "disable", "password", "tstamp", "static_info_country", "usergroup", "crdate", "pid")
+			SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ),?,?,? FROM DUAL
 		',
 	),
 	'update' => array(
@@ -27,7 +27,7 @@ return array(
 			SET "name"=?, "username"=?, "gender"=?, "company"=?, "vatid"=?, "title"=?, "first_name"=?, "last_name"=?,
 				"address"=?, "zip"=?, "city"=?, "zone"=?, "language"=?, "telephone"=?, "email"=?,
 				"fax"=?, "www"=?, "date_of_birth"=?, "disable"=?, "password"=?, "tstamp"=?,
-				"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 )
+				"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ), "usergroup"=?
 			WHERE "uid"=?
 		',
 	),

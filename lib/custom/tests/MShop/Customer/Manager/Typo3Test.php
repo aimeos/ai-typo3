@@ -113,12 +113,14 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$item->setId( null );
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
+		$item->setGroups( array( 1, 2, 3 ) );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
+		$itemExp->setGroups( array( 2, 4 ) );
 		$this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
@@ -134,6 +136,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getPaymentAddress(), $itemSaved->getPaymentAddress() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
+		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
 
 		$this->assertEquals( '', $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -147,6 +150,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getPaymentAddress(), $itemUpd->getPaymentAddress() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
+		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
 
 		$this->assertEquals( '', $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

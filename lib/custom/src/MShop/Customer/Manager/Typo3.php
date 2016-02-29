@@ -429,13 +429,14 @@ class Typo3
 			$stmt->bind( 20, $item->getPassword() );
 			$stmt->bind( 21, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
 			$stmt->bind( 22, $billingAddress->getCountryId() );
+			$stmt->bind( 23, implode( ',', $item->getGroups() ) );
 
 			if( $id !== null ) {
-				$stmt->bind( 23, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 24, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 23, time() ); // Creation time
-				$stmt->bind( 24, $this->pid ); // TYPO3 PID value
+				$stmt->bind( 24, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Creation time
+				$stmt->bind( 25, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
 			}
 
 			$stmt->execute()->finish();
