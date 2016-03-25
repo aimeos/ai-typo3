@@ -21,4 +21,9 @@ return array(
 	'setup' => array(
 		'lib/custom/setup',
 	),
+	'custom' => array(
+		'admin/jqadm' => array(
+			'admin/jqadm/manifest.jsb2',
+		),
+	),
 );
