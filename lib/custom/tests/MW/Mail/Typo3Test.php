@@ -21,8 +21,9 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
-		$this->object = new \Aimeos\MW\Mail\Typo3( $this->mock );
+		$mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
+		$this->object = new \Aimeos\MW\Mail\Typo3( function() use ( $mock ) { return $mock; } );
+		$this->mock = $mock;
 	}
 
 
@@ -35,6 +36,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testSend()
 	{
+		$this->mock->expects( $this->once() )->method( 'send' );
+
 		$this->object->send( $this->object->createMessage() );
 	}
 

@@ -20,13 +20,16 @@ namespace Aimeos\MW\Mail;
  */
 class Typo3 implements \Aimeos\MW\Mail\Iface
 {
+	private $closure;
+
 	/**
 	 * Initializes the instance of the class.
 	 *
 	 * @param \TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
 	 */
-	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object )
+	public function __construct( \Closure $closure )
 	{
+		$this->closure = $closure;
 	}
 
 
@@ -38,7 +41,8 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 */
 	public function createMessage( $charset = 'UTF-8' )
 	{
-		return new \Aimeos\MW\Mail\Message\Typo3( \TYPO3\CMS\Core\Mail\MailMessage::newInstance(), $charset );
+		$closure = $this->closure;
+		return new \Aimeos\MW\Mail\Message\Typo3( $closure(), $charset );
 	}
 
 
