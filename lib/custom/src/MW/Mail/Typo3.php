@@ -17,13 +17,17 @@
  */
 class MW_Mail_Typo3 implements MW_Mail_Interface
 {
+	private $_closure;
+
+
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
+	 * @param \Closure $closure Closure generating TYPO3 mail message objects
 	 */
-	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object )
+	public function __construct( \Closure $closure )
 	{
+		$this->_closure = $closure;
 	}
 
 
@@ -35,7 +39,8 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	 */
 	public function createMessage( $charset = 'UTF-8' )
 	{
-		return new MW_Mail_Message_Typo3( \TYPO3\CMS\Core\Mail\MailMessage::newInstance(), $charset );
+		$closure = $this->_closure;
+		return new MW_Mail_Message_Typo3( $closure(), $charset );
 	}
 
 
