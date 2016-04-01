@@ -20,9 +20,6 @@ namespace Aimeos\MW\Mail;
  */
 class Typo3 implements \Aimeos\MW\Mail\Iface
 {
-	private $object;
-
-
 	/**
 	 * Initializes the instance of the class.
 	 *
@@ -30,7 +27,6 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 */
 	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object )
 	{
-		$this->object = $object;
 	}
 
 
@@ -42,7 +38,7 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 */
 	public function createMessage( $charset = 'UTF-8' )
 	{
-		return new \Aimeos\MW\Mail\Message\Typo3( clone $this->object, $charset );
+		return new \Aimeos\MW\Mail\Message\Typo3( \TYPO3\CMS\Core\Mail\MailMessage::newInstance(), $charset );
 	}
 
 
@@ -54,14 +50,5 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	public function send( \Aimeos\MW\Mail\Message\Iface $message )
 	{
 		$message->getObject()->send();
-	}
-
-
-	/**
-	 * Clones the internal objects.
-	 */
-	public function __clone()
-	{
-		$this->object = clone $this->object;
 	}
 }

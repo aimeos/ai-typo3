@@ -15,6 +15,11 @@ namespace TYPO3\CMS\Core\Mail;
  */
 class MailMessage
 {
+	public static function newInstance()
+	{
+		return new self;
+	}
+
 	/**
 	 * @param string $charset
 	 */
