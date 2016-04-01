@@ -25,7 +25,7 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param \TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
+	 * @param \Closure $closure Closure generating TYPO3 mail message objects
 	 */
 	public function __construct( \Closure $closure )
 	{
