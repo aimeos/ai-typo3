@@ -27,7 +27,7 @@ class MW_Mail_Typo3Test extends MW_Unittest_Testcase
 	public function testCreateMessage()
 	{
 		$result = $this->object->createMessage( 'ISO-8859-1' );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Message\\Iface', $result );
+		$this->assertInstanceOf( 'MW_Mail_Message_Interface', $result );
 	}
 
 
