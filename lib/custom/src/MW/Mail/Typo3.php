@@ -17,9 +17,6 @@
  */
 class MW_Mail_Typo3 implements MW_Mail_Interface
 {
-	private $_object;
-
-
 	/**
 	 * Initializes the instance of the class.
 	 *
@@ -27,7 +24,6 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	 */
 	public function __construct( TYPO3\CMS\Core\Mail\MailMessage $object )
 	{
-		$this->_object = $object;
 	}
 
 
@@ -39,7 +35,7 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	 */
 	public function createMessage( $charset = 'UTF-8' )
 	{
-		return new MW_Mail_Message_Typo3( clone $this->_object, $charset );
+		return new MW_Mail_Message_Typo3( \TYPO3\CMS\Core\Mail\MailMessage::newInstance(), $charset );
 	}
 
 
@@ -51,14 +47,5 @@ class MW_Mail_Typo3 implements MW_Mail_Interface
 	public function send( MW_Mail_Message_Interface $message )
 	{
 		$message->getObject()->send();
-	}
-
-
-	/**
-	 * Clones the internal objects.
-	 */
-	public function __clone()
-	{
-		$this->_object = clone $this->_object;
 	}
 }
