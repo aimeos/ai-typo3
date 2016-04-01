@@ -12,29 +12,29 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'MailMessage';
 
 class MW_Mail_Typo3Test extends MW_Unittest_Testcase
 {
-	private $object;
-	private $mock;
+	private $_object;
+	private $_mock;
 
 
 	protected function setUp()
 	{
 		$mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
-		$this->object = new MW_Mail_Typo3( function() use ( $mock ) { return $mock; } );
-		$this->mock = $mock;
+		$this->_object = new MW_Mail_Typo3( function() use ( $mock ) { return $mock; } );
+		$this->_mock = $mock;
 	}
 
 
 	public function testCreateMessage()
 	{
-		$result = $this->object->createMessage( 'ISO-8859-1' );
+		$result = $this->_object->createMessage( 'ISO-8859-1' );
 		$this->assertInstanceOf( 'MW_Mail_Message_Interface', $result );
 	}
 
 
 	public function testSend()
 	{
-		$this->mock->expects( $this->once() )->method( 'send' );
+		$this->_mock->expects( $this->once() )->method( 'send' );
 
-		$this->object->send( $this->object->createMessage() );
+		$this->_object->send( $this->_object->createMessage() );
 	}
 }
