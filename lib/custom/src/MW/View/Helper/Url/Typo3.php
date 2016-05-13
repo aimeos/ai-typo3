@@ -19,7 +19,7 @@ namespace Aimeos\MW\View\Helper\Url;
  * @subpackage View
  */
 class Typo3
-	extends \Aimeos\MW\View\Helper\Base
+	extends \Aimeos\MW\View\Helper\Url\Base
 	implements \Aimeos\MW\View\Helper\Url\Iface
 {
 	private $uriBuilder;
@@ -75,6 +75,8 @@ class Typo3
 		if( isset( $config['eID'] ) ) {
 			$params['eID'] = $config['eID'];
 		}
+
+		$params = $this->sanitize( $params );
 
 		$this->uriBuilder
 			->reset()
