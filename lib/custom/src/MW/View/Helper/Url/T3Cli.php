@@ -18,7 +18,7 @@ namespace Aimeos\MW\View\Helper\Url;
  * @subpackage View
  */
 class T3Cli
-	extends \Aimeos\MW\View\Helper\Base
+	extends \Aimeos\MW\View\Helper\Url\Base
 	implements \Aimeos\MW\View\Helper\Url\Iface
 {
 	private $baseurl;
@@ -36,7 +36,7 @@ class T3Cli
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, $baseurl, $prefix, array $fixed )
 	{
-		parent::__construct( $view );
+		\Aimeos\MW\View\Helper\Base::__construct( $view );
 
 		$this->baseurl = $baseurl;
 		$this->prefix = $prefix;
@@ -75,6 +75,7 @@ class T3Cli
 		}
 
 		$params = array_merge( $params, $this->getValues( $config ) );
+		$params = $this->sanitize( $params );
 
 		return $this->baseurl . '?id=' . $target . '&' . http_build_query( $params );
 	}
