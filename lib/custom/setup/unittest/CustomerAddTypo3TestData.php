@@ -27,9 +27,17 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 
 
 	/**
-	 * Adds customer TYPO3 test data.
+	 * Adds test data
 	 */
-	protected function process()
+	public function migrate()
+	{
+	}
+
+
+	/**
+	 * Adds attribute test data.
+	 */
+	protected function mysql()
 	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {

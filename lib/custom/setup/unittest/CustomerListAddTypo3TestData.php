@@ -28,9 +28,17 @@ class CustomerListAddTypo3TestData
 
 
 	/**
-	 * Adds customer test data.
+	 * Adds test data
 	 */
-	protected function process()
+	public function migrate()
+	{
+	}
+
+
+	/**
+	 * Adds customer list test data.
+	 */
+	protected function mysql()
 	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {

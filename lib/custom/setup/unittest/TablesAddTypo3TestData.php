@@ -22,7 +22,7 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateTypo3' );
+		return array();
 	}
 
 
@@ -33,16 +33,16 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'TablesCreateTypo3' );
 	}
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Adds fe_user test data.
 	 */
 	protected function mysql()
 	{
-		$this->msg('Setting up Aimeos TYPO3 test data', 0);
+		$this->msg('Setting up Aimeos TYPO3 test tables', 0);
 		$this->status('');
 
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
