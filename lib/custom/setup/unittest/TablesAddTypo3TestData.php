@@ -22,7 +22,7 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return array( 'TablesCreateTypo3' );
 	}
 
 
@@ -33,7 +33,7 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateTypo3' );
+		return array();
 	}
 
 
