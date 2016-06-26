@@ -142,6 +142,23 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSaveItemException()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Common\Item\Type\Standard( 'common.lists.type.' ) );
+	}
+
+
+	public function testSaveDomainException()
+	{
+		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.' );
+		$item->setDomain( 'customer/group' );
+
+		$this->setExpectedException( '\Aimeos\MShop\Customer\Exception' );
+		$this->object->saveItem( $item );
+	}
+
+
 	public function testMoveItemLastToFront()
 	{
 		$listItems = $this->getListItems();
