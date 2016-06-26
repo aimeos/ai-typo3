@@ -151,7 +151,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDomainException()
 	{
-		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.' );
+		$item = $this->object->createItem();
 		$item->setDomain( 'customer/group' );
 
 		$this->setExpectedException( '\Aimeos\MShop\Customer\Exception' );
