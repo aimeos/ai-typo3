@@ -28,7 +28,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->mock = $this->getMock( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
+		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )->getMock();
 		$this->object = new \Aimeos\MW\Mail\Message\Typo3( $this->mock, 'UTF-8' );
 	}
 
@@ -95,7 +95,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testAddHeader()
 	{
-		$headersMock = $this->getMock( 'Aimeos\MW\Mail\Message\TestHeaderSet' );
+		$headersMock = $this->getMockBuilder( 'Aimeos\MW\Mail\Message\TestHeaderSet' )->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'getHeaders' )
 			->will( $this->returnValue( $headersMock ) );
