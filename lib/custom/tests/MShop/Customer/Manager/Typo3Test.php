@@ -3,15 +3,12 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2014
+ * @copyright Aimeos (aimeos.org), 2014-2016
  */
 
 namespace Aimeos\MShop\Customer\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Customer\Manager\Typo3
- */
 class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -20,9 +17,6 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	private $item;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelper::getContext();
@@ -32,13 +26,9 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
-		unset($this->object, $this->item);
-		\Aimeos\MShop\Factory::clear();
+		unset( $this->object, $this->item );
 	}
 
 
@@ -55,6 +45,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	{
 		$item = $this->object->createItem();
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Typo3', $item );
+		$this->assertEquals( 999999, $item->getPageId() );
 	}
 
 
@@ -137,6 +129,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
+		$this->assertEquals( $item->getPageId(), $itemSaved->getPageId() );
 
 		$this->assertEquals( '', $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -151,6 +144,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
+		$this->assertEquals( $itemExp->getPageId(), $itemUpd->getPageId() );
 
 		$this->assertEquals( '', $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

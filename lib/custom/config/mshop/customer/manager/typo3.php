@@ -17,7 +17,7 @@ return array(
 		'ansi' => '
 			INSERT INTO "fe_users" ("name", "username", "gender", "company", "vatid", "title", "first_name", "last_name",
 				"address", "zip", "city", "zone", "language", "telephone", "email",
-				"fax", "www", "date_of_birth", "disable", "password", "tstamp", "static_info_country", "usergroup", "crdate", "pid")
+				"fax", "www", "date_of_birth", "disable", "password", "tstamp", "static_info_country", "usergroup", "pid", "crdate")
 			SELECT ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ),?,?,? FROM DUAL
 		',
 	),
@@ -27,7 +27,7 @@ return array(
 			SET "name"=?, "username"=?, "gender"=?, "company"=?, "vatid"=?, "title"=?, "first_name"=?, "last_name"=?,
 				"address"=?, "zip"=?, "city"=?, "zone"=?, "language"=?, "telephone"=?, "email"=?,
 				"fax"=?, "www"=?, "date_of_birth"=?, "disable"=?, "password"=?, "tstamp"=?,
-				"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ), "usergroup"=?
+				"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ), "usergroup"=?, "pid"=?
 			WHERE "uid"=?
 		',
 	),
@@ -43,9 +43,8 @@ return array(
 				t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
 				t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
 				t3feu."password" AS "customer.password", t3feu."gender",
-				t3feu."date_of_birth", t3feu."disable",
-				t3feu."crdate", t3feu."tstamp",
-				t3feu."usergroup" as "groups"
+				t3feu."date_of_birth", t3feu."disable", t3feu."crdate", t3feu."tstamp",
+				t3feu."usergroup" as "groups", t3feu."pid" AS "typo3.pageid"
 			FROM "fe_users" as t3feu
 			LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 			:joins

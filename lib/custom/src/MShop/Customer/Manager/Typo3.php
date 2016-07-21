@@ -289,7 +289,7 @@ class Typo3
 	 */
 	public function createItem()
 	{
-		return $this->createItemBase();
+		return $this->createItemBase( array( 'typo3.pageid' => $this->pid ) );
 	}
 
 
@@ -430,13 +430,13 @@ class Typo3
 			$stmt->bind( 21, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
 			$stmt->bind( 22, $billingAddress->getCountryId() );
 			$stmt->bind( 23, implode( ',', $item->getGroups() ) );
+			$stmt->bind( 24, $item->getPageId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
 
 			if( $id !== null ) {
-				$stmt->bind( 24, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 25, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 24, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Creation time
-				$stmt->bind( 25, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
+				$stmt->bind( 25, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Creation time
 			}
 
 			$stmt->execute()->finish();
@@ -577,7 +577,7 @@ class Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
-		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, null, $helper );
+		return new \Aimeos\MShop\Customer\Item\Typo3( $address, $values, $listItems, $refItems, null, $helper );
 	}
 
 
