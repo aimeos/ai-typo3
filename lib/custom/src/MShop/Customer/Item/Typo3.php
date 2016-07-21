@@ -36,7 +36,7 @@ class Typo3 extends Standard implements Iface
 		array $listItems = array(), array $refItems = array(), $salt = '',
 		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems );
+		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper );
 
 		$this->values = $values;
 	}
