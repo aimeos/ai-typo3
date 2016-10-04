@@ -287,11 +287,9 @@ class Typo3
 	 * Creates a new customer item.
 	 *
 	 * @param array $values List of attributes for customer item
-	 * @param array $listItems List items associated to the customer item
-	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		$values['customer.group.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
