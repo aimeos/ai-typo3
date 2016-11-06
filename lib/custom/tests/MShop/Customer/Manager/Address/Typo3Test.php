@@ -62,7 +62,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \Exception( 'No customer address found' );
+			throw new \RuntimeException( 'No customer address found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -100,7 +100,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No customer address found' );
+			throw new \RuntimeException( 'No customer address found' );
 		}
 
 		$item->setId( null );
