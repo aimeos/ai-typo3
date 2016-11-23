@@ -41,12 +41,13 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuad_id' );
-			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_t3feuad_sid_ln_fn' );
-			$table->addIndex( array( 'siteid', 'address1', 'address2' ), 'idx_t3feuad_sid_ad1_ad2' );
-			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_t3feuad_sid_post_ci' );
-			$table->addIndex( array( 'siteid', 'parentid' ), 'idx_t3feuad_pid' );
-			$table->addIndex( array( 'siteid', 'city' ), 'idx_t3feuad_sid_city' );
-			$table->addIndex( array( 'siteid', 'email' ), 'idx_t3feuad_sid_email' );
+			$table->addIndex( array( 'parentid' ), 'idx_t3feuad_pid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_t3feuad_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_t3feuad_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_t3feuad_post_city' );
+			$table->addIndex( array( 'address1' ), 'idx_t3feuad_address1' );
+			$table->addIndex( array( 'city' ), 'idx_t3feuad_city' );
+			$table->addIndex( array( 'email' ), 'idx_t3feuad_email' );
 
 			return $schema;
 		},
