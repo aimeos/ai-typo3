@@ -3,24 +3,18 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
- * @copyright Aimeos (aimeos.org), 2014
+ * @copyright Aimeos (aimeos.org), 2014-2015
  */
 
 namespace Aimeos\MShop\Customer\Manager\Address;
 
 
-/**
- * Test class for \Aimeos\MShop\Customer\Manager\Address\Typo3
- */
 class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelper::getContext()->getEditor();
@@ -29,9 +23,6 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -87,6 +78,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'unitCustomer1@example.com', $actual->getEMail() );
 		$this->assertEquals( '055544332212', $actual->getTelefax() );
 		$this->assertEquals( 'www.example.com', $actual->getWebsite() );
+		$this->assertEquals( '10.0', $actual->getLongitude() );
+		$this->assertEquals( '50.0', $actual->getLatitude() );
 		$this->assertEquals( 0, $actual->getFlag() );
 		$this->assertEquals( 0, $actual->getPosition() );
 		$this->assertEquals( $this->editor, $actual->getEditor() );
@@ -137,6 +130,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getEMail(), $itemSaved->getEMail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
+		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
+		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getEditor(), $itemSaved->getEditor() );
@@ -165,6 +160,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getEMail(), $itemUpd->getEMail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
+		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
+		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getEditor(), $itemUpd->getEditor() );
@@ -210,6 +207,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544332212' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
+		$expr[] = $search->compare( '==', 'customer.address.longitude', '10.5' );
+		$expr[] = $search->compare( '==', 'customer.address.latitude', '51.0' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );

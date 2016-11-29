@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `fe_users` (
 	`token` varchar(32) NOT NULL DEFAULT '',
 	`tx_srfeuserregister_password` blob NOT NULL,
 	`date_of_birth` int(11) NOT NULL DEFAULT '0',
+	`longitude` decimal(8,6) DEFAULT NULL,
+	`latitude` decimal(8,6) DEFAULT NULL,
 	PRIMARY KEY (`uid`),
 	KEY `parent` (`pid`,`username`),
 	KEY `username` (`username`),
@@ -132,12 +134,12 @@ DELETE FROM `fe_groups` WHERE `lockToDomain` = 'unittest.aimeos.org';
 --
 -- Typo3 frontend users
 --
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'unittest.aimeos.org', 'Max Mustermann', 'unitCustomer1@example.com', 0, 'Example company LLC', 'DE999999999', 'Dr.', 'Max', 'Mustermann', 'Musterstraße 1a', '20001', 'Musterstadt', 'Hamburg', 'de', 'DEU', '01234567890', 'unitCustomer1@example.com', '01234567890', 'www.example.com', 157762800, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1294916626, 1294916616, '');
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'unittest.aimeos.org', 'Erika Mustermann', 'unitCustomer2@example.com', 1, 'Example company LLC', 'DE999999999', 'Prof. Dr.', 'Erika', 'Mustermann', 'Heidestraße 17', '45632', 'Köln', '', 'de', 'DEU', '09876543210', 'unitCustomer2@example.com', '09876543210', 'www.example.com', 315529200, '1', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916627, 1294916617, '1');
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`)
-	VALUES ( 'unittest.aimeos.org', 'Franz-Xaver Gabler', 'unitCustomer3@example.com', 0, 'Example company LLC', 'DE999999999', '', 'Franz-Xaver', 'Gabler', 'Phantasiestraße 2', '23643', 'Berlin', 'Berlin', 'de', 'DEU', '01234509876', 'unitCustomer3@example.com', '055544333212', 'www.example.com', 473382000, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916628, 1294916618, '1,2,3');
+INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
+	VALUES ( 'unittest.aimeos.org', 'Max Mustermann', 'unitCustomer1@example.com', 0, 'Example company LLC', 'DE999999999', 'Dr.', 'Max', 'Mustermann', 'Musterstraße 1a', '20001', 'Musterstadt', 'Hamburg', 'de', 'DEU', '01234567890', 'unitCustomer1@example.com', '01234567890', 'www.example.com', 157762800, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1294916626, 1294916616, '', '10.0', '50.0');
+INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
+	VALUES ( 'unittest.aimeos.org', 'Erika Mustermann', 'unitCustomer2@example.com', 1, 'Example company LLC', 'DE999999999', 'Prof. Dr.', 'Erika', 'Mustermann', 'Heidestraße 17', '45632', 'Köln', '', 'de', 'DEU', '09876543210', 'unitCustomer2@example.com', '09876543210', 'www.example.com', 315529200, '1', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916627, 1294916617, '1', '10.5', '51.0');
+INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
+	VALUES ( 'unittest.aimeos.org', 'Franz-Xaver Gabler', 'unitCustomer3@example.com', 0, 'Example company LLC', 'DE999999999', '', 'Franz-Xaver', 'Gabler', 'Phantasiestraße 2', '23643', 'Berlin', 'Berlin', 'de', 'DEU', '01234509876', 'unitCustomer3@example.com', '055544333212', 'www.example.com', 473382000, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916628, 1294916618, '1,2,3', '11.0', '52.0');
 
 --
 -- Typo3 frontend groups

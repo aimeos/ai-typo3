@@ -174,6 +174,20 @@ class Typo3
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'customer.address.longitude' => array(
+			'label' => 'Customer address longitude',
+			'code' => 'customer.address.longitude',
+			'internalcode' => 't3feuad."longitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.address.latitude' => array(
+			'label' => 'Customer address latitude',
+			'code' => 'customer.address.latitude',
+			'internalcode' => 't3feuad."latitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'customer.address.flag' => array(
 			'label' => 'Customer address flag',
 			'code' => 'customer.address.flag',

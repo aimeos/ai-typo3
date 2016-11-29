@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
- * @copyright Aimeos (aimeos.org), 2014
+ * @copyright Aimeos (aimeos.org), 2014-2016
  */
 
 return array(
@@ -16,19 +16,21 @@ return array(
 	),
 	'insert' => array(
 		'ansi' => '
-			INSERT INTO "fe_users_address" ("siteid", "parentid", "company", "vatid","salutation","title",
-				"firstname","lastname","address1","address2","address3","postal","city","state",
-				"countryid","langid","telephone","email","telefax","website","flag","pos", "mtime", "editor", "ctime" )
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			INSERT INTO "fe_users_address" ("siteid", "parentid", "company", "vatid",
+				"salutation","title","firstname","lastname","address1","address2","address3",
+				"postal","city","state","countryid","langid","telephone","email","telefax",
+				"website","longitude","latitude","flag","pos", "mtime", "editor", "ctime" )
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		',
 	),
 	'update' => array(
 		'ansi' => '
 			UPDATE "fe_users_address"
-			SET "siteid"=?, "parentid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?, "firstname"=?, "lastname"=?,
-				"address1"=?, "address2"=?, "address3"=?, "postal"=?, "city"=?, "state"=?, "countryid"=?,
-				"langid"=?, "telephone"=?, "email"=?, "telefax"=?, "website"=?, "flag"=?, "pos"=?,
-				"mtime"=?, "editor"=?
+			SET "siteid"=?, "parentid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?,
+				"firstname"=?, "lastname"=?, "address1"=?, "address2"=?, "address3"=?,
+				"postal"=?, "city"=?, "state"=?, "countryid"=?, "langid"=?, "telephone"=?,
+				"email"=?, "telefax"=?, "website"=?, "longitude"=?, "latitude"=?, "flag"=?,
+				"pos"=?, "mtime"=?, "editor"=?
 			WHERE "id"=?
 		',
 	),
@@ -45,11 +47,19 @@ return array(
 				t3feuad."countryid" AS "customer.address.countryid", t3feuad."langid" AS "customer.address.languageid",
 				t3feuad."telephone" AS "customer.address.telephone", t3feuad."email" AS "customer.address.email",
 				t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
+				t3feuad."longitude" AS "customer.address.longitude", t3feuad."latitude" AS "customer.address.latitude",
 				t3feuad."flag" AS "customer.address.flag", t3feuad."mtime" AS "customer.address.mtime",
 				t3feuad."editor" AS "customer.address.editor", t3feuad."ctime" AS "customer.address.ctime"
 			FROM "fe_users_address" AS t3feuad
 			:joins
 			WHERE :cond
+			GROUP BY t3feuad."id", t3feuad."siteid", t3feuad."parentid", t3feuad."pos",
+				t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
+				t3feuad."firstname", t3feuad."lastname", t3feuad."address1", t3feuad."address2",
+				t3feuad."address3", t3feuad."postal", t3feuad."city", t3feuad."state",
+				t3feuad."countryid", t3feuad."langid", t3feuad."telephone", t3feuad."email",
+				t3feuad."telefax", t3feuad."website", t3feuad."longitude", t3feuad."latitude",
+				t3feuad."flag", t3feuad."mtime", t3feuad."editor", t3feuad."ctime"
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

@@ -84,6 +84,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'unitCustomer1@example.com', $billing->getEMail() );
 		$this->assertEquals( '01234567890', $billing->getTelefax() );
 		$this->assertEquals( 'www.example.com', $billing->getWebsite() );
+		$this->assertEquals( '10.0', $billing->getLongitude() );
+		$this->assertEquals( '50.0', $billing->getLatitude() );
 		$this->assertEquals( 1, $actual->getStatus() );
 		$this->assertEquals( '5f4dcc3b5aa765d61d8327deb882cf99', $actual->getPassword() );
 		$this->assertEquals( '2011-01-13 11:03:36', $actual->getTimeCreated() );
@@ -183,6 +185,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.email', 'unitCustomer3@example.com' );
 		$expr[] = $search->compare( '==', 'customer.telefax', '055544333212' );
 		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
+		$expr[] = $search->compare( '==', 'customer.longitude', '11.0' );
+		$expr[] = $search->compare( '==', 'customer.latitude', '52.0' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '!=', 'customer.password', '' );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
@@ -208,6 +212,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer3@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '1234567891' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unit.web.site' );
+		$expr[] = $search->compare( '==', 'customer.address.longitude', '10.0' );
+		$expr[] = $search->compare( '==', 'customer.address.latitude', '50.0' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 2 );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
