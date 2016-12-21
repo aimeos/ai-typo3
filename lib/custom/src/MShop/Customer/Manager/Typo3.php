@@ -593,7 +593,7 @@ class Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
-		return new \Aimeos\MShop\Customer\Item\Typo3( $address, $values, $listItems, $refItems, $helper );
+		return new \Aimeos\MShop\Customer\Item\Typo3( $address, $values, $listItems, $refItems, null, $helper );
 	}
 
 
