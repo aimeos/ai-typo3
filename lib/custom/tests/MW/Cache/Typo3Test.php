@@ -161,7 +161,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
 			);
 
-		$this->object->set( 'key', 'value', '2000-01-01 00:00:00', array( 'tag' ) );
+		$this->object->set( 'key', 'value', '2100-01-01 00:00:00', array( 'tag' ) );
 	}
 
 
@@ -187,7 +187,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
 			);
 
-		$expires = array( 'key' => '2000-01-01 00:00:00' );
+		$expires = array( 'key' => '2100-01-01 00:00:00' );
 		$this->object->setMultiple( array( 'key' => 'value' ), $expires, array( 'key' => array( 'tag' ) ) );
 	}
 
@@ -202,7 +202,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
 			);
 
-		$object->setMultiple( array( 'key' => 'value' ), array(), array( 'key' => array( 'tag' ) ) );
+		$object->setMultiple( array( 'key' => 'value' ), null, array( 'key' => array( 'tag' ) ) );
 	}
 
 }

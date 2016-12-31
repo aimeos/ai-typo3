@@ -192,10 +192,8 @@ class Typo3
 	 */
 	public function set( $key, $value, $expires = null, array $tags = array() )
 	{
-		if( $expires !== null && ( $timestamp = strtotime( $expires ) ) !== false ) {
-			$expires = $timestamp;
-		} else {
-			$expires = null;
+		if( is_string( $expires ) ) {
+			$expires = date_create( $expires )->getTimestamp() - time();
 		}
 
 		$tagList = ( $this->prefix ? array( $this->prefix . 'siteid' ) : array() );
@@ -216,7 +214,7 @@ class Typo3
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param int|string|array $expires Associative list of keys and datetime
+	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.
 	 * @param array $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
@@ -227,7 +225,7 @@ class Typo3
 		foreach( $pairs as $key => $value )
 		{
 			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : array() );
-			$keyExpire = ( isset( $expires[$key] ) ? $expires[$key] : null );
+			$keyExpire = ( isset( $expires[$key] ) ? $expires[$key] : $expires );
 
 			$this->set( $key, $value, $keyExpire, $tagList );
 		}
