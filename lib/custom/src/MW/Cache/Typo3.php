@@ -57,7 +57,7 @@ class Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param iterable $keys List of key strings that identify the cache entries
+	 * @param \Traversable|array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 */
 	public function deleteMultiple( $keys )
@@ -123,7 +123,7 @@ class Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param iterable $keys List of key strings for the requested cache entries
+	 * @param \Traversable|array $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
@@ -212,7 +212,7 @@ class Typo3
 	 *
 	 * @inheritDoc
 	 *
-	 * @param iterable $pairs Associative list of key/value pairs. Both must be
+	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
 	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.
