@@ -47,6 +47,7 @@ class Typo3 implements Iface
 		$fluid = $this->objectManager->get( 'TYPO3\\CMS\\Fluid\\View\\StandaloneView' );
 
 		$fluid->setTemplatePathAndFilename( $filename );
+		$fluid->assign( '_aimeos_view', $view );
 		$fluid->assignMultiple( $values );
 
 		return $fluid->render();
