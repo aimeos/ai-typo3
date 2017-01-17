@@ -19,7 +19,7 @@ namespace Aimeos\MW\View\Engine;
  */
 class Typo3 implements Iface
 {
-	private objectManager;
+	private $objectManager;
 
 
 	/**

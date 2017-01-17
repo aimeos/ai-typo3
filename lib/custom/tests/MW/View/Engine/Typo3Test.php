@@ -8,6 +8,10 @@
 namespace Aimeos\MW\View\Engine;
 
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Object';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3View';
+
+
 class Typo3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -16,10 +20,6 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		if( !class_exists( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' ) ) {
-			$this->markTestSkipped( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface is not available' );
-		}
-
 		$this->mock = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
@@ -39,7 +39,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	{
 		$v = new \Aimeos\MW\View\Standard( array() );
 
-		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\StandaloneView' )
+		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
 			->setMethods( array( 'assignMultiple', 'render', 'setTemplatePathAndFilename' ) )
 			->disableOriginalConstructor()
 			->getMock();

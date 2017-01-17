@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2017
+ */
+
+
+namespace TYPO3\CMS\Extbase\Object;
+
+
+interface ObjectManagerInterface
+{
+}
+
+
+class T3Object implements ObjectManagerInterface
+{
+	public function get()
+	{
+	}
+}
