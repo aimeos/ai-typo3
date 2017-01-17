@@ -19,6 +19,10 @@ class T3View
 	{
 	}
 
+	public function assign( $key, $value )
+	{
+	}
+
 	public function render()
 	{
 	}

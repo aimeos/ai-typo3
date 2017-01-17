@@ -40,12 +40,13 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$v = new \Aimeos\MW\View\Standard( array() );
 
 		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
-			->setMethods( array( 'assignMultiple', 'render', 'setTemplatePathAndFilename' ) )
+			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$view->expects( $this->once() )->method( 'setTemplatePathAndFilename' );
 		$view->expects( $this->once() )->method( 'assignMultiple' );
+		$view->expects( $this->once() )->method( 'assign' );
 		$view->expects( $this->once() )->method( 'render' )
 			->will( $this->returnValue( 'test' ) );
 
