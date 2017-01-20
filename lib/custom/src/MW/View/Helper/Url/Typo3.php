@@ -58,7 +58,7 @@ class Typo3
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
 		$arguments = $this->fixed;
-		$arguments['controller'] = $controller;
+		$arguments['controller'] = ucfirst( $controller );
 		$arguments['action'] = $action;
 
 		$values = $this->getValues( $config );
