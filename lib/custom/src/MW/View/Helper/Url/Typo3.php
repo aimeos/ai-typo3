@@ -76,6 +76,10 @@ class Typo3
 			$params['eID'] = $config['eID'];
 		}
 
+		if( isset( $config['plugin'] ) ) {
+			$params['plugin'] = $config['plugin'];
+		}
+
 		$params = $this->sanitize( $params );
 
 		$this->uriBuilder
