@@ -96,10 +96,6 @@ class Typo3
 			}
 		}
 
-		if( isset( $config['plugin'] ) ) {
-			$params['plugin'] = $config['plugin'];
-		}
-
 		$params = $this->sanitize( $params );
 
 		$this->uriBuilder
