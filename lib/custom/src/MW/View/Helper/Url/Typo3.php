@@ -111,7 +111,7 @@ class Typo3
 			'absoluteUri' => false,
 			'namespace' => true,
 			'nocache' => false,
-			'chash' => true,
+			'chash' => false,
 			'format' => '',
 			'type' => 0,
 		);
