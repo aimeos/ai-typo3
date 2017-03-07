@@ -179,8 +179,8 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 		$this->object->moveItem( $last->getId() );
 
-		$this->assertEquals( 0, $newFirst->getPosition() );
-		$this->assertEquals( 1, $newSecond->getPosition() );
+		$this->assertEquals( 1, $newFirst->getPosition() );
+		$this->assertEquals( 2, $newSecond->getPosition() );
 	}
 
 
@@ -256,7 +256,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '>', 'customer.lists.position', 0 );
+		$expr[] = $search->compare( '>', 'customer.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
@@ -273,10 +273,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 2);
+		$search->setSlice(0, 1);
 		$results = $this->object->searchItems( $search, array(), $total );
-		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, $total );
 
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
