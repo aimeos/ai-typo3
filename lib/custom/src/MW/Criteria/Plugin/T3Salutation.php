@@ -33,8 +33,11 @@ class T3Salutation implements \Aimeos\MW\Criteria\Plugin\Iface
 			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR:
 				return 0;
 			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS:
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS:
 				return 1;
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS:
+				return 2;
+			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY:
+				return 10;
 		}
 
 		return 99;
@@ -55,6 +58,10 @@ class T3Salutation implements \Aimeos\MW\Criteria\Plugin\Iface
 				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR;
 			case 1:
 				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS;
+			case 2:
+				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS;
+			case 10:
+				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY;
 		}
 
 		return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN;
