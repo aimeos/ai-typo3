@@ -165,7 +165,6 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItems()
 	{
-		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = array();
@@ -244,27 +243,52 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
 		$this->assertEquals( array( 1, 2, 3 ), reset( $result )->getGroups() );
+	}
 
 
-		// search without base criteria
+	public function testSearchItemsTotal()
+	{
 		$search = $this->object->createSearch();
-		$results = $this->object->searchItems( $search );
-		$this->assertEquals( 3, count( $results ) );
+		$search->setSlice( 0, 2 );
+
+		$total = 0;
+		$results = $this->object->searchItems( $search, [], $total );
+
+		$this->assertEquals( 2, count( $results ) );
+		$this->assertEquals( 3, $total );
+	}
 
 
-		// search with base criteria
-		$search = $this->object->createSearch(true);
+	public function testSearchItemsCriteria()
+	{
+		$search = $this->object->createSearch( true );
 		$results = $this->object->searchItems( $search );
+
 		$this->assertEquals( 2, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@example.com' ) );
+
+		$results = $this->object->searchItems( $search, ['address', 'text'] );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new \Exception( 'No customer item for "unitCustomer1@example.com" available' );
+		}
+
+		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 
 

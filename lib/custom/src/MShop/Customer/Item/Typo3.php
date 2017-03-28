@@ -33,10 +33,10 @@ class Typo3 extends Standard implements Iface
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), $salt = '',
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
+		array $listItems = array(), array $refItems = array(), $salt = null,
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = array() )
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper );
+		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses );
 
 		$this->values = $values;
 	}

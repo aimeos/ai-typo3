@@ -235,8 +235,8 @@ class Typo3
 		),
 	);
 
-	private $plugins = array();
-	private $reverse = array();
+	private $plugins = [];
+	private $reverse = [];
 	private $helper;
 	private $pid;
 
@@ -511,12 +511,12 @@ class Typo3
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$map = array();
+		$map = [];
 
 		try
 		{
@@ -538,7 +538,12 @@ class Typo3
 			throw $e;
 		}
 
-		return $this->buildItems( $map, $ref, 'customer' );
+		$addrItems = [];
+		if( in_array( 'address', $ref, true ) ) {
+			$addrItems = $this->getAddressItems( array_keys( $map ) );
+		}
+
+		return $this->buildItems( $map, $ref, 'customer', $addrItems );
 	}
 
 
@@ -563,7 +568,7 @@ class Typo3
 	 * @param array $refItems Items referenced by the customer item via the list items
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		$helper = $this->getPasswordHelper();
 		$address = $this->getAddressManager()->createItem();
@@ -593,7 +598,7 @@ class Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
-		return new \Aimeos\MShop\Customer\Item\Typo3( $address, $values, $listItems, $refItems, null, $helper );
+		return new \Aimeos\MShop\Customer\Item\Typo3( $address, $values, $listItems, $refItems, null, $helper, $addresses );
 	}
 
 
