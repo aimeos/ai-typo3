@@ -185,7 +185,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
@@ -216,7 +216,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>', 'customer.address.ctime', '1970-01-01 00:00:00' );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );

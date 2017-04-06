@@ -66,8 +66,8 @@ class Typo3
 		),
 	);
 
-	private $plugins = array();
-	private $reverse = array();
+	private $plugins = [];
+	private $reverse = [];
 
 
 	/**
@@ -94,7 +94,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -121,7 +121,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -159,9 +159,9 @@ class Typo3
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = array();
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -289,7 +289,7 @@ class Typo3
 	 * @param array $values List of attributes for customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		$values['customer.group.siteid'] = $this->getContext()->getLocale()->getSiteId();
 

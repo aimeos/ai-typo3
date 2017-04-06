@@ -9,7 +9,7 @@
 class TestHelper
 {
 	private static $aimeos;
-	private static $context = array();
+	private static $context = [];
 
 
 	public static function bootstrap()
@@ -59,7 +59,7 @@ class TestHelper
 		$paths = $mshop->getConfigPaths( 'mysql' );
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\PHPArray( [], $paths );
 		$ctx->setConfig( $conf );
 
 

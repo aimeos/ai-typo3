@@ -28,7 +28,7 @@ class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

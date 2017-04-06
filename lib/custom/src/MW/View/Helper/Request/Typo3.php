@@ -40,8 +40,8 @@ class Typo3
 	 * @param array $cookies List of uploaded files like in $_COOKIES
 	 * @param array $server List of uploaded files like in $_SERVER
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, $target = null, array $files = array(),
-		array $query = array(), array $post = array(), array $cookies = array(), array $server = array() )
+	public function __construct( \Aimeos\MW\View\Iface $view, $target = null, array $files = [],
+		array $query = [], array $post = [], array $cookies = [], array $server = [] )
 	{
 		$this->target = $target;
 		$this->ip = ( isset( $server['REMOTE_ADDR'] ) ? $server['REMOTE_ADDR'] : null );

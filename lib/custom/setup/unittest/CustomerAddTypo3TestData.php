@@ -47,7 +47,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 		$this->msg( 'Adding TYPO3 customer test data', 0 );
 		$this->additional->setEditor( 'ai-typo3:unittest' );
 
-		$parentIds = array();
+		$parentIds = [];
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
 

@@ -167,7 +167,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'Franz-Xaver Gabler' );
 		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer3@example.com' );

@@ -52,10 +52,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'absoluteUri' => 1 );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -67,10 +67,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setNoCache' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'nocache' => 1 );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -82,10 +82,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'chash' => 1 );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -97,10 +97,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
 			->with( $this->equalTo( 123 ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'type' => 123 );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -112,10 +112,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setFormat' )
 			->with( $this->equalTo( 'xml' ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'format' => 'xml' );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -129,10 +129,10 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setArguments' )
 			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'eID' => 123 );
-		$this->assertEquals( '', $object->transform( null, null, null, array(), array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
-		$this->assertEquals( '', $object->transform( null, null, null, $params, array(), array( 'BE' => 1 ) ) );
+		$this->assertEquals( '', $object->transform( null, null, null, $params, [], array( 'BE' => 1 ) ) );
 	}
 
 
@@ -176,6 +176,6 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 		$params = array( 'test' => 'my/value' );
 		$config = array( 'namespace' => false );
-		$this->assertEquals( '', $object->transform( null, null, null, $params, array(), $config ) );
+		$this->assertEquals( '', $object->transform( null, null, null, $params, [], $config ) );
 	}
 }

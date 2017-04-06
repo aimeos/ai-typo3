@@ -131,7 +131,7 @@ class Typo3
 	 */
 	public function getMultiple( $keys, $default = null )
 	{
-		$result = array();
+		$result = [];
 
 		foreach( $keys as $key )
 		{
@@ -158,7 +158,7 @@ class Typo3
 	 */
 	public function getMultipleByTags( array $tags )
 	{
-		$result = array();
+		$result = [];
 		$len = strlen( $this->prefix );
 
 		foreach( $tags as $tag )
@@ -190,13 +190,13 @@ class Typo3
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() )
+	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 		if( is_string( $expires ) ) {
 			$expires = date_create( $expires )->getTimestamp() - time();
 		}
 
-		$tagList = ( $this->prefix ? array( $this->prefix . 'siteid' ) : array() );
+		$tagList = ( $this->prefix ? array( $this->prefix . 'siteid' ) : [] );
 
 		foreach( $tags as $tag ) {
 			$tagList[] = $this->prefix . $tag;
@@ -220,11 +220,11 @@ class Typo3
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 		foreach( $pairs as $key => $value )
 		{
-			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : array() );
+			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : [] );
 			$keyExpire = ( isset( $expires[$key] ) ? $expires[$key] : $expires );
 
 			$this->set( $key, $value, $keyExpire, $tagList );

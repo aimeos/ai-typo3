@@ -42,7 +42,7 @@ class ListsOptimizeIndexesTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -53,7 +53,7 @@ class ListsOptimizeIndexesTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

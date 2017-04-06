@@ -55,12 +55,12 @@ class CustomerListAddTypo3TestData
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer list domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['customer/lists'] as $dataset ) {
 			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
 		$this->addCustomerListData( $testdata, $refIds, 'Typo3' );
 

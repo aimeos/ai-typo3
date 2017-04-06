@@ -20,7 +20,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 		$view = new \Aimeos\MW\View\Standard();
 		$server = array( 'REMOTE_ADDR' => '127.0.0.1' );
-		$this->object = new \Aimeos\MW\View\Helper\Request\Typo3( $view, 123, array(), array(), array(), array(), $server );
+		$this->object = new \Aimeos\MW\View\Helper\Request\Typo3( $view, 123, [], [], [], [], $server );
 	}
 
 

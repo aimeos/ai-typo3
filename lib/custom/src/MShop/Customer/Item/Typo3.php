@@ -32,9 +32,9 @@ class Typo3 extends Standard implements Iface
 	 * @param string $salt Password salt (optional)
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), $salt = null,
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = array() )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
+		array $listItems = [], array $refItems = [], $salt = null,
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [] )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses );
 
@@ -82,7 +82,7 @@ class Typo3 extends Standard implements Iface
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

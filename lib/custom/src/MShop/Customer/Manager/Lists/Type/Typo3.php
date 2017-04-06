@@ -102,7 +102,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/lists/type/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

@@ -37,7 +37,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testRender()
 	{
-		$v = new \Aimeos\MW\View\Standard( array() );
+		$v = new \Aimeos\MW\View\Standard( [] );
 
 		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
 			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename' ) )

@@ -57,7 +57,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );

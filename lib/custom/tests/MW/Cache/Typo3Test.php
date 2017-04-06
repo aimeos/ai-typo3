@@ -22,7 +22,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' )->getMock();
-		$this->object = new \Aimeos\MW\Cache\Typo3( array(), $this->mock );
+		$this->object = new \Aimeos\MW\Cache\Typo3( [], $this->mock );
 	}
 
 

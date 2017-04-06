@@ -38,7 +38,7 @@ class T3CliTest extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\T3Cli( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\T3Cli( $this->view, $mock, [] );
 
 		$this->assertEquals( '', $object->transform() );
 	}
@@ -52,7 +52,7 @@ class T3CliTest extends \PHPUnit_Framework_TestCase
 		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
 			->with( $this->equalTo( false ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\T3Cli( $this->view, $mock, array() );
+		$object = new \Aimeos\MW\View\Helper\Url\T3Cli( $this->view, $mock, [] );
 
 		$this->assertEquals( '', $object->transform() );
 	}
