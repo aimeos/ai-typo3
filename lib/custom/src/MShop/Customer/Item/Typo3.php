@@ -106,8 +106,11 @@ class Typo3 extends Standard implements Iface
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
-		$list['typo3.pageid'] = $this->getPageId();
+		$list = parent::toArray( $private );
+
+		if( $private === true ) {
+			$list['typo3.pageid'] = $this->getPageId();
+		}
 
 		return $list;
 	}
