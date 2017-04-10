@@ -98,7 +98,7 @@ class Typo3Test extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->object->toArray();
+		$arrayObject = $this->object->toArray( true );
 
 		$this->assertEquals( $this->object->getPageId(), $arrayObject['typo3.pageid'] );
 	}
