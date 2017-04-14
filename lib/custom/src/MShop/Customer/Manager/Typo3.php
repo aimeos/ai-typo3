@@ -291,7 +291,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
 
@@ -610,7 +610,7 @@ class Typo3
 	protected function getAddressManager()
 	{
 		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getSubManager( 'address' );
+			$this->addressManager = $this->getObject()->getSubManager( 'address' );
 		}
 
 		return $this->addressManager;
