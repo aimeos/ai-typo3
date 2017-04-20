@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Customer\Manager;
 
 
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;

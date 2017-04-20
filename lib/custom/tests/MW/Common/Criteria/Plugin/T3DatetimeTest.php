@@ -12,7 +12,7 @@ namespace Aimeos\MW\Criteria\Plugin;
 /**
  * Test class for \Aimeos\MW\Criteria\Plugin\T3Datetime
  */
-class T3DatetimeTest extends \PHPUnit_Framework_TestCase
+class T3DatetimeTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

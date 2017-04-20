@@ -12,7 +12,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Object';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3View';
 
 
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;

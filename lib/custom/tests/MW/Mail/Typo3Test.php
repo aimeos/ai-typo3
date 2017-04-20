@@ -13,7 +13,7 @@ namespace Aimeos\MW\Mail;
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'MailMessage';
 
 
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;

@@ -16,7 +16,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'FrontendUserAuthentication';
 /**
  * Test class for \Aimeos\MW\Session\Typo3.
  */
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
 /**
  * Test class for \Aimeos\MShop\Customer\Manager\Lists\Type\Typo3Test.
  */
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor = '';

@@ -13,7 +13,7 @@ namespace Aimeos\MW\View\Helper\Url;
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'UriBuilder';
 
 
-class Typo3Test extends \PHPUnit_Framework_TestCase
+class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $view;
 
