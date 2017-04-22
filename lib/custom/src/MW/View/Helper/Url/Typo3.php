@@ -3,13 +3,16 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2014-2015
+ * @copyright Aimeos (aimeos.org), 2014-2017
  * @package MW
  * @subpackage View
  */
 
 
 namespace Aimeos\MW\View\Helper\Url;
+
+
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 
 
 /**
@@ -63,17 +66,34 @@ class Typo3
 
 		$values = $this->getValues( $config );
 
-		if( $this->prefix != '' )
+		if( isset( $config['eID'] ) )
 		{
-			if( $values['namespace'] === true ) {
-				$params = array( $this->prefix => $arguments + $params );
-			} else {
-				$params = $params + array( $this->prefix => $arguments );
-			}
-		}
+			// set required config
+			$values['type'] = 0;
+			$values['chash'] = false;
 
-		if( isset( $config['eID'] ) ) {
+			// handle parameters
+			$arguments = $arguments + $params;
+
+			$params = [];
 			$params['eID'] = $config['eID'];
+
+			if( isset( $config['format'] ) ) {
+				$params['format'] = $config['format'];
+			}
+
+			$params = $params + $arguments;
+		}
+		else
+		{
+			if( $this->prefix != '' )
+			{
+				if( $values['namespace'] === true ) {
+					$params = array( $this->prefix => $arguments + $params );
+				} else {
+					$params = $params + array( $this->prefix => $arguments );
+				}
+			}
 		}
 
 		$params = $this->sanitize( $params );
