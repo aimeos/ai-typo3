@@ -38,14 +38,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Customer\Item\Group\Standard();
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Customer\\Exception' );
 		$this->object->saveItem( $item );
 	}
 
 
 	public function testDeleteItem()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Customer\\Exception' );
 		$this->object->deleteItem( -1 );
 	}
 

@@ -11,7 +11,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	public function testException()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		new \Aimeos\MShop\Common\Item\Helper\Password\Typo3( [] );
 	}
 
