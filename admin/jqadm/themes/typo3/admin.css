@@ -1,0 +1,19 @@
+/*
+ * TYPO3 JQAdm theme
+ */
+
+body {
+	font-size: 75%;
+}
+
+.btn, .form-control {
+	font-size: 100%;
+}
+
+.navbar-brand {
+	font-size: 1rem;
+}
+
+select.form-control:not([size]):not([multiple]) {
+	height: auto;
+}
