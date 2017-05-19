@@ -32,14 +32,7 @@ class Typo3
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.address.siteid' => array(
-			'label' => 'Customer address site ID',
-			'code' => 'customer.address.siteid',
-			'internalcode' => 't3feuad."siteid"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
+		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.address.parentid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',
@@ -237,6 +230,18 @@ class Typo3
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
+	}
+
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		$path = 'mshop/customer/manager/address/typo3/delete';
+		$this->deleteItemsBase( $ids, $path, false );
 	}
 
 

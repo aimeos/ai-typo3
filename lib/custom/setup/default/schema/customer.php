@@ -14,7 +14,7 @@ return array(
 			$table = $schema->createTable( 'fe_users_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );

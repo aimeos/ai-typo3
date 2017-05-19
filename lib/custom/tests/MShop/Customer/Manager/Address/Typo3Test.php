@@ -187,7 +187,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
-		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'Example company LLC' );

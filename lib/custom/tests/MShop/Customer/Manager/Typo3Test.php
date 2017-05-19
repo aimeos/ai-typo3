@@ -192,7 +192,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
-		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.salutation', 'company' );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'unitcompany' );
