@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `fe_users` (
 	`uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
 	`pid` int(11) unsigned NOT NULL DEFAULT '0',
 	`tstamp` int(11) unsigned NOT NULL DEFAULT '0',
+	`siteid` int(11) DEFAULT NULL,
 	`username` varchar(50) DEFAULT NULL,
 	`password` varchar(40) DEFAULT NULL,
 	`usergroup` tinytext,

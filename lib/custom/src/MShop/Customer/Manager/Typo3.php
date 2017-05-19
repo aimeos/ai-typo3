@@ -29,6 +29,7 @@ class Typo3
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
+		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.label' => array(
 			'label' => 'Customer name',
 			'code' => 'customer.label',
@@ -303,7 +304,8 @@ class Typo3
 	 */
 	public function createItem()
 	{
-		return $this->createItemBase( array( 'typo3.pageid' => $this->pid ) );
+		$values = ['customer.siteid' => $this->getContext()->getLocale()->getSiteId(), 'typo3.pageid' => $this->pid];
+		return $this->createItemBase( $values );
 	}
 
 
@@ -421,38 +423,39 @@ class Typo3
 			}
 
 			// TYPO3 fe_users.static_info_country is a three letter ISO code instead a two letter one
-			$stmt->bind( 1, $item->getLabel() );
-			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $billingAddress->getCompany() );
-			$stmt->bind( 5, $billingAddress->getVatID() );
-			$stmt->bind( 6, $billingAddress->getTitle() );
-			$stmt->bind( 7, $billingAddress->getFirstname() );
-			$stmt->bind( 8, $billingAddress->getLastname() );
-			$stmt->bind( 9, $address );
-			$stmt->bind( 10, $billingAddress->getPostal() );
-			$stmt->bind( 11, $billingAddress->getCity() );
-			$stmt->bind( 12, $billingAddress->getState() );
-			$stmt->bind( 13, $billingAddress->getLanguageId() );
-			$stmt->bind( 14, $billingAddress->getTelephone() );
-			$stmt->bind( 15, $billingAddress->getEmail() );
-			$stmt->bind( 16, $billingAddress->getTelefax() );
-			$stmt->bind( 17, $billingAddress->getWebsite() );
-			$stmt->bind( 18, $billingAddress->getLongitude() );
-			$stmt->bind( 19, $billingAddress->getLatitude() );
-			$stmt->bind( 20, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 22, $item->getPassword() );
-			$stmt->bind( 23, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
-			$stmt->bind( 24, $billingAddress->getCountryId() );
-			$stmt->bind( 25, implode( ',', $item->getGroups() ) );
-			$stmt->bind( 26, $item->getPageId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getLabel() );
+			$stmt->bind( 3, $item->getCode() );
+			$stmt->bind( 4, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $billingAddress->getCompany() );
+			$stmt->bind( 6, $billingAddress->getVatID() );
+			$stmt->bind( 7, $billingAddress->getTitle() );
+			$stmt->bind( 8, $billingAddress->getFirstname() );
+			$stmt->bind( 9, $billingAddress->getLastname() );
+			$stmt->bind( 10, $address );
+			$stmt->bind( 11, $billingAddress->getPostal() );
+			$stmt->bind( 12, $billingAddress->getCity() );
+			$stmt->bind( 13, $billingAddress->getState() );
+			$stmt->bind( 14, $billingAddress->getLanguageId() );
+			$stmt->bind( 15, $billingAddress->getTelephone() );
+			$stmt->bind( 16, $billingAddress->getEmail() );
+			$stmt->bind( 17, $billingAddress->getTelefax() );
+			$stmt->bind( 18, $billingAddress->getWebsite() );
+			$stmt->bind( 19, $billingAddress->getLongitude() );
+			$stmt->bind( 20, $billingAddress->getLatitude() );
+			$stmt->bind( 21, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 23, $item->getPassword() );
+			$stmt->bind( 24, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
+			$stmt->bind( 25, $billingAddress->getCountryId() );
+			$stmt->bind( 26, implode( ',', $item->getGroups() ) );
+			$stmt->bind( 27, $item->getPageId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
 
 			if( $id !== null ) {
-				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 27, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Creation time
+				$stmt->bind( 28, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Creation time
 			}
 
 			$stmt->execute()->finish();
