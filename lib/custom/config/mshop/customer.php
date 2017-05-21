@@ -18,22 +18,27 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fe_users_address" ("siteid", "parentid", "company", "vatid",
-							"salutation","title","firstname","lastname","address1","address2","address3",
-							"postal","city","state","countryid","langid","telephone","email","telefax",
-							"website","longitude","latitude","flag","pos", "mtime", "editor", "ctime" )
-						VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+						INSERT INTO "fe_users_address" (
+							"parentid", "company", "vatid", "salutation", "title",
+							"firstname", "lastname", "address1", "address2", "address3",
+							"postal", "city", "state", "countryid", "langid", "telephone",
+							"email", "telefax", "website", "longitude", "latitude", "flag",
+							"pos", "mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fe_users_address"
-						SET "siteid"=?, "parentid"=?, "company"=?, "vatid"=?, "salutation"=?, "title"=?,
-							"firstname"=?, "lastname"=?, "address1"=?, "address2"=?, "address3"=?,
-							"postal"=?, "city"=?, "state"=?, "countryid"=?, "langid"=?, "telephone"=?,
-							"email"=?, "telefax"=?, "website"=?, "longitude"=?, "latitude"=?, "flag"=?,
-							"pos"=?, "mtime"=?, "editor"=?
-						WHERE "id"=?
+						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
+							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
+							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
+							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
+							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+						WHERE "id" = ?
 					',
 				),
 				'search' => array(
@@ -121,16 +126,20 @@ return array(
 				'typo3' => array(
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "fe_users_list_type"( "siteid", "code", "domain", "label", "status",
-								"mtime", "editor", "ctime" )
-							VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+							INSERT INTO "fe_users_list_type"(
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
 						',
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fe_users_list_type"
-							SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						',
 					),
 					'delete' => array(
@@ -205,24 +214,27 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "fe_users_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
-						"config", "pos", "status", "mtime", "editor", "ctime" )
-						VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+						INSERT INTO "fe_users_list"(
+							"parentid", "typeid", "domain", "refid", "start", "end",
+							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fe_users_list"
-						SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
 				'updatepos' => array(
 					'ansi' => '
 						UPDATE "fe_users_list"
 							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
 				'delete' => array(
@@ -298,20 +310,20 @@ return array(
 						"date_of_birth", "disable", "password", "tstamp", "static_info_country",
 						"usergroup", "pid", "crdate"
 					) SELECT ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(
-						SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1
+						SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1
 					),?,?,? FROM DUAL
 				',
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "fe_users"
-					SET "siteid"=?, "name"=?, "username"=?, "gender"=?, "company"=?, "vatid"=?, "title"=?,
-						"first_name"=?, "last_name"=?, "address"=?, "zip"=?, "city"=?, "zone"=?,
-						"language"=?, "telephone"=?, "email"=?, "fax"=?, "www"=?, "longitude"=?,
-						"latitude"=?, "date_of_birth"=?, "disable"=?, "password"=?, "tstamp"=?,
-						"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2"=? LIMIT 1 ),
-						"usergroup"=?, "pid"=?
-					WHERE "uid"=?
+					SET "siteid" = ?, "name" = ?, "username" = ?, "gender" = ?, "company" = ?, "vatid" = ?, "title" = ?,
+						"first_name" = ?, "last_name" = ?, "address" = ?, "zip" = ?, "city" = ?, "zone" = ?,
+						"language" = ?, "telephone" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
+						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
+						"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1 ),
+						"usergroup" = ?, "pid" = ?
+					WHERE "uid" = ?
 				',
 			),
 			'search' => array(
