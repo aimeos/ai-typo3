@@ -2,27 +2,6 @@
  * TYPO3 JQAdm theme
  */
 
-.aimeos {
-	font-size: 75%;
-}
-
-.btn, .form-control {
-	font-size: 100%;
-}
-
-.navbar-brand {
-	font-size: 1rem;
-}
-
-.custom-select,
-.aimeos .main-navbar .dropdown-toggle {
-	height: 33px;
-}
-
-select.form-control:not([size]):not([multiple]) {
-	height: auto;
-}
-
 .dashboard .order-latest .content {
 	height: 280px;
 }
