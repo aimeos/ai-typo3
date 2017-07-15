@@ -137,16 +137,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveDomainException()
-	{
-		$item = $this->object->createItem();
-		$item->setDomain( 'customer/group' );
-
-		$this->setExpectedException( '\Aimeos\MShop\Customer\Exception' );
-		$this->object->saveItem( $item );
-	}
-
-
 	public function testMoveItemLastToFront()
 	{
 		$listItems = $this->getListItems();
