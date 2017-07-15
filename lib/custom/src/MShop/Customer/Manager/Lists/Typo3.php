@@ -170,10 +170,6 @@ class Typo3
 			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( $item->getDomain() === 'customer/group' ) {
-			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Adding groups to customers is not supported, please use the TYPO3 backend' ) );
-		}
-
 		return parent::saveItem( $item, $fetch );
 	}
 
