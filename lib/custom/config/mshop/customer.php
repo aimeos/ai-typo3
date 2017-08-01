@@ -328,7 +328,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
+					SELECT t3feu."uid" AS "customer.id",
 						t3feu."name" AS "customer.label", t3feu."gender",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
 						t3feu."company" AS "customer.company", t3feu."vatid" AS "customer.vatid",
@@ -347,7 +347,7 @@ return array(
 					:joins
 					WHERE :cond
 						AND t3feu."deleted" = 0
-					GROUP BY t3feu."uid", t3feu."siteid", t3feu."name", t3feu."gender",
+					GROUP BY t3feu."uid", t3feu."name", t3feu."gender",
 						t3feu."username", t3feu."title", t3feu."company", t3feu."vatid",
 						t3feu."first_name", t3feu."last_name", t3feu."address", t3feu."zip",
 						t3feu."city", t3feu."zone", tsc."cn_iso_2", t3feu."language",
