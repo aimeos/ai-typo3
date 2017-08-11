@@ -283,7 +283,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1@example.com' ) );
 
-		$results = $this->object->searchItems( $search, ['address', 'text'] );
+		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \Exception( 'No customer item for "unitCustomer1@example.com" available' );

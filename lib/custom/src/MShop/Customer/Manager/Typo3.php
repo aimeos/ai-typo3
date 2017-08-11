@@ -548,7 +548,7 @@ class Typo3
 		}
 
 		$addrItems = [];
-		if( in_array( 'address', $ref, true ) ) {
+		if( in_array( 'customer/address', $ref, true ) ) {
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
 
