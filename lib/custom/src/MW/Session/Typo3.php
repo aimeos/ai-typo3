@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2014-2016
+ * @copyright Aimeos (aimeos.org), 2014-2017
  * @package MW
  * @subpackage Session
  */
@@ -20,17 +20,17 @@ namespace Aimeos\MW\Session;
  */
 class Typo3 implements \Aimeos\MW\Session\Iface
 {
-	private $feuser = null;
+	private $user;
 
 
 	/**
 	 * Initializes the Typo3 session object.
 	 *
-	 * @param \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication Typo3 frontend user object from $GLOBALS['TSFE']->fe_user
+	 * @param \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $user Typo3 user object (FE or BE)
 	 */
-	public function __construct( \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication $feuser )
+	public function __construct( \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $user )
 	{
-		$this->feuser = $feuser;
+		$this->user = $user;
 	}
 
 
@@ -46,7 +46,7 @@ class Typo3 implements \Aimeos\MW\Session\Iface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( ( $value = $this->feuser->getKey('ses', $name) ) !== null ) {
+		if( ( $value = $this->user->getSessionData( $name ) ) !== null ) {
 			return $value;
 		}
 
@@ -66,6 +66,6 @@ class Typo3 implements \Aimeos\MW\Session\Iface
 	 */
 	public function set( $name, $value )
 	{
-		$this->feuser->setKey( 'ses', $name, $value );
+		$this->user->setAndSaveSessionData( $name, $value );
 	}
 }

@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+
+namespace TYPO3\CMS\Core\Authentication;
+
+
+class AbstractUserAuthentication
+{
+	private $data = [];
+
+	/**
+	 * @param string $key
+	*/
+	public function getSessionData( $key )
+	{
+		if ( isset($this->data[$key]) ) {
+			return $this->data[$key];
+		}
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $data
+	 */
+	public function setAndSaveSessionData( $key, $data )
+	{
+		$this->data[$key] = $data;
+	}
+}
