@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://www.aimeos.com/en/license
- * @copyright Aimeos (aimeos.org), 2014-2016
+ * @copyright Aimeos (aimeos.org), 2014-2017
  */
 
 
