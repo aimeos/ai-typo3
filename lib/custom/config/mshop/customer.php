@@ -341,7 +341,7 @@ return array(
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
 						t3feu."password" AS "customer.password", t3feu."date_of_birth",
 						t3feu."usergroup" as "groups", t3feu."pid" AS "typo3.pageid",
-						t3feu."disable", t3feu."crdate", t3feu."tstamp"
+						t3feu."disable", t3feu."crdate", t3feu."tstamp", t3feu.*
 					FROM "fe_users" as t3feu
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
