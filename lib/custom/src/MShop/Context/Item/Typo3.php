@@ -38,9 +38,11 @@ class Typo3
 	 * Sets the TYPO3 password hasher object
 	 *
 	 * @param \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setHasherTypo3( \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object )
 	{
 		$this->hasher = $object;
+		return $this;
 	}
 }

@@ -65,10 +65,11 @@ class Typo3 extends Standard implements Iface
 	 */
 	public function setPageId( $value )
 	{
-		if( $value == $this->getPageId() ) { return $this; }
-
-		$this->values['typo3.pageid'] = (int) $value;
-		$this->setModified();
+		if( (int) $value !== $this->getPageId() )
+		{
+			$this->values['typo3.pageid'] = (int) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
