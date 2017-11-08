@@ -17,7 +17,6 @@ class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users' => 'ALTER TABLE "fe_users" ADD "vatid" VARCHAR(32) AFTER "company"',
-		'fe_users_address' => 'ALTER TABLE "fe_users_address" ADD "vatid" VARCHAR(32) AFTER "company"',
 	);
 
 
@@ -46,7 +45,7 @@ class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process( $this->mysql );
 	}

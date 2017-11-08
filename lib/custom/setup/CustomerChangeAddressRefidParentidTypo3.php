@@ -47,23 +47,12 @@ class CustomerChangeAddressRefidParentidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
-	{
-		$this->process( $this->mysql );
-	}
-
-
-	/**
-	 * Changes the column in table
-	 *
-	 * array string $stmts List of SQL statements for changing the columns
-	 */
-	protected function process( array $stmts )
+	public function migrate()
 	{
 		$table = 'fe_users_address';
 		$this->msg( sprintf( 'Rename "refid" to "parentid" in table "%1$s"', $table ), 0 ); $this->status( '' );
 
-		foreach( $stmts as $column => $stmts )
+		foreach( $this->mysql as $column => $stmts )
 		{
 			$this->msg( sprintf( 'Checking column "%1$s"', $column ), 1 );
 

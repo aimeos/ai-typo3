@@ -31,14 +31,6 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	 */
 	public function migrate()
 	{
-	}
-
-
-	/**
-	 * Adds attribute test data.
-	 */
-	protected function mysql()
-	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );

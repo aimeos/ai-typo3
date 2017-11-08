@@ -22,7 +22,7 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesCreateTypo3' );
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -40,24 +40,14 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds fe_user test data.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg('Setting up Aimeos TYPO3 test tables', 0);
 		$this->status('');
 
-		$file = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
-		$this->process( $file );
-	}
+		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
 
-
-	/**
-	 * Insert records from file containing the SQL records.
-	 *
-	 * @param string $filename Name of the file
-	 */
-	protected function process( $filename )
-	{
-		$this->msg(sprintf('Adding records from "%1$s"', basename($filename)), 1);
+		$this->msg( sprintf( 'Adding records from "%1$s"', basename( $filename ) ), 1 );
 
 		if( ( $content = file_get_contents( $filename ) ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filename ) );
@@ -66,5 +56,4 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 		$this->execute( $content );
 		$this->status( 'done' );
 	}
-
 }
