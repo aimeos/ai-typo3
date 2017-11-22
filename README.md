@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/aimeos/ai-typo3.png?branch=master)](https://travis-ci.org/aimeos/ai-typo3)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-typo3/badge.svg?branch=master&service=github)](https://coveralls.io/github/aimeos/ai-typo3?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-typo3/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-typo3/?branch=master)
-[![HHVM Status](http://hhvm.h4cc.de/badge/aimeos/ai-typo3.svg)](http://hhvm.h4cc.de/package/aimeos/ai-typo3)
+[![License](https://poser.pugx.org/aimeos/ai-typo3/license.svg)](https://packagist.org/packages/aimeos/ai-typo3)
 
 The Aimeos web shop components can integrate into almost any PHP application and uses the infrastructure of the application for building URLs, caching content, configuration settings, logging messages, session handling, sending e-mails or handling translations.
 
