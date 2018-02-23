@@ -102,7 +102,7 @@ return array(
 							t3feg."title" AS "customer.group.label", t3feg."crdate", t3feg."tstamp"
 						FROM "fe_groups" AS t3feg
 						:joins
-						WHERE :cond
+						WHERE t3feg."deleted" = 0 AND :cond
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -114,7 +114,7 @@ return array(
 							SELECT DISTINCT t3feg."uid"
 							FROM "fe_groups" AS t3feg
 							:joins
-							WHERE :cond
+							WHERE t3feg."deleted" = 0 AND :cond
 							LIMIT 10000 OFFSET 0
 						) AS list
 					',
