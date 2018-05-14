@@ -37,6 +37,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSaveItem()
 	{
 		$item = new \Aimeos\MShop\Customer\Item\Group\Standard();
+		$item->setLabel( 'test' );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
 		$this->object->saveItem( $item );

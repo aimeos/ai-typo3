@@ -146,7 +146,9 @@ class Typo3
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Saving groups is not supported, please use the TYPO3 backend' ) );
+		if( $item->isModified() === true ) {
+			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Saving groups is not supported, please use the TYPO3 backend' ) );
+		}
 	}
 
 
