@@ -149,6 +149,8 @@ class Typo3
 		if( $item->isModified() === true ) {
 			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Saving groups is not supported, please use the TYPO3 backend' ) );
 		}
+
+		return $item;
 	}
 
 

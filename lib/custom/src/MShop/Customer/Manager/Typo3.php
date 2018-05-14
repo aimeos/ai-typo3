@@ -337,7 +337,7 @@ class Typo3
 		}
 
 		if( !$item->isModified() ) {
-			return $item;
+			return $this->saveRefItems( $item, 'customer' );
 		}
 
 		$context = $this->getContext();
@@ -508,7 +508,7 @@ class Typo3
 			throw $e;
 		}
 
-		return $item;
+		return $this->saveRefItems( $item, 'customer' );
 	}
 
 
