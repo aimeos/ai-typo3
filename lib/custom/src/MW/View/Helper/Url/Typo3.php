@@ -66,7 +66,7 @@ class Typo3
 		if( $this->prefix != '' )
 		{
 			if( $values['namespace'] === true ) {
-				$params = array( $this->prefix => $arguments + $params );
+				$params = array( $this->prefix => array_merge( $arguments, $params ) );
 			} else {
 				$params = $params + array( $this->prefix => $arguments );
 			}
