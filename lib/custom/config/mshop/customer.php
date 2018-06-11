@@ -294,6 +294,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'typo3' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "fe_users_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "fe_users_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "fe_users_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT t3feuprty."id" AS "customer.property.type.id", t3feuprty."siteid" AS "customer.property.type.siteid",
+								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
+								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
+								t3feuprty."mtime" AS "customer.property.type.mtime", t3feuprty."editor" AS "customer.property.type.editor",
+								t3feuprty."ctime" AS "customer.property.type.ctime"
+							FROM "fe_users_property_type" t3feuprty
+							:joins
+							WHERE :cond
+							GROUP BY t3feuprty."id", t3feuprty."siteid", t3feuprty."code", t3feuprty."domain",
+								t3feuprty."label", t3feuprty."status", t3feuprty."mtime", t3feuprty."editor",
+								t3feuprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT t3feuprty."id"
+								FROM "fe_users_property_type" t3feuprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT fe_users_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'typo3' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "fe_users_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "fe_users_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "fe_users_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
+							t3feupr."siteid" AS "customer.property.siteid", t3feupr."typeid" AS "customer.property.typeid",
+							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
+							t3feupr."mtime" AS "customer.property.mtime", t3feupr."editor" AS "customer.property.editor",
+							t3feupr."ctime" AS "customer.property.ctime"
+						FROM "fe_users_property" AS t3feupr
+						:joins
+						WHERE :cond
+						GROUP BY t3feupr."id", t3feupr."parentid", t3feupr."siteid", t3feupr."typeid",
+							t3feupr."langid", t3feupr."value", t3feupr."mtime", t3feupr."editor",
+							t3feupr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT t3feupr."id"
+							FROM "fe_users_property" AS t3feupr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT fe_users_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'typo3' => array(
 			'delete' => array(
 				'ansi' => '

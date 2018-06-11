@@ -109,5 +109,52 @@ return array(
 
 			return $schema;
 		},
+
+		'fe_users_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'fe_users_property_type' );
+
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuprty_id' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_t3feuprty_sid_dom_code' );
+			$table->addIndex( array( 'siteid', 'status' ), 'idx_t3feuprty_sid_status' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_t3feuprty_sid_label' );
+			$table->addIndex( array( 'siteid', 'code' ), 'idx_t3feuprty_sid_code' );
+
+			return $schema;
+		},
+
+		'fe_users_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'fe_users_property' );
+
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
+			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->setPrimaryKey( array( 'id' ), 'pk_t3feupr_id' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'typeid', 'langid', 'value' ), 'unq_t3feupr_sid_tid_lid_value' );
+			$table->addIndex( array( 'siteid', 'langid' ), 'idx_t3feupr_sid_langid' );
+			$table->addIndex( array( 'siteid', 'value' ), 'idx_t3feupr_sid_value' );
+			$table->addIndex( array( 'typeid' ), 'fk_t3feupr_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
+
+			return $schema;
+		},
 	),
 );
