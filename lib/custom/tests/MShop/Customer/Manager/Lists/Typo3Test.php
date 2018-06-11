@@ -233,7 +233,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>', 'customer.lists.typeid', 0 );
 		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2100-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
 		$expr[] = $search->compare( '>', 'customer.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
@@ -259,13 +260,19 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		foreach($results as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
 
-		//search without base criteria
+
+	public function testSearchItemsNoCriteria()
+	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$this->assertEquals( 4, count( $this->object->searchItems($search) ) );
+	}
 
-		//search with base criteria
+
+	public function testSearchItemsBaseCriteria()
+	{
 		$search = $this->object->createSearch(true);
 		$conditions = array(
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
@@ -291,7 +298,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Typo3' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3@example.com' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );
 		$search->setSlice( 0, 1 );
 
 		$results = $manager->searchItems( $search );
