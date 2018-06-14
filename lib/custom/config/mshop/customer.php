@@ -127,17 +127,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "fe_users_list_type"(
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						',
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fe_users_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						',
@@ -155,11 +155,13 @@ return array(
 								t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
 								t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
 								t3feulity."mtime" AS "customer.lists.type.mtime", t3feulity."editor" AS "customer.lists.type.editor",
-								t3feulity."ctime" AS "customer.lists.type.ctime"
+								t3feulity."ctime" AS "customer.lists.type.ctime", t3feulity."pos" AS "customer.lists.type.position"
 							FROM "fe_users_list_type" AS t3feulity
 							:joins
-							WHERE
-								:cond
+							WHERE :cond
+							GROUP BY t3feulity."id", t3feulity."siteid", t3feulity."code", t3feulity."domain",
+								t3feulity."label", t3feulity."status", t3feulity."mtime", t3feulity."editor",
+								t3feulity."ctime", t3feulity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						',
@@ -267,6 +269,10 @@ return array(
 						FROM "fe_users_list" AS t3feuli
 						:joins
 						WHERE :cond
+						GROUP BY t3feuli."id", t3feuli."parentid", t3feuli."siteid", t3feuli."typeid",
+							t3feuli."domain", t3feuli."refid", t3feuli."start", t3feuli."end",
+							t3feuli."config", t3feuli."pos", t3feuli."status", t3feuli."mtime",
+							t3feuli."editor", t3feuli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -306,17 +312,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "fe_users_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "fe_users_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -327,13 +333,13 @@ return array(
 								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
 								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
 								t3feuprty."mtime" AS "customer.property.type.mtime", t3feuprty."editor" AS "customer.property.type.editor",
-								t3feuprty."ctime" AS "customer.property.type.ctime"
+								t3feuprty."ctime" AS "customer.property.type.ctime", t3feuprty."pos" AS "customer.property.type.position"
 							FROM "fe_users_property_type" t3feuprty
 							:joins
 							WHERE :cond
 							GROUP BY t3feuprty."id", t3feuprty."siteid", t3feuprty."code", t3feuprty."domain",
 								t3feuprty."label", t3feuprty."status", t3feuprty."mtime", t3feuprty."editor",
-								t3feuprty."ctime" /*-columns*/ , :columns /*columns-*/
+								t3feuprty."ctime", t3feuprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

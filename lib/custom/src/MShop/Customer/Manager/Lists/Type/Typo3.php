@@ -61,6 +61,13 @@ class Typo3
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'customer.lists.type.position' => array(
+			'code'=>'customer.lists.type.position',
+			'internalcode'=>'t3feulity."pos"',
+			'label'=>'Customer list type position',
+			'type'=> 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'customer.lists.type.status' => array(
 			'code'=>'customer.lists.type.status',
 			'internalcode'=>'t3feulity."status"',
