@@ -178,4 +178,18 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$config = array( 'namespace' => false );
 		$this->assertEquals( '', $object->transform( null, null, null, $params, [], $config ) );
 	}
+
+
+	public function testTransformUnchangedOriginalUriBuilder()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+			->setMethods( array( 'reset') )->getMock();
+
+		$mock->expects( $this->once() )->method( 'reset' )->will( $this->returnValue( $mock ) );
+
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+
+		$mock->expects( $this->never() )->method( 'reset' );
+		$this->assertEquals( '', $object->transform( null, null, null, [], [], [] ) );
+	}
 }
