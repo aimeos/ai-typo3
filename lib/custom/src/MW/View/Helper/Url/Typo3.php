@@ -39,7 +39,7 @@ class Typo3
 		parent::__construct( $view );
 
 		$this->prefix = $uriBuilder->getArgumentPrefix();
-		$this->uriBuilder = $uriBuilder;
+		$this->uriBuilder = clone $uriBuilder;
 		$this->fixed = $fixed;
 	}
 
