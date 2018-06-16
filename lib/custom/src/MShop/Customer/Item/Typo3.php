@@ -31,12 +31,14 @@ class Typo3 extends Standard implements Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param string $salt Password salt (optional)
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
+	 * @param \Aimeos\MShop\Customer\Item\Address\Iface[] $addresses List of delivery addresses
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
-		array $listItems = [], array $refItems = [], $salt = null,
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [] )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address,
+		array $values = [], array $listItems = [], array $refItems = [], $salt = null,
+		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [], array $propItems = [])
 	{
-		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses );
+		parent::__construct( $address, $values, $listItems, $refItems, $salt, $helper, $addresses, $propItems );
 
 		$this->values = $values;
 	}
