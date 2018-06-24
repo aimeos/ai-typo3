@@ -339,6 +339,7 @@ class Typo3
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
+			$item = $this->saveAddressItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -511,6 +512,7 @@ class Typo3
 		}
 
 		$item = $this->savePropertyItems( $item, 'customer' );
+		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -552,7 +554,7 @@ class Typo3
 
 		$addrItems = [];
 		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ) );
+			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
 		}
 
 		$propItems = [];
