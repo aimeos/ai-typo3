@@ -14,8 +14,8 @@ return array(
 			$table = $schema->createTable( 'fe_users_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', ['notnull' => false] );
-			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
@@ -51,6 +51,9 @@ return array(
 			$table->addIndex( array( 'city' ), 'idx_t3feuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_t3feuad_email' );
 
+			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuad_pid' );
+
 			return $schema;
 		},
 
@@ -83,7 +86,7 @@ return array(
 			$table = $schema->createTable( 'fe_users_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
@@ -104,6 +107,9 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_t3feuli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_t3feuli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_t3feuli_pid_sid_pos' );
+
+			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_typeid' );
@@ -140,8 +146,8 @@ return array(
 			$table = $schema->createTable( 'fe_users_property' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
@@ -155,6 +161,12 @@ return array(
 			$table->addIndex( array( 'siteid', 'value' ), 'idx_t3feupr_sid_value' );
 			$table->addIndex( array( 'typeid' ), 'fk_t3feupr_typeid' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
+
+			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_pid' );
+
+			$table->addForeignKeyConstraint( 'fe_users_property_type', array( 'typeid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_typeid' );
 
 			return $schema;
 		},
