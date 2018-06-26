@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `fe_users` (
 	KEY `parent` (`pid`,`username`),
 	KEY `username` (`username`),
 	KEY `is_online` (`is_online`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `fe_groups` (
   `tx_extbase_type` varchar(255) NOT NULL DEFAULT '0',
@@ -90,9 +90,8 @@ CREATE TABLE IF NOT EXISTS `fe_groups` (
   `felogin_redirectPid` tinytext,
   `tx_phpunit_is_dummy_record` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`),
-  KEY `parent` (`pid`),
-  KEY `phpunit_dummy` (`tx_phpunit_is_dummy_record`)
-) ENGINE=InnoDB;
+  KEY `parent` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `static_countries` (
   `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -116,8 +115,8 @@ CREATE TABLE IF NOT EXISTS `static_countries` (
   `cn_short_en` varchar(50) DEFAULT '',
   `cn_uno_member` tinyint(3) unsigned DEFAULT '0',
   PRIMARY KEY (`uid`),
-  UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=latin1;
+  KEY `parent` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 START TRANSACTION;
@@ -126,8 +125,6 @@ START TRANSACTION;
 --
 -- Typo3 tables
 --
-DELETE FROM `fe_users_address` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
-DELETE FROM `fe_users_list` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
 DELETE FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org';
 DELETE FROM `fe_groups` WHERE `lockToDomain` = 'unittest.aimeos.org';
 
