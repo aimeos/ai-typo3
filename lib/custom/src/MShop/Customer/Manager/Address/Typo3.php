@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Customer\Manager\Address;
  */
 class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Address\Standard
-	implements \Aimeos\MShop\Customer\Manager\Address\Iface
 {
 	private $searchConfig = array(
 		'customer.address.id' => array(

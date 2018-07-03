@@ -18,8 +18,7 @@ namespace Aimeos\MShop\Customer\Manager\Property;
  * @subpackage Customer
  */
 class Typo3
-	extends \Aimeos\MShop\Common\Manager\Property\Base
-	implements \Aimeos\MShop\Customer\Manager\Property\Iface
+	extends \Aimeos\MShop\Customer\Manager\Property\Standard
 {
 	private $searchConfig = array(
 		'customer.property.id' => array(
