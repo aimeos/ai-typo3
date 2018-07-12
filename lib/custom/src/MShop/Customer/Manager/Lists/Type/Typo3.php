@@ -99,10 +99,26 @@ class Typo3
 
 
 	/**
-	 * Returns the list attributes that can be used for searching.
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'mshop/customer/manager/lists/type/submanagers';
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/type/typo3/delete' );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{

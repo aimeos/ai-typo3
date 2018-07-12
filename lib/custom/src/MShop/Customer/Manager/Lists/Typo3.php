@@ -129,16 +129,32 @@ class Typo3
 
 
 	/**
-	 * Returns the list attributes that can be used for searching.
+	 * Removes old entries from the storage.
+	 *
+	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$path = 'mshop/customer/manager/lists/submanagers';
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
+		}
+
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/typo3/delete' );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['type'], $withsub );
 	}
 
 
@@ -152,24 +168,6 @@ class Typo3
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->getSubManagerBase( 'customer', 'lists/' . $manager, ( $name === null ? 'Typo3' : $name ) );
-	}
-
-
-	/**
-	 * Updates or adds a common list item object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
-	{
-		$iface = '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
-
-		return parent::saveItem( $item, $fetch );
 	}
 
 

@@ -229,18 +229,9 @@ class Typo3
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
-	}
 
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/address/typo3/delete' );
 
-	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		$path = 'mshop/customer/manager/address/typo3/delete';
-		$this->deleteItemsBase( $ids, $path, false );
 	}
 
 
