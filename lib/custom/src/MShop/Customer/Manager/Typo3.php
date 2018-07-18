@@ -302,11 +302,13 @@ class Typo3
 
 
 	/**
-	 * Instantiates a new customer item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Common\Item\Site\Iface New site item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
 		$values = ['customer.siteid' => $this->getContext()->getLocale()->getSiteId(), 'typo3.pageid' => $this->pid];
 		return $this->createItemBase( $values );
