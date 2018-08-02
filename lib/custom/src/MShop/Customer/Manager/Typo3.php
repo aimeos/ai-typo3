@@ -336,10 +336,7 @@ class Typo3
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Customer\\Item\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
 
 		if( !$item->isModified() )
 		{
@@ -659,7 +656,6 @@ class Typo3
 			return $this->helper;
 		}
 
-		$iface = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface';
 		$classname = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Typo3';
 
 		if( class_exists( $classname ) === false ) {
@@ -671,9 +667,7 @@ class Typo3
 
 		$helper = new $classname( array( 'object' => $object ) );
 
-		if( !( $helper instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface', $helper );
 
 		$this->helper = $helper;
 
