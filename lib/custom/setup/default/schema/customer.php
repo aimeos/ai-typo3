@@ -51,9 +51,6 @@ return array(
 			$table->addIndex( array( 'city' ), 'idx_t3feuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_t3feuad_email' );
 
-			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuad_pid' );
-
 			return $schema;
 		},
 
@@ -108,9 +105,6 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_t3feuli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_t3feuli_pid_sid_pos' );
 
-			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_pid' );
-
 			$table->addForeignKeyConstraint( 'fe_users_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_typeid' );
 
@@ -161,9 +155,6 @@ return array(
 			$table->addIndex( array( 'siteid', 'value' ), 'idx_t3feupr_sid_value' );
 			$table->addIndex( array( 'typeid' ), 'fk_t3feupr_typeid' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
-
-			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users_property_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_typeid' );
