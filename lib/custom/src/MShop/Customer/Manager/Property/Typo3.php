@@ -24,7 +24,7 @@ class Typo3
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
 			'internalcode' => 't3feupr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = fos."id" )' ),
+			'internaldeps'=>array( 'LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."id" )' ),
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
