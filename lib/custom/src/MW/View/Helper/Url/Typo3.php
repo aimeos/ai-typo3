@@ -57,18 +57,17 @@ class Typo3
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = [], array $trailing = [], array $config = [] )
 	{
-		$arguments = $this->fixed;
-		$arguments['controller'] = ucfirst( $controller );
-		$arguments['action'] = $action;
+		$params['controller'] = ucfirst( $controller );
+		$params['action'] = $action;
 
 		$values = $this->getValues( $config );
 
 		if( $this->prefix != '' )
 		{
 			if( $values['namespace'] === true ) {
-				$params = array( $this->prefix => array_merge( $arguments, $params ) );
+				$params = [$this->prefix => $params + $this->fixed];
 			} else {
-				$params = $params + array( $this->prefix => $arguments );
+				$params = $params + [$this->prefix => $this->fixed];
 			}
 		}
 
