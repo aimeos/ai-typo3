@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://www.gnu.org/copyleft/lgpl.html
- * @copyright Aimeos (aimeos.org), 2015-2017
+ * @copyright Aimeos (aimeos.org), 2015-2018
  * @package MAdmin
  * @subpackage Cache
  */
