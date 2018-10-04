@@ -125,6 +125,9 @@ START TRANSACTION;
 --
 -- Typo3 tables
 --
+DELETE FROM `fe_users_property` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
+DELETE FROM `fe_users_address` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
+DELETE FROM `fe_users_list` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
 DELETE FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org';
 DELETE FROM `fe_groups` WHERE `lockToDomain` = 'unittest.aimeos.org';
 
