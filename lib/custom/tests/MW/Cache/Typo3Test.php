@@ -133,26 +133,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMultipleByTags()
-	{
-		$this->mock->expects( $this->exactly( 2 ) )->method( 'getByTag' )
-			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( array( 'key' => 'value' ) ) );
-
-		$this->assertEquals( array( 'key' => 'value' ), $this->object->getMultipleByTags( array( 'key', 'key' ) ) );
-	}
-
-
-	public function testGetMultipleByTagsWithSiteId()
-	{
-		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'getByTag' )
-			->with( $this->equalTo( '1-key' ) )->will( $this->returnValue( array( '1-key' => 'value' ) ) );
-
-		$this->assertEquals( array( 'key' => 'value' ), $object->getMultipleByTags( array( 'key' ) ) );
-	}
-
-
 	public function testSet()
 	{
 		$this->mock->expects( $this->once() )->method( 'set' )

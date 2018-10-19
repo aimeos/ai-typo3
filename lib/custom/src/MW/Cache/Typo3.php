@@ -147,38 +147,6 @@ class Typo3
 
 
 	/**
-	 * Returns the cached keys and values associated to the given tags.
-	 *
-	 * @inheritDoc
-	 *
-	 * @param string[] $tags List of tag strings associated to the requested cache entries
-	 * @return array Associative list of key/value pairs for the requested cache
-	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
-	 * 	for that tag
-	 */
-	public function getMultipleByTags( array $tags )
-	{
-		$result = [];
-		$len = strlen( $this->prefix );
-
-		foreach( $tags as $tag )
-		{
-			foreach( $this->object->getByTag( $this->prefix . $tag ) as $key => $value )
-			{
-				if( strncmp( $key, $this->prefix, $len ) === 0 ) {
-					$result[ substr( $key, $len ) ] = $value;
-				} else {
-					$result[$key] = $value;
-				}
-
-			}
-		}
-
-		return $result;
-	}
-
-
-	/**
 	 * Sets the value for the given key in the cache.
 	 *
 	 * @inheritDoc

@@ -28,10 +28,6 @@ class T3Cache implements FrontendInterface
 	{
 	}
 
-	public function getByTag( $tag )
-	{
-	}
-
 	public function remove( $key )
 	{
 	}
