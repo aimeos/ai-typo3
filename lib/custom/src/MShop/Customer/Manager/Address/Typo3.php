@@ -180,13 +180,6 @@ class Typo3
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.flag' => array(
-			'label' => 'Customer address flag',
-			'code' => 'customer.address.flag',
-			'internalcode' => 't3feuad."flag"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-		),
 		'customer.address.position' => array(
 			'code' => 'customer.address.position',
 			'internalcode' => 't3feuad."pos"',

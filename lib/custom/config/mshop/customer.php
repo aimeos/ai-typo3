@@ -22,10 +22,10 @@ return array(
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
-							"email", "telefax", "website", "longitude", "latitude", "flag",
+							"email", "telefax", "website", "longitude", "latitude",
 							"pos", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -37,7 +37,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -55,8 +55,8 @@ return array(
 							t3feuad."telephone" AS "customer.address.telephone", t3feuad."email" AS "customer.address.email",
 							t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
 							t3feuad."longitude" AS "customer.address.longitude", t3feuad."latitude" AS "customer.address.latitude",
-							t3feuad."flag" AS "customer.address.flag", t3feuad."mtime" AS "customer.address.mtime",
-							t3feuad."editor" AS "customer.address.editor", t3feuad."ctime" AS "customer.address.ctime"
+							t3feuad."mtime" AS "customer.address.mtime", t3feuad."editor" AS "customer.address.editor",
+							t3feuad."ctime" AS "customer.address.ctime"
 						FROM "fe_users_address" AS t3feuad
 						:joins
 						WHERE :cond
@@ -66,7 +66,7 @@ return array(
 							t3feuad."address3", t3feuad."postal", t3feuad."city", t3feuad."state",
 							t3feuad."countryid", t3feuad."langid", t3feuad."telephone", t3feuad."email",
 							t3feuad."telefax", t3feuad."website", t3feuad."longitude", t3feuad."latitude",
-							t3feuad."flag", t3feuad."mtime", t3feuad."editor", t3feuad."ctime"
+							t3feuad."mtime", t3feuad."editor", t3feuad."ctime"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',

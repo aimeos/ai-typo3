@@ -80,7 +80,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unittest.aimeos.org', $actual->getWebsite() );
 		$this->assertEquals( '10.0', $actual->getLongitude() );
 		$this->assertEquals( '50.0', $actual->getLatitude() );
-		$this->assertEquals( 0, $actual->getFlag() );
 		$this->assertEquals( 0, $actual->getPosition() );
 		$this->assertEquals( $this->editor, $actual->getEditor() );
 	}
@@ -132,7 +131,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
 		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
-		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getEditor(), $itemSaved->getEditor() );
 
@@ -162,7 +160,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
 		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
-		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getEditor(), $itemUpd->getEditor() );
 
@@ -210,7 +207,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' );
 		$expr[] = $search->compare( '>=', 'customer.address.longitude', '10.0' );
 		$expr[] = $search->compare( '>=', 'customer.address.latitude', '50.0' );
-		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
 		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'customer.address.ctime', '1970-01-01 00:00:00' );
