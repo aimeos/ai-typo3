@@ -327,6 +327,21 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/typo3/delete';
 		$this->deleteItemsBase( $ids, $path, false, 'uid' );
+
+		$manager = $this->getObject()->getSubManager( 'address' );
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $ids ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+
+		$manager = $this->getObject()->getSubManager( 'lists' );
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'customer.lists.parentid', $ids ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+
+		$manager = $this->getObject()->getSubManager( 'property' );
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $ids ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 	}
 
 
