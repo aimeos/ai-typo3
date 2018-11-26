@@ -613,7 +613,6 @@ class Typo3
 		array $addresses = [], array $propItems = [] )
 	{
 		$helper = $this->getPasswordHelper();
-		$address = $this->getAddressManager()->createItem();
 		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'date_of_birth', $values ) ) {
@@ -640,25 +639,12 @@ class Typo3
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
 
+		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
+
 		return new \Aimeos\MShop\Customer\Item\Typo3(
 			$address, $values, $listItems, $refItems,
 			null, $helper, $addresses, $propItems
 		);
-	}
-
-
-	/**
-	 * Returns the address sub-manager.
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Customer address manager
-	 */
-	protected function getAddressManager()
-	{
-		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getObject()->getSubManager( 'address' );
-		}
-
-		return $this->addressManager;
 	}
 
 
