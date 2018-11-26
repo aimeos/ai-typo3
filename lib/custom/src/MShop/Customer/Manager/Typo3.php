@@ -175,15 +175,15 @@ class Typo3
 			'label' => 'Customer longitude',
 			'code' => 'customer.longitude',
 			'internalcode' => 't3feu."longitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.latitude' => array(
 			'label' => 'Customer latitude',
 			'code' => 'customer.latitude',
 			'internalcode' => 't3feu."latitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
@@ -468,8 +468,8 @@ class Typo3
 			$stmt->bind( 16, $billingAddress->getEmail() );
 			$stmt->bind( 17, $billingAddress->getTelefax() );
 			$stmt->bind( 18, $billingAddress->getWebsite() );
-			$stmt->bind( 19, $billingAddress->getLongitude() );
-			$stmt->bind( 20, $billingAddress->getLatitude() );
+			$stmt->bind( 19, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( 20, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( 21, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 22, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 23, $item->getPassword() );
