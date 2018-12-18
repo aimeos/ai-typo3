@@ -210,14 +210,14 @@ return array(
 						FROM "fe_users_list"
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 					',
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fe_users_list"(
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -227,7 +227,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fe_users_list"
-						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
@@ -252,7 +252,7 @@ return array(
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 							AND "pos" >= ?
 					',
@@ -260,7 +260,7 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT t3feuli."id" AS "customer.lists.id", t3feuli."parentid" AS "customer.lists.parentid",
-							t3feuli."siteid" AS "customer.lists.siteid", t3feuli."typeid" AS "customer.lists.typeid",
+							t3feuli."siteid" AS "customer.lists.siteid", t3feuli."type" AS "customer.lists.type",
 							t3feuli."domain" AS "customer.lists.domain", t3feuli."refid" AS "customer.lists.refid",
 							t3feuli."start" AS "customer.lists.datestart", t3feuli."end" AS "customer.lists.dateend",
 							t3feuli."config" AS "customer.lists.config", t3feuli."pos" AS "customer.lists.position",
@@ -269,7 +269,7 @@ return array(
 						FROM "fe_users_list" AS t3feuli
 						:joins
 						WHERE :cond
-						GROUP BY t3feuli."id", t3feuli."parentid", t3feuli."siteid", t3feuli."typeid",
+						GROUP BY t3feuli."id", t3feuli."parentid", t3feuli."siteid", t3feuli."type",
 							t3feuli."domain", t3feuli."refid", t3feuli."start", t3feuli."end",
 							t3feuli."config", t3feuli."pos", t3feuli."status", t3feuli."mtime",
 							t3feuli."editor", t3feuli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -377,7 +377,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fe_users_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -387,7 +387,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "fe_users_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -395,14 +395,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
-							t3feupr."siteid" AS "customer.property.siteid", t3feupr."typeid" AS "customer.property.typeid",
+							t3feupr."siteid" AS "customer.property.siteid", t3feupr."type" AS "customer.property.type",
 							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
 							t3feupr."mtime" AS "customer.property.mtime", t3feupr."editor" AS "customer.property.editor",
 							t3feupr."ctime" AS "customer.property.ctime"
 						FROM "fe_users_property" AS t3feupr
 						:joins
 						WHERE :cond
-						GROUP BY t3feupr."id", t3feupr."parentid", t3feupr."siteid", t3feupr."typeid",
+						GROUP BY t3feupr."id", t3feupr."parentid", t3feupr."siteid", t3feupr."type",
 							t3feupr."langid", t3feupr."value", t3feupr."mtime", t3feupr."editor",
 							t3feupr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/

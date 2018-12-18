@@ -46,13 +46,12 @@ class Typo3
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.property.typeid' => array(
-			'code' => 'customer.property.typeid',
-			'internalcode' => 't3feupr."typeid"',
-			'label' => 'Property type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'customer.property.type' => array(
+			'code' => 'customer.property.type',
+			'internalcode' => 't3feupr."type"',
+			'label' => 'Property type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.value' => array(
 			'code' => 'customer.property.value',
@@ -121,7 +120,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['type'], $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

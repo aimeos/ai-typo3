@@ -54,13 +54,12 @@ class Typo3
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.lists.typeid' => array(
-			'code'=>'customer.lists.typeid',
-			'internalcode'=>'t3feuli."typeid"',
-			'label'=>'Customer list type ID',
-			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'customer.lists.type' => array(
+			'code'=>'customer.lists.type',
+			'internalcode'=>'t3feuli."type"',
+			'label'=>'Customer list type',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lists.refid'=> array(
 			'code'=>'customer.lists.refid',
@@ -136,7 +135,7 @@ class Typo3
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -154,7 +153,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['type'], $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

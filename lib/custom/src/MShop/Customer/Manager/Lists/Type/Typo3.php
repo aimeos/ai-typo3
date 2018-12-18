@@ -25,7 +25,6 @@ class Typo3
 		'customer.lists.type.id' => array(
 			'code'=>'customer.lists.type.id',
 			'internalcode'=>'t3feulity."id"',
-			'internaldeps'=>array( 'LEFT JOIN "fe_users_list_type" AS t3feulity ON ( t3feuli."typeid" = t3feulity."id" )' ),
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

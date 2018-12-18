@@ -84,7 +84,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
@@ -97,15 +97,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuli_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'refid', 'typeid', 'parentid' ), 'unq_t3feuli_sid_dm_rid_tid_pid' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_t3feuli_sid_stat_start_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'refid', 'typeid' ), 'idx_t3feuli_pid_sid_dom_rid_tid' );
-			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_t3feuli_pid_sid_start' );
-			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_t3feuli_pid_sid_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_t3feuli_pid_sid_pos' );
-
-			$table->addForeignKeyConstraint( 'fe_users_list_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_typeid' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_t3feuli_pid_sid_dm_ty_rid' );
+			$table->addIndex( array( 'parentid' ), 'fk_t3feuli_pid' );
 
 			return $schema;
 		},
@@ -141,7 +134,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -149,14 +142,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feupr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'typeid', 'langid', 'value' ), 'unq_t3feupr_sid_tid_lid_value' );
-			$table->addIndex( array( 'siteid', 'langid' ), 'idx_t3feupr_sid_langid' );
-			$table->addIndex( array( 'siteid', 'value' ), 'idx_t3feupr_sid_value' );
-			$table->addIndex( array( 'typeid' ), 'fk_t3feupr_typeid' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_t3feupr_sid_ty_lid_value' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
-
-			$table->addForeignKeyConstraint( 'fe_users_property_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_typeid' );
 
 			return $schema;
 		},
