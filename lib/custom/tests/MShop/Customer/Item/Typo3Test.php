@@ -80,13 +80,13 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
 		$item = new \Aimeos\MShop\Customer\Item\Typo3( $address );
 
-		$list = array(
+		$list = $entries = array(
 			'typo3.pageid' => 99,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['typo3.pageid'], $item->getPageId() );
 	}
 
