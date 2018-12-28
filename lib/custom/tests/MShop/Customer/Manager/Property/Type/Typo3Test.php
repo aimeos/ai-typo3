@@ -20,7 +20,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
 
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context, 'Typo3' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Typo3' );
 		$this->object = $manager->getSubManager( 'property', 'Typo3' )->getSubManager( 'type', 'Typo3' );
 	}
 

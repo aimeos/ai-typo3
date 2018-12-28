@@ -21,7 +21,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Typo3' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::getContext(), 'Typo3' );
 		$this->object = $manager->getSubManager( 'lists', 'Typo3' );
 	}
 
@@ -283,7 +283,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function getListItems()
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Typo3' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Typo3' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );

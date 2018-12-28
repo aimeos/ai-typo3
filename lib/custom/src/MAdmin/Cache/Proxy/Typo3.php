@@ -50,7 +50,7 @@ class Typo3
 		{
 			$siteid = $this->context->getLocale()->getSiteId();
 			$conf = array( 'siteid' => $this->context->getConfig()->get( 'madmin/cache/prefix' ) . $siteid );
-			$this->object = \Aimeos\MW\Cache\Factory::createManager( 'Typo3', $conf, $this->cache );
+			$this->object = \Aimeos\MW\Cache\Factory::create( 'Typo3', $conf, $this->cache );
 		}
 
 		return $this->object;

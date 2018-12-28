@@ -45,7 +45,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 		}
 
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Typo3' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Typo3' );
 
 		foreach( $customerManager->searchItems( $customerManager->createSearch() ) as $id => $item ) {
