@@ -29,7 +29,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	protected function tearDown()
 	{
 		unset( $this->object );
-		\Aimeos\MShop::clear();
 	}
 
 
