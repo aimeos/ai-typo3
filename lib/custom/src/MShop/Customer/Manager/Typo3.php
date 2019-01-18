@@ -247,7 +247,7 @@ class Typo3
 	/**
 	 * Initializes a new customer manager object using the given context object.
 	 *
-	 * @param \Aimeos\MShop\Context\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
@@ -305,7 +305,7 @@ class Typo3
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Site\Iface New site item object
+	 * @return \Aimeos\MShop\Customer\Item\Iface New site item object
 	 */
 	public function createItem( array $values = [] )
 	{
