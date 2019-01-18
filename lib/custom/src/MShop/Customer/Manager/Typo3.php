@@ -648,7 +648,7 @@ class Typo3
 	/**
 	 * Returns a password helper object based on the configuration.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Helper\Password\Iface Password helper object
+	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
 	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
 	 */
 	protected function getPasswordHelper()
@@ -657,7 +657,7 @@ class Typo3
 			return $this->helper;
 		}
 
-		$classname = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Typo3';
+		$classname = \Aimeos\MShop\Common\Helper\Password\Typo3::class;
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -668,7 +668,7 @@ class Typo3
 
 		$helper = new $classname( array( 'object' => $object ) );
 
-		self::checkClass( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface', $helper );
+		self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
 
 		$this->helper = $helper;
 

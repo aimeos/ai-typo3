@@ -1,6 +1,6 @@
 <?php
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
 /**
@@ -12,20 +12,20 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testException()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		new \Aimeos\MShop\Common\Item\Helper\Password\Typo3( [] );
+		new \Aimeos\MShop\Common\Helper\Password\Typo3( [] );
 	}
 
 
 	public function testEncodeNull()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Typo3( array( 'object' => null ) );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( array( 'object' => null ) );
 		$this->assertEquals( 'unittest', $object->encode( 'unittest', 'salt' ) );
 	}
 
 
 	public function testEncodeObject()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Typo3( array( 'object' => new TestPasswordHasherTypo3() ) );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( array( 'object' => new TestPasswordHasherTypo3() ) );
 		$this->assertEquals( 'abcd', $object->encode( 'unittest', 'salt' ) );
 	}
 }

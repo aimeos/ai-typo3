@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Password;
  * @package MShop
  * @subpackage Common
  */
-class Typo3 implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
+class Typo3 implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
 	private $hasher;
 
