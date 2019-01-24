@@ -668,10 +668,6 @@ class Typo3
 
 		$helper = new $classname( array( 'object' => $object ) );
 
-		self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
-
-		$this->helper = $helper;
-
-		return $helper;
+		return $this->helper = self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
 	}
 }
