@@ -57,38 +57,39 @@ class Typo3
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = [], array $trailing = [], array $config = [] )
 	{
+		$locale = $this->getValue( $params, 'locale' );
 		$params['controller'] = ucfirst( $controller );
 		$params['action'] = $action;
 
-		$values = $this->getValues( $config );
-
 		if( $this->prefix != '' )
 		{
-			if( $values['namespace'] === true ) {
+			if( (bool) $this->getValue( $config, 'namespace', true ) === true ) {
 				$params = [$this->prefix => $params + $this->fixed];
 			} else {
 				$params = $params + [$this->prefix => $this->fixed];
 			}
 		}
 
-		if( isset( $config['eID'] ) ) {
-			$params['eID'] = $config['eID'];
+		if( ( $eid = $this->getValue( $config, 'eID' ) ) !== null ) {
+			$params['eID'] = $eid;
 		}
 
-		$params = $this->sanitize( $params );
+		if( $locale !== null ) {
+			$params['L'] = $locale;
+		}
 
 		$this->uriBuilder
 			->reset()
 			->setTargetPageUid( $target )
 			->setSection( join( '/', $trailing ) )
-			->setCreateAbsoluteUri( $values['absoluteUri'] )
-			->setTargetPageType( $values['type'] )
-			->setUseCacheHash( $values['chash'] )
-			->setNoCache( $values['nocache'] )
-			->setFormat( $values['format'] )
-			->setArguments( $params );
+			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
+			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
+			->setUseCacheHash( (bool) $this->getValue( $config, 'chash', false ) )
+			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
+			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
+			->setArguments( $this->sanitize( $params ) );
 
-		if( isset( $config['BE'] ) && $config['BE'] == true ) {
+		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
 			return $this->uriBuilder->buildBackendUri();
 		}
 
@@ -100,53 +101,16 @@ class Typo3
 	 * Returns the sanitized configuration values.
 	 *
 	 * @param array $config Associative list of key/value pairs
-	 * @return array Associative list of sanitized key/value pairs
+	 * @param string $key Key of the value to retrieve
+	 * @param mixed $default Default value if value for key isn't found
+	 * @return mixed Configuration value for the given key or default value
 	 */
-	protected function getValues( array $config )
+	protected function getValue( array $config, $key, $default = null )
 	{
-		$values = array(
-			'plugin' => null,
-			'extension' => null,
-			'absoluteUri' => false,
-			'namespace' => true,
-			'nocache' => false,
-			'chash' => false,
-			'format' => '',
-			'type' => 0,
-		);
-
-		if( isset( $config['plugin'] ) ) {
-			$values['plugin'] = (string) $config['plugin'];
+		if( isset( $config[$key] ) ) {
+			return $config[$key];
 		}
 
-		if( isset( $config['extension'] ) ) {
-			$values['extension'] = (string) $config['extension'];
-		}
-
-		if( isset( $config['absoluteUri'] ) ) {
-			$values['absoluteUri'] = (bool) $config['absoluteUri'];
-		}
-
-		if( isset( $config['namespace'] ) ) {
-			$values['namespace'] = (bool) $config['namespace'];
-		}
-
-		if( isset( $config['nocache'] ) ) {
-			$values['nocache'] = (bool) $config['nocache'];
-		}
-
-		if( isset( $config['chash'] ) ) {
-			$values['chash'] = (bool) $config['chash'];
-		}
-
-		if( isset( $config['type'] ) ) {
-			$values['type'] = (int) $config['type'];
-		}
-
-		if( isset( $config['format'] ) ) {
-			$values['format'] = (string) $config['format'];
-		}
-
-		return $values;
+		return $default;
 	}
 }

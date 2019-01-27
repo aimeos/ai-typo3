@@ -124,7 +124,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->setMethods( array( 'setArguments') )->getMock();
 
-		$param = array( 'eID' => 123, 'ai' => array( 'controller' => null, 'action' => null ) );
+		$param = array( 'eID' => 123, 'ai' => array( 'controller' => '', 'action' => null ) );
 
 		$mock->expects( $this->once() )->method( 'setArguments' )
 			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
@@ -133,6 +133,23 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$config = array( 'eID' => 123 );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
+	}
+
+
+	public function testTransformLocale()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+			->setMethods( array( 'setArguments') )->getMock();
+
+		$param = array( 'L' => 'de', 'ai' => ['controller' => '', 'action' => null, 'locale' => 'de'] );
+
+		$mock->expects( $this->once() )->method( 'setArguments' )
+			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
+
+		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+
+		$params = array( 'locale' => 'de' );
+		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
 	}
 
 

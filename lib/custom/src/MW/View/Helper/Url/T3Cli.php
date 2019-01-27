@@ -25,15 +25,18 @@ class T3Cli
 	 * Returns the sanitized configuration values.
 	 *
 	 * @param array $config Associative list of key/value pairs
-	 * @return array Associative list of sanitized key/value pairs
+	 * @param string $key Key of the value to retrieve
+	 * @param mixed $default Default value if value for key isn't found
+	 * @return mixed Configuration value for the given key or default value
 	 */
-	protected function getValues( array $config )
+	protected function getValue( array $config, $key, $default = null )
 	{
-		$values = parent::getValues( $config );
+		switch( $key )
+		{
+			case 'absoluteUri': return true;
+			case 'chash': return false;
+		}
 
-		$values['absoluteUri'] = true;
-		$values['chash'] = false;
-
-		return $values;
+		return parent::getValue( $config, $key, $default );
 	}
 }
