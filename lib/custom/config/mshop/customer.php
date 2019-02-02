@@ -96,10 +96,32 @@ return array(
 		),
 		'group' => array(
 			'typo3' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "fe_groups"
+						WHERE :cond
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "fe_groups" (
+							"pid", "title", "description", "tstamp", "crdate"
+						) VALUES (
+							?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "fe_groups"
+						SET "pid" = ?, "title" = ?, "description" = ?, "tstamp" = ?
+						WHERE "uid" = ?
+					'
+				),
 				'search' => array(
 					'ansi' => '
 						SELECT DISTINCT t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
-							t3feg."title" AS "customer.group.label", t3feg."crdate", t3feg."tstamp"
+							t3feg."description" AS "customer.group.label", t3feg."crdate", t3feg."tstamp"
 						FROM "fe_groups" AS t3feg
 						:joins
 						WHERE t3feg."deleted" = 0 AND :cond
@@ -118,6 +140,15 @@ return array(
 							LIMIT 10000 OFFSET 0
 						) AS list
 					',
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT fe_groups_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
 				),
 			),
 		),

@@ -67,6 +67,7 @@ class Typo3
 
 	private $plugins = [];
 	private $reverse = [];
+	private $pid;
 
 
 	/**
@@ -81,6 +82,9 @@ class Typo3
 		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Datetime();
 		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
 		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
+
+		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/group/typo3/pid-default', $this->pid );
 	}
 
 
@@ -106,7 +110,39 @@ class Typo3
 	 */
 	public function deleteItems( array $ids )
 	{
-		throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Deleting groups is not supported, please use the TYPO3 backend' ) );
+		/** mshop/customer/manager/group/typo3/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/customer/manager/group/typo3/delete/ansi
+		 */
+
+		/** mshop/customer/manager/group/typo3/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the customer group
+		 * database. The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2015.08
+		 * @category Developer
+		 * @see mshop/customer/manager/group/typo3/insert/ansi
+		 * @see mshop/customer/manager/group/typo3/update/ansi
+		 * @see mshop/customer/manager/group/typo3/newid/ansi
+		 * @see mshop/customer/manager/group/typo3/search/ansi
+		 * @see mshop/customer/manager/group/typo3/count/ansi
+		 */
+		$path = 'mshop/customer/manager/group/typo3/delete';
+
+		return $this->deleteItemsBase( $ids, $path, false, 'uid' );
 	}
 
 
@@ -145,8 +181,162 @@ class Typo3
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		if( $item->isModified() === true ) {
-			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Saving groups is not supported, please use the TYPO3 backend' ) );
+		self::checkClass( \Aimeos\MShop\Customer\Item\Group\Iface::class, $item );
+
+		if( !$item->isModified() ) {
+			return $item;
+		}
+
+		$context = $this->getContext();
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$id = $item->getId();
+
+			if( $id === null )
+			{
+				/** mshop/customer/manager/group/typo3/insert/mysql
+				 * Inserts a new customer group record into the database table
+				 *
+				 * @see mshop/customer/manager/group/typo3/insert/ansi
+				 */
+
+				/** mshop/customer/manager/group/typo3/insert/ansi
+				 * Inserts a new customer group record into the database table
+				 *
+				 * Items with no ID yet (i.e. the ID is NULL) will be created in
+				 * the database and the newly created ID retrieved afterwards
+				 * using the "newid" SQL statement.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer group item to the statement before
+				 * they are sent to the database server. The number of question
+				 * marks must be the same as the number of columns listed in the
+				 * INSERT statement. The order of the columns must correspond to
+				 * the order in the saveItems() method, so the correct values are
+				 * bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for inserting records
+				 * @since 2015.08
+				 * @category Developer
+				 * @see mshop/customer/manager/group/typo3/update/ansi
+				 * @see mshop/customer/manager/group/typo3/newid/ansi
+				 * @see mshop/customer/manager/group/typo3/delete/ansi
+				 * @see mshop/customer/manager/group/typo3/search/ansi
+				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 */
+				$path = 'mshop/customer/manager/group/typo3/insert';
+			}
+			else
+			{
+				/** mshop/customer/manager/group/typo3/update/mysql
+				 * Updates an existing customer group record in the database
+				 *
+				 * @see mshop/customer/manager/group/typo3/update/ansi
+				 */
+
+				/** mshop/customer/manager/group/typo3/update/ansi
+				 * Updates an existing customer group record in the database
+				 *
+				 * Items which already have an ID (i.e. the ID is not NULL) will
+				 * be updated in the database.
+				 *
+				 * The SQL statement must be a string suitable for being used as
+				 * prepared statement. It must include question marks for binding
+				 * the values from the customer group item to the statement before
+				 * they are sent to the database server. The order of the columns
+				 * must correspond to the order in the saveItems() method, so the
+				 * correct values are bound to the columns.
+				 *
+				 * The SQL statement should conform to the ANSI standard to be
+				 * compatible with most relational database systems. This also
+				 * includes using double quotes for table and column names.
+				 *
+				 * @param string SQL statement for updating records
+				 * @since 2015.08
+				 * @category Developer
+				 * @see mshop/customer/manager/group/typo3/insert/ansi
+				 * @see mshop/customer/manager/group/typo3/newid/ansi
+				 * @see mshop/customer/manager/group/typo3/delete/ansi
+				 * @see mshop/customer/manager/group/typo3/search/ansi
+				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 */
+				$path = 'mshop/customer/manager/group/typo3/update';
+			}
+
+			$stmt = $this->getCachedStatement( $conn, $path );
+
+			$stmt->bind( 1, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCode() );
+			$stmt->bind( 3, $item->getLabel() );
+			$stmt->bind( 4, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // mtime
+
+			if( $id !== null ) {
+				$stmt->bind( 5, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$item->setId( $id );
+			} else {
+				$stmt->bind( 5, time() ); // ctime
+			}
+
+			$stmt->execute()->finish();
+
+			if( $id === null && $fetch === true )
+			{
+				/** mshop/customer/manager/group/typo3/newid/mysql
+				 * Retrieves the ID generated by the database when inserting a new record
+				 *
+				 * @see mshop/customer/manager/group/typo3/newid/ansi
+				 */
+
+				/** mshop/customer/manager/group/typo3/newid/ansi
+				 * Retrieves the ID generated by the database when inserting a new record
+				 *
+				 * As soon as a new record is inserted into the database table,
+				 * the database server generates a new and unique identifier for
+				 * that record. This ID can be used for retrieving, updating and
+				 * deleting that specific record from the table again.
+				 *
+				 * For MySQL:
+				 *  SELECT LAST_INSERT_ID()
+				 * For PostgreSQL:
+				 *  SELECT currval('seq_mcus_id')
+				 * For SQL Server:
+				 *  SELECT SCOPE_IDENTITY()
+				 * For Oracle:
+				 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
+				 *
+				 * There's no way to retrive the new ID by a SQL statements that
+				 * fits for most database servers as they implement their own
+				 * specific way.
+				 *
+				 * @param string SQL statement for retrieving the last inserted record ID
+				 * @since 2015.08
+				 * @category Developer
+				 * @see mshop/customer/manager/group/typo3/insert/ansi
+				 * @see mshop/customer/manager/group/typo3/update/ansi
+				 * @see mshop/customer/manager/group/typo3/delete/ansi
+				 * @see mshop/customer/manager/group/typo3/search/ansi
+				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 */
+				$path = 'mshop/customer/manager/group/typo3/newid';
+				$item->setId( $this->newId( $conn, $path ) );
+			}
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( \Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
 		}
 
 		return $item;
