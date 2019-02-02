@@ -229,13 +229,39 @@ class Typo3
 		),
 		// not available
 		'customer.editor'=> array(
-			'label'=>'Customer editor',
-			'code'=>'customer.editor',
-			'internalcode'=>'1',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'label' => 'Customer editor',
+			'code' => 'customer.editor',
+			'internalcode' => null,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'customer:has' => array(
+			'code' => 'customer:has()',
+			'internalcode' => '(
+				SELECT t3feuli_has."id" FROM fe_users_list AS t3feuli_has
+				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site
+					AND t3feuli_has."domain" = $1 AND t3feuli_has."type" = $2 AND t3feuli_has."refid" = $3
+			)',
+			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
+		'customer:prop' => array(
+			'code' => 'customer:prop()',
+			'internalcode' => '(
+				SELECT t3feupr_prop."id" FROM fe_users_property AS t3feupr_prop
+				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site
+					AND t3feupr_prop."type" = $1 AND t3feupr_prop."value" = $3
+					AND ( t3feupr_prop."langid" = $2 OR t3feupr_prop."langid" IS NULL )
+			)',
+			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
 		),
 	);
+
 
 	private $plugins = [];
 	private $reverse = [];
@@ -267,6 +293,24 @@ class Typo3
 		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 
 		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+
+
+		$locale = $context->getLocale();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 't3feuli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 't3feupr_prop."siteid"', $siteIds, ':site' );
 	}
 
 
@@ -633,9 +677,10 @@ class Typo3
 			$values['customer.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
-		if( array_key_exists( 'groups', $values ) ) {
+		if( array_key_exists( 'groups', $values ) && $values['groups'] !== '' ) {
 			$values['groups'] = explode( ',', $values['groups'] );
 		}
+
 
 		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
 

@@ -24,7 +24,7 @@ class Typo3
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
 			'internalcode' => 't3feupr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."id" )' ),
+			'internaldeps'=>array( 'LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."uid" )' ),
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -102,7 +102,7 @@ class Typo3
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 

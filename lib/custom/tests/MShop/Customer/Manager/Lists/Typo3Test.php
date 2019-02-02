@@ -37,7 +37,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'customer.lists.domain' );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
 		$this->assertEquals( 4, $result['text'] );
 	}
@@ -228,45 +228,48 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>', 'customer.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.domain', 'text' );
 		$expr[] = $search->compare( '==', 'customer.lists.type', 'default' );
-		$expr[] = $search->compare( '>', 'customer.lists.refid', '' );
+		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2100-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
-		$expr[] = $search->compare( '>', 'customer.lists.position', 1 );
+		$expr[] = $search->compare( '>', 'customer.lists.position', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 2 );
 		$results = $this->object->searchItems( $search, [], $total );
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 2, count( $results ) );
+		$this->assertEquals( 3, $total );
 
-		foreach($results as $itemId => $item) {
+		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
 
 
-	public function testSearchItemsNoCriteria()
+	public function testSearchItemsAll()
 	{
+		//search without base criteria
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
-		$this->assertEquals( 4, count( $this->object->searchItems($search) ) );
+		$result = $this->object->searchItems( $search );
+		$this->assertEquals( 5, count( $result ) );
 	}
 
 
-	public function testSearchItemsBaseCriteria()
+	public function testSearchItemsBase()
 	{
-		$search = $this->object->createSearch(true);
+		//search with base criteria
+		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 4, count( $this->object->searchItems($search) ) );
+		$this->assertEquals( 5, count( $this->object->searchItems( $search ) ) );
 	}
 
 

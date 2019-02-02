@@ -119,40 +119,8 @@ CREATE TABLE IF NOT EXISTS `static_countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-START TRANSACTION;
-
-
---
--- Typo3 tables
---
-DELETE FROM `fe_users_property` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
-DELETE FROM `fe_users_address` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
-DELETE FROM `fe_users_list` WHERE parentid IN ( SELECT `uid` FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org' );
-DELETE FROM `fe_users` WHERE `lockToDomain` = 'unittest.aimeos.org';
-DELETE FROM `fe_groups` WHERE `lockToDomain` = 'unittest.aimeos.org';
-
-
---
--- Typo3 frontend users
---
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
-	VALUES ( 'unittest.aimeos.org', 'unitCustomer1', 'UTC001', 0, 'ABC GmbH', 'DE999999999', 'Dr.', 'Max', 'Mustermann', 'Musterstraße 1a', '20001', 'Musterstadt', 'Hamburg', 'de', 'DEU', '055544332211', 'unitCustomer1@aimeos.org', '055544332212', 'unittest.aimeos.org', 0, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1294916626, 1294916616, '', '10.0', '50.0');
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
-	VALUES ( 'unittest.aimeos.org', 'unitCustomer2', 'UTC002', 1, 'ABC GmbH', 'DE999999999', 'Prof. Dr.', 'Erika', 'Mustermann', 'Heidestraße 17', '45632', 'Köln', '', 'de', 'DEU', '055544332211', 'unitCustomer2@aimeos.org', '055544332212', 'unittest.aimeos.org', 0, '1', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916627, 1294916617, '1', '10.5', '51.0');
-INSERT INTO `fe_users` ( `lockToDomain`, `name`, `username`, `gender`, `company`, `vatid`, `title`, `first_name`, `last_name`, `address`, `zip`, `city`, `zone`, `language`, `static_info_country`, `telephone`, `email`, `fax`, `www`, `date_of_birth`, `disable`, `password`, `tstamp`, `crdate`, `usergroup`, `longitude`, `latitude`)
-	VALUES ( 'unittest.aimeos.org', 'unitCustomer3', 'UTC003', 0, 'ABC GmbH', 'DE999999999', '', 'Franz-Xaver', 'Gabler', 'Phantasiestraße 2', '23643', 'Berlin', 'Berlin', 'de', 'DEU', '055544332221', 'unitCustomer3@aimeos.org', '055544333212', 'unittest.aimeos.org', 0, '0', '5f4dcc3b5aa765d61d8327deb882cf99', 1295916628, 1294916618, '1,2,3', '11.0', '52.0');
-
---
--- Typo3 frontend groups
---
-INSERT INTO `fe_groups` ( `lockToDomain`, `title`, `tstamp`, `crdate`, `tx_phpunit_is_dummy_record`)
-	VALUES ( 'unittest.aimeos.org', 'Unit test group', 1294916626, 1294916616, 1);
-
 --
 -- Typo3 countries
 --
 INSERT INTO `static_countries` (`pid`, `deleted`, `cn_iso_2`, `cn_iso_3`, `cn_iso_nr`, `cn_parent_tr_iso_nr`, `cn_official_name_local`, `cn_official_name_en`, `cn_capital`, `cn_tldomain`, `cn_currency_iso_3`, `cn_currency_iso_nr`, `cn_phone`, `cn_eu_member`, `cn_address_format`, `cn_zone_flag`, `cn_short_local`, `cn_short_en`, `cn_uno_member`)
 SELECT 0, 0, 'DE', 'DEU', 276, 155, 'Bundesrepublik Deutschland', 'Federal Republic of Germany', 'Berlin', 'de', 'EUR', 978, 49, 1, 1, 0, 'Deutschland', 'Germany', 1 FROM DUAL WHERE NOT EXISTS ( SELECT `cn_iso_2` FROM `static_countries` WHERE `cn_iso_2` = 'DE' );
-
-
-COMMIT;

@@ -47,51 +47,26 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@aimeos.org' ) );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 		$items = $this->object->searchItems( $search );
 
-		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No customer address found' );
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new \RuntimeException( 'No address item found' );
 		}
 
-		$actual = $this->object->getItem( $expected->getId() );
-
-		$this->assertEquals( $expected, $actual );
-
-		$this->assertEquals( 'mr', $actual->getSalutation() );
-		$this->assertEquals( 'ABC', $actual->getCompany() );
-		$this->assertEquals( 'DE999999999', $actual->getVatID() );
-		$this->assertEquals( 'Dr', $actual->getTitle() );
-		$this->assertEquals( 'Our', $actual->getFirstname() );
-		$this->assertEquals( 'Unittest', $actual->getLastname() );
-		$this->assertEquals( 'Pickhuben', $actual->getAddress1() );
-		$this->assertEquals( '2-4', $actual->getAddress2() );
-		$this->assertEquals( '', $actual->getAddress3() );
-		$this->assertEquals( '20457', $actual->getPostal() );
-		$this->assertEquals( 'Hamburg', $actual->getCity() );
-		$this->assertEquals( 'Hamburg', $actual->getState() );
-		$this->assertEquals( 'de', $actual->getLanguageId() );
-		$this->assertEquals( 'DE', $actual->getCountryId() );
-		$this->assertEquals( '055544332211', $actual->getTelephone() );
-		$this->assertEquals( 'unitCustomer1@aimeos.org', $actual->getEMail() );
-		$this->assertEquals( '055544332212', $actual->getTelefax() );
-		$this->assertEquals( 'unittest.aimeos.org', $actual->getWebsite() );
-		$this->assertEquals( '10.0', $actual->getLongitude() );
-		$this->assertEquals( '50.0', $actual->getLatitude() );
-		$this->assertEquals( 0, $actual->getPosition() );
-		$this->assertEquals( $this->editor, $actual->getEditor() );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.email', 'unitCustomer1@aimeos.org' ) );
-		$results = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
+		$items = $this->object->searchItems( $search );
 
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No customer address found' );
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new \RuntimeException( 'No address item found' );
 		}
 
 		$item->setId( null );
@@ -183,35 +158,34 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = [];
-		$expr[] = $search->compare( '!=', 'customer.address.id', null );
-		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
-		$expr[] = $search->compare( '==', 'customer.address.company', 'ABC GmbH' );
-		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );
-		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
-		$expr[] = $search->compare( '==', 'customer.address.title', 'Dr.' );
-		$expr[] = $search->compare( '==', 'customer.address.firstname', 'Good' );
-		$expr[] = $search->compare( '==', 'customer.address.lastname', 'Unittest' );
-		$expr[] = $search->compare( '==', 'customer.address.address1', 'Pickhuben' );
-		$expr[] = $search->compare( '==', 'customer.address.address2', '2-4' );
-		$expr[] = $search->compare( '==', 'customer.address.address3', '' );
-		$expr[] = $search->compare( '==', 'customer.address.postal', '11099' );
-		$expr[] = $search->compare( '==', 'customer.address.city', 'Berlin' );
-		$expr[] = $search->compare( '==', 'customer.address.state', 'Berlin' );
-		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
-		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332221' );
-		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@aimeos.org' );
-		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544333212' );
-		$expr[] = $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' );
-		$expr[] = $search->compare( '>=', 'customer.address.longitude', '10.0' );
-		$expr[] = $search->compare( '>=', 'customer.address.latitude', '50.0' );
-		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
-		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
-
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$conditions = array(
+			$search->compare( '!=', 'customer.address.id', null ),
+			$search->compare( '!=', 'customer.address.parentid', null ),
+			$search->compare( '==', 'customer.address.company', 'Example company' ),
+			$search->compare( '==', 'customer.address.vatid', 'DE999999999' ),
+			$search->compare( '==', 'customer.address.salutation', 'mr' ),
+			$search->compare( '==', 'customer.address.title', 'Dr' ),
+			$search->compare( '==', 'customer.address.firstname', 'Our' ),
+			$search->compare( '==', 'customer.address.lastname', 'Unittest' ),
+			$search->compare( '==', 'customer.address.address1', 'Pickhuben' ),
+			$search->compare( '==', 'customer.address.address2', '2-4' ),
+			$search->compare( '==', 'customer.address.address3', '' ),
+			$search->compare( '==', 'customer.address.postal', '20457' ),
+			$search->compare( '==', 'customer.address.city', 'Hamburg' ),
+			$search->compare( '==', 'customer.address.state', 'Hamburg' ),
+			$search->compare( '==', 'customer.address.countryid', 'DE' ),
+			$search->compare( '==', 'customer.address.languageid', 'de' ),
+			$search->compare( '==', 'customer.address.telephone', '055544332211' ),
+			$search->compare( '==', 'customer.address.email', 'test@example.com' ),
+			$search->compare( '==', 'customer.address.telefax', '055544332212' ),
+			$search->compare( '==', 'customer.address.website', 'www.example.com' ),
+			$search->compare( '==', 'customer.address.longitude', '10.0' ),
+			$search->compare( '==', 'customer.address.latitude', '50.0' ),
+			$search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' ),
+			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
+			$search->compare( '==', 'customer.address.editor', $this->editor ),
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
 
@@ -222,17 +196,17 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$conditions = array(
-			$search->compare( '~=', 'customer.address.company', 'ABC GmbH' ),
+			$search->compare( '~=', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->setSlice( 0, 2 );
 
 		$results = $this->object->searchItems( $search, [], $total );
 
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 2, count( $results ) );
+		$this->assertEquals( 3, $total );
 
 		foreach( $results as $id => $item ) {
 			$this->assertEquals( $id, $item->getId() );

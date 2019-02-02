@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2014-2018
  */
 
@@ -11,54 +10,61 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds TYPO3 customer test data.
+ * Adds FOS user customer test data.
  */
 class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return string[] List of task names
+	 * @return array List of task names
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TablesAddTypo3TestData' );
+		return ['TablesAddTypo3TestData'];
 	}
 
 
 	/**
-	 * Adds test data
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return array List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return [];
+	}
+
+
+	/**
+	 * Adds customer test data
 	 */
 	public function migrate()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
-		$this->msg( 'Adding TYPO3 customer test data', 0 );
+		$this->msg( 'Adding Fos user bundle customer test data', 0 );
+
 		$this->additional->setEditor( 'ai-typo3:unittest' );
 
-		$parentIds = [];
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
+		$manager = $this->getManager()->getSubManager( 'group' );
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
-		if( ( $testdata = include( $path ) ) == false ){
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
-		}
-
-
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
-		$customerAddressManager = $customerManager->getSubManager( 'address', 'Typo3' );
-
-		foreach( $customerManager->searchItems( $customerManager->createSearch() ) as $id => $item ) {
-			$parentIds[ 'customer/' . $item->getCode() ] = $id;
-		}
-
-		$this->conn->begin();
-
-		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
-
-		$this->conn->commit();
-
+		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 
 		$this->status( 'done' );
+	}
+
+
+	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager()
+	{
+		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
 	}
 }
