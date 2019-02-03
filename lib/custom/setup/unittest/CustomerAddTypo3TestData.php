@@ -47,7 +47,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 
 		$this->additional->setEditor( 'ai-typo3:unittest' );
 
-		$manager = $this->getManager()->getSubManager( 'group' );
+		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
@@ -61,10 +61,15 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
+		if( $domain === 'customer' ) {
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
+		}
+
+		return parent::getManager( $domain );
 	}
 }
