@@ -239,10 +239,10 @@ class Typo3
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT t3feuli_has."id" FROM fe_users_list AS t3feuli_has
-				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site
-					AND t3feuli_has."domain" = $1 AND t3feuli_has."type" = $2 AND t3feuli_has."refid" = $3
+				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site AND t3feuli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -251,11 +251,10 @@ class Typo3
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT t3feupr_prop."id" FROM fe_users_property AS t3feupr_prop
-				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site
-					AND t3feupr_prop."type" = $1 AND t3feupr_prop."value" = $3
-					AND ( t3feupr_prop."langid" = $2 OR t3feupr_prop."langid" IS NULL )
+				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site AND t3feupr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -311,6 +310,27 @@ class Typo3
 
 		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 't3feuli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 't3feupr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND t3feuli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND t3feuli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND t3feupr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND t3feupr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 
