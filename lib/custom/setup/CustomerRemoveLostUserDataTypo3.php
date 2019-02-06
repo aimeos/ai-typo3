@@ -15,8 +15,9 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'address' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
-		'list' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
+		'fe_users_address' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
+		'fe_users_list' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
+		'fe_users_property' => 'DELETE FROM "fe_users_property" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
 	];
 
 
@@ -47,29 +48,21 @@ class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Remove left over TYPO3 fe_users address records', 0 );
+		$this->msg( 'Remove left over TYPO3 fe_users references', 0, '' );
 
-		if( $this->schema->tableExists( 'fe_users' ) && $this->schema->tableExists( 'fe_users_address' ) )
+		foreach( $this->sql as $table => $stmt )
 		{
-			$this->execute( $this->sql['address'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
 
-
-		$this->msg( 'Remove left over TYPO3 fe_users list records', 0 );
-
-		if( $this->schema->tableExists( 'fe_users' ) && $this->schema->tableExists( 'fe_users_list' ) )
-		{
-			$this->execute( $this->sql['list'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			if( $this->schema->tableExists( 'fe_users' ) && $this->schema->tableExists( $table ) )
+			{
+				$this->execute( $stmt );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
 		}
 	}
 }
