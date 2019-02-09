@@ -335,21 +335,6 @@ class Typo3
 
 
 	/**
-	 * Returns the list attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'group', 'lists', 'property'];
-
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
-	}
-
-
-	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
@@ -404,6 +389,19 @@ class Typo3
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $ids ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+	}
+
+
+	/**
+	 * Returns the list attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		$path = 'mshop/customer/manager/submanagers';
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address'], $withsub );
 	}
 
 
