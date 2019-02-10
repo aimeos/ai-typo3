@@ -279,7 +279,7 @@ class Typo3
 	public function getSearchAttributes( $withsub = true )
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'group', 'lists', 'property'];
+		$default = ['address', 'lists', 'property'];
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
