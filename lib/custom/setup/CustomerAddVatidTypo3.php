@@ -60,7 +60,7 @@ class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding "vatid" column to fe_users tables', 0 ); $this->status( '' );
 
-		foreach( $stmts AS $table => $stmt )
+		foreach( $stmts as $table => $stmt )
 		{
 			$this->msg( sprintf( 'Checking "%1$s" table', $table ), 1 );
 

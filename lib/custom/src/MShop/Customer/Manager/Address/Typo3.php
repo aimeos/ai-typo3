@@ -224,7 +224,6 @@ class Typo3
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/customer/manager/address/typo3/delete' );
-
 	}
 
 
