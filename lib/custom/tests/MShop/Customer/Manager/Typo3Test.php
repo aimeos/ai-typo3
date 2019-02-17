@@ -45,8 +45,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->createItem();
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Typo3', $item );
-		$this->assertEquals( 999999, $item->getPageId() );
 	}
 
 
@@ -100,7 +98,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
-		$this->assertEquals( $item->getPageId(), $itemSaved->getPageId() );
 
 		$this->assertEquals( '', $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -114,7 +111,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
-		$this->assertEquals( $itemExp->getPageId(), $itemUpd->getPageId() );
 
 		$this->assertEquals( '', $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
