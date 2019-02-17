@@ -81,17 +81,18 @@ class Typo3 extends Standard implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'typo3.pageid': $item = $item->setPageId( $value ); break;
+				case 'typo3.pageid': !$private ?: $item = $item->setPageId( $value ); break;
 				default: continue 2;
 			}
 

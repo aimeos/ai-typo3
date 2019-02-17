@@ -84,7 +84,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			'typo3.pageid' => 99,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['typo3.pageid'], $item->getPageId() );
