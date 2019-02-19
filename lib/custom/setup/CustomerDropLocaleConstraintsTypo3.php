@@ -28,19 +28,6 @@ class CustomerDropLocaleConstraintsTypo3 extends \Aimeos\MW\Setup\Task\Base
 	);
 
 
-
-
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies()
-	{
-		return [];
-	}
-
-
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
@@ -48,7 +35,7 @@ class CustomerDropLocaleConstraintsTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateTypo3' );
+		return ['TablesCreateMShop'];
 	}
 
 

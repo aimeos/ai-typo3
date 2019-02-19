@@ -15,24 +15,24 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
-	 * Returns the list of task names which this task depends on.
+	 * Returns the list of task names which this task depends on
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
 	{
-		return ['TablesAddTypo3TestData'];
+		return ['TablesAddTypo3TestData', 'MShopSetLocale'];
 	}
 
 
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return ['CustomerAddTestData'];
 	}
 
 
@@ -43,7 +43,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
-		$this->msg( 'Adding Fos user bundle customer test data', 0 );
+		$this->msg( 'Adding TYPO3 customer test data', 0 );
 
 		$this->additional->setEditor( 'ai-typo3:unittest' );
 
