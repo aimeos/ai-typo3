@@ -45,7 +45,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 
 		$this->msg( 'Adding TYPO3 customer test data', 0 );
 
-		$this->additional->setEditor( 'ai-typo3:unittest' );
+		$this->additional->setEditor( 'ai-typo3:lib/custom' );
 
 		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
 		$search = $manager->createSearch();

@@ -80,7 +80,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-typo3:unittest' );
+		$ctx->setEditor( 'ai-typo3:lib/custom' );
 
 		return $ctx;
 	}
