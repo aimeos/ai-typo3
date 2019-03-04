@@ -239,8 +239,7 @@ class Typo3
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT t3feuli_has."id" FROM fe_users_list AS t3feuli_has
-				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site AND t3feuli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -294,7 +293,9 @@ class Typo3
 		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 
 
+		$self = $this;
 		$locale = $context->getLocale();
+
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
@@ -308,18 +309,22 @@ class Typo3
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 't3feuli_has."siteid"', $siteIds, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 't3feupr_prop."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND t3feuli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND t3feuli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 't3feuli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 't3feuli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};
 
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 't3feupr_prop."siteid"', $siteIds, ':site' );
 
 		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
 
