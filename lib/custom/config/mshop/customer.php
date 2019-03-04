@@ -245,17 +245,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "fe_users_list"(
-							"parentid", "type", "domain", "refid", "start", "end",
+							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "fe_users_list"
-						SET "parentid" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',

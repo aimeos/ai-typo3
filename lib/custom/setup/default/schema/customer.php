@@ -87,6 +87,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 98 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
@@ -101,6 +102,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_t3feuli_pid_sid_dm_ty_rid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'idx_t3feuli_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feuli_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
