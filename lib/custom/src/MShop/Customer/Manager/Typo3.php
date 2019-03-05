@@ -250,8 +250,7 @@ class Typo3
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT t3feupr_prop."id" FROM fe_users_property AS t3feupr_prop
-				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site AND t3feupr_prop."type" = $1 :langid :value
-				LIMIT 1
+				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -324,15 +323,15 @@ class Typo3
 		};
 
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 't3feupr_prop."siteid"', $siteIds, ':site' );
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$lang = 'AND t3feupr_prop."langid"';
-			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
-
-			$source = str_replace( ':langid', $lang, $source );
-			$source = str_replace( ':value', isset( $params[2] ) ? 'AND t3feupr_prop."value" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 't3feupr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 't3feupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

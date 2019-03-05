@@ -142,6 +142,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
@@ -151,6 +152,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feupr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_t3feupr_sid_ty_lid_value' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_t3feupr_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
