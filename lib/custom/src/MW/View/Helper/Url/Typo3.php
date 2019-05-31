@@ -82,6 +82,7 @@ class Typo3
 			->setTargetPageUid( $target )
 			->setSection( join( '/', $trailing ) )
 			->setCreateAbsoluteUri( $values['absoluteUri'] )
+			->setAbsoluteUriScheme( $values['scheme'] )
 			->setTargetPageType( $values['type'] )
 			->setUseCacheHash( $values['chash'] )
 			->setNoCache( $values['nocache'] )
@@ -112,6 +113,7 @@ class Typo3
 			'nocache' => false,
 			'chash' => false,
 			'format' => '',
+			'scheme' => null,
 			'type' => 0,
 		);
 
@@ -145,6 +147,10 @@ class Typo3
 
 		if( isset( $config['format'] ) ) {
 			$values['format'] = (string) $config['format'];
+		}
+		
+		if( isset( $config['scheme'] ) ) {
+			$values['scheme'] = (string) $config['scheme'];
 		}
 
 		return $values;
