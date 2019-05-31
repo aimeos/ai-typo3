@@ -54,6 +54,14 @@ class UriBuilder
 		return $this;
 	}
 
+	/**
+	 * @param string $scheme
+	 */
+	public function setAbsoluteUriScheme( $scheme )
+	{
+		return $this;
+	}
+
 	public function setArguments( $additional )
 	{
 		return $this;
