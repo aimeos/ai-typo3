@@ -84,6 +84,7 @@ class Typo3
 			->setSection( join( '/', $trailing ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
+			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
 			->setUseCacheHash( (bool) $this->getValue( $config, 'chash', false ) )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
