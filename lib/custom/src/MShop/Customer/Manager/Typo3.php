@@ -623,7 +623,7 @@ class Typo3
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[ $row['customer.id'] ] = $row;
+				$map[(string) $row['customer.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );
