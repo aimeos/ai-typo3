@@ -94,7 +94,7 @@ class Typo3
 			return $this->uriBuilder->buildBackendUri();
 		}
 
-		return $this->uriBuilder->buildFrontendUri();
+		return preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $this->uriBuilder->buildFrontendUri() );
 	}
 
 
