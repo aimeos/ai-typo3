@@ -56,7 +56,7 @@ return array(
 							t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
 							t3feuad."longitude" AS "customer.address.longitude", t3feuad."latitude" AS "customer.address.latitude",
 							t3feuad."mtime" AS "customer.address.mtime", t3feuad."editor" AS "customer.address.editor",
-							t3feuad."ctime" AS "customer.address.ctime"
+							t3feuad."ctime" AS "customer.address.ctime", t3feuad.*
 						FROM "fe_users_address" AS t3feuad
 						:joins
 						WHERE :cond
@@ -121,7 +121,7 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT DISTINCT t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
-							t3feg."description" AS "customer.group.label", t3feg."crdate", t3feg."tstamp"
+							t3feg."description" AS "customer.group.label", t3feg."crdate", t3feg."tstamp", t3feg.*
 						FROM "fe_groups" AS t3feg
 						:joins
 						WHERE t3feg."deleted" = 0 AND :cond
@@ -186,7 +186,8 @@ return array(
 								t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
 								t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
 								t3feulity."mtime" AS "customer.lists.type.mtime", t3feulity."editor" AS "customer.lists.type.editor",
-								t3feulity."ctime" AS "customer.lists.type.ctime", t3feulity."pos" AS "customer.lists.type.position"
+								t3feulity."ctime" AS "customer.lists.type.ctime", t3feulity."pos" AS "customer.lists.type.position",
+								t3feulity.*
 							FROM "fe_users_list_type" AS t3feulity
 							:joins
 							WHERE :cond
@@ -268,7 +269,8 @@ return array(
 							t3feuli."start" AS "customer.lists.datestart", t3feuli."end" AS "customer.lists.dateend",
 							t3feuli."config" AS "customer.lists.config", t3feuli."pos" AS "customer.lists.position",
 							t3feuli."status" AS "customer.lists.status", t3feuli."mtime" AS "customer.lists.mtime",
-							t3feuli."editor" AS "customer.lists.editor", t3feuli."ctime" AS "customer.lists.ctime"
+							t3feuli."editor" AS "customer.lists.editor", t3feuli."ctime" AS "customer.lists.ctime",
+							t3feuli.*
 						FROM "fe_users_list" AS t3feuli
 						:joins
 						WHERE :cond
@@ -336,7 +338,8 @@ return array(
 								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
 								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
 								t3feuprty."mtime" AS "customer.property.type.mtime", t3feuprty."editor" AS "customer.property.type.editor",
-								t3feuprty."ctime" AS "customer.property.type.ctime", t3feuprty."pos" AS "customer.property.type.position"
+								t3feuprty."ctime" AS "customer.property.type.ctime", t3feuprty."pos" AS "customer.property.type.position",
+								t3feuprty.*
 							FROM "fe_users_property_type" t3feuprty
 							:joins
 							WHERE :cond
@@ -401,7 +404,7 @@ return array(
 							t3feupr."siteid" AS "customer.property.siteid", t3feupr."type" AS "customer.property.type",
 							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
 							t3feupr."mtime" AS "customer.property.mtime", t3feupr."editor" AS "customer.property.editor",
-							t3feupr."ctime" AS "customer.property.ctime"
+							t3feupr."ctime" AS "customer.property.ctime", t3feupr.*
 						FROM "fe_users_property" AS t3feupr
 						:joins
 						WHERE :cond
@@ -482,7 +485,7 @@ return array(
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
 						t3feu."password" AS "customer.password", t3feu."date_of_birth",
 						t3feu."usergroup" as "groups", t3feu."pid" AS "typo3.pageid",
-						t3feu."disable", t3feu."crdate", t3feu."tstamp"
+						t3feu."disable", t3feu."crdate", t3feu."tstamp", t3feu.*
 					FROM "fe_users" as t3feu
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
