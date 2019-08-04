@@ -698,7 +698,7 @@ class Typo3
 		}
 
 		if( array_key_exists( 'groups', $values ) && $values['groups'] !== '' ) {
-			$values['groups'] = explode( ',', $values['groups'] );
+			$values['customer.groups'] = explode( ',', $values['groups'] );
 		}
 
 
