@@ -43,7 +43,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT t3feuad."id" AS "customer.address.id", t3feuad."siteid" AS "customer.address.siteid",
+						SELECT DISTINCT t3feuad."id" AS "customer.address.id", t3feuad."siteid" AS "customer.address.siteid",
 							t3feuad."parentid" AS "customer.address.parentid", t3feuad."pos" AS "customer.address.position",
 							t3feuad."company" AS "customer.address.company", t3feuad."vatid" AS "customer.address.vatid",
 							t3feuad."salutation" AS "customer.address.salutation", t3feuad."title" AS "customer.address.title",
@@ -60,13 +60,6 @@ return array(
 						FROM "fe_users_address" AS t3feuad
 						:joins
 						WHERE :cond
-						GROUP BY t3feuad."id", t3feuad."siteid", t3feuad."parentid", t3feuad."pos",
-							t3feuad."company", t3feuad."vatid", t3feuad."salutation", t3feuad."title",
-							t3feuad."firstname", t3feuad."lastname", t3feuad."address1", t3feuad."address2",
-							t3feuad."address3", t3feuad."postal", t3feuad."city", t3feuad."state",
-							t3feuad."countryid", t3feuad."langid", t3feuad."telephone", t3feuad."email",
-							t3feuad."telefax", t3feuad."website", t3feuad."longitude", t3feuad."latitude",
-							t3feuad."mtime", t3feuad."editor", t3feuad."ctime"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -182,7 +175,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT t3feulity."id" AS "customer.lists.type.id", t3feulity."siteid" AS "customer.lists.type.siteid",
+							SELECT DISTINCT t3feulity."id" AS "customer.lists.type.id", t3feulity."siteid" AS "customer.lists.type.siteid",
 								t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
 								t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
 								t3feulity."mtime" AS "customer.lists.type.mtime", t3feulity."editor" AS "customer.lists.type.editor",
@@ -191,9 +184,6 @@ return array(
 							FROM "fe_users_list_type" AS t3feulity
 							:joins
 							WHERE :cond
-							GROUP BY t3feulity."id", t3feulity."siteid", t3feulity."code", t3feulity."domain",
-								t3feulity."label", t3feulity."status", t3feulity."mtime", t3feulity."editor",
-								t3feulity."ctime", t3feulity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						',
@@ -263,7 +253,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT t3feuli."id" AS "customer.lists.id", t3feuli."parentid" AS "customer.lists.parentid",
+						SELECT DISTINCT t3feuli."id" AS "customer.lists.id", t3feuli."parentid" AS "customer.lists.parentid",
 							t3feuli."siteid" AS "customer.lists.siteid", t3feuli."type" AS "customer.lists.type",
 							t3feuli."domain" AS "customer.lists.domain", t3feuli."refid" AS "customer.lists.refid",
 							t3feuli."start" AS "customer.lists.datestart", t3feuli."end" AS "customer.lists.dateend",
@@ -274,10 +264,6 @@ return array(
 						FROM "fe_users_list" AS t3feuli
 						:joins
 						WHERE :cond
-						GROUP BY t3feuli."id", t3feuli."parentid", t3feuli."siteid", t3feuli."type",
-							t3feuli."domain", t3feuli."refid", t3feuli."start", t3feuli."end",
-							t3feuli."config", t3feuli."pos", t3feuli."status", t3feuli."mtime",
-							t3feuli."editor", t3feuli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -334,7 +320,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT t3feuprty."id" AS "customer.property.type.id", t3feuprty."siteid" AS "customer.property.type.siteid",
+							SELECT DISTINCT t3feuprty."id" AS "customer.property.type.id", t3feuprty."siteid" AS "customer.property.type.siteid",
 								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
 								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
 								t3feuprty."mtime" AS "customer.property.type.mtime", t3feuprty."editor" AS "customer.property.type.editor",
@@ -343,9 +329,6 @@ return array(
 							FROM "fe_users_property_type" t3feuprty
 							:joins
 							WHERE :cond
-							GROUP BY t3feuprty."id", t3feuprty."siteid", t3feuprty."code", t3feuprty."domain",
-								t3feuprty."label", t3feuprty."status", t3feuprty."mtime", t3feuprty."editor",
-								t3feuprty."ctime", t3feuprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -400,7 +383,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
+						SELECT DISTINCT t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
 							t3feupr."siteid" AS "customer.property.siteid", t3feupr."type" AS "customer.property.type",
 							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
 							t3feupr."mtime" AS "customer.property.mtime", t3feupr."editor" AS "customer.property.editor",
@@ -408,9 +391,6 @@ return array(
 						FROM "fe_users_property" AS t3feupr
 						:joins
 						WHERE :cond
-						GROUP BY t3feupr."id", t3feupr."parentid", t3feupr."siteid", t3feupr."type",
-							t3feupr."langid", t3feupr."value", t3feupr."mtime", t3feupr."editor",
-							t3feupr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -472,7 +452,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
+					SELECT DISTINCT t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
 						t3feu."name" AS "customer.label", t3feu."gender",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
 						t3feu."company" AS "customer.company", t3feu."vatid" AS "customer.vatid",
@@ -489,16 +469,7 @@ return array(
 					FROM "fe_users" as t3feu
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
-					WHERE :cond
-						AND t3feu."deleted" = 0
-					GROUP BY t3feu."uid", t3feu."siteid", t3feu."name", t3feu."gender",
-						t3feu."username", t3feu."title", t3feu."company", t3feu."vatid",
-						t3feu."first_name", t3feu."last_name", t3feu."address", t3feu."zip",
-						t3feu."city", t3feu."zone", tsc."cn_iso_2", t3feu."language",
-						t3feu."telephone", t3feu."email", t3feu."fax", t3feu."www",
-						t3feu."longitude", t3feu."latitude", t3feu."password", t3feu."date_of_birth",
-						t3feu."usergroup", t3feu."pid", t3feu."disable", t3feu."crdate", t3feu."tstamp"
-						/*-columns*/ , :columns /*columns-*/
+					WHERE :cond AND t3feu."deleted" = 0
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				',
