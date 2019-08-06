@@ -329,6 +329,7 @@ class Typo3
 				$params[$key] = trim( $param, '\'' );
 			}
 
+			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
 			$source = str_replace( ':site', $self->toExpression( 't3feupr_prop."siteid"', $siteIds ), $source );
 			$str = $self->toExpression( 't3feupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
