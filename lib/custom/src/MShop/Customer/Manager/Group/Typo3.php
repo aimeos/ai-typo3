@@ -196,6 +196,7 @@ class Typo3
 		try
 		{
 			$id = $item->getId();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -235,6 +236,7 @@ class Typo3
 				 * @see mshop/customer/manager/group/typo3/count/ansi
 				 */
 				$path = 'mshop/customer/manager/group/typo3/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -271,20 +273,26 @@ class Typo3
 				 * @see mshop/customer/manager/group/typo3/count/ansi
 				 */
 				$path = 'mshop/customer/manager/group/typo3/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $item->getLabel() );
-			$stmt->bind( 4, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // mtime
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // mtime
 
 			if( $id !== null ) {
-				$stmt->bind( 5, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 5, time() ); // ctime
+				$stmt->bind( $idx++, time() ); // ctime
 			}
 
 			$stmt->execute()->finish();
