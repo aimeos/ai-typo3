@@ -13,9 +13,6 @@ class AbstractUserAuthentication
 {
 	private $data = [];
 
-	/**
-	 * @param string $key
-	*/
 	public function getSessionData( $key )
 	{
 		if ( isset($this->data[$key]) ) {
@@ -23,12 +20,17 @@ class AbstractUserAuthentication
 		}
 	}
 
-	/**
-	 * @param string $key
-	 * @param string $data
-	 */
+	public function setKey( $type, $key, $data )
+	{
+		$this->data[$key] = $data;
+	}
+
 	public function setAndSaveSessionData( $key, $data )
 	{
 		$this->data[$key] = $data;
+	}
+
+	public function storeSessionData()
+	{
 	}
 }

@@ -31,6 +31,15 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testApply()
+	{
+		$this->object->apply( ['test' => '123456789', 'test2' => '987654321'] );
+
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+		$this->assertEquals( '987654321', $this->object->get( 'test2' ) );
+	}
+
+
 	public function testGet()
 	{
 		$this->assertEquals('', $this->object->get('test'));

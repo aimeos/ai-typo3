@@ -18,7 +18,7 @@ namespace Aimeos\MW\Session;
  * @package MW
  * @subpackage Session
  */
-class Typo3 implements \Aimeos\MW\Session\Iface
+class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 {
 	private $user;
 
@@ -31,6 +31,23 @@ class Typo3 implements \Aimeos\MW\Session\Iface
 	public function __construct( \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $user )
 	{
 		$this->user = $user;
+	}
+
+
+	/**
+	 * Sets a list of key/value pairs.
+	 *
+	 * @param array $values Associative list of key/value pairs
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function apply( array $values )
+	{
+		foreach( $values as $key => $value ) {
+			$this->user->setKey( 'ses', $key, $value );
+		}
+
+		$this->user->storeSessionData();
+		return $this;
 	}
 
 
