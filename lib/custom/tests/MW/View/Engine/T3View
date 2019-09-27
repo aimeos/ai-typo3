@@ -15,6 +15,14 @@ class T3View
 	{
 	}
 
+	public function setPartialRootPaths( array $partialRootPaths )
+	{
+	}
+
+	public function setLayoutRootPaths( array $setLayoutRootPaths )
+	{
+	}
+
 	public function assignMultiple( array $values )
 	{
 	}
