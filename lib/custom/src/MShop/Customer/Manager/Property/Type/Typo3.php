@@ -104,11 +104,11 @@ class Typo3
 	 *
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		$path = 'mshop/customer/manager/property/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/customer/manager/property/type/typo3/delete' );
