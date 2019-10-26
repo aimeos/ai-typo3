@@ -109,7 +109,7 @@ class Typo3
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/type/typo3/delete' );
+		$this->clearBase( $siteids, 'mshop/customer/manager/lists/type/typo3/delete' );
 	}
 
 
