@@ -50,12 +50,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$expected = $this->object->findItem( 'UTC003', ['text'] );
-		$actual = $this->object->getItem( $expected->getId(), ['text'] );
+		$domains = ['text', 'customer/property' => ['newsletter']];
+		$expected = $this->object->findItem( 'UTC001', $domains );
+		$actual = $this->object->getItem( $expected->getId(), $domains );
 
 		$this->assertEquals( $expected, $actual );
-		$this->assertEquals( 3, count( $actual->getListItems( 'text' ) ) );
-		$this->assertEquals( 3, count( $actual->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getListItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $actual->getPropertyItems() ) );
 	}
 
 
