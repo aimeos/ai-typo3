@@ -104,11 +104,12 @@ class Typo3
 
 
 	/**
-	 * Removes multiple items specified by their IDs
+	 * Removes multiple items.
 	 *
-	 * @param array $ids List of IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
 		/** mshop/customer/manager/group/typo3/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -142,7 +143,7 @@ class Typo3
 		 */
 		$path = 'mshop/customer/manager/group/typo3/delete';
 
-		return $this->deleteItemsBase( $ids, $path, false, 'uid' );
+		return $this->deleteItemsBase( $itemIds, $path, false, 'uid' );
 	}
 
 

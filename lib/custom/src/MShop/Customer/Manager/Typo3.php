@@ -359,29 +359,32 @@ class Typo3
 
 
 	/**
-	 * Deletes a customer item object from the permanent storage.
+	 * Removes multiple items.
 	 *
-	 * @param array $ids List of customer IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
 		$path = 'mshop/customer/manager/typo3/delete';
-		$this->deleteItemsBase( $ids, $path, false, 'uid' );
+		$this->deleteItemsBase( $itemIds, $path, false, 'uid' );
 
 		$manager = $this->getObject()->getSubManager( 'address' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $ids ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $itemIds ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		$manager = $this->getObject()->getSubManager( 'lists' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.lists.parentid', $ids ) );
+		$search->setConditions( $search->compare( '==', 'customer.lists.parentid', $itemIds ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		$manager = $this->getObject()->getSubManager( 'property' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $ids ) );
+		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $itemIds ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+
+		return $this->deleteRefItems( $itemIds );
 	}
 
 
