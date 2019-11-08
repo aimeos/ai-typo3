@@ -10,6 +10,7 @@ namespace Aimeos\MW\View\Engine;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Object';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3View';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Configuration';
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -24,6 +25,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$configuration = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Configuration\ConfigurationManager' )
+			->setMethods( array( 'getConfiguration' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$configuration->expects( $this->once() )->method( 'getConfiguration' );
+		$this->mock->expects( $this->at(0) )->method( 'get' )
+			->will( $this->returnValue( $configuration) );
 
 		$this->object = new \Aimeos\MW\View\Engine\Typo3( $this->mock );
 	}
@@ -40,17 +49,19 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$v = new \Aimeos\MW\View\Standard( [] );
 
 		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
-			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename' ) )
+			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename', 'setPartialRootPaths', 'setLayoutRootPaths' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$view->expects( $this->once() )->method( 'setTemplatePathAndFilename' );
 		$view->expects( $this->once() )->method( 'assignMultiple' );
 		$view->expects( $this->once() )->method( 'assign' );
+		$view->expects( $this->once() )->method( 'setPartialRootPaths' );
+		$view->expects( $this->once() )->method( 'setLayoutRootPaths' );
 		$view->expects( $this->once() )->method( 'render' )
 			->will( $this->returnValue( 'test' ) );
 
-		$this->mock->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->at(0) )->method( 'get' )
 			->will( $this->returnValue( $view) );
 
 		$result = $this->object->render( $v, 'filepath', array( 'key' => 'value' ) );
