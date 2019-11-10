@@ -10,9 +10,6 @@
 namespace Aimeos\MW\Cache;
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Cache';
-
-
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -21,7 +18,11 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Cache\\Frontend\\T3Cache' )->getMock();
+		if( interface_exists( 'TYPO3\CMS\Core\Cache\Frontend\FrontendInterface' ) === false ) {
+			$this->markTestSkipped( 'Class \\TYPO3\\CMS\\Core\\Cache\\Frontend\\FrontendInterface not found' );
+		}
+
+		$this->mock = $this->getMockBuilder( 'TYPO3\CMS\Core\Cache\Frontend\FrontendInterface' )->getMock();
 		$this->object = new \Aimeos\MW\Cache\Typo3( [], $this->mock );
 	}
 
@@ -32,58 +33,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDelete()
-	{
-		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( 'key' ) );
-		$this->object->delete( 'key' );
-	}
-
-
-	public function testDeleteWithSiteId()
-	{
-		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
-		$object->delete( 'key' );
-	}
-
-
-	public function testDeleteMultiple()
-	{
-		$this->mock->expects( $this->exactly( 2 ) )->method( 'remove' )->with( $this->equalTo( 'key' ) );
-		$this->object->deleteMultiple( array( 'key', 'key' ) );
-	}
-
-
-	public function testDeleteMultipleWithSiteId()
-	{
-		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
-		$object->deleteMultiple( array( 'key' ) );
-	}
-
-
-	public function testDeleteByTags()
-	{
-		$this->mock->expects( $this->exactly( 2 ) )->method( 'flushByTag' )->with( $this->equalTo( 'tag' ) );
-		$this->object->deleteByTags( array( 'tag', 'tag' ) );
-	}
-
-
-	public function testDeleteByTagsWithSiteId()
-	{
-		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
-		$object->deleteByTags( array( 'tag' ) );
-	}
-
-
 	public function testClear()
 	{
 		$this->mock->expects( $this->once() )->method( 'flush' );
-		$this->object->clear();
+		$this->assertTrue( $this->object->clear() );
 	}
 
 
@@ -92,7 +45,55 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
 
 		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-siteid' ) );
-		$object->clear();
+		$this->assertTrue( $object->clear() );
+	}
+
+
+	public function testDelete()
+	{
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( 'key' ) );
+		$this->assertTrue( $this->object->delete( 'key' ) );
+	}
+
+
+	public function testDeleteWithSiteId()
+	{
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
+
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
+		$this->assertTrue( $object->delete( 'key' ) );
+	}
+
+
+	public function testDeleteMultiple()
+	{
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'remove' )->with( $this->equalTo( 'key' ) );
+		$this->assertTrue( $this->object->deleteMultiple( array( 'key', 'key' ) ) );
+	}
+
+
+	public function testDeleteMultipleWithSiteId()
+	{
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
+
+		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
+		$this->assertTrue( $object->deleteMultiple( array( 'key' ) ) );
+	}
+
+
+	public function testDeleteByTags()
+	{
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'flushByTag' )->with( $this->equalTo( 'tag' ) );
+		$this->assertTrue( $this->object->deleteByTags( array( 'tag', 'tag' ) ) );
+	}
+
+
+	public function testDeleteByTagsWithSiteId()
+	{
+		$object = new \Aimeos\MW\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
+
+		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
+		$this->assertTrue( $object->deleteByTags( array( 'tag' ) ) );
 	}
 
 
@@ -133,15 +134,22 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testHas()
+	{
+		$this->mock->expects( $this->once() )->method( 'has' )->will( $this->returnValue( true ) );
+		$this->assertTrue( $this->object->has( 'key' ) );
+	}
+
+
 	public function testSet()
 	{
 		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( 'key' ), $this->equalTo( 'value' ),
-				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
+				$this->equalTo( ['tag'] ), $this->greaterThan( 0 )
 			);
 
-		$this->object->set( 'key', 'value', '2100-01-01 00:00:00', array( 'tag' ) );
+		$this->assertTrue( $this->object->set( 'key', 'value', '2100-01-01 00:00:00', ['tag'] ) );
 	}
 
 
@@ -155,7 +163,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
 			);
 
-		$object->set( 'key', 'value', null, array( 'tag' ) );
+		$this->assertTrue( $object->set( 'key', 'value', null, ['tag'] ) );
 	}
 
 
@@ -164,11 +172,11 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'set' )
 			->with(
 				$this->equalTo( 'key' ), $this->equalTo( 'value' ),
-				$this->equalTo( array( 'tag' ) ), $this->greaterThan( 0 )
+				$this->equalTo( ['tag'] ), $this->greaterThan( 0 )
 			);
 
-		$expires = array( 'key' => '2100-01-01 00:00:00' );
-		$this->object->setMultiple( array( 'key' => 'value' ), $expires, array( 'key' => array( 'tag' ) ) );
+		$expires = '2100-01-01 00:00:00';
+		$this->assertTrue( $this->object->setMultiple( ['key' => 'value'], $expires, ['tag'] ) );
 	}
 
 
@@ -182,7 +190,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
 			);
 
-		$object->setMultiple( array( 'key' => 'value' ), null, array( 'key' => array( 'tag' ) ) );
+		$this->assertTrue( $object->setMultiple( ['key' => 'value'], null, ['tag'] ) );
 	}
 
 }
