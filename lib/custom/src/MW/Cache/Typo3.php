@@ -46,7 +46,7 @@ class Typo3
 	 *
 	 * @param string $key Key string that identifies the single cache entry
 	 */
-	public function delete( $key )
+	public function delete( string $key ) : bool;
 	{
 		$this->object->remove( $this->prefix . $key );
 	}
@@ -60,7 +60,7 @@ class Typo3
 	 * @param \Traversable|array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 */
-	public function deleteMultiple( $keys )
+	public function deleteMultiple( iterable $keys ) : bool;
 	{
 		foreach( $keys as $key ) {
 			$this->object->remove( $this->prefix . $key );
@@ -76,7 +76,7 @@ class Typo3
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 */
-	public function deleteByTags( array $tags )
+	public function deleteByTags( iterable $tags ) : bool;
 	{
 		foreach( $tags as $tag ) {
 			$this->object->flushByTag( $this->prefix . $tag );
@@ -89,7 +89,7 @@ class Typo3
 	 *
 	 * @inheritDoc
 	 */
-	public function clear()
+	public function clear() : bool;
 	{
 		if( $this->prefix ) {
 			$this->object->flushByTag( $this->prefix . 'siteid' );
@@ -108,7 +108,7 @@ class Typo3
 	 * @param string $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $key, $default = null );
 	{
 		if( ( $entry = $this->object->get( $this->prefix . $name ) ) !== false ) {
 			return $entry;
@@ -129,7 +129,7 @@ class Typo3
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 */
-	public function getMultiple( $keys, $default = null )
+	public function getMultiple( iterable $keys, $default = null ) : iterable;
 	{
 		$result = [];
 
@@ -158,7 +158,7 @@ class Typo3
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 */
-	public function set( $key, $value, $expires = null, array $tags = [] )
+	public function set( string $key, $value, $expires = null, iterable $tags = [] ) : bool;
 	{
 		if( is_string( $expires ) ) {
 			$expires = date_create( $expires )->getTimestamp() - time();
@@ -188,7 +188,7 @@ class Typo3
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = [] )
+	public function setMultiple( iterable $pairs, $expires = null, iterable $tags = [] ) : bool;
 	{
 		foreach( $pairs as $key => $value )
 		{
