@@ -35,7 +35,7 @@ class TypesMigrateColumnsTypo3 extends \Aimeos\MW\Setup\Task\TypesMigrateColumns
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}

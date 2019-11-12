@@ -25,7 +25,7 @@ class CustomerAddVatidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}

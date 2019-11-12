@@ -28,7 +28,7 @@ class TablesUpdateCharsetCollationTypo3 extends \Aimeos\MW\Setup\Task\TablesUpda
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}
