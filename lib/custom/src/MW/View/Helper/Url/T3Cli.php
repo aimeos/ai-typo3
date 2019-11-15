@@ -29,7 +29,7 @@ class T3Cli
 	 * @param mixed $default Default value if value for key isn't found
 	 * @return mixed Configuration value for the given key or default value
 	 */
-	protected function getValue( array $config, $key, $default = null )
+	protected function getValue( array $config, string $key, $default = null )
 	{
 		switch( $key )
 		{

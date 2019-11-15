@@ -40,7 +40,7 @@ class Typo3
 	 * @param array $cookies List of uploaded files like in $_COOKIES
 	 * @param array $server List of uploaded files like in $_SERVER
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, $target = null, array $files = [],
+	public function __construct( \Aimeos\MW\View\Iface $view, string $target = null, array $files = [],
 		array $query = [], array $post = [], array $cookies = [], array $server = [] )
 	{
 		$this->target = $target;
@@ -57,7 +57,7 @@ class Typo3
 	 *
 	 * @return string Client IP address
 	 */
-	public function getClientAddress()
+	public function getClientAddress() : string
 	{
 		return $this->ip;
 	}
@@ -68,7 +68,7 @@ class Typo3
 	 *
 	 * @return string|null Current page ID
 	 */
-	public function getTarget()
+	public function getTarget() : ?string
 	{
 		return $this->target;
 	}
@@ -85,7 +85,7 @@ class Typo3
 	 * @param array $server List of uploaded files like in $_SERVER
 	 * @return \Psr\Http\Message\ServerRequestInterface PSR-7 request object
 	 */
-	protected function createRequest( array $files, array $query, array $post, array $cookies, array $server )
+	protected function createRequest( array $files, array $query, array $post, array $cookies, array $server ) : \Psr\Http\Message\ServerRequestInterface
 	{
 		if( !isset( $server['HTTP_HOST'] ) ) {
 			$server['HTTP_HOST'] = 'localhost';

@@ -55,7 +55,8 @@ class Typo3
 	 * @param array $config Additional configuration parameter per URL
 	 * @return string Complete URL that can be used in the template
 	 */
-	public function transform( $target = null, $controller = null, $action = null, array $params = [], array $trailing = [], array $config = [] )
+	public function transform( string $target = null, string $controller = null, string $action = null,
+		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
 		$locale = $this->getValue( $params, 'locale' );
 		$params['controller'] = ucfirst( $controller );
@@ -80,24 +81,22 @@ class Typo3
 
 		$useCHash = (bool) $this->getValue( $config, 'chash', false );
 
-		$this->uriBuilder
-			->reset()
+		$this->uriBuilder->reset()
 			->setTargetPageUid( $target )
 			->setSection( join( '/', $trailing ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
-			->setUseCacheHash( $useCHash )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
-			->setArguments( $this->sanitize( $params ) );
+			->setArguments( $this->sanitize( $params ) )
+			->setUseCacheHash( $useCHash );
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
-			return $this->uriBuilder->buildBackendUri();
+			return (string) $this->uriBuilder->buildBackendUri();
 		}
 
 		$url = $this->uriBuilder->buildFrontendUri();
-
 		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url );
 	}
 
@@ -110,7 +109,7 @@ class Typo3
 	 * @param mixed $default Default value if value for key isn't found
 	 * @return mixed Configuration value for the given key or default value
 	 */
-	protected function getValue( array $config, $key, $default = null )
+	protected function getValue( array $config, string $key, $default = null )
 	{
 		if( isset( $config[$key] ) ) {
 			return $config[$key];
