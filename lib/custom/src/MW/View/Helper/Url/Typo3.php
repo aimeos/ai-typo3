@@ -78,6 +78,8 @@ class Typo3
 			$params['L'] = $locale;
 		}
 
+		$useCHash = (bool) $this->getValue( $config, 'chash', false );
+
 		$this->uriBuilder
 			->reset()
 			->setTargetPageUid( $target )
@@ -85,7 +87,7 @@ class Typo3
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
-			->setUseCacheHash( (bool) $this->getValue( $config, 'chash', false ) )
+			->setUseCacheHash( $useCHash )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) );
@@ -94,7 +96,9 @@ class Typo3
 			return $this->uriBuilder->buildBackendUri();
 		}
 
-		return preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $this->uriBuilder->buildFrontendUri() );
+		$url = $this->uriBuilder->buildFrontendUri();
+
+		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url );
 	}
 
 
