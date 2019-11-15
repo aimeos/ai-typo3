@@ -32,7 +32,7 @@ class T3DateTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 

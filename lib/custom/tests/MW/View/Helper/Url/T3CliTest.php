@@ -33,7 +33,7 @@ class T3CliTest extends \PHPUnit\Framework\TestCase
 	public function testTransformAbsolute()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setCreateAbsoluteUri') )->getMock();
+			->setMethods( array( 'setCreateAbsoluteUri' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
@@ -47,7 +47,7 @@ class T3CliTest extends \PHPUnit\Framework\TestCase
 	public function testTransformChash()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setUseCacheHash') )->getMock();
+			->setMethods( array( 'setUseCacheHash' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
 			->with( $this->equalTo( false ) )->will( $this->returnValue( $mock ) );
