@@ -95,7 +95,7 @@ class Typo3
 		$server = ServerRequestFactory::normalizeServer( $server );
 		$headers = ServerRequestFactory::marshalHeaders( $server );
 		$uri = ServerRequestFactory::marshalUriFromServer( $server, $headers );
-		$method = ServerRequestFactory::get('REQUEST_METHOD', $server, 'GET');
+		$method = ServerRequestFactory::get( 'REQUEST_METHOD', $server, 'GET' );
 
 		return new ServerRequest( $server, $files, $uri, $method, 'php://input', $headers, $cookies, $query, $post );
 	}

@@ -31,8 +31,8 @@ class TablesAddTypo3TestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg('Setting up Aimeos TYPO3 test tables', 0);
-		$this->status('');
+		$this->msg( 'Setting up Aimeos TYPO3 test tables', 0 );
+		$this->status( '' );
 
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mysql.sql';
 
