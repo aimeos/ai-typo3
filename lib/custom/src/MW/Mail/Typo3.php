@@ -39,7 +39,7 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 * @param string $charset Default charset of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
-	public function createMessage( $charset = 'UTF-8' )
+	public function createMessage( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface
 	{
 		$closure = $this->closure;
 		return new \Aimeos\MW\Mail\Message\Typo3( $closure(), $charset );
@@ -51,8 +51,9 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 *
 	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 */
-	public function send( \Aimeos\MW\Mail\Message\Iface $message )
+	public function send( \Aimeos\MW\Mail\Message\Iface $message ) : Iface
 	{
 		$message->getObject()->send();
+		return $this;
 	}
 }
