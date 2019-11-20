@@ -40,7 +40,7 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	 * @param array $values Associative list of key/value pairs
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function apply( array $values )
+	public function apply( array $values ) : Iface
 	{
 		foreach( $values as $key => $value ) {
 			$this->user->setKey( 'ses', $key, $value );
@@ -61,7 +61,7 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		if( ( $value = $this->user->getSessionData( $name ) ) !== null ) {
 			return $value;
@@ -81,7 +81,7 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $value Value that should be associated with the given key
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : Iface
 	{
 		$this->user->setAndSaveSessionData( $name, $value );
 		return $this;
