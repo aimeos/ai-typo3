@@ -56,7 +56,7 @@ class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
 					&& $schema->constraintExists( $table, $constraint ) === false
 				) {
-					$this->execute( $stmt, 'db-customer' );
+					$this->execute( $sql, 'db-customer' );
 					$this->status( 'done' );
 				}
 				else
