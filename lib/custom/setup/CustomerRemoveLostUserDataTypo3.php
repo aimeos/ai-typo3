@@ -15,9 +15,15 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'fe_users_address' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
-		'fe_users_list' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
-		'fe_users_property' => 'DELETE FROM "fe_users_property" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )',
+		'fe_users_address' => [
+			'fk_t3feuad_pid' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+		],
+		'fe_users_list' => [
+			'fk_t3feuli_pid' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+		],
+		'fe_users_property' => [
+			'fk_t3feupr_pid' => 'DELETE FROM "fe_users_property" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+		]
 	];
 
 
@@ -39,18 +45,24 @@ class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Remove left over TYPO3 fe_users references', 0, '' );
 
-		foreach( $this->sql as $table => $stmt )
-		{
-			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
+		$schema = $this->getSchema( 'db-customer' );
 
-			if( $this->schema->tableExists( 'fe_users' ) && $this->schema->tableExists( $table ) )
+		foreach( $this->sql as $table => $map )
+		{
+			foreach( $map as $constraint => $sql )
 			{
-				$this->execute( $stmt );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+				$this->msg( sprintf( 'Remove records from %1$s', $table ), 1 );
+
+				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
+					&& $schema->constraintExists( $table, $constraint ) === false
+				) {
+					$this->execute( $stmt, 'db-customer' );
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
 			}
 		}
 	}
