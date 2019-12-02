@@ -19,7 +19,7 @@ class TablesAddTypo3TestData extends TablesCreateMShop
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}
