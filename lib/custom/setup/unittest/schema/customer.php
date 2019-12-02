@@ -18,6 +18,7 @@ return array(
 			$table->addColumn( 'pid', 'integer', ['unsigned' => true, 'default' => 0] );
 			$table->addColumn( 'deleted', 'integer', ['length' => 3, 'default' => 0] );
 			$table->addColumn( 'hidden', 'integer', ['length' => 3, 'default' => 0] );
+			$table->addColumn( 'disable', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
 			$table->addColumn( 'tstamp', 'integer', ['unsigned' => true, 'default' => 0] );
 			$table->addColumn( 'crdate', 'integer', ['unsigned' => true, 'default' => 0] );
 			$table->addColumn( 'cruser_id', 'integer', ['unsigned' => true, 'default' => 0] );
