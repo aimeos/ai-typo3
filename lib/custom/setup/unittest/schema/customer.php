@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'fe_users' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users' );
 
@@ -69,14 +69,14 @@ return array(
 			$table->addColumn( 'latitude', 'decimal', ['precision' => 8, 'scale' => 6, 'notnull' => false] );
 
 			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid', 'username'],'fe_users_parent' );
-			$table->addIndex( ['username'],'fe_users_username' );
-			$table->addIndex( ['is_online'],'fe_users_is_online' );
+			$table->addIndex( ['pid', 'username'], 'fe_users_parent' );
+			$table->addIndex( ['username'], 'fe_users_username' );
+			$table->addIndex( ['is_online'], 'fe_users_is_online' );
 
 			return $schema;
 		},
 
-		'fe_groups' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_groups' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_groups' );
 
@@ -96,12 +96,12 @@ return array(
 			$table->addColumn( 'tx_phpunit_is_dummy_record', 'integer', ['unsigned' => true, 'length' => 1, 'default' => 0] );
 
 			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid', 'deleted', 'hidden'],'fe_groups_parent' );
+			$table->addIndex( ['pid', 'deleted', 'hidden'], 'fe_groups_parent' );
 
 			return $schema;
 		},
 
-		'static_countries' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'static_countries' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'static_countries' );
 
@@ -127,7 +127,7 @@ return array(
 			$table->addColumn( 'cn_uno_member', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
 
 			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid'],'static_countries_parent' );
+			$table->addIndex( ['pid'], 'static_countries_parent' );
 
 			return $schema;
 		},
