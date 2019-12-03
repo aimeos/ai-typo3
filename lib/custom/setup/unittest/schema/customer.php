@@ -68,10 +68,10 @@ return array(
 			$table->addColumn( 'longitude', 'decimal', ['precision' => 8, 'scale' => 6, 'notnull' => false] );
 			$table->addColumn( 'latitude', 'decimal', ['precision' => 8, 'scale' => 6, 'notnull' => false] );
 
-			$table->setPrimaryKey( ['uid'],'PRIMARY' );
-			$table->addIndex( ['pid'],'parent' );
-			$table->addIndex( ['username'],'username' );
-			$table->addIndex( ['is_online'],'is_online' );
+			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
+			$table->addIndex( ['pid', 'username'],'fe_users_parent' );
+			$table->addIndex( ['username'],'fe_users_username' );
+			$table->addIndex( ['is_online'],'fe_users_is_online' );
 
 			return $schema;
 		},
@@ -95,8 +95,8 @@ return array(
 			$table->addColumn( 'felogin_redirectPid', 'text', ['length' => 0xff, 'notnull' => false] );
 			$table->addColumn( 'tx_phpunit_is_dummy_record', 'integer', ['unsigned' => true, 'length' => 1, 'default' => 0] );
 
-			$table->setPrimaryKey( ['uid'],'PRIMARY' );
-			$table->addIndex( ['pid'],'parent' );
+			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
+			$table->addIndex( ['pid', 'deleted', 'hidden'],'fe_groups_parent' );
 
 			return $schema;
 		},
@@ -126,8 +126,8 @@ return array(
 			$table->addColumn( 'cn_short_en', 'string', ['length' => 50, 'default' => ''] );
 			$table->addColumn( 'cn_uno_member', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
 
-			$table->setPrimaryKey( ['uid'],'PRIMARY' );
-			$table->addIndex( ['pid'],'parent' );
+			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
+			$table->addIndex( ['pid'],'static_countries_parent' );
 
 			return $schema;
 		},
