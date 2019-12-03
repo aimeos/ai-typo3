@@ -66,7 +66,7 @@ return [
 		],
 		'customer/UTC002' => [
 			'customer.label' => 'unitCustomer002', 'customer.code' => 'UTC002', 'customer.status' => 1,
-			'customer.languageid' => 'de', 'customer.email' => 'test2@example.com',
+			'customer.countryid' => 'DE', 'customer.languageid' => 'de', 'customer.email' => 'test2@example.com',
 			'address' => [[
 				'customer.address.company' => 'Example company LLC', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr.',
@@ -95,7 +95,7 @@ return [
 		],
 		'customer/UTC003' => [
 			'customer.label' => 'unitCustomer003', 'customer.code' => 'UTC003', 'customer.status' => 0,
-			'customer.languageid' => 'de', 'customer.email' => 'test3@example.com',
+			'customer.countryid' => 'DE', 'customer.languageid' => 'de', 'customer.email' => 'test3@example.com',
 			'address' => [[
 				'customer.address.company' => 'unitcompany', 'customer.address.vatid' => 'vatnumber',
 				'customer.address.salutation' => 'company', 'customer.address.title' => 'unittitle',
