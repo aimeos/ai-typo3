@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'fe_users_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_address' );
 
@@ -39,7 +39,7 @@ return array(
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuad_id' );
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_t3feuad_last_first' );
@@ -56,7 +56,7 @@ return array(
 			return $schema;
 		},
 
-		'fe_users_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_list_type' );
 
@@ -80,7 +80,7 @@ return array(
 			return $schema;
 		},
 
-		'fe_users_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_list' );
 
@@ -111,7 +111,7 @@ return array(
 			return $schema;
 		},
 
-		'fe_users_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_property_type' );
 
@@ -135,7 +135,7 @@ return array(
 			return $schema;
 		},
 
-		'fe_users_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_property' );
 
