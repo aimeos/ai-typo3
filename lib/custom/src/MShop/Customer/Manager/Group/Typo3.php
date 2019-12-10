@@ -37,7 +37,7 @@ class Typo3
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
-			'internalcode' => 't3feg."title"',
+			'internalcode' => 't3feg."description"',
 			'label' => 'Customer group label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
