@@ -128,7 +128,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.group.label', 'unitgroup' ) );
+		$search->setConditions( $search->compare( '==', 'customer.group.label', 'Unitgroup' ) );
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
