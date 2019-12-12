@@ -237,10 +237,8 @@ class Typo3
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => '(
-				SELECT t3feuli_has."id" FROM fe_users_list AS t3feuli_has
-				WHERE t3feu."uid" = t3feuli_has."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND t3feuli."id"',
+			'internaldeps' => ['LEFT JOIN "fe_users_list" AS t3feuli ON ( t3feuli."parentid" = t3feu."uid" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -248,10 +246,8 @@ class Typo3
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => '(
-				SELECT t3feupr_prop."id" FROM fe_users_property AS t3feupr_prop
-				WHERE t3feu."uid" = t3feupr_prop."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND t3feupr."id"',
+			'internaldeps' => ['LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."uid" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -301,13 +297,21 @@ class Typo3
 
 		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = isset( $params[1] ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . $id;
 			}
 
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 't3feuli_has."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 't3feuli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 't3feuli."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 't3feuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
@@ -315,14 +319,21 @@ class Typo3
 
 		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) .( $id !== '' ?  md5( $id ) : '' );
 			}
 
-			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 't3feupr_prop."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 't3feupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 't3feupr."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 't3feupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
