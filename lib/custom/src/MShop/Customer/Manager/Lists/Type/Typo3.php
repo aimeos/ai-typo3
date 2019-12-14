@@ -34,8 +34,8 @@ class Typo3
 			'code'=>'customer.lists.type.siteid',
 			'internalcode'=>'t3feulity."siteid"',
 			'label'=>'Customer list type site ID',
-			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.lists.type.code' => array(

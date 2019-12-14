@@ -14,9 +14,8 @@ return array(
 			$table = $schema->createTable( 'fe_users_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
-			$table->addColumn( 'pos', 'smallint', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
@@ -37,6 +36,7 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
+			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
@@ -61,7 +61,7 @@ return array(
 			$table = $schema->createTable( 'fe_users_list_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -86,7 +86,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
@@ -116,7 +116,7 @@ return array(
 			$table = $schema->createTable( 'fe_users_property_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -141,7 +141,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 130, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );

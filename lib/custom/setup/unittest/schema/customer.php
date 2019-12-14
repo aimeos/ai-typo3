@@ -13,7 +13,7 @@ return array(
 
 			$table = $schema->createTable( 'fe_users' );
 
-			$table->addColumn( 'siteid', 'integer', ['notnull' => false] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'uid', 'integer', ['autoincrement' => true, 'unsigned' => true] );
 			$table->addColumn( 'pid', 'integer', ['unsigned' => true, 'default' => 0] );
 			$table->addColumn( 'deleted', 'integer', ['length' => 3, 'default' => 0] );
