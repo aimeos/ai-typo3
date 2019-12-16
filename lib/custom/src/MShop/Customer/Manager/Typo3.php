@@ -524,7 +524,7 @@ class Typo3
 			}
 
 			// TYPO3 fe_users.static_info_country is a three letter ISO code instead a two letter one
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $this->plugins['customer.salutation']->translate( $billingAddress->getSalutation() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
