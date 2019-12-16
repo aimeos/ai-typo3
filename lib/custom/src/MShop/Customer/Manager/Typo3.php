@@ -237,7 +237,7 @@ class Typo3
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => ':site :key AND t3feuli."id"',
+			'internalcode' => ':site AND :key AND t3feuli."id"',
 			'internaldeps' => ['LEFT JOIN "fe_users_list" AS t3feuli ON ( t3feuli."parentid" = t3feu."uid" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -246,7 +246,7 @@ class Typo3
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => ':site :key AND t3feupr."id"',
+			'internalcode' => ':site AND :key AND t3feupr."id"',
 			'internaldeps' => ['LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."uid" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -291,11 +291,8 @@ class Typo3
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -311,15 +308,15 @@ class Typo3
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 't3feuli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 't3feuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 't3feuli."siteid"', $level );
+			$keystr = $this->toExpression( 't3feuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -335,8 +332,8 @@ class Typo3
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 't3feupr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 't3feupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 't3feupr."siteid"', $level );
+			$keystr = $this->toExpression( 't3feupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
