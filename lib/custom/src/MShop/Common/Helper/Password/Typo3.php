@@ -44,7 +44,7 @@ class Typo3 implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt = null )
+	public function encode( string $password, string $salt = null ) : string
 	{
 		return ( isset( $this->hasher ) ? $this->hasher->getHashedPassword( $password, $salt ) : $password );
 	}

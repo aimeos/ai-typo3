@@ -28,7 +28,7 @@ class Typo3
 	 *
 	 * @return \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface|null Password factory object or null
 	 */
-	public function getHasherTypo3()
+	public function getHasherTypo3() : ?\TYPO3\CMS\Saltedpasswords\Salt\SaltInterface
 	{
 		return $this->hasher;
 	}
@@ -40,7 +40,7 @@ class Typo3
 	 * @param \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setHasherTypo3( \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object )
+	public function setHasherTypo3( \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface $object ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->hasher = $object;
 		return $this;
