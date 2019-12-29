@@ -344,9 +344,10 @@ class Typo3
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
@@ -354,6 +355,8 @@ class Typo3
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
+
+		return $this;
 	}
 
 
@@ -363,7 +366,7 @@ class Typo3
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Customer\Item\Iface New site item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -376,7 +379,7 @@ class Typo3
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/typo3/delete';
 		$this->deleteItemsBase( $itemIds, $path, false, 'uid' );
@@ -403,10 +406,10 @@ class Typo3
 	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address'], $withsub );
@@ -417,10 +420,10 @@ class Typo3
 	 * Saves a customer item object.
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Customer\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		if( !$item->isModified() )
 		{
@@ -615,11 +618,11 @@ class Typo3
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -669,7 +672,7 @@ class Typo3
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
@@ -686,7 +689,7 @@ class Typo3
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-		array $addrItems = [], array $propItems = [] )
+		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$helper = $this->getPasswordHelper();
 		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
@@ -730,7 +733,7 @@ class Typo3
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
 	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
 	 */
-	protected function getPasswordHelper()
+	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
 		if( $this->helper ) {
 			return $this->helper;

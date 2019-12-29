@@ -91,15 +91,18 @@ class Typo3
 	/**
 	 * Removes old entries from the database
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
+
+		return $this;
 	}
 
 
@@ -109,7 +112,7 @@ class Typo3
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/customer/manager/group/typo3/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -150,10 +153,10 @@ class Typo3
 	/**
 	 * Returns the attributes that can be used for searching
 	 *
-	 * @param boolean $withsub Return attributes of sub-managers too if true
+	 * @param bool $withsub Return attributes of sub-managers too if true
 	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 
@@ -168,7 +171,7 @@ class Typo3
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer/group', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
@@ -181,7 +184,7 @@ class Typo3
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Customer\Item\Group\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Customer\Item\Group\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Customer\Item\Group\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Group\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -356,11 +359,11 @@ class Typo3
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->getContext();
@@ -488,9 +491,9 @@ class Typo3
 	 * Creates a new customer item.
 	 *
 	 * @param array $values List of attributes for customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface New customer item
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Customer\Item\Group\Iface
 	{
 		$values['customer.group.siteid'] = $this->getContext()->getLocale()->getSiteId();
 

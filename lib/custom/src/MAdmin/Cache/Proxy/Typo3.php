@@ -42,9 +42,9 @@ class Typo3
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return \\Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MW\Cache\Iface
 	{
 		if( !isset( $this->object ) )
 		{

@@ -214,26 +214,27 @@ class Typo3
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		$this->clearBase( $siteids, 'mshop/customer/manager/address/typo3/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/address/typo3/delete' );
 	}
 
 
 	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
 
@@ -246,9 +247,9 @@ class Typo3
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', 'address/' . $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
@@ -259,7 +260,7 @@ class Typo3
 	 *
 	 * @return string Configuration path (mshop/customer/manager/address/typo3/item/)
 	 */
-	protected function getConfigPath()
+	protected function getConfigPath() : string
 	{
 		return 'mshop/customer/manager/address/typo3/';
 	}
@@ -270,7 +271,7 @@ class Typo3
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function getSearchConfig()
+	protected function getSearchConfig() : array
 	{
 		return $this->searchConfig;
 	}
