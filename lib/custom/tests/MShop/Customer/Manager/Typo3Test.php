@@ -17,7 +17,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	private $item;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
@@ -26,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->item );
 	}
@@ -119,7 +119,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -302,14 +302,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

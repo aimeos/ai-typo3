@@ -26,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )->getMock();
 		$this->object = new \Aimeos\MW\Mail\Message\Typo3( $this->mock, 'UTF-8' );
@@ -38,7 +38,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 

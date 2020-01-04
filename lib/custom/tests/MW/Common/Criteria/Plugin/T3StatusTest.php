@@ -21,7 +21,7 @@ class T3StatusTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Sets up the fixture. This method is called before a test is executed.
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Criteria\Plugin\T3Status();
 	}
@@ -30,7 +30,7 @@ class T3StatusTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Tears down the fixture. This method is called after a test is executed.
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

@@ -18,14 +18,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$mock = new \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication();
 		$this->object = new \Aimeos\MW\Session\Typo3($mock);
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset($this->object);
 	}

@@ -18,13 +18,13 @@ class T3CliTest extends \PHPUnit\Framework\TestCase
 	private $view;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->view = new \Aimeos\MW\View\Standard();
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->view );
 	}

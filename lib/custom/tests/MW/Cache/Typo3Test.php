@@ -16,7 +16,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	private $mock;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( interface_exists( 'TYPO3\CMS\Core\Cache\Frontend\FrontendInterface' ) === false ) {
 			$this->markTestSkipped( 'Class \\TYPO3\\CMS\\Core\\Cache\\Frontend\\FrontendInterface not found' );
@@ -27,7 +27,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->mock, $this->object );
 	}

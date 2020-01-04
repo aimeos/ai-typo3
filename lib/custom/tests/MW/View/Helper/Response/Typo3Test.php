@@ -14,7 +14,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !class_exists( '\Zend\Diactoros\Response' ) ) {
 			$this->markTestSkipped( '\Zend\Diactoros\Response is not available' );
@@ -25,7 +25,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

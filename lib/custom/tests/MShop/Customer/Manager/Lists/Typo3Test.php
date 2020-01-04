@@ -17,7 +17,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	private $editor = '';
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
@@ -26,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -122,7 +122,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->expectException('\\Aimeos\\MShop\\Exception');
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -189,7 +189,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type') );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type', 'Typo3') );
 
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->expectException('\\Aimeos\\MShop\\Exception');
 		$this->object->getSubManager('unknown');
 	}
 }
