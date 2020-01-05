@@ -21,13 +21,13 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$mock = new \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication();
-		$this->object = new \Aimeos\MW\Session\Typo3($mock);
+		$this->object = new \Aimeos\MW\Session\Typo3( $mock );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 
@@ -42,19 +42,19 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$this->assertEquals('', $this->object->get('test'));
+		$this->assertEquals( '', $this->object->get( 'test' ) );
 
-		$this->object->set('test', '123456789');
-		$this->assertEquals('123456789', $this->object->get('test'));
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
 	}
 
 
 	public function testSet()
 	{
-		$this->object->set('test', '123');
+		$this->object->set( 'test', '123' );
 		$this->assertEquals( '123', $this->object->get( 'test' ) );
 
-		$this->object->set('test', '234');
+		$this->object->set( 'test', '234' );
 		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }
