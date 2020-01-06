@@ -16,7 +16,7 @@
 	"require": {
 		"php": "~7.1",
 		"composer/installers": "^1.0",
-		"zendframework/zend-diactoros": "~1.0",
+		"nyholm/psr7-server": "^0.4.1",
 		"aimeos/aimeos-core": "dev-master"
 	},
 	"require-dev": {

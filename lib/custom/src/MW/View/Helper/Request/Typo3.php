@@ -10,10 +10,6 @@
 
 namespace Aimeos\MW\View\Helper\Request;
 
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Stream;
-
 
 /**
  * View helper class for accessing request data from Flow
@@ -91,12 +87,15 @@ class Typo3
 			$server['HTTP_HOST'] = 'localhost';
 		}
 
-		$files = ServerRequestFactory::normalizeFiles( $files );
-		$server = ServerRequestFactory::normalizeServer( $server );
-		$headers = ServerRequestFactory::marshalHeaders( $server );
-		$uri = ServerRequestFactory::marshalUriFromServer( $server, $headers );
-		$method = ServerRequestFactory::get( 'REQUEST_METHOD', $server, 'GET' );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 
-		return new ServerRequest( $server, $files, $uri, $method, 'php://input', $headers, $cookies, $query, $post );
+		$creator = new \Nyholm\Psr7Server\ServerRequestCreator(
+			$psr17Factory, // ServerRequestFactory
+			$psr17Factory, // UriFactory
+			$psr17Factory, // UploadedFileFactory
+			$psr17Factory  // StreamFactory
+		);
+
+		return $creator->fromGlobals();
 	}
 }
