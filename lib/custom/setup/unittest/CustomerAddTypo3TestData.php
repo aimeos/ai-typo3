@@ -50,7 +50,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
-		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 

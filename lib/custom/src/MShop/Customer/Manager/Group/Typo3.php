@@ -359,11 +359,11 @@ class Typo3
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
-	 * @param int &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
+	 * @param int|null &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->getContext();
@@ -483,7 +483,7 @@ class Typo3
 			throw $e;
 		}
 
-		return $map;
+		return new \Aimeos\Map( $map );
 	}
 
 

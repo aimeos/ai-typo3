@@ -49,9 +49,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
-		$items = $this->object->searchItems( $search );
 
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 
@@ -63,9 +62,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
-		$items = $this->object->searchItems( $search );
 
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 

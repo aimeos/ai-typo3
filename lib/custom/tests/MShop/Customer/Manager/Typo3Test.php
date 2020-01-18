@@ -65,9 +65,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
-		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No customer found.' );
 		}
 
@@ -254,7 +253,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, count( reset( $result )->getGroups() ) );
+		$this->assertEquals( 1, count( $result->first()->getGroups() ) );
 	}
 
 
@@ -289,9 +288,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 
-		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
-
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search, ['customer/address', 'text'] ) ) === null ) {
 			throw new \Exception( 'No customer item for "UTC001" available' );
 		}
 

@@ -387,17 +387,17 @@ class Typo3
 		$manager = $this->getObject()->getSubManager( 'address' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $itemIds ) );
-		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
 		$manager = $this->getObject()->getSubManager( 'lists' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'customer.lists.parentid', $itemIds ) );
-		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
 		$manager = $this->getObject()->getSubManager( 'property' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $itemIds ) );
-		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
 		return $this->deleteRefItems( $itemIds );
 	}
@@ -618,11 +618,11 @@ class Typo3
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param int &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
+	 * @param int|null &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();

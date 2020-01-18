@@ -43,23 +43,20 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
 
-		if( ( $expected = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No list type item found' );
 		}
 
-		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
