@@ -483,7 +483,7 @@ class Typo3
 			throw $e;
 		}
 
-		return new \Aimeos\Map( $map );
+		return map( $map );
 	}
 
 
