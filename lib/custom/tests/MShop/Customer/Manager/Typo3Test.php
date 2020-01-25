@@ -167,10 +167,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$item = $this->object->findItem( 'UTC001', ['text'] );
-
-		if( ( $listItem = current( $item->getListItems( 'text', 'default' ) ) ) === false ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
+		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$search = $this->object->createSearch();
 
