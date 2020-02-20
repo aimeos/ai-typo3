@@ -52,6 +52,20 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 
 
 	/**
+	 * Remove the given key from the session.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function del( string $name ) : Iface
+	{
+		$this->user->setKey( 'ses', $name, null );
+		$this->user->storeSessionData();
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its serialized
@@ -68,6 +82,23 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 		}
 
 		return $default;
+	}
+
+
+	/**
+	 * Remove the list of keys from the session.
+	 *
+	 * @param array $name Keys to remove from the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function remove( array $names ) : Iface
+	{
+		foreach( $names as $name ) {
+			$this->user->setKey( 'ses', $name, null );
+		}
+
+		$this->user->storeSessionData();
+		return $this;
 	}
 
 

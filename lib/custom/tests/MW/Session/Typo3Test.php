@@ -31,30 +31,60 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testApply()
+	public function testDel()
 	{
-		$this->object->apply( ['test' => '123456789', 'test2' => '987654321'] );
-
+		$this->object->set( 'test', '123456789' );
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
-		$this->assertEquals( '987654321', $this->object->get( 'test2' ) );
+
+		$result = $this->object->del( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 	}
 
 
 	public function testGet()
 	{
-		$this->assertEquals( '', $this->object->get( 'test' ) );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 
 		$this->object->set( 'test', '123456789' );
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$this->object->set( 'test', ['123456789'] );
+		$this->assertEquals( ['123456789'], $this->object->get( 'test' ) );
+	}
+
+
+	public function testPull()
+	{
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$this->assertEquals( '123456789', $this->object->pull( 'test' ) );
+		$this->assertEquals( null, $this->object->pull( 'test' ) );
+	}
+
+
+	public function testRemove()
+	{
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$result = $this->object->remove( ['test'] );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 	}
 
 
 	public function testSet()
 	{
-		$this->object->set( 'test', '123' );
-		$this->assertEquals( '123', $this->object->get( 'test' ) );
+		$this->object->set( 'test', null );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 
-		$this->object->set( 'test', '234' );
+		$result = $this->object->set( 'test', '234' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
 		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }
