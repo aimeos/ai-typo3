@@ -15,56 +15,37 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Configuration';
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
-	private $object;
-	private $mock;
-
-
-	protected function setUp() : void
+	public function testRender()
 	{
-		$this->mock = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' )
+		$mock = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$configuration = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Configuration\ConfigurationManager' )
+		$config = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Configuration\ConfigurationManager' )
 			->setMethods( array( 'getConfiguration' ) )
 			->disableOriginalConstructor()
 			->getMock();
-		$configuration->expects( $this->once() )->method( 'getConfiguration' );
-		$this->mock->expects( $this->at(0) )->method( 'get' )
-			->will( $this->returnValue( $configuration) );
-
-		$this->object = new \Aimeos\MW\View\Engine\Typo3( $this->mock );
-	}
-
-
-	protected function tearDown() : void
-	{
-		unset( $this->object, $this->mock );
-	}
-
-
-	public function testRender()
-	{
-		$v = new \Aimeos\MW\View\Standard( [] );
 
 		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
 			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename', 'setPartialRootPaths', 'setLayoutRootPaths' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
+		$conf = ['view' => ['partialRootPaths' => '', 'layoutRootPaths' => '']];
+		$config->expects( $this->once() )->method( 'getConfiguration' )->will( $this->returnValue( $conf ) );
+		$mock->expects( $this->exactly( 2 ) )->method( 'get' )->will( $this->onConsecutiveCalls( $config, $view ) );
+
 		$view->expects( $this->once() )->method( 'setTemplatePathAndFilename' );
 		$view->expects( $this->once() )->method( 'assignMultiple' );
 		$view->expects( $this->once() )->method( 'assign' );
 		$view->expects( $this->once() )->method( 'setPartialRootPaths' );
 		$view->expects( $this->once() )->method( 'setLayoutRootPaths' );
-		$view->expects( $this->once() )->method( 'render' )
-			->will( $this->returnValue( 'test' ) );
+		$view->expects( $this->once() )->method( 'render' )->will( $this->returnValue( 'test' ) );
 
-		$this->mock->expects( $this->at(0) )->method( 'get' )
-			->will( $this->returnValue( $view) );
+		$v = new \Aimeos\MW\View\Standard( [] );
+		$object = new \Aimeos\MW\View\Engine\Typo3( $mock );
 
-		$result = $this->object->render( $v, 'filepath', array( 'key' => 'value' ) );
-		$this->assertEquals( 'test', $result );
+		$this->assertEquals( 'test', $object->render( $v, 'filepath', array( 'key' => 'value' ) ) );
 	}
 }
