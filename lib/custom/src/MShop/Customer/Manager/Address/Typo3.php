@@ -26,12 +26,19 @@ class Typo3
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
 			'internalcode' => 't3feuad."id"',
-			'internaldeps' => array( 'LEFT JOIN "fe_users_address" AS t3feuad ON ( t3feu."uid" = t3feuad."parentid" )' ),
+			'internaldeps' => ['LEFT JOIN "fe_users_address" AS t3feuad ON ( t3feu."uid" = t3feuad."parentid" )'],
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// customer.siteid is only for informational purpuse, not for filtering
+		'customer.address.siteid' => array(
+			'code' => 'customer.address.siteid',
+			'internalcode' => 't3feuad."siteid"',
+			'label' => 'Customer address site ID',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'customer.address.parentid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',
@@ -40,14 +47,14 @@ class Typo3
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.company'=> array(
+		'customer.address.company' => array(
 			'label' => 'Customer address company',
 			'code' => 'customer.address.company',
 			'internalcode' => 't3feuad."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.vatid'=> array(
+		'customer.address.vatid' => array(
 			'label' => 'Customer address VAT ID',
 			'code' => 'customer.address.vatid',
 			'internalcode' => 't3feuad."vatid"',
@@ -187,26 +194,26 @@ class Typo3
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.address.ctime'=> array(
-			'code'=>'customer.address.ctime',
-			'internalcode'=>'t3feuad."ctime"',
-			'label'=>'Customer address create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.ctime' => array(
+			'code' => 'customer.address.ctime',
+			'internalcode' => 't3feuad."ctime"',
+			'label' => 'Customer address create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.mtime'=> array(
-			'code'=>'customer.address.mtime',
-			'internalcode'=>'t3feuad."mtime"',
-			'label'=>'Customer address modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.mtime' => array(
+			'code' => 'customer.address.mtime',
+			'internalcode' => 't3feuad."mtime"',
+			'label' => 'Customer address modification date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.editor'=> array(
-			'code'=>'customer.address.editor',
-			'internalcode'=>'t3feuad."editor"',
-			'label'=>'Customer address editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.editor' => array(
+			'code' => 'customer.address.editor',
+			'internalcode' => 't3feuad."editor"',
+			'label' => 'Customer address editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 

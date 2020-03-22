@@ -224,8 +224,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "fe_users_list_type"
-							WHERE :cond
-							AND siteid = ?
+							WHERE :cond AND siteid = ?
 						',
 					),
 					'search' => array(
@@ -319,8 +318,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fe_users_list"
-						WHERE :cond
-						AND siteid = ?
+						WHERE :cond AND siteid = ?
 					',
 				),
 				'insert' => array(
@@ -597,7 +595,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fe_users"
-					WHERE :cond
+					WHERE :cond AND siteid = ?
 				',
 			),
 			'insert' => array(

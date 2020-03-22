@@ -22,13 +22,20 @@ class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
-		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 't3feu."uid"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'customer.siteid' => array(
+			'code' => 'customer.siteid',
+			'internalcode' => 't3feu."siteid"',
+			'label' => 'Customer site ID',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.code' => array(
@@ -356,7 +363,7 @@ class Typo3
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this;
+		return $this->clearBase( $siteids, 'mshop/customer/manager/typo3/delete' );
 	}
 
 
@@ -382,24 +389,7 @@ class Typo3
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/typo3/delete';
-		$this->deleteItemsBase( $itemIds, $path, false, 'uid' );
-
-		$manager = $this->getObject()->getSubManager( 'address' );
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $itemIds ) );
-		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
-
-		$manager = $this->getObject()->getSubManager( 'lists' );
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.lists.parentid', $itemIds ) );
-		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
-
-		$manager = $this->getObject()->getSubManager( 'property' );
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'customer.property.parentid', $itemIds ) );
-		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
-
-		return $this->deleteRefItems( $itemIds );
+		return $this->deleteItemsBase( $itemIds, $path, true, 'uid' )->deleteRefItems( $itemIds );
 	}
 
 

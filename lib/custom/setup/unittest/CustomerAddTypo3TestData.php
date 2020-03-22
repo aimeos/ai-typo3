@@ -45,13 +45,17 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 
 		$this->msg( 'Adding TYPO3 customer test data', 0 );
 
-		$this->additional->setEditor( 'ai-typo3:lib/custom' );
+		$dbm = $this->additional->getDatabaseManager();
+		$conn = $dbm->acquire( 'db-customer' );
+		$conn->create( 'DELETE FROM "fe_users" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
+		$dbm->release( $conn, 'db-customer' );
 
 		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
 		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
+		$this->additional->setEditor( 'ai-typo3:lib/custom' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 
 		$this->status( 'done' );
