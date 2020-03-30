@@ -194,6 +194,13 @@ class Typo3
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'customer.address.birthday' => array(
+			'label' => 'Customer address birthday',
+			'code' => 'customer.address.birthday',
+			'internalcode' => 't3feuad."birthday"',
+			'type' => 'date',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'customer.address.ctime' => array(
 			'code' => 'customer.address.ctime',
 			'internalcode' => 't3feuad."ctime"',

@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
-							"pos", "mtime", "editor", "siteid", "ctime"
+							"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -38,7 +38,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -58,7 +58,7 @@ return array(
 							t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
 							t3feuad."longitude" AS "customer.address.longitude", t3feuad."latitude" AS "customer.address.latitude",
 							t3feuad."mtime" AS "customer.address.mtime", t3feuad."editor" AS "customer.address.editor",
-							t3feuad."ctime" AS "customer.address.ctime"
+							t3feuad."ctime" AS "customer.address.ctime", t3feuad."birthday" AS "customer.address.birthday"
 						FROM "fe_users_address" AS t3feuad
 						:joins
 						WHERE :cond
@@ -80,7 +80,7 @@ return array(
 							t3feuad."telefax" AS "customer.address.telefax", t3feuad."website" AS "customer.address.website",
 							t3feuad."longitude" AS "customer.address.longitude", t3feuad."latitude" AS "customer.address.latitude",
 							t3feuad."mtime" AS "customer.address.mtime", t3feuad."editor" AS "customer.address.editor",
-							t3feuad."ctime" AS "customer.address.ctime"
+							t3feuad."ctime" AS "customer.address.ctime", t3feuad."birthday" AS "customer.address.birthday"
 						FROM "fe_users_address" AS t3feuad
 						:joins
 						WHERE :cond

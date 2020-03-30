@@ -103,6 +103,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
 		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
+		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getEditor(), $itemSaved->getEditor() );
 
@@ -132,6 +133,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
 		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
+		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getEditor(), $itemUpd->getEditor() );
 
@@ -179,6 +181,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.website', 'www.example.com' ),
 			$search->compare( '==', 'customer.address.longitude', '10.0' ),
 			$search->compare( '==', 'customer.address.latitude', '50.0' ),
+			$search->compare( '==', 'customer.address.birthday', '2000-01-01' ),
 			$search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' ),
 			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor ),

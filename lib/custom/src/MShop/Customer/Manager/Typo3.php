@@ -196,7 +196,7 @@ class Typo3
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
 			'internalcode' => 't3feu."date_of_birth"',
-			'type' => 'string',
+			'type' => 'date',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.password'=> array(
@@ -537,7 +537,7 @@ class Typo3
 			$stmt->bind( $idx++, $billingAddress->getWebsite() );
 			$stmt->bind( $idx++, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $this->plugins['customer.birthday']->translate( $item->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $this->plugins['customer.birthday']->translate( $billingAddress->getBirthday() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getPassword() );
 			$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // Modification time
