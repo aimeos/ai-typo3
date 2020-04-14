@@ -31,8 +31,6 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object, string $charset )
 	{
-		$object->setCharset( $charset );
-
 		$this->object = $object;
 	}
 
@@ -116,8 +114,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addHeader( string $name, string $value ) : Iface
 	{
-		$hs = $this->object->getHeaders();
-		$hs->addTextHeader( $name, $value );
+		$this->object->getHeaders()->addTextHeader( $name, $value );
 		return $this;
 	}
 
@@ -169,7 +166,14 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setBody( string $message ) : Iface
 	{
-		$this->object->setBody( $message );
+		$class = '\Symfony\Component\Mime\Email';
+
+		if( class_exists( $class ) && $this->object instanceof $class ) {
+			$this->object->text( $message );
+		} elseif( class_exists( '\Swiftmailer' ) ) {
+			$this->object->setBody( $message );
+		}
+
 		return $this;
 	}
 
@@ -182,7 +186,14 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setBodyHtml( string $message ) : Iface
 	{
-		$this->object->addPart( $message, 'text/html' );
+		$class = '\Symfony\Component\Mime\Email';
+
+		if( class_exists( $class ) && $this->object instanceof $class ) {
+			$this->object->html( $message );
+		} elseif( class_exists( '\Swiftmailer' ) ) {
+			$this->object->addPart( $message, 'text/html' );
+		}
+
 		return $this;
 	}
 
@@ -198,11 +209,25 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addAttachment( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
 	{
-		$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
-		$part->setDisposition( $disposition );
+		$class = '\Symfony\Component\Mime\Email';
 
-		$this->object->attach( $part );
-		return $this;
+		if( class_exists( $class ) && $this->object instanceof $class )
+		{
+echo 'Symfony\Component\Mime\Email::addAttachment' . PHP_EOL;
+			$this->object->attach( $data, $filename, $mimetype );
+			return $this;
+		}
+
+		if( class_exists( '\Swift_Attachment' ) )
+		{
+echo 'Swift_EmbeddedFile' . PHP_EOL;
+			$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
+			$part->setDisposition( $disposition );
+			$this->object->attach( $part );
+			return $this;
+		}
+
+		throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
 	}
 
 
@@ -216,9 +241,23 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function embedAttachment( string $data, string $mimetype, string $filename ) : string
 	{
-		$part = \Swift_EmbeddedFile::newInstance( $data, $mimetype, $filename );
+		$class = '\Symfony\Component\Mime\Email';
 
-		return $this->object->embed( $part );
+		if( class_exists( $class ) && $this->object instanceof $class )
+		{
+echo 'Symfony\Component\Mime\Email::embedAttachment' . PHP_EOL;
+			$this->object->embed( $data, $filename, $mimetype );
+			return md5( $filename );
+		}
+
+		if( class_exists( '\Swift_EmbeddedFile' ) )
+		{
+echo 'Swift_EmbeddedFile' . PHP_EOL;
+			$part = \Swift_EmbeddedFile::newInstance( $data, $mimetype, $filename );
+			return $this->object->embed( $part );
+		}
+
+		throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
 	}
 
 
