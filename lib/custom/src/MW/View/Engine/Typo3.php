@@ -32,7 +32,7 @@ class Typo3 implements Iface
 	public function __construct( \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager )
 	{
 		$this->objectManager = $objectManager;
-		$this->configuration = $this->objectManager->get(ConfigurationManager::class)->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK);
+		$this->configuration = $this->objectManager->get( ConfigurationManager::class )->getConfiguration( ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK );
 	}
 
 
@@ -48,8 +48,8 @@ class Typo3 implements Iface
 	public function render( \Aimeos\MW\View\Iface $view, string $filename, array $values ) : string
 	{
 		$fluid = $this->objectManager->get( 'TYPO3\\CMS\\Fluid\\View\\StandaloneView' );
-		$fluid->setPartialRootPaths((array) $this->configuration['view']['partialRootPaths']);
-		$fluid->setLayoutRootPaths((array) $this->configuration['view']['layoutRootPaths']);
+		$fluid->setPartialRootPaths( (array) $this->configuration['view']['partialRootPaths'] );
+		$fluid->setLayoutRootPaths( (array) $this->configuration['view']['layoutRootPaths'] );
 		$fluid->setTemplatePathAndFilename( $filename );
 		$fluid->assign( '_aimeos_view', $view );
 		$fluid->assignMultiple( $values );
