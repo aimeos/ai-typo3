@@ -170,7 +170,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
 			$this->object->text( $message );
-		} elseif( class_exists( '\Swiftmailer' ) ) {
+		} elseif( class_exists( '\Swift_Mailer' ) ) {
 			$this->object->setBody( $message );
 		}
 
@@ -190,7 +190,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
 			$this->object->html( $message );
-		} elseif( class_exists( '\Swiftmailer' ) ) {
+		} elseif( class_exists( '\Swift_Mailer' ) ) {
 			$this->object->addPart( $message, 'text/html' );
 		}
 
@@ -213,14 +213,12 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 
 		if( class_exists( $class ) && $this->object instanceof $class )
 		{
-echo 'Symfony\Component\Mime\Email::addAttachment' . PHP_EOL;
 			$this->object->attach( $data, $filename, $mimetype );
 			return $this;
 		}
 
 		if( class_exists( '\Swift_Attachment' ) )
 		{
-echo 'Swift_EmbeddedFile' . PHP_EOL;
 			$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
 			$part->setDisposition( $disposition );
 			$this->object->attach( $part );
@@ -245,14 +243,12 @@ echo 'Swift_EmbeddedFile' . PHP_EOL;
 
 		if( class_exists( $class ) && $this->object instanceof $class )
 		{
-echo 'Symfony\Component\Mime\Email::embedAttachment' . PHP_EOL;
 			$this->object->embed( $data, $filename, $mimetype );
 			return md5( $filename );
 		}
 
 		if( class_exists( '\Swift_EmbeddedFile' ) )
 		{
-echo 'Swift_EmbeddedFile' . PHP_EOL;
 			$part = \Swift_EmbeddedFile::newInstance( $data, $mimetype, $filename );
 			return $this->object->embed( $part );
 		}

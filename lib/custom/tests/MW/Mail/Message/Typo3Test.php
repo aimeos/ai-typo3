@@ -82,7 +82,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testAddHeader()
 	{
 		$result = $this->object->addHeader( 'test', 'value' );
-//		$this->assertSame( $this->object, $result );
+		$this->assertSame( $this->object, $result );
 	}
 
 
