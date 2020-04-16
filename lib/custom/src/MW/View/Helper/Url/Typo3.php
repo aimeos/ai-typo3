@@ -82,14 +82,14 @@ class Typo3
 		$useCHash = (bool) $this->getValue( $config, 'chash', false );
 
 		$this->uriBuilder->reset()
-			->setTargetPageUid( (int) $target )
-			->setSection( join( '/', $trailing ) )
+			->setTargetPageUid( $target ? (int) $target : ( $GLOBALS['TSFE']->id ?? null ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) )
+			->setSection( join( '/', $trailing ) )
 			->setUseCacheHash( $useCHash );
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
