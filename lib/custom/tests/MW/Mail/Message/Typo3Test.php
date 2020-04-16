@@ -18,7 +18,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )->getMock();
+		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$this->object = new \Aimeos\MW\Mail\Message\Typo3( $this->mock, 'UTF-8' );
 	}
 
@@ -81,6 +84,19 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddHeader()
 	{
+		if( !class_exists( '\Symfony\Component\Mime\Header\Headers' ) ) {
+			$this->markTestSkipped( '\Symfony\Component\Mime\Header\Headers is not installed' );
+		}
+
+		$stub = $this->getMockBuilder( '\Symfony\Component\Mime\Header\Headers' )
+			->setMethods( ['addTextHeader'] )
+			->getMock();
+
+		$stub->expects( $this->once() )->method( 'addTextHeader' )
+			->with( $this->stringContains( 'test' ), $this->stringContains( 'value' ) );
+
+		$this->mock->expects( $this->once() )->method( 'getHeaders' )->will( $this->returnValue( $stub ) );
+
 		$result = $this->object->addHeader( 'test', 'value' );
 		$this->assertSame( $this->object, $result );
 	}
