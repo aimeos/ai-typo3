@@ -26,9 +26,9 @@ class Typo3
 	/**
 	 * Returns the TYPO3 password hasher object
 	 *
-	 * @return \TYPO3\CMS\Saltedpasswords\Salt\SaltInterface|null Password factory object or null
+	 * @return \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface|null Password factory object or null
 	 */
-	public function getHasherTypo3() : ?\TYPO3\CMS\Saltedpasswords\Salt\SaltInterface
+	public function getHasherTypo3() : ?\TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface
 	{
 		return $this->hasher;
 	}
