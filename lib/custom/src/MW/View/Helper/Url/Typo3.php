@@ -82,7 +82,7 @@ class Typo3
 
 		$this->uriBuilder
 			->reset()
-			->setTargetPageUid( $target )
+			->setTargetPageUid( (int) ( $target ?: ( isset( $GLOBALS['TSFE']->id ) ? $GLOBALS['TSFE']->id : 0 ) ) )
 			->setSection( join( '/', $trailing ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
