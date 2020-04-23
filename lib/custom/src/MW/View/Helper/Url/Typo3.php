@@ -82,7 +82,7 @@ class Typo3
 		$useCHash = (bool) $this->getValue( $config, 'chash', false );
 
 		$this->uriBuilder->reset()
-			->setTargetPageUid( (int) ( $target ? $target : ( $GLOBALS['TSFE']->id ?? 0 ) ) )
+			->setTargetPageUid( (int) ( $target ?: ( $GLOBALS['TSFE']->id ?? 0 ) ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
