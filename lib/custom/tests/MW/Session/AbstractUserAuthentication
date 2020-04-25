@@ -20,17 +20,8 @@ class AbstractUserAuthentication
 		}
 	}
 
-	public function setKey( $type, $key, $data )
-	{
-		$this->data[$key] = $data;
-	}
-
 	public function setAndSaveSessionData( $key, $data )
 	{
 		$this->data[$key] = $data;
-	}
-
-	public function storeSessionData()
-	{
 	}
 }

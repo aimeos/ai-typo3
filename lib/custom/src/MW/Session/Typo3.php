@@ -43,10 +43,9 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	public function apply( array $values ) : Iface
 	{
 		foreach( $values as $key => $value ) {
-			$this->user->setKey( 'ses', $key, $value );
+			$this->user->setAndSaveSessionData( $key, $value );
 		}
 
-		$this->user->storeSessionData();
 		return $this;
 	}
 
@@ -59,8 +58,7 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	 */
 	public function del( string $name ) : Iface
 	{
-		$this->user->setKey( 'ses', $name, null );
-		$this->user->storeSessionData();
+		$this->user->setAndSaveSessionData( $name, null );
 		return $this;
 	}
 
@@ -94,10 +92,9 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	public function remove( array $names ) : Iface
 	{
 		foreach( $names as $name ) {
-			$this->user->setKey( 'ses', $name, null );
+			$this->user->setAndSaveSessionData( $name, null );
 		}
 
-		$this->user->storeSessionData();
 		return $this;
 	}
 
