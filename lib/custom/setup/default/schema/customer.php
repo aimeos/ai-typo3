@@ -49,7 +49,7 @@ return array(
 			$table->addIndex( array( 'address1' ), 'idx_t3feuad_address1' );
 			$table->addIndex( array( 'city' ), 'idx_t3feuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_t3feuad_email' );
-			$table->addIndex( array( 'parentid' ), 'idx_t3feuad_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_t3feuad_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuad_pid' );
@@ -104,7 +104,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_t3feuli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_t3feuli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_t3feuli_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_t3feuli_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feuli_pid' );
@@ -153,8 +153,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feupr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_t3feupr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_t3feupr_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_t3feupr_pid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_t3feupr_sid_key' );
+			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_t3feupr_pid' );
