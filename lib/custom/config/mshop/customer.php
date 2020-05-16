@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							t3feuad."id" AS "customer.address.id", t3feuad."siteid" AS "customer.address.siteid",
 							t3feuad."parentid" AS "customer.address.parentid", t3feuad."pos" AS "customer.address.position",
 							t3feuad."company" AS "customer.address.company", t3feuad."vatid" AS "customer.address.vatid",
@@ -66,7 +66,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							t3feuad."id" AS "customer.address.id", t3feuad."siteid" AS "customer.address.siteid",
 							t3feuad."parentid" AS "customer.address.parentid", t3feuad."pos" AS "customer.address.position",
 							t3feuad."company" AS "customer.address.company", t3feuad."vatid" AS "customer.address.vatid",
@@ -92,7 +92,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feuad."id"
+							SELECT t3feuad."id"
 							FROM "fe_users_address" AS t3feuad
 							:joins
 							WHERE :cond
@@ -102,7 +102,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feuad."id"
+							SELECT t3feuad."id"
 							FROM "fe_users_address" AS t3feuad
 							:joins
 							WHERE :cond
@@ -148,7 +148,8 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
+						SELECT
+							t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
 							t3feg."description" AS "customer.group.label", t3feg."crdate", t3feg."tstamp", t3feg.*
 						FROM "fe_groups" AS t3feg
 						:joins
@@ -157,7 +158,8 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
+						SELECT
+							t3feg."uid" AS "customer.group.id", t3feg."title" AS "customer.group.code",
 							t3feg."description" AS "customer.group.label", t3feg."crdate", t3feg."tstamp", t3feg.*
 						FROM "fe_groups" AS t3feg
 						:joins
@@ -170,7 +172,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feg."uid"
+							SELECT t3feg."uid"
 							FROM "fe_groups" AS t3feg
 							:joins
 							WHERE t3feg."deleted" = 0 AND :cond
@@ -180,7 +182,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feg."uid"
+							SELECT t3feg."uid"
 							FROM "fe_groups" AS t3feg
 							:joins
 							WHERE t3feg."deleted" = 0 AND :cond
@@ -229,7 +231,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								t3feulity."id" AS "customer.lists.type.id", t3feulity."siteid" AS "customer.lists.type.siteid",
 								t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
 								t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
@@ -242,7 +244,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								t3feulity."id" AS "customer.lists.type.id", t3feulity."siteid" AS "customer.lists.type.siteid",
 								t3feulity."code" AS "customer.lists.type.code", t3feulity."domain" AS "customer.lists.type.domain",
 								t3feulity."label" AS "customer.lists.type.label", t3feulity."status" AS "customer.lists.type.status",
@@ -259,7 +261,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT t3feulity."id"
+								SELECT t3feulity."id"
 								FROM "fe_users_list_type" AS t3feulity
 								:joins
 								WHERE :cond
@@ -269,7 +271,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT t3feulity."id"
+								SELECT t3feulity."id"
 								FROM "fe_users_list_type" AS t3feulity
 								:joins
 								WHERE :cond
@@ -291,7 +293,7 @@ return array(
 			'typo3' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", t3feuli."id" AS "id"
 							FROM "fe_users_list" AS t3feuli
@@ -303,7 +305,7 @@ return array(
 						GROUP BY "key"
 					',
 					'mysql' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", t3feuli."id" AS "id"
 							FROM "fe_users_list" AS t3feuli
@@ -386,7 +388,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feuli."id"
+							SELECT t3feuli."id"
 							FROM "fe_users_list" AS t3feuli
 							:joins
 							WHERE :cond
@@ -396,7 +398,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feuli."id"
+							SELECT t3feuli."id"
 							FROM "fe_users_list" AS t3feuli
 							:joins
 							WHERE :cond
@@ -445,7 +447,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								t3feuprty."id" AS "customer.property.type.id", t3feuprty."siteid" AS "customer.property.type.siteid",
 								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
 								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
@@ -458,7 +460,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								t3feuprty."id" AS "customer.property.type.id", t3feuprty."siteid" AS "customer.property.type.siteid",
 								t3feuprty."code" AS "customer.property.type.code", t3feuprty."domain" AS "customer.property.type.domain",
 								t3feuprty."label" AS "customer.property.type.label", t3feuprty."status" AS "customer.property.type.status",
@@ -475,7 +477,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT t3feuprty."id"
+								SELECT t3feuprty."id"
 								FROM "fe_users_property_type" t3feuprty
 								:joins
 								WHERE :cond
@@ -485,7 +487,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT t3feuprty."id"
+								SELECT t3feuprty."id"
 								FROM "fe_users_property_type" t3feuprty
 								:joins
 								WHERE :cond
@@ -532,7 +534,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
 							t3feupr."siteid" AS "customer.property.siteid", t3feupr."type" AS "customer.property.type",
 							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
@@ -545,7 +547,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							t3feupr."id" AS "customer.property.id", t3feupr."parentid" AS "customer.property.parentid",
 							t3feupr."siteid" AS "customer.property.siteid", t3feupr."type" AS "customer.property.type",
 							t3feupr."langid" AS "customer.property.languageid", t3feupr."value" AS "customer.property.value",
@@ -562,7 +564,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feupr."id"
+							SELECT t3feupr."id"
 							FROM "fe_users_property" AS t3feupr
 							:joins
 							WHERE :cond
@@ -572,7 +574,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT t3feupr."id"
+							SELECT t3feupr."id"
 							FROM "fe_users_property" AS t3feupr
 							:joins
 							WHERE :cond
@@ -626,7 +628,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
 						t3feu."name" AS "customer.label", t3feu."gender",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
@@ -645,11 +647,12 @@ return array(
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
 					WHERE :cond AND t3feu."deleted" = 0
+					GROUP BY :group t3feu."uid", tsc."cn_iso_2"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
 						t3feu."name" AS "customer.label", t3feu."gender",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
@@ -668,6 +671,7 @@ return array(
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
 					WHERE :cond AND t3feu."deleted" = 0
+					GROUP BY :group t3feu."uid", tsc."cn_iso_2"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -676,22 +680,24 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT t3feu."uid"
+						SELECT t3feu."uid"
 						FROM "fe_users" AS t3feu
 						LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 						:joins
 						WHERE :cond AND t3feu."deleted" = 0
+						GROUP BY t3feu."uid"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT t3feu."uid"
+						SELECT t3feu."uid"
 						FROM "fe_users" AS t3feu
 						LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 						:joins
 						WHERE :cond AND t3feu."deleted" = 0
+						GROUP BY t3feu."uid"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',
