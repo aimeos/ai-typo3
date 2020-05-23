@@ -647,7 +647,12 @@ return array(
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
 					WHERE :cond AND t3feu."deleted" = 0
-					GROUP BY :group t3feu."uid", tsc."cn_iso_2"
+					GROUP BY :columns :group
+						t3feu."uid", t3feu."siteid", t3feu."name", t3feu."gender", t3feu."username", t3feu."title",
+						t3feu."company", t3feu."vatid", t3feu."first_name", t3feu."last_name", t3feu."address", t3feu."zip",
+						t3feu."city", t3feu."zone", tsc."cn_iso_2", t3feu."language", t3feu."telephone", t3feu."email",
+						t3feu."fax", t3feu."www", t3feu."longitude", t3feu."latitude", t3feu."password", t3feu."date_of_birth",
+						t3feu."usergroup", t3feu."pid", t3feu."disable", t3feu."crdate", t3feu."tstamp"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
