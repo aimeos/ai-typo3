@@ -603,27 +603,27 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "fe_users" ( :names
-						"siteid", "name", "username", "gender", "company", "vatid",
+						"name", "username", "gender", "company", "vatid",
 						"title", "first_name", "last_name", "address", "zip", "city", "zone",
 						"language", "telephone", "email", "fax", "www", "longitude", "latitude",
 						"date_of_birth", "disable", "password", "tstamp", "static_info_country",
-						"usergroup", "pid", "crdate"
-					) SELECT :values ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(
+						"usergroup", "pid", "siteid", "crdate"
+					) SELECT :values ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(
 						SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1
-					),?,?,?
+					),?,?,?,?
 				',
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "fe_users"
 					SET :names
-						"siteid" = ?, "name" = ?, "username" = ?, "gender" = ?, "company" = ?, "vatid" = ?, "title" = ?,
+						"name" = ?, "username" = ?, "gender" = ?, "company" = ?, "vatid" = ?, "title" = ?,
 						"first_name" = ?, "last_name" = ?, "address" = ?, "zip" = ?, "city" = ?, "zone" = ?,
 						"language" = ?, "telephone" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
 						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
 						"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1 ),
 						"usergroup" = ?, "pid" = ?
-					WHERE "uid" = ?
+					WHERE "siteid" = ? AND "uid" = ?
 				',
 			),
 			'search' => array(
