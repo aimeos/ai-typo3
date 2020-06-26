@@ -50,10 +50,10 @@ class FEUsersAddSiteIdTypo3 extends \Aimeos\MW\Setup\Task\Base
 			&& $schema->tableExists( $table ) === true
 			&& $schema->columnExists( $table, $column ) === false )
 		{
-			foreach( $this->migrate[$schema->getName()] as $stmt )
-			{
-				$this->execute( $stmt );
+			foreach( $this->migrate[$schema->getName()] as $stmt ) {
+				$this->execute( $stmt, 'db-customer' );
 			}
+
 			$this->status( 'done' );
 		}
 		else
