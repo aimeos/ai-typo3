@@ -295,7 +295,7 @@ class Typo3
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT  ); // ctime
+				$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // ctime
 			}
 
 			$stmt->execute()->finish();
