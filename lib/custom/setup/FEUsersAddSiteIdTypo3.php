@@ -15,7 +15,7 @@ namespace Aimeos\MW\Setup\Task;
 class FEUsersAddSiteIdTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $migrate = array(
-		'mysql' => array (
+		'mysql' => array(
 			'ALTER TABLE "fe_users" ADD "siteid" INTEGER NULL'
 		),
 	);
@@ -50,7 +50,7 @@ class FEUsersAddSiteIdTypo3 extends \Aimeos\MW\Setup\Task\Base
 			&& $schema->tableExists( $table ) === true
 			&& $schema->columnExists( $table, $column ) === false )
 		{
-			foreach ( $this->migrate[$schema->getName()] as $stmt ) {
+			foreach( $this->migrate[$schema->getName()] as $stmt ) {
 				$this->execute( $stmt, 'db-customer' );
 			}
 
