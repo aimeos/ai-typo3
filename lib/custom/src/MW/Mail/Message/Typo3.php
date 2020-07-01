@@ -20,6 +20,7 @@ namespace Aimeos\MW\Mail\Message;
  */
 class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 {
+	private $charset;
 	private $object;
 
 
@@ -31,6 +32,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object, string $charset )
 	{
+		$this->charset = $charset;
 		$this->object = $object;
 	}
 
@@ -169,7 +171,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->text( $message );
+			$this->object->text( $message, $this->charset );
 		} elseif( class_exists( '\Swift_Mailer' ) ) {
 			$this->object->setBody( $message );
 		}
@@ -189,7 +191,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->html( $message );
+			$this->object->html( $message, $this->charset );
 		} elseif( class_exists( '\Swift_Mailer' ) ) {
 			$this->object->addPart( $message, 'text/html' );
 		}
