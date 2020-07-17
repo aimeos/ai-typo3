@@ -12,6 +12,7 @@ return array(
 		'fe_users_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_address' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
@@ -60,6 +61,7 @@ return array(
 		'fe_users_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_list_type' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
@@ -84,6 +86,7 @@ return array(
 		'fe_users_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_list' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
@@ -115,6 +118,7 @@ return array(
 		'fe_users_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_property_type' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
@@ -139,6 +143,7 @@ return array(
 		'fe_users_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'fe_users_property' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
