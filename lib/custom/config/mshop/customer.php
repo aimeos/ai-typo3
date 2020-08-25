@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fe_users_address"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND ( siteid = ? OR siteid = \'\' )
 					',
 				),
 				'insert' => array(
@@ -38,8 +38,8 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
-						WHERE "id" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
+						WHERE ( siteid = ? OR siteid = \'\' ) AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -597,7 +597,7 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fe_users"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND ( siteid = ? OR siteid = \'\' )
 				',
 			),
 			'insert' => array(
@@ -623,7 +623,7 @@ return array(
 						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
 						"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1 ),
 						"usergroup" = ?, "pid" = ?
-					WHERE "siteid" = ? AND "uid" = ?
+					WHERE ( siteid = ? OR siteid = \'\' ) AND "uid" = ?
 				',
 			),
 			'search' => array(
