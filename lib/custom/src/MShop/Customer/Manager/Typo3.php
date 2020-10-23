@@ -612,7 +612,7 @@ class Typo3
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();

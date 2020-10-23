@@ -363,7 +363,7 @@ class Typo3
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->getContext();

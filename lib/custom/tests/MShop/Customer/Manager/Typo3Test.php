@@ -66,7 +66,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No customer found.' );
 		}
 
@@ -246,7 +246,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->search( $search );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, count( $result->first()->getGroups() ) );
@@ -259,7 +259,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
@@ -269,7 +269,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsCriteria()
 	{
 		$search = $this->object->createSearch( true );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->search( $search );
 
 		$this->assertEquals( 2, count( $results ) );
 
@@ -284,7 +284,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
-		if( ( $item = $this->object->searchItems( $search, ['customer/address', 'text'] ) ) === null ) {
+		if( ( $item = $this->object->search( $search, ['customer/address', 'text'] ) ) === null ) {
 			throw new \Exception( 'No customer item for "test@example.com" available' );
 		}
 

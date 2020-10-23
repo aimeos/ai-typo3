@@ -50,7 +50,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 
@@ -63,7 +63,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 
@@ -187,7 +187,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 1, count( $this->object->search( $search ) ) );
 	}
 
 
@@ -204,7 +204,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
