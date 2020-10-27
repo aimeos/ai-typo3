@@ -81,7 +81,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'unitgroup' );
 
-		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
@@ -91,13 +91,13 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'unittest-group' );
 
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unittest-group-2' );
 
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $itemSaved->getId() );
 
@@ -121,7 +121,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $itemSaved->getId() );
+		$this->object->get( $itemSaved->getId() );
 	}
 
 

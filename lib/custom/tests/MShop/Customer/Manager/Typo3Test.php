@@ -52,7 +52,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$domains = ['text', 'customer/property' => ['newsletter']];
 		$expected = $this->object->findItem( 'test@example.com', $domains );
-		$actual = $this->object->getItem( $expected->getId(), $domains );
+		$actual = $this->object->get( $expected->getId(), $domains );
 
 		$this->assertEquals( $expected, $actual );
 		$this->assertEquals( 1, count( $actual->getListItems( 'text' ) ) );
@@ -75,14 +75,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$item->setLabel( 'unitTest' );
 		$item->setGroups( array( 1, 2, 3 ) );
 		$item = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
 		$itemExp->setGroups( array( 2, 4 ) );
 		$itemExp = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -117,7 +117,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 
 		$this->expectException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 
