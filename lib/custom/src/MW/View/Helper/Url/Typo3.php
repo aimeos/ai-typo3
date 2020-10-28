@@ -62,14 +62,10 @@ class Typo3
 		$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
 		$params['action'] = $action;
 
-		if( $this->prefix != '' )
-		{
-			if( (bool) $this->getValue( $config, 'namespace', true ) === true ) {
-				$params = [$this->prefix => $params + $this->fixed];
-			} else {
-				$params = $params + [$this->prefix => $this->fixed];
-			}
+		if( $this->prefix != '' && (bool) $this->getValue( $config, 'namespace', true ) === true ) {
+			$params = [$this->prefix => $params];
 		}
+		$params += $this->fixed;
 
 		if( ( $eid = $this->getValue( $config, 'eID' ) ) !== null ) {
 			$params['eID'] = $eid;
