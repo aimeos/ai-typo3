@@ -45,7 +45,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
@@ -127,7 +127,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.group.label', 'Unitgroup' ) );
 		$search->setSlice( 0, 1 );
 

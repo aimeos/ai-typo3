@@ -63,7 +63,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
@@ -158,7 +158,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->filter() );
 	}
 
 
@@ -167,7 +167,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$item = $this->object->findItem( 'test@example.com', ['text'] );
 		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
@@ -255,7 +255,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsTotal()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
@@ -268,7 +268,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCriteria()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$results = $this->object->search( $search );
 
 		$this->assertEquals( 2, count( $results ) );
@@ -281,7 +281,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
 		if( ( $item = $this->object->search( $search, ['customer/address', 'text'] ) ) === null ) {

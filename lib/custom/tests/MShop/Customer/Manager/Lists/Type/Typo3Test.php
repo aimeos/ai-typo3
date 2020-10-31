@@ -41,7 +41,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setSlice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
@@ -54,7 +54,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
@@ -107,7 +107,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
