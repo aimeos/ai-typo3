@@ -71,7 +71,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unitgroup' );
+		$item = $this->object->find( 'unitgroup' );
 
 		$this->assertEquals( 'unitgroup', $item->getCode() );
 	}
@@ -79,7 +79,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$item = $this->object->findItem( 'unitgroup' );
+		$item = $this->object->find( 'unitgroup' );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
