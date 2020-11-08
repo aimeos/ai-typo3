@@ -38,7 +38,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Group\Iface::class, $item );
 	}
 
@@ -87,7 +87,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setCode( 'unittest-group' );
 
 		$resultSaved = $this->object->saveItem( $item );
