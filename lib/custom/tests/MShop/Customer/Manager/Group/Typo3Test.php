@@ -90,13 +90,13 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 		$item->setCode( 'unittest-group' );
 
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unittest-group-2' );
 
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );
