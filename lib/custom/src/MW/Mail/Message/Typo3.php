@@ -245,7 +245,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 
 		if( class_exists( $class ) && $this->object instanceof $class )
 		{
-			$this->object->embed( $data, $filename, $mimetype );
+			$this->object->embed( $data, $mimetype, $filename );
 			return md5( $filename );
 		}
 
