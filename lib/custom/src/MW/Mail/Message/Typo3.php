@@ -245,13 +245,13 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 
 		if( class_exists( $class ) && $this->object instanceof $class )
 		{
-			$this->object->embed( $data, $mimetype, $filename );
+			$this->object->embed( $data, $filename, $mimetype );
 			return md5( $filename );
 		}
 
 		if( class_exists( '\Swift_EmbeddedFile' ) )
 		{
-			$part = \Swift_EmbeddedFile::newInstance( $data, $mimetype, $filename );
+			$part = \Swift_EmbeddedFile::newInstance( $data, $filename, $mimetype );
 			return $this->object->embed( $part );
 		}
 
