@@ -256,7 +256,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$search = $this->object->filter();
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total );
