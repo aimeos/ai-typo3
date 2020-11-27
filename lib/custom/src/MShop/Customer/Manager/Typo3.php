@@ -292,6 +292,19 @@ class Typo3
 		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
 		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 
+		/** mshop/customer/manager/typo3/pid-default
+		 * Page ID the customer records are assigned to
+		 *
+		 * In TYPO3, you can assign fe_user records to different sysfolders based
+		 * on their page ID and for checking user credentials at login, the configured
+		 * sysfolder is used. Thus, the page ID of the same sysfolder must be assigned
+		 * to the user records so they are allowed to log in after they are created
+		 * or modified by Aimeos.
+		 *
+		 * @param int TYPO3 page ID
+		 * @since 2016.10
+		 * @see mshop/customer/manager/group/typo3/pid-default
+		 */
 		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 
 
