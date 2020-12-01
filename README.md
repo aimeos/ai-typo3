@@ -4,7 +4,7 @@
 
 # Aimeos TYPO3 adapter
 
-[![Build Status](https://travis-ci.org/aimeos/ai-typo3.png?branch=master)](https://travis-ci.org/aimeos/ai-typo3)
+[![Build Status](https://circleci.com/gh/aimeos/ai-typo3.svg?style=shield)](https://circleci.com/gh/aimeos/ai-typo3)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-typo3/badge.svg?branch=master&service=github)](https://coveralls.io/github/aimeos/ai-typo3?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-typo3/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-typo3/?branch=master)
 [![License](https://poser.pugx.org/aimeos/ai-typo3/license.svg)](https://packagist.org/packages/aimeos/ai-typo3)
