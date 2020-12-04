@@ -48,7 +48,7 @@ jobs:
       - run: composer req --no-update "nyholm/psr7-server:^0.4.1" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
       - run: composer update -n --prefer-dist
       - save_cache:
-          key: php74-{{ checksum "composer.json" }}
+          key: php73-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
