@@ -245,7 +245,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search );
 
 		$this->assertEquals( 1, count( $result ) );

@@ -145,7 +145,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 2 );
 		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
@@ -175,7 +175,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 5, count( $this->object->search( $search ) ) );
 	}
 

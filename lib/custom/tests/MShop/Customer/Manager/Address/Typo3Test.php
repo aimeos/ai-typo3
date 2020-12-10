@@ -186,7 +186,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 1, count( $this->object->search( $search ) ) );
 	}
 
@@ -201,7 +201,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
