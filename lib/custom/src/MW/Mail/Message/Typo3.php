@@ -243,13 +243,16 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	{
 		$class = '\Symfony\Component\Mime\Email';
 
+		if( !$filename ) {
+			$filename = md5( $data );
+		}
+
 		if( class_exists( $class ) && $this->object instanceof $class )
 		{
 			$this->object->embed( $data, $filename, $mimetype );
-			return md5( $filename );
+			return 'cid:' . $filename;
 		}
-
-		if( class_exists( '\Swift_EmbeddedFile' ) )
+		elseif( class_exists( '\Swift_EmbeddedFile' ) )
 		{
 			$part = \Swift_EmbeddedFile::newInstance( $data, $filename, $mimetype );
 			return $this->object->embed( $part );
