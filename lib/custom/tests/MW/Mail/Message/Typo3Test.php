@@ -34,8 +34,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddFrom()
 	{
-		$this->mock->expects( $this->once() )->method( 'addFrom' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'addFrom' );
 
 		$result = $this->object->addFrom( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
@@ -44,8 +43,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddTo()
 	{
-		$this->mock->expects( $this->once() )->method( 'addTo' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'addTo' );
 
 		$result = $this->object->addTo( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
@@ -54,8 +52,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddCc()
 	{
-		$this->mock->expects( $this->once() )->method( 'addCc' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'addCc' );
 
 		$result = $this->object->addCc( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
@@ -64,8 +61,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddBcc()
 	{
-		$this->mock->expects( $this->once() )->method( 'addBcc' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'addBcc' );
 
 		$result = $this->object->addBcc( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
@@ -74,8 +70,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAddReplyTo()
 	{
-		$this->mock->expects( $this->once() )->method( 'addReplyTo' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'addReplyTo' );
 
 		$result = $this->object->addReplyTo( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
@@ -89,11 +84,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$stub = $this->getMockBuilder( '\Symfony\Component\Mime\Header\Headers' )
-			->setMethods( ['addTextHeader'] )
+			->setMethods( ['add'] )
 			->getMock();
 
-		$stub->expects( $this->once() )->method( 'addTextHeader' )
-			->with( $this->stringContains( 'test' ), $this->stringContains( 'value' ) );
+		$stub->expects( $this->once() )->method( 'add' );
 
 		$this->mock->expects( $this->once() )->method( 'getHeaders' )->will( $this->returnValue( $stub ) );
 
@@ -111,8 +105,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSetSender()
 	{
-		$this->mock->expects( $this->once() )->method( 'setSender' )
-			->with( $this->stringContains( 'a@b' ), $this->stringContains( 'test' ) );
+		$this->mock->expects( $this->once() )->method( 'setSender' );
 
 		$result = $this->object->setSender( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
