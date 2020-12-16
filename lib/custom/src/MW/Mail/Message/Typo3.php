@@ -49,7 +49,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addFrom( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->addFrom( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->addFrom( $email, $name );
 		}
@@ -70,7 +70,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addTo( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->addTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->addTo( $email, $name );
 		}
@@ -91,7 +91,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addCc( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->addCc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->addCc( $email, $name );
 		}
@@ -112,7 +112,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addBcc( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->addBcc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->addBcc( $email, $name );
 		}
@@ -133,7 +133,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addReplyTo( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->addReplyTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->addReplyTo( $email, $name );
 		}
@@ -187,7 +187,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 		$class = '\Symfony\Component\Mime\Email';
 
 		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->setSender( new \Symfony\Component\Mime\Address( $email, $name ) );
+			$this->object->setSender( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 		} else {
 			$this->object->setSender( $email, $name );
 		}
