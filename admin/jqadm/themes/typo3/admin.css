@@ -3,10 +3,8 @@
  */
 
 html, body {
-	height: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
 	overflow: auto;
-}
-
-.dashboard .order-latest .content {
-	height: 280px;
+	height: 100%;
 }
