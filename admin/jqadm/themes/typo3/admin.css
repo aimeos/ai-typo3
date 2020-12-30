@@ -2,6 +2,11 @@
  * TYPO3 JQAdm theme
  */
 
+html, body {
+	height: 100%;
+	overflow: auto;
+}
+
 .dashboard .order-latest .content {
 	height: 280px;
 }
