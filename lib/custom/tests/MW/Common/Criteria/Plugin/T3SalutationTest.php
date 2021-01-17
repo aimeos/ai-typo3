@@ -50,13 +50,7 @@ class T3SalutationTest extends \PHPUnit\Framework\TestCase
 
 	public function testTranslateFemale()
 	{
-		$this->assertEquals( 1, $this->object->translate( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS ) );
-	}
-
-
-	public function testTranslateFemale2()
-	{
-		$this->assertEquals( 2, $this->object->translate( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS ) );
+		$this->assertEquals( 1, $this->object->translate( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS ) );
 	}
 
 
@@ -80,13 +74,7 @@ class T3SalutationTest extends \PHPUnit\Framework\TestCase
 
 	public function testReverseFemale()
 	{
-		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS, $this->object->reverse( 1 ) );
-	}
-
-
-	public function testReverseFemale2()
-	{
-		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS, $this->object->reverse( 2 ) );
+		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS, $this->object->reverse( 1 ) );
 	}
 
 
