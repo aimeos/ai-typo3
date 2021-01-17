@@ -18,6 +18,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		if( !class_exists( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' ) ) {
+			$this->markTestSkipped( 'Class TYPO3\\CMS\\Core\\Mail\\MailMessage not found' );
+		}
+
 		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )
 			->disableOriginalConstructor()
 			->getMock();
