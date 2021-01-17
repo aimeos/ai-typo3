@@ -81,25 +81,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddHeader()
-	{
-		if( !class_exists( '\Symfony\Component\Mime\Header\Headers' ) ) {
-			$this->markTestSkipped( '\Symfony\Component\Mime\Header\Headers is not installed' );
-		}
-
-		$stub = $this->getMockBuilder( '\Symfony\Component\Mime\Header\Headers' )
-			->setMethods( ['add'] )
-			->getMock();
-
-		$stub->expects( $this->once() )->method( 'add' );
-
-		$this->mock->expects( $this->once() )->method( 'getHeaders' )->will( $this->returnValue( $stub ) );
-
-		$result = $this->object->addHeader( 'test', 'value' );
-		$this->assertSame( $this->object, $result );
-	}
-
-
 	public function testSend()
 	{
 		$this->mock->expects( $this->once() )->method( 'send' );
