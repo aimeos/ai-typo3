@@ -35,7 +35,6 @@ class FEUsersAddSiteIdTypo3 extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Add column siteid to fe_users table.
 	 *
-	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
 	public function migrate()
 	{

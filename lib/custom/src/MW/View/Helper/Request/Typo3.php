@@ -73,7 +73,6 @@ class Typo3
 	/**
 	 * Creates a PSR-7 compatible request
 	 *
-	 * @param \TYPO3\Flow\Http\Request $nativeRequest Flow request object
 	 * @param array $files List of uploaded files like in $_FILES
 	 * @param array $query List of uploaded files like in $_GET
 	 * @param array $post List of uploaded files like in $_POST
