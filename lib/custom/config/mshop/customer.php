@@ -602,8 +602,8 @@ return array(
 						FROM "fe_users" AS t3feu
 						:joins
 						WHERE :cond
-						GROUP BY t3feu.id, :cols, :val
-						ORDER BY t3feu.id DESC
+						GROUP BY t3feu.uid, :cols, :val
+						ORDER BY t3feu.uid DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -615,8 +615,8 @@ return array(
 						FROM "fe_users" AS t3feu
 						:joins
 						WHERE :cond
-						GROUP BY t3feu.id, :cols, :val
-						ORDER BY t3feu.id DESC
+						GROUP BY t3feu.uid, :cols, :val
+						ORDER BY t3feu.uid DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
