@@ -594,6 +594,34 @@ return array(
 			),
 		),
 		'typo3' => array(
+			'aggregate' => array(
+				'ansi' => '
+					SELECT :keys, COUNT("val") AS "count"
+					FROM (
+						SELECT :acols, :val AS "val"
+						FROM "fe_users" AS t3feu
+						:joins
+						WHERE :cond
+						GROUP BY t3feu.id, :cols, :val
+						ORDER BY t3feu.id DESC
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					) AS list
+					GROUP BY :keys
+				',
+				'mysql' => '
+					SELECT :keys, COUNT("val") AS "count"
+					FROM (
+						SELECT :acols, :val AS "val"
+						FROM "fe_users" AS t3feu
+						:joins
+						WHERE :cond
+						GROUP BY t3feu.id, :cols, :val
+						ORDER BY t3feu.id DESC
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY :keys
+				'
+			),
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "fe_users"
@@ -630,7 +658,7 @@ return array(
 				'ansi' => '
 					SELECT :columns
 						t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
-						t3feu."name" AS "customer.label", t3feu."gender",
+						t3feu."name" AS "customer.label", t3feu."gender" AS "customer.salutation",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
 						t3feu."company" AS "customer.company", t3feu."vatid" AS "customer.vatid",
 						t3feu."first_name" AS "customer.firstname", t3feu."last_name" AS "customer.lastname",
@@ -640,9 +668,10 @@ return array(
 						t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
 						t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
-						t3feu."password" AS "customer.password", t3feu."date_of_birth",
-						t3feu."usergroup" as "groups", t3feu."pid" AS "typo3.pageid",
-						t3feu."disable", t3feu."crdate", t3feu."tstamp"
+						t3feu."password" AS "customer.password", t3feu."date_of_birth" AS "customer.birthday",
+						t3feu."usergroup" as "customer.groups", t3feu."pid" AS "typo3.pageid",
+						t3feu."disable" AS "customer.status", t3feu."crdate" AS "customer.ctime",
+						t3feu."tstamp" AS "customer.mtime"
 					FROM "fe_users" as t3feu
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
@@ -659,7 +688,7 @@ return array(
 				'mysql' => '
 					SELECT :columns
 						t3feu."uid" AS "customer.id", t3feu."siteid" AS "customer.siteid",
-						t3feu."name" AS "customer.label", t3feu."gender",
+						t3feu."name" AS "customer.label", t3feu."gender" AS "customer.salutation",
 						t3feu."username" AS "customer.code", t3feu."title" AS "customer.title",
 						t3feu."company" AS "customer.company", t3feu."vatid" AS "customer.vatid",
 						t3feu."first_name" AS "customer.firstname", t3feu."last_name" AS "customer.lastname",
@@ -669,9 +698,10 @@ return array(
 						t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
 						t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
-						t3feu."password" AS "customer.password", t3feu."date_of_birth",
-						t3feu."usergroup" as "groups", t3feu."pid" AS "typo3.pageid",
-						t3feu."disable", t3feu."crdate", t3feu."tstamp"
+						t3feu."password" AS "customer.password", t3feu."date_of_birth" AS "customer.birthday",
+						t3feu."usergroup" as "customer.groups", t3feu."pid" AS "typo3.pageid",
+						t3feu."disable" AS "customer.status", t3feu."crdate" AS "customer.ctime",
+						t3feu."tstamp" AS "customer.mtime"
 					FROM "fe_users" as t3feu
 					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins

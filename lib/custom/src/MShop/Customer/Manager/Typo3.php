@@ -264,7 +264,6 @@ class Typo3
 
 
 	private $plugins = [];
-	private $reverse = [];
 	private $helper;
 	private $pid;
 
@@ -280,17 +279,17 @@ class Typo3
 		parent::__construct( $context );
 
 		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Salutation();
-		$this->plugins['customer.salutation'] = $this->reverse['gender'] = $plugin;
+		$this->plugins['customer.salutation'] = $plugin;
 
 		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Status();
-		$this->plugins['customer.status'] = $this->reverse['disable'] = $plugin;
+		$this->plugins['customer.status'] = $plugin;
 
 		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Date();
-		$this->plugins['customer.birthday'] = $this->reverse['date_of_birth'] = $plugin;
+		$this->plugins['customer.birthday'] = $plugin;
 
 		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Datetime();
-		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
-		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
+		$this->plugins['customer.ctime'] = $plugin;
+		$this->plugins['customer.mtime'] = $plugin;
 
 		/** mshop/customer/manager/typo3/pid-default
 		 * Page ID the customer records are assigned to
@@ -347,6 +346,72 @@ class Typo3
 
 			return $params;
 		};
+	}
+
+
+	/**
+	 * Counts the number items that are available for the values of the given key.
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param array|string $key Search key or list of key to aggregate items for
+	 * @param string|null $value Search key for aggregating the value column
+	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
+	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
+	 */
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	{
+		/** mshop/customer/manager/typo3//aggregate/mysql
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * @see mshop/customer/manager/typo3//aggregate/ansi
+		 */
+
+		/** mshop/customer/manager/typo3//aggregate/ansi
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * Groups all records by the values in the key column and counts their
+		 * occurence. The matched records can be limited by the given criteria
+		 * from the customer database. The records must be from one of the sites
+		 * that are configured via the context item. If the current site is part
+		 * of a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * This statement doesn't return any records. Instead, it returns pairs
+		 * of the different values found in the key column together with the
+		 * number of records that have been found for that key values.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for aggregating customer items
+		 * @since 2021.04
+		 * @category Developer
+		 * @see mshop/customer/manager/typo3//insert/ansi
+		 * @see mshop/customer/manager/typo3//update/ansi
+		 * @see mshop/customer/manager/typo3//newid/ansi
+		 * @see mshop/customer/manager/typo3//delete/ansi
+		 * @see mshop/customer/manager/typo3//search/ansi
+		 * @see mshop/customer/manager/typo3//count/ansi
+		 */
+
+		$cfgkey = 'mshop/customer/manager/typo3/aggregate' . $type;
+		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value );
 	}
 
 
@@ -685,32 +750,7 @@ class Typo3
 		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$helper = $this->getPasswordHelper();
-		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
-
-		if( array_key_exists( 'date_of_birth', $values ) ) {
-			$values['customer.birthday'] = $this->reverse['date_of_birth']->reverse( $values['date_of_birth'] );
-		}
-
-		if( array_key_exists( 'gender', $values ) ) {
-			$values['customer.salutation'] = $this->reverse['gender']->reverse( $values['gender'] );
-		}
-
-		if( array_key_exists( 'disable', $values ) ) {
-			$values['customer.status'] = $this->reverse['disable']->reverse( $values['disable'] );
-		}
-
-		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['customer.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
-		}
-
-		if( array_key_exists( 'crdate', $values ) ) {
-			$values['customer.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
-		}
-
-		if( array_key_exists( 'groups', $values ) && $values['groups'] !== '' ) {
-			$values['customer.groups'] = explode( ',', $values['groups'] );
-		}
-
+		$values = $this->transform( $values );
 
 		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
 
@@ -744,5 +784,41 @@ class Typo3
 		$helper = new $classname( array( 'object' => $object ) );
 
 		return $this->helper = self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
+	}
+
+
+	/**
+	 * Transforms the application specific values to Aimeos standard values.
+	 *
+	 * @param array $values Associative list of key/value pairs from the storage
+	 * @return array Associative list of key/value pairs with standard Aimeos values
+	 */
+	protected function transform( array $values ) : array
+	{
+		if( array_key_exists( 'customer.birthday', $values ) ) {
+			$values['customer.birthday'] = $this->plugins['customer.birthday']->reverse( $values['customer.birthday'] );
+		}
+
+		if( array_key_exists( 'customer.salutation', $values ) ) {
+			$values['customer.salutation'] = $this->plugins['customer.salutation']->reverse( $values['customer.salutation'] );
+		}
+
+		if( array_key_exists( 'customer.status', $values ) ) {
+			$values['customer.status'] = $this->plugins['customer.status']->reverse( $values['customer.status'] );
+		}
+
+		if( array_key_exists( 'customer.mtime', $values ) ) {
+			$values['customer.mtime'] = $this->plugins['customer.mtime']->reverse( $values['customer.mtime'] );
+		}
+
+		if( array_key_exists( 'customer.ctime', $values ) ) {
+			$values['customer.ctime'] = $this->plugins['customer.ctime']->reverse( $values['customer.ctime'] );
+		}
+
+		if( array_key_exists( 'customer.groups', $values ) && $values['customer.groups'] !== '' ) {
+			$values['customer.groups'] = explode( ',', $values['customer.groups'] );
+		}
+
+		return $values;
 	}
 }
