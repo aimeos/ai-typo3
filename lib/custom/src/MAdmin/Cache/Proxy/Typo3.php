@@ -29,8 +29,8 @@ class Typo3
 	/**
 	 * Initializes the cache controller.
 	 *
-	 * @param \\Aimeos\MShop\Context\Item\Iface $context MShop context object
-	 * @param \TYPO3\Flow\Cache\Frontend\StringFrontend $cache Flow cache object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
+	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache Flow cache object
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{

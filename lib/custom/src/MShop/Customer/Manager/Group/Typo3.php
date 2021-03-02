@@ -73,7 +73,7 @@ class Typo3
 	/**
 	 * Initializes the customer group manager object
 	 *
-	 * @param \Aimeos\MShop\Context\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
@@ -103,7 +103,7 @@ class Typo3
 	/**
 	 * Removes old entries from the database
 	 *
-	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface

@@ -86,7 +86,7 @@ class Typo3 extends Base implements \Aimeos\MW\Session\Iface
 	/**
 	 * Remove the list of keys from the session.
 	 *
-	 * @param array $name Keys to remove from the session
+	 * @param array $names Keys to remove from the session
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
 	public function remove( array $names ) : Iface
