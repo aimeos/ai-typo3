@@ -52,5 +52,9 @@ class TablesMigrateSiteidTypo3 extends TablesMigrateSiteid
 		$this->msg( 'Update TYPO3 "siteid" columns', 0, '' );
 
 		$this->process( $this->resources );
+
+		if( $this->getSchema( 'db-customer' )->tableExists( 'fe_users' ) !== false ) {
+			$this->execute( 'UPDATE fe_users SET siteid=\'\' WHERE siteid IS NULL' );
+		}
 	}
 }
