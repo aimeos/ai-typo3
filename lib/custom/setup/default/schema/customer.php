@@ -105,8 +105,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feuli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_t3feuli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_t3feuli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_t3feuli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_t3feuli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feuli_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
@@ -158,7 +158,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_t3feupr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_t3feupr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_t3feupr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_t3feupr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_t3feupr_pid' );
 
 			$table->addForeignKeyConstraint( 'fe_users', array( 'parentid' ), array( 'uid' ),
