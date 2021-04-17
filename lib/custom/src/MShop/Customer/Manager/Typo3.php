@@ -146,7 +146,7 @@ class Typo3
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
-			'internalcode' => 'tsc."cn_iso_2"',
+			'internalcode' => 't3feu."static_info_country"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
