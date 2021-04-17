@@ -636,9 +636,9 @@ return array(
 						"language", "telephone", "email", "fax", "www", "longitude", "latitude",
 						"date_of_birth", "disable", "password", "tstamp", "static_info_country",
 						"usergroup", "pid", "siteid", "crdate"
-					) SELECT :values ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(
-						SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1
-					),?,?,?,?
+					) VALUES ( :values
+						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+					)
 				',
 			),
 			'update' => array(
@@ -649,8 +649,7 @@ return array(
 						"first_name" = ?, "last_name" = ?, "address" = ?, "zip" = ?, "city" = ?, "zone" = ?,
 						"language" = ?, "telephone" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
 						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
-						"static_info_country"=( SELECT "cn_iso_3" FROM "static_countries" WHERE "cn_iso_2" = ? LIMIT 1 ),
-						"usergroup" = ?, "pid" = ?
+						"static_info_country" = ?, "usergroup" = ?, "pid" = ?
 					WHERE ( siteid = ? OR siteid = \'\' ) AND "uid" = ?
 				',
 			),
@@ -664,7 +663,7 @@ return array(
 						t3feu."first_name" AS "customer.firstname", t3feu."last_name" AS "customer.lastname",
 						t3feu."address" AS "customer.address1", t3feu."zip" AS "customer.postal",
 						t3feu."city" AS "customer.city", t3feu."zone" AS "customer.state",
-						tsc."cn_iso_2" AS "customer.countryid", t3feu."language" AS "customer.languageid",
+						t3feu."static_info_country" AS "customer.countryid", t3feu."language" AS "customer.languageid",
 						t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
 						t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
@@ -673,13 +672,12 @@ return array(
 						t3feu."disable" AS "customer.status", t3feu."crdate" AS "customer.ctime",
 						t3feu."tstamp" AS "customer.mtime"
 					FROM "fe_users" as t3feu
-					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
 					WHERE :cond AND t3feu."deleted" = 0
 					GROUP BY :columns :group
 						t3feu."uid", t3feu."siteid", t3feu."name", t3feu."gender", t3feu."username", t3feu."title",
 						t3feu."company", t3feu."vatid", t3feu."first_name", t3feu."last_name", t3feu."address", t3feu."zip",
-						t3feu."city", t3feu."zone", tsc."cn_iso_2", t3feu."language", t3feu."telephone", t3feu."email",
+						t3feu."city", t3feu."zone", t3feu."static_info_country", t3feu."language", t3feu."telephone", t3feu."email",
 						t3feu."fax", t3feu."www", t3feu."longitude", t3feu."latitude", t3feu."password", t3feu."date_of_birth",
 						t3feu."usergroup", t3feu."pid", t3feu."disable", t3feu."crdate", t3feu."tstamp"
 					ORDER BY :order
@@ -694,7 +692,7 @@ return array(
 						t3feu."first_name" AS "customer.firstname", t3feu."last_name" AS "customer.lastname",
 						t3feu."address" AS "customer.address1", t3feu."zip" AS "customer.postal",
 						t3feu."city" AS "customer.city", t3feu."zone" AS "customer.state",
-						tsc."cn_iso_2" AS "customer.countryid", t3feu."language" AS "customer.languageid",
+						t3feu."static_info_country" AS "customer.countryid", t3feu."language" AS "customer.languageid",
 						t3feu."telephone" AS "customer.telephone", t3feu."email" AS "customer.email",
 						t3feu."fax" AS "customer.telefax", t3feu."www" AS "customer.website",
 						t3feu."longitude" AS "customer.longitude", t3feu."latitude" AS "customer.latitude",
@@ -703,10 +701,9 @@ return array(
 						t3feu."disable" AS "customer.status", t3feu."crdate" AS "customer.ctime",
 						t3feu."tstamp" AS "customer.mtime"
 					FROM "fe_users" as t3feu
-					LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 					:joins
 					WHERE :cond AND t3feu."deleted" = 0
-					GROUP BY :group t3feu."uid", tsc."cn_iso_2"
+					GROUP BY :group t3feu."uid", t3feu."static_info_country"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -717,7 +714,6 @@ return array(
 					FROM (
 						SELECT t3feu."uid"
 						FROM "fe_users" AS t3feu
-						LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 						:joins
 						WHERE :cond AND t3feu."deleted" = 0
 						GROUP BY t3feu."uid"
@@ -729,7 +725,6 @@ return array(
 					FROM (
 						SELECT t3feu."uid"
 						FROM "fe_users" AS t3feu
-						LEFT JOIN "static_countries" AS tsc ON t3feu."static_info_country" = tsc."cn_iso_3"
 						:joins
 						WHERE :cond AND t3feu."deleted" = 0
 						GROUP BY t3feu."uid"
