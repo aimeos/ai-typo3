@@ -53,7 +53,7 @@ class TablesMigrateSiteidTypo3 extends TablesMigrateSiteid
 
 		$this->process( $this->resources );
 
-		if( $this->getSchema( 'db-customer' )->tableExists( 'fe_users' ) !== false ) {
+		if( $this->getSchema( 'db-customer' )->columnExists( 'fe_users', 'siteid' ) !== false ) {
 			$this->execute( 'UPDATE fe_users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
