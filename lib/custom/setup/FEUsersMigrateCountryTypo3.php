@@ -40,7 +40,7 @@ class FEUsersMigrateCountryTypo3 extends \Aimeos\MW\Setup\Task\Base
 		{
 			$stmt = 'UPDATE fe_users SET static_info_country = (
 				SELECT cn_iso_2 FROM static_countries WHERE cn_iso_3 = static_info_country
-			) WHERE LENGTH(static_info_country) = 2';
+			) WHERE LENGTH(static_info_country) = 3';
 
 			$this->execute( $stmt, 'db-customer' );
 			$this->status( 'done' );
