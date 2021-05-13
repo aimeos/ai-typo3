@@ -35,7 +35,7 @@ class FEUsersMigrateCountryTypo3 extends \Aimeos\MW\Setup\Task\Base
 
 		$schema = $this->getSchema( 'db-customer' );
 
-		if( $schema->tableExists( 'fe_users' ) === true
+		if( $schema->tableExists( 'fe_users' ) === true && $schema->tableExists( 'static_countries' ) === true
 			&& $schema->columnExists( 'fe_users', 'static_info_country' ) === true )
 		{
 			$stmt = 'UPDATE fe_users SET static_info_country = (
