@@ -100,36 +100,5 @@ return array(
 
 			return $schema;
 		},
-
-		'static_countries' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$table = $schema->createTable( 'static_countries' );
-
-			$table->addColumn( 'uid', 'integer', ['autoincrement' => true, 'unsigned' => true] );
-			$table->addColumn( 'pid', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'deleted', 'integer', ['length' => 3, 'default' => 0] );
-			$table->addColumn( 'cn_iso_2', 'string', ['length' => 2, 'default' => ''] );
-			$table->addColumn( 'cn_iso_3', 'string', ['length' => 3, 'default' => ''] );
-			$table->addColumn( 'cn_iso_nr', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_parent_tr_iso_nr', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_official_name_local', 'string', ['length' => 128, 'default' => ''] );
-			$table->addColumn( 'cn_official_name_en', 'string', ['length' => 128, 'default' => ''] );
-			$table->addColumn( 'cn_capital', 'string', ['length' => 45, 'default' => ''] );
-			$table->addColumn( 'cn_tldomain', 'string', ['length' => 2, 'default' => ''] );
-			$table->addColumn( 'cn_currency_iso_3', 'string', ['length' => 3, 'default' => ''] );
-			$table->addColumn( 'cn_currency_iso_nr', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_phone', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_eu_member', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_address_format', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cn_zone_flag', 'integer', ['length' => 4, 'default' => 0] );
-			$table->addColumn( 'cn_short_local', 'string', ['length' => 70, 'default' => ''] );
-			$table->addColumn( 'cn_short_en', 'string', ['length' => 50, 'default' => ''] );
-			$table->addColumn( 'cn_uno_member', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
-
-			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid'], 'static_countries_parent' );
-
-			return $schema;
-		},
 	),
 );
