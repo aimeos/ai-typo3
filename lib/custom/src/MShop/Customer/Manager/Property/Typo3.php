@@ -23,8 +23,8 @@ class Typo3
 	private $searchConfig = array(
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
-			'internalcode' => 't3feupr."id"',
-			'internaldeps' => ['LEFT JOIN "fe_users_property" AS t3feupr ON ( t3feupr."parentid" = t3feu."uid" )'],
+			'internalcode' => 'mcuspr."id"',
+			'internaldeps' => ['LEFT JOIN "fe_users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."uid" )'],
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -32,7 +32,7 @@ class Typo3
 		),
 		'customer.property.parentid' => array(
 			'code' => 'customer.property.parentid',
-			'internalcode' => 't3feupr."parentid"',
+			'internalcode' => 'mcuspr."parentid"',
 			'label' => 'Property parent ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -40,7 +40,7 @@ class Typo3
 		),
 		'customer.property.siteid' => array(
 			'code' => 'customer.property.siteid',
-			'internalcode' => 't3feupr."siteid"',
+			'internalcode' => 'mcuspr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -48,28 +48,28 @@ class Typo3
 		),
 		'customer.property.type' => array(
 			'code' => 'customer.property.type',
-			'internalcode' => 't3feupr."type"',
+			'internalcode' => 'mcuspr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.value' => array(
 			'code' => 'customer.property.value',
-			'internalcode' => 't3feupr."value"',
+			'internalcode' => 'mcuspr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.languageid' => array(
 			'code' => 'customer.property.languageid',
-			'internalcode' => 't3feupr."langid"',
+			'internalcode' => 'mcuspr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.ctime' => array(
 			'code' => 'customer.property.ctime',
-			'internalcode' => 't3feupr."ctime"',
+			'internalcode' => 'mcuspr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -77,7 +77,7 @@ class Typo3
 		),
 		'customer.property.mtime' => array(
 			'code' => 'customer.property.mtime',
-			'internalcode' => 't3feupr."mtime"',
+			'internalcode' => 'mcuspr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -85,7 +85,7 @@ class Typo3
 		),
 		'customer.property.editor' => array(
 			'code' => 'customer.property.editor',
-			'internalcode' => 't3feupr."editor"',
+			'internalcode' => 'mcuspr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,

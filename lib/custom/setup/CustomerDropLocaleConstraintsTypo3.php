@@ -16,14 +16,14 @@ class CustomerDropLocaleConstraintsTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'fe_users_list_type' => array(
-			'fk_t3feulity_siteid' => 'ALTER TABLE "fe_users_list_type" DROP FOREIGN KEY "fk_t3feulity_siteid"',
+			'fk_mcuslity_siteid' => 'ALTER TABLE "fe_users_list_type" DROP FOREIGN KEY "fk_mcuslity_siteid"',
 		),
 		'fe_users_list' => array(
-			'fk_t3feuli_siteid' => 'ALTER TABLE "fe_users_list" DROP FOREIGN KEY "fk_t3feuli_siteid"',
+			'fk_mcusli_siteid' => 'ALTER TABLE "fe_users_list" DROP FOREIGN KEY "fk_mcusli_siteid"',
 		),
 		'fe_users_address' => array(
-			'fk_t3feuad_siteid' => 'ALTER TABLE "fe_users_address" DROP FOREIGN KEY "fk_t3feuad_siteid"',
-			'fk_t3feuad_langid' => 'ALTER TABLE "fe_users_address" DROP FOREIGN KEY "fk_t3feuad_langid"',
+			'fk_mcusad_siteid' => 'ALTER TABLE "fe_users_address" DROP FOREIGN KEY "fk_mcusad_siteid"',
+			'fk_mcusad_langid' => 'ALTER TABLE "fe_users_address" DROP FOREIGN KEY "fk_mcusad_langid"',
 		),
 	);
 

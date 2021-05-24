@@ -16,13 +16,13 @@ class CustomerRemoveLostUserDataTypo3 extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
 		'fe_users_address' => [
-			'fk_t3feuad_pid' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+			'fk_mcusad_pid' => 'DELETE FROM "fe_users_address" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
 		],
 		'fe_users_list' => [
-			'fk_t3feuli_pid' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+			'fk_mcusli_pid' => 'DELETE FROM "fe_users_list" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
 		],
 		'fe_users_property' => [
-			'fk_t3feupr_pid' => 'DELETE FROM "fe_users_property" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
+			'fk_mcuspr_pid' => 'DELETE FROM "fe_users_property" WHERE NOT EXISTS ( SELECT "uid" FROM "fe_users" AS u WHERE "parentid"=u."uid" )'
 		]
 	];
 

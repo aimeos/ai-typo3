@@ -17,7 +17,7 @@ class CustomerChangeAddressRefidParentidTypo3 extends \Aimeos\MW\Setup\Task\Base
 	private $mysql = array(
 		'refid' => array(
 			'ALTER TABLE "fe_users_address" CHANGE "refid" "parentid" INTEGER NOT NULL',
-			'ALTER TABLE "fe_users_address" DROP INDEX "idx_t3feuad_refid", ADD INDEX "idx_t3feuad_pid" ("parentid")',
+			'ALTER TABLE "fe_users_address" DROP INDEX "idx_mcusad_refid", ADD INDEX "idx_mcusad_pid" ("parentid")',
 		),
 	);
 
