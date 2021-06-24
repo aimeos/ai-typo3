@@ -21,7 +21,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['TablesAddTypo3TestData', 'MShopSetLocale'];
+		return ['TablesAddTypo3TestData', 'ProductAddTestData'];
 	}
 
 
