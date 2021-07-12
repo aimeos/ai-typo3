@@ -28,7 +28,7 @@ class T3Status implements \Aimeos\MW\Criteria\Plugin\Iface
 	 */
 	public function translate( $value )
 	{
-		return ( $value === 1 ? 0 : 1 );
+		return ( $value == 1 ? 0 : 1 );
 	}
 
 
@@ -40,6 +40,6 @@ class T3Status implements \Aimeos\MW\Criteria\Plugin\Iface
 	 */
 	public function reverse( $value )
 	{
-		return ( $value === 1 ? 0 : 1 );
+		return ( $value == 1 ? 0 : 1 );
 	}
 }
