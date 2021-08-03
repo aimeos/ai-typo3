@@ -31,6 +31,7 @@ class Typo3
 	 *
 	 * @param array $config List of configuration values
 	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache TYPO3 cache object
+	 * @deprecated 2022.01 Remove $config parameter and siteid prefix
 	 */
 	public function __construct( array $config, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
