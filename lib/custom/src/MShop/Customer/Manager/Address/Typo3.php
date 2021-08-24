@@ -238,7 +238,7 @@ class Typo3
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/address/typo3/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/address/typo3/clear' );
 	}
 
 
