@@ -10,6 +10,12 @@ return array(
 	'manager' => array(
 		'address' => array(
 			'typo3' => array(
+				'clear' => array(
+					'ansi' => '
+						DELETE FROM "fe_users_address"
+						WHERE :cond AND siteid = ?
+					',
+				),
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "fe_users_address"
@@ -621,6 +627,12 @@ return array(
 					) AS list
 					GROUP BY :keys
 				'
+			),
+			'clear' => array(
+				'ansi' => '
+					DELETE FROM "fe_users"
+					WHERE :cond AND siteid = ?
+				',
 			),
 			'delete' => array(
 				'ansi' => '
