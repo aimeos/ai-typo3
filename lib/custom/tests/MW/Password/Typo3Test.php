@@ -17,7 +17,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		if( !class_exists( '\TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash' ) ) {
-			$this->markAsSkipped( 'TYPO3 password hashing not available' );
+			$this->markTestSkipped( 'TYPO3 password hashing not available' );
 		}
 
 		$this->object = new \Aimeos\MW\Password\Typo3( new \TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash() );
