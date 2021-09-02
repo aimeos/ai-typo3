@@ -768,22 +768,11 @@ class Typo3
 	 */
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
-		if( $this->helper ) {
-			return $this->helper;
+		if( $this->helper === null ) {
+			$this->helper = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->getContext()->password()] );
 		}
 
-		$classname = \Aimeos\MShop\Common\Helper\Password\Typo3::class;
-
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$context = $this->getContext();
-		$object = ( method_exists( $context, 'getHasherTypo3' ) ? $context->getHasherTypo3() : null );
-
-		$helper = new $classname( array( 'object' => $object ) );
-
-		return $this->helper = self::checkClass( \Aimeos\MShop\Common\Helper\Password\Iface::class, $helper );
+		return $this->helper;
 	}
 
 

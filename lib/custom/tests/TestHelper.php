@@ -65,18 +65,17 @@ class TestHelper
 		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );
 
-
 		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
-
 
 		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
+		$password = new \Aimeos\MW\Password\Standard();
+		$ctx->setPassword( $password );
 
 		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
-
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $ctx );
 		$localeItem = $localeManager->bootstrap( $site, '', '', false );

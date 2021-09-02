@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MShop\Common\Helper\Password;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2021
  */
+
+
+namespace Aimeos\MShop\Common\Helper\Password;
+
+
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	public function testException()
@@ -16,25 +18,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testEncodeNull()
+	public function testEncode()
 	{
-		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( array( 'object' => null ) );
-		$this->assertEquals( 'unittest', $object->encode( 'unittest', 'salt' ) );
-	}
-
-
-	public function testEncodeObject()
-	{
-		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( array( 'object' => new TestPasswordHasherTypo3() ) );
-		$this->assertEquals( 'abcd', $object->encode( 'unittest', 'salt' ) );
-	}
-}
-
-
-class TestPasswordHasherTypo3
-{
-	public function getHashedPassword( $password, $salt )
-	{
-		return 'abcd';
+		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => \TestHelper::getContext()->password()] );
+		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
 	}
 }
