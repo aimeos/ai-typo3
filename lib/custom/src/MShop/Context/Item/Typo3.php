@@ -16,6 +16,7 @@ namespace Aimeos\MShop\Context\Item;
  *
  * @package MShop
  * @subpackage Context
+ * @deprecated 2022.01
  */
 class Typo3
 	extends \Aimeos\MShop\Context\Item\Standard
