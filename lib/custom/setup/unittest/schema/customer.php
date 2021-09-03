@@ -30,7 +30,7 @@ return array(
 			$table->addColumn( 'name', 'string', ['length' => 100, 'default' => ''] );
 			$table->addColumn( 'uc', 'text', ['length' => 0xffff, 'notnull' => false] );
 			$table->addColumn( 'username', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'password', 'string', ['length' => 40, 'notnull' => false] );
+			$table->addColumn( 'password', 'string', ['length' => 100, 'notnull' => false] );
 			$table->addColumn( 'first_name', 'string', ['length' => 50, 'notnull' => false] );
 			$table->addColumn( 'middle_name', 'string', ['length' => 50, 'notnull' => false] );
 			$table->addColumn( 'last_name', 'string', ['length' => 50, 'notnull' => false] );
