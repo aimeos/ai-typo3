@@ -55,6 +55,8 @@ class T3Router
 	public function transform( string $target = null, string $controller = null, string $action = null,
 		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
+		$params['action'] = $action;
+
 		if( $params['locale'] ?? null ) {
 			$params['L'] = $params['locale'];
 		}
