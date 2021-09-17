@@ -48,11 +48,39 @@ class Typo3
 	{
 		if( !isset( $this->object ) )
 		{
-			$siteid = $this->context->getLocale()->getSiteItem()->getId();
+			$siteid = $this->context->getLocale()->getSiteItem()->getId() . $this->retrievePageType();
 			$conf = array( 'siteid' => $this->context->getConfig()->get( 'madmin/cache/prefix' ) . $siteid );
 			$this->object = \Aimeos\MW\Cache\Factory::create( 'Typo3', $conf, $this->cache );
 		}
 
 		return $this->object;
+	}
+
+
+	/**
+	 * Retrieve the page type.
+	 *
+	 * @return string The page type, if available.
+	 */
+	protected function retrievePageType() : string
+	{
+		// Try to access it from the Aimeos middleware.
+		if( method_exists( \Aimeos\Aimeos\Middleware\PageRoutingHandler::class, 'getRoutingPageArguments' ) ) {
+			$arguments = \Aimeos\Aimeos\Middleware\PageRoutingHandler::getRoutingPageArguments();
+			if( $arguments !== null ) {
+				return '-' . (int) $arguments->getPageType();
+			}
+		}
+
+		// Fallback to the globals.
+		if( isset( $GLOBALS['TYPO3_REQUEST'] ) === true
+			&& $GLOBALS['TYPO3_REQUEST'] instanceof \Psr\Http\Message\ServerRequestInterface
+			&& $GLOBALS['TYPO3_REQUEST']->getAttribute('routing') !== null
+		) {
+			return '-' . (int) $GLOBALS['TYPO3_REQUEST']->getAttribute( 'routing' )->getPageType();
+		}
+
+		// Unable to retrieve the page type.
+		return '';
 	}
 }
