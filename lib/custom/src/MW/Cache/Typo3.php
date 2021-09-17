@@ -35,7 +35,7 @@ class Typo3
 	public function __construct( array $config, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
 		$this->prefix = ( isset( $config['siteid'] ) ? $config['siteid'] . '-' : '' );
-        $this->prefix .= ( isset( $config['pageType'] ) ? $config['pageType'] . '-' : '' );
+		$this->prefix .= ( isset( $config['pageType'] ) ? $config['pageType'] . '-' : '' );
 		$this->object = $cache;
 	}
 
