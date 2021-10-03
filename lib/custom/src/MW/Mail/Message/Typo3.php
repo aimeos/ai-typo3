@@ -46,12 +46,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addFrom( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addFrom( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->addFrom( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->addFrom( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->addFrom( $email, $name );
+			}
 		}
 
 		return $this;
@@ -67,12 +70,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addTo( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->addTo( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->addTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->addTo( $email, $name );
+			}
 		}
 
 		return $this;
@@ -88,12 +94,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addCc( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addCc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->addCc( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->addCc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->addCc( $email, $name );
+			}
 		}
 
 		return $this;
@@ -109,12 +118,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addBcc( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addBcc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->addBcc( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->addBcc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->addBcc( $email, $name );
+			}
 		}
 
 		return $this;
@@ -130,12 +142,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addReplyTo( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->addReplyTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->addReplyTo( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->addReplyTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->addReplyTo( $email, $name );
+			}
 		}
 
 		return $this;
@@ -151,12 +166,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addHeader( string $name, string $value ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $name )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->getHeaders()->add( new \Symfony\Component\Mime\Header\UnstructuredHeader( $name, $value ) );
-		} else {
-			$this->object->getHeaders()->addTextHeader( $name, $value );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->getHeaders()->add( new \Symfony\Component\Mime\Header\UnstructuredHeader( $name, $value ) );
+			} else {
+				$this->object->getHeaders()->addTextHeader( $name, $value );
+			}
 		}
 
 		return $this;
@@ -184,12 +202,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setSender( string $email, string $name = null ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $email )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->setSender( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-		} else {
-			$this->object->setSender( $email, $name );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->setSender( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
+			} else {
+				$this->object->setSender( $email, $name );
+			}
 		}
 
 		return $this;
@@ -204,12 +225,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setSubject( string $subject ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $subject )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->setSubject( $subject );
-		} else {
-			$this->object->setSubject( $subject );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->setSubject( $subject );
+			} else {
+				$this->object->setSubject( $subject );
+			}
 		}
 
 		return $this;
@@ -224,12 +248,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setBody( string $message ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $message )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->text( $message, $this->charset );
-		} elseif( class_exists( '\Swift_Mailer' ) ) {
-			$this->object->setBody( $message );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->text( $message, $this->charset );
+			} elseif( class_exists( '\Swift_Mailer' ) ) {
+				$this->object->setBody( $message );
+			}
 		}
 
 		return $this;
@@ -244,12 +271,15 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function setBodyHtml( string $message ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
+		if( $message )
+		{
+			$class = '\Symfony\Component\Mime\Email';
 
-		if( class_exists( $class ) && $this->object instanceof $class ) {
-			$this->object->html( $message, $this->charset );
-		} elseif( class_exists( '\Swift_Mailer' ) ) {
-			$this->object->addPart( $message, 'text/html' );
+			if( class_exists( $class ) && $this->object instanceof $class ) {
+				$this->object->html( $message, $this->charset );
+			} elseif( class_exists( '\Swift_Mailer' ) ) {
+				$this->object->addPart( $message, 'text/html' );
+			}
 		}
 
 		return $this;
@@ -267,23 +297,27 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 */
 	public function addAttachment( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
 	{
-		$class = '\Symfony\Component\Mime\Email';
-
-		if( class_exists( $class ) && $this->object instanceof $class )
+		if( $data )
 		{
-			$this->object->attach( $data, $filename, $mimetype );
-			return $this;
+			$class = '\Symfony\Component\Mime\Email';
+
+			if( class_exists( $class ) && $this->object instanceof $class )
+			{
+				$this->object->attach( $data, $filename, $mimetype );
+			}
+			elseif( class_exists( '\Swift_Attachment' ) )
+			{
+				$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
+				$part->setDisposition( $disposition );
+				$this->object->attach( $part );
+			}
+			else
+			{
+				throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
+			}
 		}
 
-		if( class_exists( '\Swift_Attachment' ) )
-		{
-			$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
-			$part->setDisposition( $disposition );
-			$this->object->attach( $part );
-			return $this;
-		}
-
-		throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
+		return $this;
 	}
 
 
