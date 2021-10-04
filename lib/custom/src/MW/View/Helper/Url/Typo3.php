@@ -85,8 +85,7 @@ class Typo3
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) )
-			->setSection( join( '/', $trailing ) )
-			->setUseCacheHash( $useCHash );
+			->setSection( join( '/', $trailing ) );
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
 			return (string) $this->uriBuilder->buildBackendUri();

@@ -74,21 +74,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testTransformChash()
-	{
-		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setUseCacheHash' ) )->getMock();
-
-		$mock->expects( $this->once() )->method( 'setUseCacheHash' )
-			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
-
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
-
-		$config = array( 'chash' => 1 );
-		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
-	}
-
-
 	public function testTransformType()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )

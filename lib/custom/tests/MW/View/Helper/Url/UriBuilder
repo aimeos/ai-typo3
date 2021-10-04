@@ -68,14 +68,6 @@ class UriBuilder
 	}
 
 	/**
-	 * @param boolean $chash
-	 */
-	public function setUseCacheHash( $chash )
-	{
-		return $this;
-	}
-
-	/**
 	 * @param boolean $nocache
 	 */
 	public function setNoCache( $nocache )
