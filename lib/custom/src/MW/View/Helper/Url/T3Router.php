@@ -10,6 +10,8 @@
 
 namespace Aimeos\MW\View\Helper\Url;
 
+use TYPO3\CMS\Core\Routing\RouterInterface;
+
 
 /**
  * View helper class for building URLs using the page router.
@@ -55,12 +57,15 @@ class T3Router
 	public function transform( string $target = null, string $controller = null, string $action = null,
 		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
+		$params['controller'] = $controller;
 		$params['action'] = $action;
 
 		if( $params['locale'] ?? null ) {
 			$params['L'] = $params['locale'];
 		}
 
-		return (string) $this->router->generateUri( $target, ['ai' => $params + $this->fixed], join( '/', $trailing ) );
+		$abs = !empty( $config['absoluteUri'] ) ? RouterInterface::ABSOLUTE_URL : RouterInterface::ABSOLUTE_PATH;
+
+		return (string) $this->router->generateUri( $target, ['ai' => $params + $this->fixed], join( '/', $trailing ), $abs );
 	}
 }
