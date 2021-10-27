@@ -81,7 +81,6 @@ class Typo3
 			->setTargetPageUid( (int) ( $target ?: ( $GLOBALS['TSFE']->id ?? 0 ) ) )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
-			->setAbsoluteUriScheme( $this->getValue( $config, 'scheme', '' ) )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) )
