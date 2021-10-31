@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
@@ -19,7 +19,7 @@ class CustomerMigrateListsKeyTypo3 extends TablesMigrateListsKey
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['TablesMigrateListsKey'];
 	}
@@ -28,9 +28,9 @@ class CustomerMigrateListsKeyTypo3 extends TablesMigrateListsKey
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update TYPO3 lists "key" columns', 0 ); $this->status( '' );
+		$this->info( 'Update TYPO3 lists "key" columns', 'v' );
 
 		$this->process( ['db-customer' => 'fe_users_list'] );
 	}

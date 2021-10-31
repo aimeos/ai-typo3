@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds FOS user customer test data.
  */
-class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
+class CustomerAddTypo3TestData extends CustomerAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['TablesAddTypo3TestData', 'ProductAddTestData'];
 	}
@@ -30,7 +30,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['CustomerAddTestData'];
 	}
@@ -39,26 +39,19 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	/**
 	 * Adds customer test data
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding TYPO3 customer test data', 'v' );
 
-		$this->msg( 'Adding TYPO3 customer test data', 0 );
-
-		$dbm = $this->additional->getDatabaseManager();
-		$conn = $dbm->acquire( 'db-customer' );
-		$conn->create( 'DELETE FROM "fe_users" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
-		$dbm->release( $conn, 'db-customer' );
+		$this->db( 'db-customer' )->exec( 'DELETE FROM fe_users WHERE email LIKE \'test%@example.com\'' );
 
 		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
 		$manager->delete( $manager->search( $search )->toArray() );
 
-		$this->additional->setEditor( 'ai-typo3:lib/custom' );
+		$this->context()->setEditor( 'ai-typo3:lib/custom' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
-
-		$this->status( 'done' );
 	}
 
 
@@ -71,7 +64,7 @@ class CustomerAddTypo3TestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'customer' ) {
-			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Typo3' );
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Typo3' );
 		}
 
 		return parent::getManager( $domain );

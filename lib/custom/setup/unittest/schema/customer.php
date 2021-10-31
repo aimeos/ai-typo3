@@ -9,96 +9,86 @@
 return array(
 	'table' => array(
 
-		'fe_users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_users' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fe_users' );
+			$table->int( 'uid' )->unsigned( true )->primary( 'PRIMARY' );
+			$table->string( 'siteid', 'string', ['length' => 255, 'default' => '1.'] );
+			$table->int( 'pid' )->unsigned( true )->default( 0 );
+			$table->int( 'deleted' )->length( 3 )->default( 0 );
+			$table->int( 'hidden' )->length( 3 )->default( 0 );
+			$table->int( 'disable' )->unsigned( true )->length( 3 )->default( 0 );
+			$table->int( 'tstamp' )->unsigned( true )->default( 0 );
+			$table->int( 'crdate' )->unsigned( true )->default( 0 );
+			$table->int( 'cruser_id' )->unsigned( true )->default( 0 );
+			$table->string( 'lockToDomain' )->length( 50 )->default( '' );
+			$table->text( 'TSconfig' )->default( '' );
+			$table->int( 'starttime' )->unsigned( true )->length( 11 )->default( 0 );
+			$table->int( 'endtime' )->unsigned( true )->length( 11 )->default( 0 );
+			$table->string( 'usergroup' )->null( true );
+			$table->string( 'name' )->length( 100 )->default( '' );
+			$table->text( 'uc' )->null( true );
+			$table->string( 'username' )->length( 50 )->null( true );
+			$table->string( 'password' )->length( 100 )->null( true );
+			$table->string( 'first_name' )->length( 50 )->null( true );
+			$table->string( 'middle_name' )->length( 50 )->null( true );
+			$table->string( 'last_name' )->length( 50 )->null( true );
+			$table->string( 'address' )->null( true );
+			$table->string( 'telephone' )->length( 20 )->null( true );
+			$table->string( 'fax' )->length( 20 )->null( true );
+			$table->string( 'email' )->length( 80 )->null( true );
+			$table->string( 'title' )->length( 40 )->null( true );
+			$table->string( 'city' )->length( 50 )->null( true );
+			$table->string( 'www' )->length( 80 )->null( true );
+			$table->string( 'company' )->length( 80 )->null( true );
+			$table->string( 'vatid' )->length( 50 )->null( true );
+			$table->string( 'zip' )->length( 20 )->default( '' );
+			$table->string( 'country' )->length( 60 )->default( '' );
+			$table->text( 'image', 255 )->null( true );
+			$table->string( 'felogin_forgotHash' )->length( 80 )->null( true );
+			$table->string( 'tx_extbase_type' )->null( true );
+			$table->int( 'fe_cruser_id' )->unsigned( true )->default( 0 );
+			$table->int( 'lastlogin' )->unsigned( true )->default( 0 );
+			$table->int( 'is_online' )->unsigned( true )->default( 0 );
+			$table->int( 'date_of_birth' )->unsigned( true )->default( 0 );
+			$table->string( 'zone' )->length( 45 )->default( '' );
+			$table->string( 'language' )->length( 2 )->default( '' );
+			$table->string( 'cnum' )->length( 50 )->default( '' );
+			$table->string( 'token' )->length( 32 )->default( '' );
+			$table->int( 'gender' )->unsigned( true )->default( 99 );
+			$table->int( 'status' )->unsigned( true )->default( 0 );
+			$table->int( 'by_invitation' )->unsigned( true )->default( 0 );
+			$table->int( 'module_sys_dmail_html' )->unsigned( true )->default( 0 );
+			$table->int( 'terms_acknowledged' )->unsigned( true )->default( 0 );
+			$table->text( 'tx_srfeuserregister_password' )->default( '' );
+			$table->text( 'comments' )->default( '' );
+			$table->text( 'felogin_redirectPid' )->length( 0xff )->default( '' );
+			$table->string( 'static_info_country' )->length( 3 )->default( '' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
 
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => '1.'] );
-			$table->addColumn( 'uid', 'integer', ['autoincrement' => true, 'unsigned' => true] );
-			$table->addColumn( 'pid', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'deleted', 'integer', ['length' => 3, 'default' => 0] );
-			$table->addColumn( 'hidden', 'integer', ['length' => 3, 'default' => 0] );
-			$table->addColumn( 'disable', 'integer', ['length' => 3, 'unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'tstamp', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'crdate', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cruser_id', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'lockToDomain', 'string', ['length' => 50, 'default' => ''] );
-			$table->addColumn( 'TSconfig', 'text', ['length' => 0xffff, 'default' => ''] );
-			$table->addColumn( 'starttime', 'integer', ['length' => 11, 'unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'endtime', 'integer', ['length' => 11, 'unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'usergroup', 'string', ['length' => 0xff, 'notnull' => false] );
-			$table->addColumn( 'name', 'string', ['length' => 100, 'default' => ''] );
-			$table->addColumn( 'uc', 'text', ['length' => 0xffff, 'notnull' => false] );
-			$table->addColumn( 'username', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'password', 'string', ['length' => 100, 'notnull' => false] );
-			$table->addColumn( 'first_name', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'middle_name', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'last_name', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'address', 'string', ['length' => 255, 'notnull' => false] );
-			$table->addColumn( 'telephone', 'string', ['length' => 20, 'notnull' => false] );
-			$table->addColumn( 'fax', 'string', ['length' => 20, 'notnull' => false] );
-			$table->addColumn( 'email', 'string', ['length' => 80, 'notnull' => false] );
-			$table->addColumn( 'title', 'string', ['length' => 40, 'notnull' => false] );
-			$table->addColumn( 'city', 'string', ['length' => 50, 'notnull' => false] );
-			$table->addColumn( 'www', 'string', ['length' => 80, 'notnull' => false] );
-			$table->addColumn( 'company', 'string', ['length' => 80, 'notnull' => false] );
-			$table->addColumn( 'vatid', 'string', ['length' => 32, 'notnull' => false] );
-			$table->addColumn( 'zip', 'string', ['length' => 20, 'default' => ''] );
-			$table->addColumn( 'country', 'string', ['length' => 60, 'default' => ''] );
-			$table->addColumn( 'image', 'text', ['length' => 0xff, 'notnull' => false] );
-			$table->addColumn( 'felogin_forgotHash', 'string', ['length' => 80, 'notnull' => false] );
-			$table->addColumn( 'tx_extbase_type', 'string', ['length' => 255, 'notnull' => false] );
-			$table->addColumn( 'fe_cruser_id', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'lastlogin', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'is_online', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'date_of_birth', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'zone', 'string', ['length' => 45, 'default' => ''] );
-			$table->addColumn( 'language', 'string', ['length' => 2, 'default' => ''] );
-			$table->addColumn( 'cnum', 'string', ['length' => 50, 'default' => ''] );
-			$table->addColumn( 'token', 'string', ['length' => 32, 'default' => ''] );
-			$table->addColumn( 'gender', 'integer', ['unsigned' => true, 'default' => 99] );
-			$table->addColumn( 'status', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'by_invitation', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'module_sys_dmail_html', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'terms_acknowledged', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'tx_srfeuserregister_password', 'text', ['length' => 0xffff, 'default' => ''] );
-			$table->addColumn( 'comments', 'text', ['length' => 0xffff, 'default' => ''] );
-			$table->addColumn( 'felogin_redirectPid', 'text', ['length' => 0xff, 'default' => ''] );
-			$table->addColumn( 'static_info_country', 'string', ['length' => 3, 'default' => ''] );
-			$table->addColumn( 'longitude', 'decimal', ['precision' => 8, 'scale' => 6, 'notnull' => false] );
-			$table->addColumn( 'latitude', 'decimal', ['precision' => 8, 'scale' => 6, 'notnull' => false] );
-
-			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid', 'username'], 'fe_users_parent' );
-			$table->addIndex( ['username'], 'fe_users_username' );
-			$table->addIndex( ['is_online'], 'fe_users_is_online' );
-
-			return $schema;
+			$table->index( ['pid', 'username'], 'fe_users_parent' );
+			$table->index( ['username'], 'fe_users_username' );
+			$table->index( ['is_online'], 'fe_users_is_online' );
 		},
 
-		'fe_groups' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'fe_groups' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'fe_groups' );
+			$table->id( 'uid' )->unsigned( true )->primary( 'PRIMARY' );
+			$table->int( 'pid' )->unsigned( true )->default( 0 );
+			$table->int( 'deleted' )->length( 3 )->default( 0 );
+			$table->int( 'hidden' )->length( 3 )->default( 0 );
+			$table->int( 'tstamp' )->unsigned( true )->default( 0 );
+			$table->int( 'crdate' )->unsigned( true )->default( 0 );
+			$table->int( 'cruser_id' )->unsigned( true )->default( 0 );
+			$table->string( 'title' )->length( 50 )->default( '' );
+			$table->string( 'lockToDomain' )->length( 50 )->default( '' );
+			$table->text( 'description' )->default( '' );
+			$table->text( 'TSconfig' )->default( '' );
+			$table->text( 'subgroup' )->length( 0xff )->default( '' );
+			$table->text( 'felogin_redirectPid' )->length( 0xff )->null( true );
+			$table->int( 'tx_phpunit_is_dummy_record' )->unsigned( true )->length( 1 )->default( 0 );
 
-			$table->addColumn( 'uid', 'integer', ['autoincrement' => true, 'unsigned' => true] );
-			$table->addColumn( 'pid', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'deleted', 'integer', ['length' => 3, 'default' => 0] );
-			$table->addColumn( 'hidden', 'integer', ['length' => 3, 'default' => 0] );
-			$table->addColumn( 'tstamp', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'crdate', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'cruser_id', 'integer', ['unsigned' => true, 'default' => 0] );
-			$table->addColumn( 'title', 'string', ['length' => 50, 'default' => ''] );
-			$table->addColumn( 'lockToDomain', 'string', ['length' => 50, 'default' => ''] );
-			$table->addColumn( 'description', 'text', ['length' => 0xffff, 'default' => ''] );
-			$table->addColumn( 'TSconfig', 'text', ['length' => 0xffff, 'default' => ''] );
-			$table->addColumn( 'subgroup', 'text', ['length' => 0xff, 'default' => ''] );
-			$table->addColumn( 'felogin_redirectPid', 'text', ['length' => 0xff, 'notnull' => false] );
-			$table->addColumn( 'tx_phpunit_is_dummy_record', 'integer', ['unsigned' => true, 'length' => 1, 'default' => 0] );
-
-			$table->setPrimaryKey( ['uid'], 'PRIMARY' );
-			$table->addIndex( ['pid', 'deleted', 'hidden'], 'fe_groups_parent' );
-
-			return $schema;
+			$table->index( ['pid', 'deleted', 'hidden'], 'fe_groups_parent' );
 		},
 	),
 );
