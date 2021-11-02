@@ -11,7 +11,7 @@ return array(
 
 		'fe_users' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table->int( 'uid' )->unsigned( true )->primary( 'PRIMARY' );
+			$table->id( 'uid' )->unsigned( true )->primary( 'PRIMARY' );
 			$table->string( 'siteid' )->default( '1.' );
 			$table->int( 'pid' )->unsigned( true )->default( 0 );
 			$table->int( 'deleted' )->length( 3 )->default( 0 );

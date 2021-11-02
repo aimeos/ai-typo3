@@ -34,7 +34,7 @@ class CustomerRemoveLostUserDataTypo3 extends Base
 	 */
 	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Customer'];
 	}
 
 
@@ -53,7 +53,7 @@ class CustomerRemoveLostUserDataTypo3 extends Base
 			{
 				$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
 
-				if( !$db->hasForeign( $table, $constraint ) ) {
+				if( $db->hasTable( $table ) && !$db->hasForeign( $table, $constraint ) ) {
 					$db->exec( $sql );
 				}
 			}

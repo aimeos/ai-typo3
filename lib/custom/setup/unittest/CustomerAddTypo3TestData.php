@@ -21,18 +21,7 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	 */
 	public function after() : array
 	{
-		return ['TablesAddTypo3TestData', 'ProductAddTestData'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function before() : array
-	{
-		return ['CustomerAddTestData'];
+		return ['Customer', 'Text', 'ProductAddTestData'];
 	}
 
 
@@ -43,15 +32,10 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	{
 		$this->info( 'Adding TYPO3 customer test data', 'v' );
 
-		$this->db( 'db-customer' )->exec( 'DELETE FROM fe_users WHERE email LIKE \'test%@example.com\'' );
-
-		$manager = $this->getManager( 'customer' )->getSubManager( 'group' );
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'customer.group.code', 'unitgroup' ) );
-		$manager->delete( $manager->search( $search )->toArray() );
+		$this->db( 'db-customer' )->exec( "DELETE FROM fe_users WHERE email LIKE 'test%@example.com'" );
 
 		$this->context()->setEditor( 'ai-typo3:lib/custom' );
-		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
+		$this->process();
 	}
 
 
@@ -61,7 +45,7 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $domain === 'customer' ) {
 			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Typo3' );
