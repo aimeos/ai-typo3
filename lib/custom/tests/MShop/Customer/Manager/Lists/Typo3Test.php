@@ -160,23 +160,16 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsAll()
 	{
 		//search without base criteria
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
-		$result = $this->object->search( $search );
-		$this->assertEquals( 5, count( $result ) );
+		$search = $this->object->filter()->add( ['customer.lists.editor' => $this->editor] );
+		$this->assertGreaterThanOrEqual( 5, count( $this->object->search( $search ) ) );
 	}
 
 
 	public function testSearchItemsBase()
 	{
 		//search with base criteria
-		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'customer.lists.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$this->assertEquals( 5, count( $this->object->search( $search ) ) );
+		$search = $this->object->filter( true )->add( ['customer.lists.editor' => $this->editor] );
+		$this->assertGreaterThanOrEqual( 5, count( $this->object->search( $search ) ) );
 	}
 
 
