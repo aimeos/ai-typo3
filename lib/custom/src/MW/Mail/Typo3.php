@@ -53,7 +53,7 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 */
 	public function send( \Aimeos\MW\Mail\Message\Iface $message ) : Iface
 	{
-		$message->getObject()->send();
+		$message->object()->send();
 		return $this;
 	}
 }

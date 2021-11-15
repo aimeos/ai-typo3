@@ -141,6 +141,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetObject()
 	{
-		$this->assertInstanceOf( 'TYPO3\\CMS\\Core\\Mail\\MailMessage', $this->object->getObject() );
+		$this->assertInstanceOf( 'TYPO3\\CMS\\Core\\Mail\\MailMessage', $this->object->object() );
 	}
 }

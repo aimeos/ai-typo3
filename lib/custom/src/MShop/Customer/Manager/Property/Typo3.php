@@ -104,7 +104,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/property/typo3/delete' );

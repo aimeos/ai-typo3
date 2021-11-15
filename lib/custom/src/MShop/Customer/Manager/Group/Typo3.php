@@ -111,7 +111,7 @@ class Typo3
 		$path = 'mshop/customer/manager/group/submanagers';
 
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this;
@@ -211,7 +211,7 @@ class Typo3
 		try
 		{
 			$id = $item->getId();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{

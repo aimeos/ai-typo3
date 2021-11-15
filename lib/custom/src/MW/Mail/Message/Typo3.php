@@ -357,7 +357,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @return \TYPO3\CMS\Core\Mail\MailMessage TYPO3 mail message object
 	 */
-	public function getObject() : \TYPO3\CMS\Core\Mail\MailMessage
+	public function object() : \TYPO3\CMS\Core\Mail\MailMessage
 	{
 		return $this->object;
 	}

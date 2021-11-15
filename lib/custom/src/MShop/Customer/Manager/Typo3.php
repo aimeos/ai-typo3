@@ -427,7 +427,7 @@ class Typo3
 		$default = ['address', 'group', 'lists', 'property'];
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/typo3/clear' );
@@ -498,7 +498,7 @@ class Typo3
 		{
 			$id = $item->getId();
 			$billingAddress = $item->getPaymentAddress();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{

@@ -44,7 +44,7 @@ class Typo3
 	 *
 	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	protected function getObject() : \Aimeos\MW\Cache\Iface
+	protected function object() : \Aimeos\MW\Cache\Iface
 	{
 		if( !isset( $this->object ) )
 		{

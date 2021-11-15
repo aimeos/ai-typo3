@@ -235,7 +235,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/address/typo3/clear' );
