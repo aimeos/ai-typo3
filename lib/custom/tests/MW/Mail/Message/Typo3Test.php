@@ -36,47 +36,47 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddFrom()
+	public function testFrom()
 	{
 		$this->mock->expects( $this->once() )->method( 'addFrom' );
 
-		$result = $this->object->addFrom( 'a@b', 'test' );
+		$result = $this->object->from( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testAddTo()
+	public function testTo()
 	{
 		$this->mock->expects( $this->once() )->method( 'addTo' );
 
-		$result = $this->object->addTo( 'a@b', 'test' );
+		$result = $this->object->to( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testAddCc()
+	public function testCc()
 	{
 		$this->mock->expects( $this->once() )->method( 'addCc' );
 
-		$result = $this->object->addCc( 'a@b', 'test' );
+		$result = $this->object->cc( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testAddBcc()
+	public function testBcc()
 	{
 		$this->mock->expects( $this->once() )->method( 'addBcc' );
 
-		$result = $this->object->addBcc( 'a@b', 'test' );
+		$result = $this->object->bcc( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testAddReplyTo()
+	public function testReplyTo()
 	{
 		$this->mock->expects( $this->once() )->method( 'addReplyTo' );
 
-		$result = $this->object->addReplyTo( 'a@b', 'test' );
+		$result = $this->object->replyTo( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
@@ -88,58 +88,58 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetSender()
+	public function testSender()
 	{
 		$this->mock->expects( $this->once() )->method( 'setSender' );
 
-		$result = $this->object->setSender( 'a@b', 'test' );
+		$result = $this->object->sender( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testSetSubject()
+	public function testSubject()
 	{
 		$this->mock->expects( $this->once() )->method( 'setSubject' )
 			->with( $this->stringContains( 'test' ) );
 
-		$result = $this->object->setSubject( 'test' );
+		$result = $this->object->subject( 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testSetBody()
+	public function testText()
 	{
 		$this->mock->expects( $this->once() )->method( 'text' )
 			->with( $this->stringContains( 'test' ) );
 
-		$result = $this->object->setBody( 'test' );
+		$result = $this->object->text( 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testSetBodyHtml()
+	public function testHtml()
 	{
 		$this->mock->expects( $this->once() )->method( 'html' )
 			->with( $this->stringContains( 'test' ) );
 
-		$result = $this->object->setBodyHtml( 'test' );
+		$result = $this->object->html( 'test' );
 		$this->assertSame( $this->object, $result );
 	}
 
 
-	public function testAddAttachment()
+	public function testAttach()
 	{
 		$this->markTestIncomplete( 'Swift_Attachment::newInstance() is not testable' );
 	}
 
 
-	public function testEmbedAttachment()
+	public function testEmbed()
 	{
 		$this->markTestIncomplete( 'Swift_EmbeddedFile::newInstance() is not testable' );
 	}
 
 
-	public function testGetObject()
+	public function testObject()
 	{
 		$this->assertInstanceOf( 'TYPO3\\CMS\\Core\\Mail\\MailMessage', $this->object->object() );
 	}

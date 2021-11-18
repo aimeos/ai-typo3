@@ -44,7 +44,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user sending the e-mail or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addFrom( string $email, string $name = null ) : Iface
+	public function from( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -68,7 +68,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addTo( string $email, string $name = null ) : Iface
+	public function to( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -92,7 +92,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addCc( string $email, string $name = null ) : Iface
+	public function cc( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -116,7 +116,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addBcc( string $email, string $name = null ) : Iface
+	public function bcc( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -140,7 +140,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addReplyTo( string $email, string $name = null ) : Iface
+	public function replyTo( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -164,7 +164,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $value Text content of the custom e-mail header
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addHeader( string $name, string $value ) : Iface
+	public function header( string $name, string $value ) : Iface
 	{
 		if( $name )
 		{
@@ -200,7 +200,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $name Name of the user who sent the message or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSender( string $email, string $name = null ) : Iface
+	public function sender( string $email, string $name = null ) : Iface
 	{
 		if( $email )
 		{
@@ -223,7 +223,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $subject Subject of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSubject( string $subject ) : Iface
+	public function subject( string $subject ) : Iface
 	{
 		if( $subject )
 		{
@@ -246,7 +246,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $message Text body of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBody( string $message ) : Iface
+	public function text( string $message ) : Iface
 	{
 		if( $message )
 		{
@@ -269,7 +269,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $message HTML body of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBodyHtml( string $message ) : Iface
+	public function html( string $message ) : Iface
 	{
 		if( $message )
 		{
@@ -295,7 +295,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addAttachment( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
+	public function attach( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
 	{
 		if( $data )
 		{
@@ -329,7 +329,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string|null $filename Name of the attached file
 	 * @return string Content ID for referencing the attachment in the HTML body
 	 */
-	public function embedAttachment( string $data, string $mimetype, string $filename ) : string
+	public function embed( string $data, string $mimetype, string $filename ) : string
 	{
 		$class = '\Symfony\Component\Mime\Email';
 

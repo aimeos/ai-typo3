@@ -31,9 +31,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateMessage()
+	public function testCreate()
 	{
-		$result = $this->object->createMessage( 'ISO-8859-1' );
+		$result = $this->object->create( 'ISO-8859-1' );
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Message\\Iface', $result );
 	}
 
@@ -42,7 +42,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'send' );
 
-		$this->object->send( $this->object->createMessage() );
+		$this->object->send( $this->object->create() );
 	}
 
 }
