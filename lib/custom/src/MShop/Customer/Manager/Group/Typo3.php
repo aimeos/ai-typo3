@@ -110,7 +110,7 @@ class Typo3
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -202,7 +202,7 @@ class Typo3
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -378,7 +378,7 @@ class Typo3
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -507,7 +507,7 @@ class Typo3
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Customer\Item\Group\Iface
 	{
-		$values['customer.group.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['customer.group.siteid'] = $this->context()->getLocale()->getSiteId();
 
 		if( array_key_exists( 'tstamp', $values ) ) {
 			$values['customer.group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );

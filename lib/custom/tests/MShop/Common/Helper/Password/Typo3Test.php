@@ -20,7 +20,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testEncode()
 	{
-		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => \TestHelper::getContext()->password()] );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => \TestHelper::context()->password()] );
 		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
 	}
 }

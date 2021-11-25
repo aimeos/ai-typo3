@@ -426,7 +426,7 @@ class Typo3
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
 
-		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -442,7 +442,7 @@ class Typo3
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['customer.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -489,7 +489,7 @@ class Typo3
 			return $this->saveListItems( $item, 'customer' );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -681,7 +681,7 @@ class Typo3
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->getContext()->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$map = [];
@@ -769,7 +769,7 @@ class Typo3
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
 		if( $this->helper === null ) {
-			$this->helper = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->getContext()->password()] );
+			$this->helper = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->context()->password()] );
 		}
 
 		return $this->helper;
