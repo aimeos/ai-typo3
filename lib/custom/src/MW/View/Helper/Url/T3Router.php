@@ -66,6 +66,6 @@ class T3Router
 
 		$abs = !empty( $config['absoluteUri'] ) ? RouterInterface::ABSOLUTE_URL : RouterInterface::ABSOLUTE_PATH;
 
-		return (string) $this->router->generateUri( $target, ['ai' => $params + $this->fixed], join( '/', $trailing ), $abs );
+		return (string) $this->router->generateUri( $target, ['ai' => $params] + $this->fixed, join( '/', $trailing ), $abs );
 	}
 }
