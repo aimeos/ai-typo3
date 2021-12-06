@@ -304,11 +304,11 @@ class Typo3
 		 * @since 2016.10
 		 * @see mshop/customer/manager/group/typo3/pid-default
 		 */
-		$this->pid = $context->getConfig()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+		$this->pid = $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/customer/manager/sitemode', $level );
 
 
 		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -426,7 +426,7 @@ class Typo3
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
 
-		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 

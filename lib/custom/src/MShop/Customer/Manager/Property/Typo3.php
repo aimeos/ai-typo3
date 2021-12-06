@@ -103,7 +103,7 @@ class Typo3
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, ['type'] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, ['type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 

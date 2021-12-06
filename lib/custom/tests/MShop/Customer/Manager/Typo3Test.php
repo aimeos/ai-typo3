@@ -21,7 +21,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->getEditor();
-		$this->context->getConfig()->set( 'mshop/customer/manager/typo3/pid-default', 999999 );
+		$this->context->config()->set( 'mshop/customer/manager/typo3/pid-default', 999999 );
 		$this->object = new \Aimeos\MShop\Customer\Manager\Typo3( $this->context );
 	}
 
