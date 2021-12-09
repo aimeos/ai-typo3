@@ -204,7 +204,7 @@ class Typo3
 
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -380,7 +380,7 @@ class Typo3
 		$map = [];
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
