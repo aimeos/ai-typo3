@@ -48,7 +48,7 @@ class Typo3
 	{
 		if( !isset( $this->object ) )
 		{
-			$siteid = $this->context->getLocale()->getSiteItem()->getId();
+			$siteid = $this->context->locale()->getSiteItem()->getId();
 			$conf = array( 'siteid' => $this->context->config()->get( 'madmin/cache/prefix' ) . $siteid );
 			$this->object = \Aimeos\MW\Cache\Factory::create( 'Typo3', $conf, $this->cache );
 		}

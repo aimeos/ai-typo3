@@ -507,7 +507,7 @@ class Typo3
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Customer\Item\Group\Iface
 	{
-		$values['customer.group.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['customer.group.siteid'] = $this->context()->locale()->getSiteId();
 
 		if( array_key_exists( 'tstamp', $values ) ) {
 			$values['customer.group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );

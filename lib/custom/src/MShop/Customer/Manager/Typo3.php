@@ -442,7 +442,7 @@ class Typo3
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['customer.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['customer.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -610,7 +610,7 @@ class Typo3
 			$stmt->bind( $idx++, $billingAddress->getCountryId() );
 			$stmt->bind( $idx++, implode( ',', $item->getGroups() ) );
 			$stmt->bind( $idx++, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
