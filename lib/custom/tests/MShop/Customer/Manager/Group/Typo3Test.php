@@ -18,7 +18,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->getEditor();
+		$this->editor = $context->editor();
 
 		$this->object = new \Aimeos\MShop\Customer\Manager\Group\Typo3( $context );
 	}
