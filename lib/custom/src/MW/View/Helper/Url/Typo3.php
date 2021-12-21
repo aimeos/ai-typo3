@@ -90,7 +90,7 @@ class Typo3
 			return (string) $this->uriBuilder->buildBackendUri();
 		}
 
-		$url = $this->uriBuilder->buildFrontendUri();
+		$url = (string) $this->uriBuilder->buildFrontendUri();
 		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url );
 	}
 
