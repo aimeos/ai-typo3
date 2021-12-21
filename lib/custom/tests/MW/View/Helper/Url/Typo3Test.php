@@ -10,9 +10,6 @@
 namespace Aimeos\MW\View\Helper\Url;
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'UriBuilder';
-
-
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $view;
@@ -20,6 +17,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		if( !class_exists( '\TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder' ) ) {
+			$this->markTestSkipped( 'TYPO3 UriBuilder not available' );
+		}
+
 		$this->view = new \Aimeos\MW\View\Standard();
 	}
 

@@ -8,15 +8,14 @@
 namespace Aimeos\MW\View\Engine;
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Object';
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3View';
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'T3Configuration';
-
-
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	public function testRender()
 	{
+		if( !class_exists( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' ) ) {
+			$this->markTestSkipped( 'TYPO3 ObjectManager not available' );
+		}
+
 		$mock = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
@@ -27,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$view = $this->getMockBuilder( 'TYPO3\\CMS\\Fluid\\View\\T3View' )
+		$view = $this->getMockBuilder( 'T3View' )
 			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename', 'setPartialRootPaths', 'setLayoutRootPaths' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -47,5 +46,34 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MW\View\Engine\Typo3( $mock );
 
 		$this->assertEquals( 'test', $object->render( $v, 'filepath', array( 'key' => 'value' ) ) );
+	}
+}
+
+
+
+class T3View
+{
+	public function setTemplatePathAndFilename( $filepath )
+	{
+	}
+
+	public function setPartialRootPaths( array $partialRootPaths )
+	{
+	}
+
+	public function setLayoutRootPaths( array $setLayoutRootPaths )
+	{
+	}
+
+	public function assignMultiple( array $values )
+	{
+	}
+
+	public function assign( $key, $value )
+	{
+	}
+
+	public function render()
+	{
 	}
 }

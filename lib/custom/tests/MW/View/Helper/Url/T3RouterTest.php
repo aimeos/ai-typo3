@@ -17,6 +17,10 @@ class T3RouterTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		if( !interface_exists( '\TYPO3\CMS\Core\Routing\RouterInterface' ) ) {
+			$this->markTestSkipped( 'TYPO3 Router not available' );
+		}
+
 		$this->view = new \Aimeos\MW\View\Standard();
 	}
 
