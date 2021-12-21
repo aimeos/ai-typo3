@@ -10,9 +10,6 @@
 namespace Aimeos\MW\Session;
 
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'AbstractUserAuthentication';
-
-
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -20,6 +17,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		if( !class_exists( '\TYPO3\CMS\Core\Authentication\AbstractUserAuthentication' ) ) {
+			$this->markTestSkipped( 'TYPO3 AbstractUserAuthentication not available' );
+		}
+
 		$mock = new \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication();
 		$this->object = new \Aimeos\MW\Session\Typo3( $mock );
 	}
