@@ -21,7 +21,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'TYPO3 AbstractUserAuthentication not available' );
 		}
 
-		$mock = new \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication();
+		$mock = $this->getMockForAbstractClass( '\TYPO3\CMS\Core\Authentication\AbstractUserAuthentication' );
 		$this->object = new \Aimeos\MW\Session\Typo3( $mock );
 	}
 
