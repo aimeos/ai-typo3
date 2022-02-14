@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\Session;
+namespace Aimeos\Base\Session;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -27,7 +27,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 
-		$this->object = new \Aimeos\MW\Session\Typo3( $this->mock );
+		$this->object = new \Aimeos\Base\Session\Typo3( $this->mock );
 	}
 
 
@@ -43,7 +43,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->del( 'test' );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $result );
 	}
 
 
@@ -70,7 +70,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->remove( ['test'] );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $result );
 	}
 
 
@@ -80,6 +80,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->set( 'test', '234' );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $result );
 	}
 }
