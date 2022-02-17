@@ -8,7 +8,7 @@ jobs:
   "php72-mariadb10":
     docker:
       - image: aimeos/ci-php:7.2
-      - image: cimg/mariadb:10.3.3
+      - image: cimg/mariadb:10.3
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
