@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\Mail;
+namespace Aimeos\Base\Mail;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -26,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Mail\Typo3( function() use ( $mock ) { return $mock; } );
+		$this->object = new \Aimeos\Base\Mail\Typo3( function() use ( $mock ) { return $mock; } );
 		$this->mock = $mock;
 	}
 
@@ -34,7 +34,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testCreate()
 	{
 		$result = $this->object->create( 'ISO-8859-1' );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Message\\Iface', $result );
+		$this->assertInstanceOf( '\\Aimeos\\Base\\Mail\\Message\\Iface', $result );
 	}
 
 

@@ -4,21 +4,21 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2014-2022
- * @package MW
+ * @package Base
  * @subpackage Mail
  */
 
 
-namespace Aimeos\MW\Mail\Message;
+namespace Aimeos\Base\Mail\Message;
 
 
 /**
  * Zend implementation for creating e-mails.
  *
- * @package MW
+ * @package Base
  * @subpackage Mail
  */
-class Typo3 implements \Aimeos\MW\Mail\Message\Iface
+class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 {
 	private $charset;
 	private $object;
@@ -42,7 +42,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user sending the e-mail or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function from( string $email, string $name = null ) : Iface
 	{
@@ -66,7 +66,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $email Destination address of the target mailbox
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function to( string $email, string $name = null ) : Iface
 	{
@@ -90,7 +90,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $email Destination address for a copy
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function cc( string $email, string $name = null ) : Iface
 	{
@@ -112,20 +112,22 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	/**
 	 * Adds a destination e-mail address for a hidden copy of the message.
 	 *
-	 * @param string $email Destination address for a hidden copy
-	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @param array|string $email Destination address for a hidden copy
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
-	public function bcc( string $email, string $name = null ) : Iface
+	public function bcc( $email ) : Iface
 	{
-		if( $email )
+		if( !empty( $email ) )
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
-			if( class_exists( $class ) && $this->object instanceof $class ) {
-				$this->object->addBcc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
-			} else {
-				$this->object->addBcc( $email, $name );
+			foreach( (array) $email as $addr )
+			{
+				if( class_exists( $class ) && $this->object instanceof $class ) {
+					$this->object->addBcc( new \Symfony\Component\Mime\Address( $addr ) );
+				} else {
+					$this->object->addBcc( $addr );
+				}
 			}
 		}
 
@@ -138,7 +140,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $email E-mail address which should receive all replies
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function replyTo( string $email, string $name = null ) : Iface
 	{
@@ -162,7 +164,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $name Name of the custom e-mail header
 	 * @param string $value Text content of the custom e-mail header
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function header( string $name, string $value ) : Iface
 	{
@@ -184,7 +186,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	/**
 	 * Sends the e-mail message to the mail server.
 	 *
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function send() : Iface
 	{
@@ -198,7 +200,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 *
 	 * @param string $email Source e-mail address
 	 * @param string|null $name Name of the user who sent the message or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function sender( string $email, string $name = null ) : Iface
 	{
@@ -221,7 +223,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * Sets the subject of the message.
 	 *
 	 * @param string $subject Subject of the message
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function subject( string $subject ) : Iface
 	{
@@ -244,7 +246,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * Sets the text body of the message.
 	 *
 	 * @param string $message Text body of the message
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function text( string $message ) : Iface
 	{
@@ -267,7 +269,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * Sets the HTML body of the message.
 	 *
 	 * @param string $message HTML body of the message
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function html( string $message ) : Iface
 	{
@@ -293,7 +295,7 @@ class Typo3 implements \Aimeos\MW\Mail\Message\Iface
 	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
 	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
 	public function attach( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
 	{

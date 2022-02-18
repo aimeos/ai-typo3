@@ -4,21 +4,21 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2014-2022
- * @package MW
+ * @package Base
  * @subpackage Mail
  */
 
 
-namespace Aimeos\MW\Mail;
+namespace Aimeos\Base\Mail;
 
 
 /**
  * TYPO3 implementation for creating and sending e-mails.
  *
- * @package MW
+ * @package Base
  * @subpackage Mail
  */
-class Typo3 implements \Aimeos\MW\Mail\Iface
+class Typo3 implements \Aimeos\Base\Mail\Iface
 {
 	private $closure;
 
@@ -37,21 +37,21 @@ class Typo3 implements \Aimeos\MW\Mail\Iface
 	 * Creates a new e-mail message object.
 	 *
 	 * @param string $charset Default charset of the message
-	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
+	 * @return \Aimeos\Base\Mail\Message\Iface E-mail message object
 	 */
-	public function create( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface
+	public function create( string $charset = 'UTF-8' ) : \Aimeos\Base\Mail\Message\Iface
 	{
 		$closure = $this->closure;
-		return new \Aimeos\MW\Mail\Message\Typo3( $closure(), $charset );
+		return new \Aimeos\Base\Mail\Message\Typo3( $closure(), $charset );
 	}
 
 
 	/**
 	 * Sends the e-mail message to the mail server.
 	 *
-	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
+	 * @param \Aimeos\Base\Mail\Message\Iface $message E-mail message object
 	 */
-	public function send( \Aimeos\MW\Mail\Message\Iface $message ) : Iface
+	public function send( \Aimeos\Base\Mail\Message\Iface $message ) : Iface
 	{
 		$message->object()->send();
 		return $this;

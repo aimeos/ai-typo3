@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\Mail\Message;
+namespace Aimeos\Base\Mail\Message;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -26,7 +26,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Mail\Message\Typo3( $this->mock, 'UTF-8' );
+		$this->object = new \Aimeos\Base\Mail\Message\Typo3( $this->mock, 'UTF-8' );
 	}
 
 
