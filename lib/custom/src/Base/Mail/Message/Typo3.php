@@ -291,17 +291,19 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	/**
 	 * Adds an attachment to the message.
 	 *
-	 * @param string $data Binary or string
-	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $data Binary or string @author nose
 	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
+	 * @param string|null $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
 	 * @return \Aimeos\Base\Mail\Message\Iface Message object
 	 */
-	public function attach( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
+	public function attach( ?string $data, string $filename = null, string $mimetype = null, string $disposition = 'attachment' ) : Iface
 	{
 		if( $data )
 		{
 			$class = '\Symfony\Component\Mime\Email';
+			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
+			$filename = $filename ?: md5( $data );
 
 			if( class_exists( $class ) && $this->object instanceof $class )
 			{
@@ -326,31 +328,36 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	/**
 	 * Embeds an attachment into the message and returns its reference.
 	 *
-	 * @param string $data Binary or string
-	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $data Binary or string
 	 * @param string|null $filename Name of the attached file
+	 * @param string|null $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
 	 * @return string Content ID for referencing the attachment in the HTML body
 	 */
-	public function embed( string $data, string $mimetype, string $filename ) : string
+	public function embed( ?string $data, string $filename = null, string $mimetype = null ) : string
 	{
-		$class = '\Symfony\Component\Mime\Email';
-
-		if( !$filename ) {
-			$filename = md5( $data );
-		}
-
-		if( class_exists( $class ) && $this->object instanceof $class )
+		if( $data )
 		{
-			$this->object->embed( $data, $filename, $mimetype );
-			return 'cid:' . $filename;
-		}
-		elseif( class_exists( '\Swift_EmbeddedFile' ) )
-		{
-			$part = \Swift_EmbeddedFile::newInstance( $data, $filename, $mimetype );
-			return $this->object->embed( $part );
+			$class = '\Symfony\Component\Mime\Email';
+			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
+			$filename = $filename ?: md5( $data );
+
+			if( class_exists( $class ) && $this->object instanceof $class )
+			{
+				$this->object->embed( $data, $filename, $mimetype );
+				return 'cid:' . $filename;
+			}
+			elseif( class_exists( '\Swift_EmbeddedFile' ) )
+			{
+				$part = \Swift_EmbeddedFile::newInstance( $data, $filename, $mimetype );
+				return $this->object->embed( $part );
+			}
+			else
+			{
+				throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
+			}
 		}
 
-		throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
+		return '';
 	}
 
 
