@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Password;
+namespace Aimeos\Base\Password;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -20,7 +20,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'TYPO3 password hashing not available' );
 		}
 
-		$this->object = new \Aimeos\MW\Password\Typo3( new \TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash() );
+		$this->object = new \Aimeos\Base\Password\Typo3( new \TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash() );
 	}
 
 

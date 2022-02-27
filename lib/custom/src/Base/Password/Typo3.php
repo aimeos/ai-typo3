@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\Password;
+namespace Aimeos\Base\Password;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MW\Password;
  * @package MW
  * @subpackage Password
  */
-class Typo3 implements \Aimeos\MW\Password\Iface
+class Typo3 implements \Aimeos\Base\Password\Iface
 {
 	private $hasher;
 

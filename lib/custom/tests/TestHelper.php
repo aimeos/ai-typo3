@@ -71,7 +71,7 @@ class TestHelper
 		$logger = new \Aimeos\Base\Logger\File( $site . '.log', \Aimeos\Base\Logger\Iface::DEBUG );
 		$ctx->setLogger( $logger );
 
-		$password = new \Aimeos\MW\Password\Standard();
+		$password = new \Aimeos\Base\Password\Standard();
 		$ctx->setPassword( $password );
 
 		$session = new \Aimeos\Base\Session\None();
