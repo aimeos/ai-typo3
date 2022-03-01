@@ -1,6 +1,6 @@
 {
 	"name": "aimeos/ai-typo3",
-	"description": "TYPO3 adapter for Aimeos web shops and e-commerce solutions",
+	"description": "TYPO3 adapter for Aimeos e-commerce integration",
 	"keywords": ["aimeos", "adapter", "typo3", "cms", "shop", "e-commerce"],
 	"homepage": "https://aimeos.org/TYPO3",
 	"type": "aimeos-extension",
