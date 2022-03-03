@@ -13,17 +13,17 @@ return [
 		'aimeos-core',
 	],
 	'include' => [
-		'lib/custom/src',
+		'src',
 	],
 	'config' => [
-		'lib/custom/config',
+		'config',
 	],
 	'setup' => [
-		'lib/custom/setup',
+		'setup',
 	],
 	'custom' => [
 		'admin/jqadm' => [
-			'admin/jqadm/manifest.jsb2',
+			'manifest.jsb2',
 		],
 	],
 ];

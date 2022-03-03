@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2014-2022
  */
 
@@ -32,15 +31,14 @@ class TestHelper
 	}
 
 
-	private static function getAimeos()
+	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
-			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
@@ -56,7 +54,7 @@ class TestHelper
 		$mshop = self::getAimeos();
 
 
-		$paths = $mshop->getConfigPaths( 'mysql' );
+		$paths = $mshop->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
@@ -79,11 +77,8 @@ class TestHelper
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $ctx );
 		$localeItem = $localeManager->bootstrap( $site, '', '', false );
-
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-typo3:lib/custom' );
-
-		return $ctx;
+		return $ctx->setEditor( 'ai-typo3:lib/custom' );
 	}
 }
