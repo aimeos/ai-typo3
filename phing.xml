@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Aimeos TYPO3 extension - custom library extensions" default="test">
+<project name="ai-typo3 extension" default="test">
 
 	<target name="test" description="Executes unit tests" depends="clean">
 		<echo msg="Executing unit tests" />
