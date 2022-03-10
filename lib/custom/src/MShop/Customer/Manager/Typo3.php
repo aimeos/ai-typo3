@@ -689,6 +689,8 @@ class Typo3
 		try
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$level = $this->getContext()->config()->get( 'mshop/customer/manager/sitemode', $level );
+
 			$cfgPathSearch = 'mshop/customer/manager/typo3/search';
 			$cfgPathCount = 'mshop/customer/manager/typo3/count';
 			$required = array( 'customer' );
