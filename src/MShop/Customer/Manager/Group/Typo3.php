@@ -26,42 +26,42 @@ class Typo3
 			'internalcode' => 'mcusgr."uid"',
 			'label' => 'Customer group ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.group.code' => array(
 			'code' => 'customer.group.code',
 			'internalcode' => 'mcusgr."title"',
 			'label' => 'Customer group code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."description"',
 			'label' => 'Customer group label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.ctime'=> array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."crdate"',
 			'label' => 'Customer group creation time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.mtime'=> array(
 			'code' => 'customer.group.mtime',
 			'internalcode' => 'mcusgr."tstamp"',
 			'label' => 'Customer group modification time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.editor'=> array(
 			'code' => 'customer.group.editor',
 			'internalcode' => '1',
 			'label' => 'Customer group editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -298,16 +298,16 @@ class Typo3
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $this->pid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // mtime
+			$stmt->bind( $idx++, time(), \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // mtime
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( $idx++, time(), \Aimeos\MW\DB\Statement\Base::PARAM_INT ); // ctime
+				$stmt->bind( $idx++, time(), \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // ctime
 			}
 
 			$stmt->execute()->finish();
