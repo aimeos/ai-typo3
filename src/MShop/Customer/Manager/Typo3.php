@@ -278,16 +278,16 @@ class Typo3
 	{
 		parent::__construct( $context );
 
-		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Salutation();
+		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Salutation();
 		$this->plugins['customer.salutation'] = $plugin;
 
-		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Status();
+		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Status();
 		$this->plugins['customer.status'] = $plugin;
 
-		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Date();
+		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Date();
 		$this->plugins['customer.birthday'] = $plugin;
 
-		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Datetime();
+		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Datetime();
 		$this->plugins['customer.ctime'] = $plugin;
 		$this->plugins['customer.mtime'] = $plugin;
 
@@ -352,13 +352,13 @@ class Typo3
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param array|string $key Search key or list of key to aggregate items for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/customer/manager/typo3//aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -464,7 +464,7 @@ class Typo3
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -674,12 +674,12 @@ class Typo3
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->context()->db();
 		$dbname = $this->getResourceName();
@@ -689,6 +689,8 @@ class Typo3
 		try
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
+
 			$cfgPathSearch = 'mshop/customer/manager/typo3/search';
 			$cfgPathCount = 'mshop/customer/manager/typo3/count';
 			$required = array( 'customer' );

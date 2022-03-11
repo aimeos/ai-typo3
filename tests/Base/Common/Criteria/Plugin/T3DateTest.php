@@ -7,11 +7,11 @@
  */
 
 
-namespace Aimeos\MW\Criteria\Plugin;
+namespace Aimeos\Base\Criteria\Plugin;
 
 
 /**
- * Test class for \Aimeos\MW\Criteria\Plugin\T3Date
+ * Test class for \Aimeos\Base\Criteria\Plugin\T3Date
  */
 class T3DateTest extends \PHPUnit\Framework\TestCase
 {
@@ -23,7 +23,7 @@ class T3DateTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MW\Criteria\Plugin\T3Date();
+		$this->object = new \Aimeos\Base\Criteria\Plugin\T3Date();
 	}
 
 

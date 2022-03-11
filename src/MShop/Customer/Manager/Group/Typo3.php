@@ -79,7 +79,7 @@ class Typo3
 	{
 		parent::__construct( $context );
 
-		$plugin = new \Aimeos\MW\Criteria\Plugin\T3Datetime();
+		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Datetime();
 		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
 		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
 
@@ -166,7 +166,7 @@ class Typo3
 	 * Returns the attributes that can be used for searching
 	 *
 	 * @param bool $withsub Return attributes of sub-managers too if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\Base\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
@@ -369,13 +369,13 @@ class Typo3
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->context();

@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\Criteria\Plugin;
+namespace Aimeos\Base\Criteria\Plugin;
 
 
 /**
@@ -18,7 +18,7 @@ namespace Aimeos\MW\Criteria\Plugin;
  * @package MW
  * @subpackage Common
  */
-class T3Date implements \Aimeos\MW\Criteria\Plugin\Iface
+class T3Date implements \Aimeos\Base\Criteria\Plugin\Iface
 {
 	/**
 	 * Translates ISO dates into seconds relative to the epoch.
