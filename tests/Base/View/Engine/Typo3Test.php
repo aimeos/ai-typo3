@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2017-2022
  */
 
-namespace Aimeos\MW\View\Engine;
+namespace Aimeos\Base\View\Engine;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -42,8 +42,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$view->expects( $this->once() )->method( 'setLayoutRootPaths' );
 		$view->expects( $this->once() )->method( 'render' )->will( $this->returnValue( 'test' ) );
 
-		$v = new \Aimeos\MW\View\Standard( [] );
-		$object = new \Aimeos\MW\View\Engine\Typo3( $mock );
+		$v = new \Aimeos\Base\View\Standard( [] );
+		$object = new \Aimeos\Base\View\Engine\Typo3( $mock );
 
 		$this->assertEquals( 'test', $object->render( $v, 'filepath', array( 'key' => 'value' ) ) );
 	}

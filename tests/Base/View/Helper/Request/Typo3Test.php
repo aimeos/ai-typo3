@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Request;
+namespace Aimeos\Base\View\Helper\Request;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -16,9 +16,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\Base\View\Standard();
 		$server = array( 'REMOTE_ADDR' => '127.0.0.1' );
-		$this->object = new \Aimeos\MW\View\Helper\Request\Typo3( $view, 123, [], [], [], [], $server );
+		$this->object = new \Aimeos\Base\View\Helper\Request\Typo3( $view, 123, [], [], [], [], $server );
 	}
 
 
@@ -30,7 +30,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\View\Helper\Request\Typo3', $this->object->transform() );
+		$this->assertInstanceOf( '\Aimeos\Base\View\Helper\Request\Typo3', $this->object->transform() );
 	}
 
 

@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Response;
+namespace Aimeos\Base\View\Helper\Response;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -16,8 +16,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$view = new \Aimeos\MW\View\Standard();
-		$this->object = new \Aimeos\MW\View\Helper\Response\Typo3( $view );
+		$view = new \Aimeos\Base\View\Standard();
+		$this->object = new \Aimeos\Base\View\Helper\Response\Typo3( $view );
 	}
 
 
@@ -29,6 +29,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\View\Helper\Response\Typo3', $this->object->transform() );
+		$this->assertInstanceOf( '\Aimeos\Base\View\Helper\Response\Typo3', $this->object->transform() );
 	}
 }

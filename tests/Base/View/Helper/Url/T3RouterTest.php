@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Url;
+namespace Aimeos\Base\View\Helper\Url;
 
 
 class T3RouterTest extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class T3RouterTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'TYPO3 Router not available' );
 		}
 
-		$this->view = new \Aimeos\MW\View\Standard();
+		$this->view = new \Aimeos\Base\View\Standard();
 	}
 
 
@@ -40,7 +40,7 @@ class T3RouterTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )->method( 'generateUri' )->will( $this->returnValue( $stub ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\T3Router( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\T3Router( $this->view, $mock, [] );
 
 		$this->assertEquals( '', $object->transform() );
 	}

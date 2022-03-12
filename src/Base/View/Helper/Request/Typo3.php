@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Request;
+namespace Aimeos\Base\View\Helper\Request;
 
 
 /**
@@ -18,8 +18,8 @@ namespace Aimeos\MW\View\Helper\Request;
  * @subpackage View
  */
 class Typo3
-	extends \Aimeos\MW\View\Helper\Request\Standard
-	implements \Aimeos\MW\View\Helper\Request\Iface
+	extends \Aimeos\Base\View\Helper\Request\Standard
+	implements \Aimeos\Base\View\Helper\Request\Iface
 {
 	private $ip;
 	private $target;
@@ -28,7 +28,7 @@ class Typo3
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param string|null TYPO3 target page ID
 	 * @param array $files List of uploaded files like in $_FILES
 	 * @param array $query List of uploaded files like in $_GET
@@ -36,7 +36,7 @@ class Typo3
 	 * @param array $cookies List of uploaded files like in $_COOKIES
 	 * @param array $server List of uploaded files like in $_SERVER
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, string $target = null, array $files = [],
+	public function __construct( \Aimeos\Base\View\Iface $view, string $target = null, array $files = [],
 		array $query = [], array $post = [], array $cookies = [], array $server = [] )
 	{
 		$this->target = $target;

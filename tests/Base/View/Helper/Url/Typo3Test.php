@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Url;
+namespace Aimeos\Base\View\Helper\Url;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'TYPO3 UriBuilder not available' );
 		}
 
-		$this->view = new \Aimeos\MW\View\Standard();
+		$this->view = new \Aimeos\Base\View\Standard();
 	}
 
 
@@ -39,7 +39,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
 		$fixed = array( 'site' => 'unittest' );
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, $fixed );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, $fixed );
 
 		$this->assertEquals( '', $object->transform() );
 	}
@@ -53,7 +53,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'absoluteUri' => 1 );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
@@ -68,7 +68,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setNoCache' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'nocache' => 1 );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
@@ -83,7 +83,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
 			->with( $this->equalTo( 123 ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'type' => 123 );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
@@ -98,7 +98,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setFormat' )
 			->with( $this->equalTo( 'xml' ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'format' => 'xml' );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
@@ -115,7 +115,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setArguments' )
 			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$config = array( 'eID' => 123 );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], $config ) );
@@ -132,7 +132,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'setArguments' )
 			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$params = array( 'locale' => 'de' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
@@ -146,7 +146,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )->method( 'buildBackendUri' );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params, [], array( 'BE' => 1 ) ) );
@@ -160,7 +160,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
 		$this->assertEquals( '', $object->transform( null, null, null, $params ) );
@@ -175,7 +175,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->will( $this->returnValue( 'ai' ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, array( 'site' => 'unittest' ) );
 
 		$params = array( 'test' => 'my/value' );
 		$config = array( 'namespace' => false );
@@ -190,7 +190,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )->method( 'reset' )->will( $this->returnValue( $mock ) );
 
-		$object = new \Aimeos\MW\View\Helper\Url\Typo3( $this->view, $mock, [] );
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
 		$mock->expects( $this->never() )->method( 'reset' );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], [] ) );
