@@ -19,7 +19,7 @@ namespace Aimeos\MAdmin\Cache\Proxy;
  */
 class Typo3
 	extends \Aimeos\MAdmin\Cache\Proxy\Standard
-	implements \Aimeos\MW\Cache\Iface
+	implements \Aimeos\Base\Cache\Iface
 {
 	private $object;
 	private $context;
@@ -42,15 +42,15 @@ class Typo3
 	/**
 	 * Returns the cache object or creates a new one if it doesn't exist yet.
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
-	protected function object() : \Aimeos\MW\Cache\Iface
+	protected function object() : \Aimeos\Base\Cache\Iface
 	{
 		if( !isset( $this->object ) )
 		{
 			$siteid = $this->context->locale()->getSiteItem()->getId();
 			$conf = array( 'siteid' => $this->context->config()->get( 'madmin/cache/prefix' ) . $siteid );
-			$this->object = \Aimeos\MW\Cache\Factory::create( 'Typo3', $conf, $this->cache );
+			$this->object = \Aimeos\Base\Cache\Factory::create( 'Typo3', $conf, $this->cache );
 		}
 
 		return $this->object;
