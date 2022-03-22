@@ -13,7 +13,7 @@ namespace Aimeos\Base\Mail\Message;
 
 
 /**
- * Zend implementation for creating e-mails.
+ * TYPO3 implementation for creating e-mails.
  *
  * @package Base
  * @subpackage Mail

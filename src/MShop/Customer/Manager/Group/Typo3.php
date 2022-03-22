@@ -73,9 +73,9 @@ class Typo3
 	/**
 	 * Initializes the customer group manager object
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
+	public function __construct( \Aimeos\MShop\ContextIface $context )
 	{
 		parent::__construct( $context );
 
