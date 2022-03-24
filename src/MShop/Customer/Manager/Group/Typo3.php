@@ -203,13 +203,8 @@ class Typo3
 		}
 
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$id = $item->getId();
 			$columns = $this->object()->getSaveAttributes();
 
@@ -354,14 +349,6 @@ class Typo3
 				$item->setId( $this->newId( $conn, $path ) );
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		return $item;
 	}
 
@@ -379,13 +366,8 @@ class Typo3
 	{
 		$map = [];
 		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
 
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
 			$required = array( 'customer.group' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
@@ -486,14 +468,6 @@ class Typo3
 			while( ( $row = $results->fetch() ) !== null ) {
 				$map[(string) $row['customer.group.id']] = $this->createItemBase( $row );
 			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
 
 		return map( $map );
 	}
