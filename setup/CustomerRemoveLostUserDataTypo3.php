@@ -49,7 +49,7 @@ class CustomerRemoveLostUserDataTypo3 extends Base
 			return;
 		}
 
-		$this->info( 'Remove left over TYPO3 fe_users references', 'v' );
+		$this->info( 'Remove left over TYPO3 fe_users references', 'vv' );
 
 		foreach( $this->sql as $table => $map )
 		{

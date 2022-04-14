@@ -30,7 +30,7 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding TYPO3 customer test data', 'v' );
+		$this->info( 'Adding TYPO3 customer test data', 'vv' );
 
 		$this->db( 'db-customer' )->exec( "DELETE FROM fe_users WHERE email LIKE 'test%@example.com'" );
 

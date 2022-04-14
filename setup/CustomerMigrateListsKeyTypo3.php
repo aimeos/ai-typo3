@@ -30,7 +30,7 @@ class CustomerMigrateListsKeyTypo3 extends TablesMigrateListsKey
 	 */
 	public function up()
 	{
-		$this->info( 'Update TYPO3 lists "key" columns', 'v' );
+		$this->info( 'Update TYPO3 lists "key" columns', 'vv' );
 
 		$this->process( ['db-customer' => 'fe_users_list'] );
 	}

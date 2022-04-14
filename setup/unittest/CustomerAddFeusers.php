@@ -19,7 +19,7 @@ class CustomerAddFeusers extends Base
 
 	public function up()
 	{
-		$this->info( 'Creating fe_users schema', 'v' );
+		$this->info( 'Creating fe_users schema', 'vv' );
 		$db = $this->db( 'db-customer' );
 
 		$filepath = __DIR__ . '/schema/customer.php';

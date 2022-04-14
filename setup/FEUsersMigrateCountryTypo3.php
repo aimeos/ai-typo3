@@ -36,7 +36,7 @@ class FEUsersMigrateCountryTypo3 extends Base
 			return;
 		}
 
-		$this->info( 'Migrating "static_info_country" column in "fe_users" table', 'v' );
+		$this->info( 'Migrating "static_info_country" column in "fe_users" table', 'vv' );
 
 		$db->exec( '
 			UPDATE fe_users SET static_info_country = (
