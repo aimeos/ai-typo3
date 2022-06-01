@@ -21,8 +21,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::context();
 		$this->editor = $this->context->editor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::context(), 'Typo3' );
-		$this->object = $manager->getSubManager( 'lists', 'Typo3' );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Lists\Typo3( \TestHelper::context() );
 	}
 
 
