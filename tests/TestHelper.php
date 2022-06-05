@@ -79,6 +79,6 @@ class TestHelper
 		$localeItem = $localeManager->bootstrap( $site, '', '', false );
 		$ctx->setLocale( $localeItem );
 
-		return $ctx->setEditor( 'ai-typo3:lib/custom' );
+		return $ctx->setEditor( 'ai-typo3' );
 	}
 }

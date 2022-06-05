@@ -34,7 +34,7 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 
 		$this->db( 'db-customer' )->exec( "DELETE FROM fe_users WHERE email LIKE 'test%@example.com'" );
 
-		$this->context()->setEditor( 'ai-typo3:lib/custom' );
+		$this->context()->setEditor( 'ai-typo3' );
 		$this->process();
 	}
 
