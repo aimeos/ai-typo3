@@ -40,13 +40,12 @@ return array(
 			$table->smallint( 'pos' );
 			$table->meta();
 
-			$table->index( ['parentid'], 'fk_t3feuad_pid' );
-			$table->index( ['langid'], 'idx_t3feuad_langid' );
-			$table->index( ['siteid', 'lastname', 'firstname'], 'idx_t3feuad_sid_last_first' );
-			$table->index( ['siteid', 'postal', 'address1'], 'idx_t3feuad_sid_post_addr1' );
-			$table->index( ['siteid', 'postal', 'city'], 'idx_t3feuad_sid_post_ci' );
-			$table->index( ['siteid', 'city'], 'idx_t3feuad_sid_city' );
-			$table->index( ['siteid', 'email'], 'idx_t3feuad_sid_email' );
+			$table->index( ['langid', 'siteid'], 'idx_t3feuad_langid_sid' );
+			$table->index( ['lastname', 'firstname'], 'idx_t3feuad_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_t3feuad_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_t3feuad_post_ci' );
+			$table->index( ['city'], 'idx_t3feuad_city' );
+			$table->index( ['email'], 'idx_t3feuad_email' );
 
 			$table->foreign( 'parentid', 'fe_users', 'uid', 'fk_t3feuad_pid' );
 		},
@@ -64,10 +63,10 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_t3feulity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_t3feulity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_t3feulity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_t3feulity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_t3feulity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_t3feulity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_t3feulity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_t3feulity_code_sid' );
 		},
 
 		'fe_users_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -87,9 +86,8 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_t3feuli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_t3feuli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_t3feuli_key_sid' );
-			$table->index( ['parentid'], 'fk_t3feuli_pid' );
 
 			$table->foreign( 'parentid', 'fe_users', 'uid', 'fk_t3feuli_pid' );
 		},
@@ -107,10 +105,10 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_t3feuprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_t3feuprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_t3feuprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_t3feuprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_t3feuprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_t3feuprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_t3feuprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_t3feuprty_code_sid' );
 		},
 
 		'fe_users_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -126,9 +124,8 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_t3feupr_sid_ty_lid_value' );
-			$table->index( ['key', 'siteid'], 'fk_t3feupr_key_sid' );
-			$table->index( ['parentid'], 'fk_t3feupr_pid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_t3feupr_ty_lid_val_sid' );
+			$table->index( ['key', 'siteid'], 'idx_t3feupr_key_sid' );
 
 			$table->foreign( 'parentid', 'fe_users', 'uid', 'fk_t3feupr_pid' );
 		},
