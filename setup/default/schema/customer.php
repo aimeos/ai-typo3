@@ -124,7 +124,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_t3feupr_ty_lid_val_sid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_t3feupr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'idx_t3feupr_key_sid' );
 
 			$table->foreign( 'parentid', 'fe_users', 'uid', 'fk_t3feupr_pid' );
