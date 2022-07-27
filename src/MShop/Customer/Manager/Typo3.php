@@ -442,7 +442,7 @@ class Typo3
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['customer.siteid'] = $this->context()->locale()->getSiteId();
+		$values['customer.siteid'] = $values['customer.siteid'] ?? $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
