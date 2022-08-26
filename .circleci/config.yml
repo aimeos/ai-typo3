@@ -21,6 +21,7 @@ jobs:
       - restore_cache:
           keys:
             - php72-{{ checksum "composer.json" }}
+      - run: composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
       - run: composer req --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
       - run: composer update -n --prefer-dist
       - save_cache:
@@ -45,6 +46,7 @@ jobs:
       - restore_cache:
           keys:
             - php73-{{ checksum "composer.json" }}
+      - run: composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
       - run: composer req --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
       - run: composer update -n --prefer-dist
       - save_cache:
@@ -70,6 +72,7 @@ jobs:
       - restore_cache:
           keys:
             - php74-{{ checksum "composer.json" }}
+      - run: composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
       - run: composer req --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
       - run: composer update -n --prefer-dist
       - save_cache:
@@ -95,6 +98,7 @@ jobs:
       - restore_cache:
           keys:
             - php80-{{ checksum "composer.json" }}
+      - run: composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
       - run: composer req --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
       - run: composer update -n --prefer-dist
       - save_cache:
@@ -120,6 +124,7 @@ jobs:
       - restore_cache:
           keys:
             - php81-{{ checksum "composer.json" }}
+      - run: composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
       - run: composer req --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
       - run: composer update -n --prefer-dist
       - save_cache:
