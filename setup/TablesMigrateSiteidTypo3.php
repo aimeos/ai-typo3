@@ -56,8 +56,8 @@ class TablesMigrateSiteidTypo3 extends TablesMigrateSiteid
 
 		$db = $this->db( 'db-customer' );
 
-		if( $db->hasColumn( 'users', 'siteid' ) ) {
-			$db->exec( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
+		if( $db->hasColumn( 'fe_users', 'siteid' ) ) {
+			$db->exec( 'UPDATE fe_users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
 }
