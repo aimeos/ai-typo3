@@ -22,20 +22,14 @@ class TablesMigrateSiteidTypo3 extends TablesMigrateSiteid
 	];
 
 
-	public function before() : array
-	{
-		return ['Customer'];
-	}
-
-
 	/**
-	 * Returns the list of task names which this task depends on.
+	 * Returns the list of task names which depend on this task.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function after() : array
+	public function before() : array
 	{
-		return ['TablesMigrateSiteid'];
+		return ['Customer', 'TablesMigrateSiteid'];
 	}
 
 
