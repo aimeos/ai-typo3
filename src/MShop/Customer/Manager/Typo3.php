@@ -482,11 +482,8 @@ class Typo3
 	 */
 	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( !$item->isModified() )
-		{
-			$item = $this->savePropertyItems( $item, 'customer' );
-			$item = $this->saveAddressItems( $item, 'customer' );
-			return $this->saveListItems( $item, 'customer' );
+		if( !$item->isModified() ) {
+			return $item;
 		}
 
 		$context = $this->context();
