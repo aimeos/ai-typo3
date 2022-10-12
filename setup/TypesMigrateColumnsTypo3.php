@@ -19,7 +19,7 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 	];
 
 	private $constraints = [
-		'db-customer' => ['fe_users_list' => 'unq_mcusli_sid_dm_rid_tid_pid', 'fe_users_property' => 'unq_mcuspr_sid_tid_lid_value'],
+		'db-customer' => ['fe_users_list' => 'unq_t3feuli_sid_dm_rid_tid_pid', 'fe_users_property' => 'unq_t3feupr_sid_tid_lid_value'],
 	];
 
 	private $migrations = [
