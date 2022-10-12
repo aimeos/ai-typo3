@@ -24,8 +24,8 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 
 	private $migrations = [
 		'db-customer' => [
-			'fe_users_list' => 'UPDATE "fe_users_list" SET "type" = ( SELECT "code" FROM "fe_users_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
-			'fe_users_property' => 'UPDATE "fe_users_property" SET "type" = ( SELECT "code" FROM "fe_users_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
+			'fe_users_list' => 'UPDATE fe_users_list SET type = ( SELECT code FROM fe_users_list_type AS t WHERE t.id = typeid AND t.domain = domain ) WHERE type = \'\'',
+			'fe_users_property' => 'UPDATE fe_users_property SET type = ( SELECT code FROM fe_users_property_type AS t WHERE t.id = typeid AND t.domain = domain ) WHERE type = \'\'',
 		],
 	];
 
