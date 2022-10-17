@@ -41,20 +41,20 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 			return;
 		}
 
-		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
-		$this->info( 'Add new type columns for Laravel', 'vv' );
+		$this->info( 'Migrate typeid to type for TYPO3', 'vv' );
+		$this->info( 'Add new type columns for TYPO3', 'vv' );
 
 		foreach( $this->tables as $rname => $list ) {
 			$this->addColumn( $rname, $list );
 		}
 
-		$this->info( 'Drop old unique indexes for Laravel', 'vv' );
+		$this->info( 'Drop old unique indexes for TYPO3', 'vv' );
 
 		foreach( $this->constraints as $rname => $list ) {
 			$this->dropIndex( $rname, $list );
 		}
 
-		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
+		$this->info( 'Migrate typeid to type for TYPO3', 'vv' );
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );
