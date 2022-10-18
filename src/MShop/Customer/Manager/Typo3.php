@@ -603,12 +603,13 @@ class Typo3
 			$stmt->bind( $idx++, $billingAddress->getCountryId() );
 			$stmt->bind( $idx++, implode( ',', $item->getGroups() ) );
 			$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
-			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
+				$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
 				$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
+				$stmt->bind( $idx++, $context->locale()->getSiteId() );
 				$stmt->bind( $idx, time(), \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // Creation time
 			}
 

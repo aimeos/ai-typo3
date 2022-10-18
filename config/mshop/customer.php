@@ -45,7 +45,7 @@ return array(
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
 							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
-						WHERE ( "siteid" = ? OR siteid = \'\' ) AND "id" = ?
+						WHERE ( "siteid" LIKE ? OR siteid = \'\' ) AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -226,7 +226,7 @@ return array(
 							SET :names
 								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						',
 					),
 					'delete' => array(
@@ -345,7 +345,7 @@ return array(
 						SET :names
 							"parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
 							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					',
 				),
 				'search' => array(
@@ -448,7 +448,7 @@ return array(
 							SET :names
 								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "siteid" = ? AND "id" = ?
+							WHERE "siteid" LIKE ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -535,7 +535,7 @@ return array(
 						SET :names
 							"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
+						WHERE "siteid" LIKE ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -662,7 +662,7 @@ return array(
 						"language" = ?, "telephone" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
 						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
 						"static_info_country" = ?, "usergroup" = ?, "pid" = ?
-					WHERE ( "siteid" = ? OR siteid = \'\' ) AND "uid" = ?
+					WHERE ( "siteid" LIKE ? OR siteid = \'\' ) AND "uid" = ?
 				',
 			),
 			'search' => array(
