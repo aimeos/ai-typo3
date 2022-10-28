@@ -29,6 +29,10 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 		],
 	];
 
+	private $drops = [
+		'db-customer' => ['users_list' => 'fk_t3feuli_typeid', 'users_property' => 'fk_t3feupr_typeid'],
+	];
+
 
 	/**
 	 * Executes the task
@@ -42,22 +46,29 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 		}
 
 		$this->info( 'Migrate typeid to type for TYPO3', 'vv' );
-		$this->info( 'Add new type columns for TYPO3', 'vv' );
+
+		$this->info( 'Add new type columns for TYPO3', 'vv', 1 );
 
 		foreach( $this->tables as $rname => $list ) {
 			$this->addColumn( $rname, $list );
 		}
 
-		$this->info( 'Drop old unique indexes for TYPO3', 'vv' );
+		$this->info( 'Drop old unique indexes for TYPO3', 'vv', 1 );
 
 		foreach( $this->constraints as $rname => $list ) {
 			$this->dropIndex( $rname, $list );
 		}
 
-		$this->info( 'Migrate typeid to type for TYPO3', 'vv' );
+		$this->info( 'Migrate typeid to type for TYPO3', 'vv', 1 );
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );
+		}
+
+		$this->info( 'Drop typeid columns for TYPO3', 'vv', 1 );
+
+		foreach( $this->drops as $rname => $list ) {
+			$this->dropColumn( $rname, $list );
 		}
 	}
 }
