@@ -30,7 +30,7 @@ class TypesMigrateColumnsTypo3 extends TypesMigrateColumns
 	];
 
 	private $drops = [
-		'db-customer' => ['users_list' => 'fk_t3feuli_typeid', 'users_property' => 'fk_t3feupr_typeid'],
+		'db-customer' => ['fe_users_list' => 'fk_t3feuli_typeid', 'fe_users_property' => 'fk_t3feupr_typeid'],
 	];
 
 
