@@ -196,7 +196,7 @@ class Typo3
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Customer\Item\Group\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Customer\Item\Group\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Group\Iface
+	protected function saveItem( \Aimeos\MShop\Customer\Item\Group\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Group\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
