@@ -31,17 +31,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAggregate()
-	{
-		$search = $this->object->filter( true );
-		$result = $this->object->aggregate( $search, 'customer.lists.domain' )->toArray();
-
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( 'text', $result );
-		$this->assertEquals( 4, $result['text'] );
-	}
-
-
 	public function testCreateItem()
 	{
 		$item = $this->object->create();
