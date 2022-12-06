@@ -732,7 +732,7 @@ class Typo3
 		$helper = $this->getPasswordHelper();
 		$values = $this->transform( $values );
 
-		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
 
 		return new \Aimeos\MShop\Customer\Item\Standard(
 			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper
