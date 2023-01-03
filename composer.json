@@ -18,7 +18,7 @@
 		"ext-fileinfo": "*",
 		"nyholm/psr7": "~1.2",
 		"nyholm/psr7-server": "~1.0",
-		"aimeos/aimeos-core": "dev-master"
+		"aimeos/aimeos-core": "2023.01.*"
 	},
 	"require-dev": {
 		"typo3/cms-core": "~9.5||~10.3",
