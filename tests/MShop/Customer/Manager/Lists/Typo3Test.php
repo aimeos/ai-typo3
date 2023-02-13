@@ -166,7 +166,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Typo3' ) );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 }

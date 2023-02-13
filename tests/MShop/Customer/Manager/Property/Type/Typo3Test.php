@@ -172,7 +172,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 }
