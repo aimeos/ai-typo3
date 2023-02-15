@@ -40,5 +40,8 @@
 		"classmap": [
 			"tests"
 		]
+	},
+	"config": {
+		"allow-plugins": true
 	}
 }
