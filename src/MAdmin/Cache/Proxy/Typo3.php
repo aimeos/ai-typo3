@@ -8,33 +8,31 @@
  */
 
 
-namespace Aimeos\MAdmin\Cache\Proxy;
+namespace Aimeos\MAdmin\Cache\Manager;
 
 
 /**
- * Cache proxy for creating the TYPO3 cache object on demand.
+ * Cache manager for the TYPO3 cache object.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class Typo3
-	extends \Aimeos\MAdmin\Cache\Proxy\Standard
-	implements \Aimeos\Base\Cache\Iface
+class Typo3 extends \Aimeos\MAdmin\Cache\Manager\Standard
 {
-	private $object;
-	private $context;
 	private $cache;
+	private $object;
 
 
 	/**
 	 * Initializes the cache controller.
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context MShop context object
-	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache Flow cache object
+	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache TYPO3 cache object
 	 */
 	public function __construct( \Aimeos\MShop\ContextIface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
-		$this->context = $context;
+		parent::__construct( $this->context );
+
 		$this->cache = $cache;
 	}
 
@@ -46,11 +44,8 @@ class Typo3
 	 */
 	protected function object() : \Aimeos\Base\Cache\Iface
 	{
-		if( !isset( $this->object ) )
-		{
-			$siteid = $this->context->locale()->getSiteItem()->getId();
-			$conf = array( 'siteid' => $this->context->config()->get( 'madmin/cache/prefix' ) . $siteid );
-			$this->object = \Aimeos\Base\Cache\Factory::create( 'Typo3', $conf, $this->cache );
+		if( !isset( $this->object ) ) {
+			$this->object = \Aimeos\Base\Cache\Factory::create( 'Typo3', $this->cache );
 		}
 
 		return $this->object;

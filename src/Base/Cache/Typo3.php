@@ -23,19 +23,15 @@ class Typo3
 	implements \Aimeos\Base\Cache\Iface
 {
 	private $object;
-	private $prefix;
 
 
 	/**
 	 * Initializes the object instance.
 	 *
-	 * @param array $config List of configuration values
 	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache TYPO3 cache object
-	 * @deprecated 2022.01 Remove $config parameter and siteid prefix
 	 */
-	public function __construct( array $config, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
+	public function __construct( \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
 	{
-		$this->prefix = ( isset( $config['siteid'] ) ? $config['siteid'] . '-' : '' );
 		$this->object = $cache;
 	}
 
@@ -63,12 +59,7 @@ class Typo3
 	 */
 	public function clear() : bool
 	{
-		if( $this->prefix ) {
-			$this->object->flushByTag( $this->prefix . 'siteid' );
-		} else {
-			$this->object->flush();
-		}
-
+		$this->object->flush();
 		return true;
 	}
 
@@ -84,7 +75,7 @@ class Typo3
 	 */
 	public function delete( string $key ) : bool
 	{
-		$this->object->remove( $this->prefix . $key );
+		$this->object->remove( $key );
 		return true;
 	}
 
@@ -101,7 +92,7 @@ class Typo3
 	public function deleteMultiple( iterable $keys ) : bool
 	{
 		foreach( $keys as $key ) {
-			$this->object->remove( $this->prefix . $key );
+			$this->object->remove( $key );
 		}
 
 		return true;
@@ -121,7 +112,7 @@ class Typo3
 	public function deleteByTags( iterable $tags ) : bool
 	{
 		foreach( $tags as $tag ) {
-			$this->object->flushByTag( $this->prefix . $tag );
+			$this->object->flushByTag( $tag );
 		}
 
 		return true;
@@ -141,7 +132,7 @@ class Typo3
 	 */
 	public function get( string $key, $default = null )
 	{
-		if( ( $entry = $this->object->get( $this->prefix . $key ) ) !== false ) {
+		if( ( $entry = $this->object->get( $key ) ) !== false ) {
 			return $entry;
 		}
 
@@ -165,7 +156,7 @@ class Typo3
 
 		foreach( $keys as $key )
 		{
-			if( ( $entry = $this->object->get( $this->prefix . $key ) ) !== false ) {
+			if( ( $entry = $this->object->get( $key ) ) !== false ) {
 				$result[$key] = $entry;
 			} else {
 				$result[$key] = $default;
@@ -187,7 +178,7 @@ class Typo3
 	 */
 	public function has( string $key ) : bool
 	{
-		return $this->object->has( $this->prefix . $key );
+		return $this->object->has( $key );
 	}
 
 
@@ -213,13 +204,13 @@ class Typo3
 			$expires = date_create( $expires )->getTimestamp() - time();
 		}
 
-		$tagList = ( $this->prefix ? array( $this->prefix . 'siteid' ) : [] );
+		$tagList = [];
 
 		foreach( $tags as $tag ) {
-			$tagList[] = $this->prefix . $tag;
+			$tagList[] = $tag;
 		}
 
-		$this->object->set( $this->prefix . $key, $value, $tagList, $expires );
+		$this->object->set( $key, $value, $tagList, $expires );
 		return true;
 	}
 

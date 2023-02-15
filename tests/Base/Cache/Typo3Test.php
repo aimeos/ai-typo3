@@ -23,7 +23,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( 'TYPO3\CMS\Core\Cache\Frontend\FrontendInterface' )->getMock();
-		$this->object = new \Aimeos\Base\Cache\Typo3( [], $this->mock );
+		$this->object = new \Aimeos\Base\Cache\Typo3( $this->mock );
 	}
 
 
@@ -42,9 +42,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testClearWithSiteId()
 	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
+		$object = new \Aimeos\Base\Cache\Typo3( $this->mock );
 
-		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-siteid' ) );
+		$this->mock->expects( $this->once() )->method( 'flush' );
 		$this->assertTrue( $object->clear() );
 	}
 
@@ -56,15 +56,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
-		$this->assertTrue( $object->delete( 'key' ) );
-	}
-
-
 	public function testDeleteMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'remove' )->with( $this->equalTo( 'key' ) );
@@ -72,28 +63,10 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteMultipleWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'remove' )->with( $this->equalTo( '1-key' ) );
-		$this->assertTrue( $object->deleteMultiple( array( 'key' ) ) );
-	}
-
-
 	public function testDeleteByTags()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'flushByTag' )->with( $this->equalTo( 'tag' ) );
 		$this->assertTrue( $this->object->deleteByTags( array( 'tag', 'tag' ) ) );
-	}
-
-
-	public function testDeleteByTagsWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'flushByTag' )->with( $this->equalTo( '1-tag' ) );
-		$this->assertTrue( $object->deleteByTags( array( 'tag' ) ) );
 	}
 
 
@@ -106,15 +79,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
-		$object->get( 'key', 'default' );
-	}
-
-
 	public function testGetMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
@@ -122,15 +86,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
 		$this->assertEquals( $expected, $this->object->getMultiple( array( 'key1', 'key2' ) ) );
-	}
-
-
-	public function testGetMultipleWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( '1-key' ) );
-		$object->getMultiple( array( 'key' ) );
 	}
 
 
@@ -153,20 +108,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'set' )
-			->with(
-				$this->equalTo( '1-key' ), $this->equalTo( 'value' ),
-				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
-			);
-
-		$this->assertTrue( $object->set( 'key', 'value', null, ['tag'] ) );
-	}
-
-
 	public function testSetMultiple()
 	{
 		$this->mock->expects( $this->once() )->method( 'set' )
@@ -178,19 +119,4 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expires = '2100-01-01 00:00:00';
 		$this->assertTrue( $this->object->setMultiple( ['key' => 'value'], $expires, ['tag'] ) );
 	}
-
-
-	public function testSetMultipleWithSiteId()
-	{
-		$object = new \Aimeos\Base\Cache\Typo3( array( 'siteid' => 1 ), $this->mock );
-
-		$this->mock->expects( $this->once() )->method( 'set' )
-			->with(
-				$this->equalTo( '1-key' ), $this->equalTo( 'value' ),
-				$this->equalTo( array( '1-siteid', '1-tag' ) ), $this->equalTo( null )
-			);
-
-		$this->assertTrue( $object->setMultiple( ['key' => 'value'], null, ['tag'] ) );
-	}
-
 }
