@@ -34,7 +34,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransform()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'buildFrontendUri' ) )->getMock();
+			->onlyMethods( array( 'buildFrontendUri' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
@@ -48,7 +48,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformAbsolute()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setCreateAbsoluteUri' ) )->getMock();
+			->onlyMethods( array( 'setCreateAbsoluteUri' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
@@ -63,7 +63,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformNocache()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setNoCache' ) )->getMock();
+			->onlyMethods( array( 'setNoCache' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setNoCache' )
 			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
@@ -78,7 +78,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformType()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setTargetPageType' ) )->getMock();
+			->onlyMethods( array( 'setTargetPageType' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
 			->with( $this->equalTo( 123 ) )->will( $this->returnValue( $mock ) );
@@ -93,7 +93,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformFormat()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setFormat' ) )->getMock();
+			->onlyMethods( array( 'setFormat' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setFormat' )
 			->with( $this->equalTo( 'xml' ) )->will( $this->returnValue( $mock ) );
@@ -108,7 +108,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformEID()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setArguments' ) )->getMock();
+			->onlyMethods( array( 'setArguments' ) )->getMock();
 
 		$param = array( 'eID' => 123, 'ai' => array( 'controller' => '', 'action' => null ) );
 
@@ -125,7 +125,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformLocale()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'setArguments' ) )->getMock();
+			->onlyMethods( array( 'setArguments' ) )->getMock();
 
 		$param = array( 'L' => 'de', 'ai' => ['controller' => '', 'action' => null, 'locale' => 'de'] );
 
@@ -142,7 +142,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformBackend()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-		->setMethods( array( 'buildBackendUri' ) )->getMock();
+		->onlyMethods( array( 'buildBackendUri' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'buildBackendUri' );
 
@@ -156,7 +156,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformParams()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'buildFrontendUri' ) )->getMock();
+			->onlyMethods( array( 'buildFrontendUri' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 
@@ -170,7 +170,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformNoNamespace()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'buildFrontendUri', 'getArgumentPrefix' ) )->getMock();
+			->onlyMethods( array( 'buildFrontendUri', 'getArgumentPrefix' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
 		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->will( $this->returnValue( 'ai' ) );
@@ -186,7 +186,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testTransformUnchangedOriginalUriBuilder()
 	{
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
-			->setMethods( array( 'reset' ) )->getMock();
+			->onlyMethods( array( 'reset' ) )->getMock();
 
 		$mock->expects( $this->once() )->method( 'reset' )->will( $this->returnValue( $mock ) );
 

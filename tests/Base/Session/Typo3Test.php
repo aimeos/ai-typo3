@@ -23,7 +23,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( '\TYPO3\CMS\Core\Authentication\AbstractUserAuthentication' )
-			->setMethods( ['getSessionData', 'setAndSaveSessionData'] )
+			->onlyMethods( ['getSessionData', 'setAndSaveSessionData'] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 

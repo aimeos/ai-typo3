@@ -17,17 +17,17 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$mock = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Object\ObjectManagerInterface' )
-			->setMethods( array( 'get' ) )
+			->onlyMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$config = $this->getMockBuilder( '\TYPO3\CMS\Extbase\Configuration\ConfigurationManager' )
-			->setMethods( array( 'getConfiguration' ) )
+			->onlyMethods( array( 'getConfiguration' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$view = $this->getMockBuilder( 'T3View' )
-			->setMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename', 'setPartialRootPaths', 'setLayoutRootPaths' ) )
+			->onlyMethods( array( 'assign', 'assignMultiple', 'render', 'setTemplatePathAndFilename', 'setPartialRootPaths', 'setLayoutRootPaths' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
