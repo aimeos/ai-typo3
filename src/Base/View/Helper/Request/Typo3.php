@@ -21,8 +21,8 @@ class Typo3
 	extends \Aimeos\Base\View\Helper\Request\Standard
 	implements \Aimeos\Base\View\Helper\Request\Iface
 {
-	private $ip;
-	private $target;
+	private ?string $target;
+	private ?string $ip;
 
 
 	/**

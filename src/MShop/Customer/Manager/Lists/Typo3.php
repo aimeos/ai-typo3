@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists;
 class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Lists\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.lists.id'=> array(
 			'code' => 'customer.lists.id',
 			'internalcode' => 'mcusli."id"',

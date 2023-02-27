@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Manager\Group;
 class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Group\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.group.id' => array(
 			'code' => 'customer.group.id',
 			'internalcode' => 'mcusgr."uid"',
@@ -65,9 +65,9 @@ class Typo3
 		),
 	);
 
-	private $plugins = [];
-	private $reverse = [];
-	private $pid;
+	private array $plugins = [];
+	private array $reverse = [];
+	private int $pid;
 
 
 	/**

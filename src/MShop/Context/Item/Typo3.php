@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Context\Item;
 class Typo3
 	extends \Aimeos\MShop\Context
 {
-	private $hasher;
+	private ?\TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface $hasher = null;
 
 
 	/**

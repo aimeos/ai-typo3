@@ -19,21 +19,20 @@ namespace Aimeos\MAdmin\Cache\Manager;
  */
 class Typo3 extends \Aimeos\MAdmin\Cache\Manager\Standard
 {
-	private $cache;
-	private $object;
+	private \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache;
+	private \Aimeos\Base\Cache\Iface $object;
 
 
 	/**
-	 * Initializes the cache controller.
+	 * Sets the cache controller object.
 	 *
-	 * @param \Aimeos\MShop\ContextIface $context MShop context object
 	 * @param \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache TYPO3 cache object
+	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Same object for fluid interface
 	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context, \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache )
+	public function setCache( \TYPO3\CMS\Core\Cache\Frontend\FrontendInterface $cache ) : Iface
 	{
-		parent::__construct( $this->context );
-
 		$this->cache = $cache;
+		return $this;
 	}
 
 
@@ -42,7 +41,7 @@ class Typo3 extends \Aimeos\MAdmin\Cache\Manager\Standard
 	 *
 	 * @return \Aimeos\Base\Cache\Iface Cache object
 	 */
-	protected function object() : \Aimeos\Base\Cache\Iface
+	public function getCache() : \Aimeos\Base\Cache\Iface
 	{
 		if( !isset( $this->object ) ) {
 			$this->object = \Aimeos\Base\Cache\Factory::create( 'Typo3', $this->cache );

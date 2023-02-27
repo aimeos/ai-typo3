@@ -20,8 +20,8 @@ namespace Aimeos\Base\Mail\Message;
  */
 class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 {
-	private $charset;
-	private $object;
+	private \TYPO3\CMS\Core\Mail\MailMessage $object;
+	private string $charset;
 
 
 	/**

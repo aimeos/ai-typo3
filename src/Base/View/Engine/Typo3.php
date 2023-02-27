@@ -20,7 +20,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
  */
 class Typo3 implements Iface
 {
-	private $objectManager;
+	private \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager;
 
 	private $configuration;
 

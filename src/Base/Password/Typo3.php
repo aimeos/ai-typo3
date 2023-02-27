@@ -19,7 +19,7 @@ namespace Aimeos\Base\Password;
  */
 class Typo3 implements \Aimeos\Base\Password\Iface
 {
-	private $hasher;
+	private \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface $hasher;
 
 
 	/**

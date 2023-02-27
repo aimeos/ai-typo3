@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Customer\Manager;
 class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
@@ -263,9 +263,9 @@ class Typo3
 	);
 
 
-	private $plugins = [];
-	private $helper;
-	private $pid;
+	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
+	private array $plugins = [];
+	private int $pid;
 
 
 

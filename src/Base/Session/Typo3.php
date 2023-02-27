@@ -20,7 +20,7 @@ namespace Aimeos\Base\Session;
  */
 class Typo3 extends Base implements \Aimeos\Base\Session\Iface
 {
-	private $user;
+	private \TYPO3\CMS\Core\Authentication\AbstractUserAuthentication $user;
 
 
 	/**

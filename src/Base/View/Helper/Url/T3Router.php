@@ -23,8 +23,8 @@ class T3Router
 	extends \Aimeos\Base\View\Helper\Url\Base
 	implements \Aimeos\Base\View\Helper\Url\Iface
 {
-	private $router;
-	private $fixed;
+	private \TYPO3\CMS\Core\Routing\RouterInterface $router;
+	private array $fixed;
 
 
 	/**

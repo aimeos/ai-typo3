@@ -20,7 +20,7 @@ namespace Aimeos\Base\Mail;
  */
 class Typo3 implements \Aimeos\Base\Mail\Iface
 {
-	private $closure;
+	private \Closure $closure;
 
 	/**
 	 * Initializes the instance of the class.

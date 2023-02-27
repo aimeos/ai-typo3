@@ -22,9 +22,9 @@ class Typo3
 	extends \Aimeos\Base\View\Helper\Url\Base
 	implements \Aimeos\Base\View\Helper\Url\Iface
 {
-	private $uriBuilder;
-	private $prefix;
-	private $fixed;
+	private \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder;
+	private ?string $prefix;
+	private array $fixed;
 
 
 	/**
