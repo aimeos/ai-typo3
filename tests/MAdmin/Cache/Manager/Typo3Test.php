@@ -12,6 +12,7 @@ namespace Aimeos\MAdmin\Cache\Manager;
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $context;
+	private $object;
 	private $stub;
 
 
