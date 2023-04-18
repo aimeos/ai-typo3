@@ -20,19 +20,22 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
  */
 class Typo3 implements Iface
 {
-	private \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager;
-
 	private $configuration;
+	private $view;
+
 
 	/**
 	 * Initializes the view object
 	 *
 	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager TYPO3 object manager
 	 */
-	public function __construct( \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager )
+	public function __construct( \TYPO3Fluid\Fluid\View\ViewInterface $view, array $configuration )
 	{
-		$this->objectManager = $objectManager;
-		$this->configuration = $this->objectManager->get( ConfigurationManager::class )->getConfiguration( ConfigurationManager::CONFIGURATION_TYPE_FRAMEWORK );
+		$this->configuration = $configuration;
+		$this->view = $view;
+
+		$this->view->setPartialRootPaths( (array) $this->configuration['view']['partialRootPaths'] );
+		$this->view->setLayoutRootPaths( (array) $this->configuration['view']['layoutRootPaths'] );
 	}
 
 
@@ -47,9 +50,7 @@ class Typo3 implements Iface
 	 */
 	public function render( \Aimeos\Base\View\Iface $view, string $filename, array $values ) : string
 	{
-		$fluid = $this->objectManager->get( 'TYPO3\\CMS\\Fluid\\View\\StandaloneView' );
-		$fluid->setPartialRootPaths( (array) $this->configuration['view']['partialRootPaths'] );
-		$fluid->setLayoutRootPaths( (array) $this->configuration['view']['layoutRootPaths'] );
+		$fluid = clone $this->view;
 		$fluid->setTemplatePathAndFilename( $filename );
 		$fluid->assign( '_aimeos_view', $view );
 		$fluid->assignMultiple( $values );
