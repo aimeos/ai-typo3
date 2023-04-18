@@ -20,22 +20,17 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
  */
 class Typo3 implements Iface
 {
-	private $configuration;
 	private $view;
 
 
 	/**
 	 * Initializes the view object
 	 *
-	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager TYPO3 object manager
+	 * @param \TYPO3Fluid\Fluid\View\ViewInterface $view TYPO3 view
 	 */
-	public function __construct( \TYPO3Fluid\Fluid\View\ViewInterface $view, array $configuration )
+	public function __construct( \TYPO3Fluid\Fluid\View\ViewInterface $view )
 	{
-		$this->configuration = $configuration;
 		$this->view = $view;
-
-		$this->view->setPartialRootPaths( (array) $this->configuration['view']['partialRootPaths'] );
-		$this->view->setLayoutRootPaths( (array) $this->configuration['view']['layoutRootPaths'] );
 	}
 
 
