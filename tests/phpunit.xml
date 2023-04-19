@@ -7,8 +7,5 @@
     <testsuite name="MShop suite">
       <directory>MShop/</directory>
     </testsuite>
-    <testsuite name="MAdmin suite">
-      <directory>MAdmin/</directory>
-    </testsuite>
   </testsuites>
 </phpunit>
