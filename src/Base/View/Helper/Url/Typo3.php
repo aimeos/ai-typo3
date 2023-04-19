@@ -59,12 +59,13 @@ class Typo3
 		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
 		$locale = $this->getValue( $params, 'locale' );
-		$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
-		$params['action'] = $action;
 
 		if( $this->prefix != '' && (bool) $this->getValue( $config, 'namespace', true ) === true ) {
 			$params = [$this->prefix => $params];
 		}
+
+		$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
+		$params['action'] = $action;
 		$params += $this->fixed;
 
 		if( ( $eid = $this->getValue( $config, 'eID' ) ) !== null ) {
