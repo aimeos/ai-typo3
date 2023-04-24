@@ -24,7 +24,7 @@ class T3Datetime implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Translates ISO dates into seconds relative to the epoch.
 	 *
 	 * @param string $value ISO date string (YYYY-MM-DD HH:mm:ss)
-	 * @param mixed Expected value type
+	 * @param mixed $type Expected value type
 	 * @return integer Seconds relative to the epoch
 	 */
 	public function translate( $value, $type = null )
@@ -37,7 +37,7 @@ class T3Datetime implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Reverses the translation from seconds relative to the epoch to the ISO date string (YYYY-MM-DD HH:mm:ss).
 	 *
 	 * @param integer $value Seconds relative to the epoch
-	 * @param mixed Expected value type
+	 * @param mixed $type Expected value type
 	 * @return string ISO date string (YYYY-MM-DD HH:mm:ss)
 	 */
 	public function reverse( $value, $type = null )

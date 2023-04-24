@@ -24,7 +24,7 @@ class T3Salutation implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Translates the MShop value into its TYPO3 equivalent.
 	 *
 	 * @param string $value Address constant from \Aimeos\MShop\Common\Item\Address\Base
-	 * @param mixed Expected value type
+	 * @param mixed $type Expected value type
 	 * @return integer TYPO3 gender value or 99 if nothing matches
 	 */
 	public function translate( $value, $type = null )
@@ -47,7 +47,7 @@ class T3Salutation implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Reverses the translation from the TYPO3 value to the MShop constant.
 	 *
 	 * @param string $value TYPO3 value or empty if not set
-	 * @param mixed Expected value type
+	 * @param mixed $type Expected value type
 	 * @return string Address constant from \Aimeos\MShop\Common\Item\Address\Base
 	 */
 	public function reverse( $value, $type = null )
