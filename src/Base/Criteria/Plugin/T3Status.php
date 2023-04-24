@@ -24,9 +24,10 @@ class T3Status implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Translates the MShop value into its TYPO3 equivalent.
 	 *
 	 * @param integer $value Status value
+	 * @param mixed Expected value type
 	 * @return integer Value for TYPO3 "disabled" field
 	 */
-	public function translate( $value )
+	public function translate( $value, $type = null )
 	{
 		return ( $value == 1 ? 0 : 1 );
 	}
@@ -36,9 +37,10 @@ class T3Status implements \Aimeos\Base\Criteria\Plugin\Iface
 	 * Reverses the translation from the TYPO3 value to the MShop constant.
 	 *
 	 * @param integer $value Value for TYPO3 "disabled" field
+	 * @param mixed Expected value type
 	 * @return integer Status value
 	 */
-	public function reverse( $value )
+	public function reverse( $value, $type = null )
 	{
 		return ( $value == 1 ? 0 : 1 );
 	}
