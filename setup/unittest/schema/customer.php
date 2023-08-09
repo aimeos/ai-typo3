@@ -35,6 +35,7 @@ return array(
 			$table->string( 'address' )->null( true );
 			$table->string( 'telephone' )->length( 20 )->null( true );
 			$table->string( 'fax' )->length( 20 )->null( true );
+			$table->string( 'mobile', 32 )->default( '' );
 			$table->string( 'email' )->length( 80 )->null( true );
 			$table->string( 'title' )->length( 40 )->null( true );
 			$table->string( 'city' )->length( 50 )->null( true );

@@ -97,6 +97,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getCountryId(), $itemSaved->getCountryId() );
 		$this->assertEquals( $item->getTelephone(), $itemSaved->getTelephone() );
+		$this->assertEquals( $item->getMobile(), $itemSaved->getMobile() );
 		$this->assertEquals( $item->getEMail(), $itemSaved->getEMail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
@@ -127,6 +128,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getCountryId(), $itemUpd->getCountryId() );
 		$this->assertEquals( $itemExp->getTelephone(), $itemUpd->getTelephone() );
+		$this->assertEquals( $itemExp->getMobile(), $itemUpd->getMobile() );
 		$this->assertEquals( $itemExp->getEMail(), $itemUpd->getEMail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
@@ -175,8 +177,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.countryid', 'DE' ),
 			$search->compare( '==', 'customer.address.languageid', 'de' ),
 			$search->compare( '==', 'customer.address.telephone', '055544332211' ),
-			$search->compare( '==', 'customer.address.email', 'test@example.com' ),
 			$search->compare( '==', 'customer.address.telefax', '055544332212' ),
+			$search->compare( '==', 'customer.address.mobile', '055544332213' ),
+			$search->compare( '==', 'customer.address.email', 'test@example.com' ),
 			$search->compare( '==', 'customer.address.website', 'www.example.com' ),
 			$search->compare( '==', 'customer.address.longitude', '10.0' ),
 			$search->compare( '==', 'customer.address.latitude', '50.0' ),

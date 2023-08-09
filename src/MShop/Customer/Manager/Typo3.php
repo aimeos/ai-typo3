@@ -157,17 +157,24 @@ class Typo3
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.email' => array(
-			'label' => 'Customer email',
-			'code' => 'customer.email',
-			'internalcode' => 'mcus."email"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 'mcus."fax"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.mobile' => array(
+			'label' => 'Customer mobile number',
+			'code' => 'customer.mobile',
+			'internalcode' => 'mcus."mobile"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.email' => array(
+			'label' => 'Customer email',
+			'code' => 'customer.email',
+			'internalcode' => 'mcus."email"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
@@ -594,6 +601,7 @@ class Typo3
 			$stmt->bind( $idx++, $billingAddress->getState() );
 			$stmt->bind( $idx++, $billingAddress->getLanguageId() );
 			$stmt->bind( $idx++, $billingAddress->getTelephone() );
+			$stmt->bind( $idx++, $billingAddress->getMobile() );
 			$stmt->bind( $idx++, $billingAddress->getEmail() );
 			$stmt->bind( $idx++, $billingAddress->getTelefax() );
 			$stmt->bind( $idx++, $billingAddress->getWebsite() );
