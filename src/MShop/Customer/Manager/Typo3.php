@@ -245,7 +245,7 @@ class Typo3
 		'customer.editor'=> array(
 			'label' => 'Customer editor',
 			'code' => 'customer.editor',
-			'internalcode' => null,
+			'internalcode' => '',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
