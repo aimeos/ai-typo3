@@ -25,43 +25,37 @@ class Typo3
 			'code' => 'customer.group.id',
 			'internalcode' => 'mcusgr."uid"',
 			'label' => 'Customer group ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 		),
 		'customer.group.code' => array(
 			'code' => 'customer.group.code',
 			'internalcode' => 'mcusgr."title"',
 			'label' => 'Customer group code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."description"',
 			'label' => 'Customer group label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.ctime'=> array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."crdate"',
 			'label' => 'Customer group creation time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.mtime'=> array(
 			'code' => 'customer.group.mtime',
 			'internalcode' => 'mcusgr."tstamp"',
 			'label' => 'Customer group modification time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.editor'=> array(
 			'code' => 'customer.group.editor',
 			'internalcode' => '1',
 			'label' => 'Customer group editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -290,7 +284,7 @@ class Typo3
 			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+				$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 			}
 
 			$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
