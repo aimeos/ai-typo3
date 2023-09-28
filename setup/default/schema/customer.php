@@ -60,7 +60,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' );
-			$table->json( 'i18n' )->null( true );
+			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' );
 			$table->meta();
@@ -103,7 +103,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' );
-			$table->json( 'i18n' )->null( true );
+			$table->i18n();
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' );
 			$table->meta();
