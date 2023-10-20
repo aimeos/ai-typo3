@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2023
+ * @copyright Aimeos (aimeos.org), 2023
  */
 
 
@@ -10,9 +10,9 @@ namespace Aimeos\Upscheme\Task;
 
 
 /**
- * Adds TYPO3 customer test data.
+ * Adds TYPO3 group test data.
  */
-class CustomerAddTypo3TestData extends CustomerAddTestData
+class GroupAddTypo3TestData extends GroupAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on
@@ -21,18 +21,18 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	 */
 	public function after() : array
 	{
-		return ['Customer', 'Text', 'GroupAddTestData', 'ProductAddTestData'];
+		return ['Group'];
 	}
 
 
 	/**
-	 * Adds customer test data
+	 * Adds group test data
 	 */
 	public function up()
 	{
-		$this->info( 'Adding TYPO3 customer test data', 'vv' );
+		$this->info( 'Adding TYPO3 group test data', 'vv' );
 
-		$this->db( 'db-customer' )->exec( "DELETE FROM fe_users WHERE email LIKE 'test%@example.com'" );
+		$this->db( 'db-group' )->exec( "DELETE FROM fe_groups WHERE title LIKE 'unitgroup%'" );
 
 		$this->context()->setEditor( 'ai-typo3' );
 		$this->process();
@@ -48,7 +48,7 @@ class CustomerAddTypo3TestData extends CustomerAddTestData
 	 */
 	protected function getManager( string $domain, string $name = 'Standard' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( $domain === 'customer' ) {
+		if( $domain === 'group' ) {
 			return parent::getManager( $domain, 'Typo3' );
 		}
 
