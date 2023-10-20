@@ -4,57 +4,57 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2023
  * @package MShop
- * @subpackage Customer
+ * @subpackage Group
  */
 
 
-namespace Aimeos\MShop\Customer\Manager\Group;
+namespace Aimeos\MShop\Group\Manager;
 
 
 /**
- * TYPO3 implementation of the customer group class
+ * TYPO3 implementation of the group class
  *
  * @package MShop
- * @subpackage Customer
+ * @subpackage Group
  */
 class Typo3
-	extends \Aimeos\MShop\Customer\Manager\Group\Standard
+	extends \Aimeos\MShop\Group\Manager\Standard
 {
 	private array $searchConfig = array(
-		'customer.group.id' => array(
-			'code' => 'customer.group.id',
-			'internalcode' => 'mcusgr."uid"',
-			'label' => 'Customer group ID',
+		'group.id' => array(
+			'code' => 'group.id',
+			'internalcode' => 'mgro."uid"',
+			'label' => 'Group ID',
 			'type' => 'int',
 		),
-		'customer.group.code' => array(
-			'code' => 'customer.group.code',
-			'internalcode' => 'mcusgr."title"',
-			'label' => 'Customer group code',
+		'group.code' => array(
+			'code' => 'group.code',
+			'internalcode' => 'mgro."title"',
+			'label' => 'Group code',
 			'type' => 'string',
 		),
-		'customer.group.label' => array(
-			'code' => 'customer.group.label',
-			'internalcode' => 'mcusgr."description"',
-			'label' => 'Customer group label',
+		'group.label' => array(
+			'code' => 'group.label',
+			'internalcode' => 'mgro."description"',
+			'label' => 'Group label',
 			'type' => 'string',
 		),
-		'customer.group.ctime'=> array(
-			'code' => 'customer.group.ctime',
-			'internalcode' => 'mcusgr."crdate"',
-			'label' => 'Customer group creation time',
+		'group.ctime'=> array(
+			'code' => 'group.ctime',
+			'internalcode' => 'mgro."crdate"',
+			'label' => 'Group creation time',
 			'type' => 'datetime',
 		),
-		'customer.group.mtime'=> array(
-			'code' => 'customer.group.mtime',
-			'internalcode' => 'mcusgr."tstamp"',
-			'label' => 'Customer group modification time',
+		'group.mtime'=> array(
+			'code' => 'group.mtime',
+			'internalcode' => 'mgro."tstamp"',
+			'label' => 'Group modification time',
 			'type' => 'datetime',
 		),
-		'customer.group.editor'=> array(
-			'code' => 'customer.group.editor',
+		'group.editor'=> array(
+			'code' => 'group.editor',
 			'internalcode' => '1',
-			'label' => 'Customer group editor',
+			'label' => 'Group editor',
 			'type' => 'string',
 		),
 	);
@@ -65,7 +65,7 @@ class Typo3
 
 
 	/**
-	 * Initializes the customer group manager object
+	 * Initializes the group manager object
 	 *
 	 * @param \Aimeos\MShop\ContextIface $context Context object with required objects
 	 */
@@ -74,15 +74,15 @@ class Typo3
 		parent::__construct( $context );
 
 		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Datetime();
-		$this->plugins['customer.ctime'] = $this->reverse['crdate'] = $plugin;
-		$this->plugins['customer.mtime'] = $this->reverse['tstamp'] = $plugin;
+		$this->plugins['ctime'] = $this->reverse['crdate'] = $plugin;
+		$this->plugins['mtime'] = $this->reverse['tstamp'] = $plugin;
 
-		/** mshop/customer/manager/group/typo3/pid-default
-		 * Page ID the customer records are assigned to
+		/** mshop/manager/typo3/pid-default
+		 * Page ID the group records are assigned to
 		 *
 		 * In TYPO3, you can assign fe_group records to different sysfolders based
 		 * on their page ID. These sysfolders can be use for user authorization and
-		 * therefore, you need to assign the correct page ID to customer groups
+		 * therefore, you need to assign the correct page ID to groups
 		 * created or modified by the Aimeos admin backend.
 		 *
 		 * @param int TYPO3 page ID
@@ -90,7 +90,7 @@ class Typo3
 		 * @see mshop/customer/manager/typo3/pid-default
 		 */
 		$this->pid = $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
-		$this->pid = $context->config()->get( 'mshop/customer/manager/group/typo3/pid-default', $this->pid );
+		$this->pid = $context->config()->get( 'mshop/group/manager/typo3/pid-default', $this->pid );
 	}
 
 
@@ -102,7 +102,7 @@ class Typo3
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$path = 'mshop/customer/manager/group/submanagers';
+		$path = 'mshop/group/manager/submanagers';
 
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
@@ -120,16 +120,16 @@ class Typo3
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/customer/manager/group/typo3/delete/mysql
+		/** mshop/group/manager/typo3/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/customer/manager/group/typo3/delete/ansi
+		 * @see mshop/group/manager/typo3/delete/ansi
 		 */
 
-		/** mshop/customer/manager/group/typo3/delete/ansi
+		/** mshop/group/manager/typo3/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * Removes the records specified by the given IDs from the customer group
+		 * Removes the records specified by the given IDs from the group
 		 * database. The records must be from the site that is configured via the
 		 * context item.
 		 *
@@ -144,13 +144,13 @@ class Typo3
 		 * @param string SQL statement for deleting items
 		 * @since 2015.08
 		 * @category Developer
-		 * @see mshop/customer/manager/group/typo3/insert/ansi
-		 * @see mshop/customer/manager/group/typo3/update/ansi
-		 * @see mshop/customer/manager/group/typo3/newid/ansi
-		 * @see mshop/customer/manager/group/typo3/search/ansi
-		 * @see mshop/customer/manager/group/typo3/count/ansi
+		 * @see mshop/group/manager/typo3/insert/ansi
+		 * @see mshop/group/manager/typo3/update/ansi
+		 * @see mshop/group/manager/typo3/newid/ansi
+		 * @see mshop/group/manager/typo3/search/ansi
+		 * @see mshop/group/manager/typo3/count/ansi
 		 */
-		$path = 'mshop/customer/manager/group/typo3/delete';
+		$path = 'mshop/group/manager/typo3/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path, false, 'uid' );
 	}
@@ -164,14 +164,14 @@ class Typo3
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$path = 'mshop/customer/manager/group/submanagers';
+		$path = 'mshop/group/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
 	/**
-	 * Returns a new manager for customer group extensions
+	 * Returns a new manager for group extensions
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
@@ -179,18 +179,18 @@ class Typo3
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'customer/group', $manager, ( $name === null ? 'Typo3' : $name ) );
+		return $this->getSubManagerBase( 'group/group', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
 
 
 	/**
-	 * Inserts a new or updates an existing customer group item
+	 * Inserts a new or updates an existing group item
 	 *
-	 * @param \Aimeos\MShop\Customer\Item\Group\Iface $item Customer group item
+	 * @param \Aimeos\MShop\Group\Item\Iface $item Group item
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Customer\Item\Group\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Group\Item\Iface $item Updated item including the generated ID
 	 */
-	protected function saveItem( \Aimeos\MShop\Customer\Item\Group\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Group\Iface
+	protected function saveItem( \Aimeos\MShop\Group\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Group\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -204,14 +204,14 @@ class Typo3
 
 			if( $id === null )
 			{
-				/** mshop/customer/manager/group/typo3/insert/mysql
-				 * Inserts a new customer group record into the database table
+				/** mshop/group/manager/typo3/insert/mysql
+				 * Inserts a new group record into the database table
 				 *
-				 * @see mshop/customer/manager/group/typo3/insert/ansi
+				 * @see mshop/group/manager/typo3/insert/ansi
 				 */
 
-				/** mshop/customer/manager/group/typo3/insert/ansi
-				 * Inserts a new customer group record into the database table
+				/** mshop/group/manager/typo3/insert/ansi
+				 * Inserts a new group record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
 				 * the database and the newly created ID retrieved afterwards
@@ -219,7 +219,7 @@ class Typo3
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the customer group item to the statement before
+				 * the values from the group item to the statement before
 				 * they are sent to the database server. The number of question
 				 * marks must be the same as the number of columns listed in the
 				 * INSERT statement. The order of the columns must correspond to
@@ -233,32 +233,32 @@ class Typo3
 				 * @param string SQL statement for inserting records
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/typo3/update/ansi
-				 * @see mshop/customer/manager/group/typo3/newid/ansi
-				 * @see mshop/customer/manager/group/typo3/delete/ansi
-				 * @see mshop/customer/manager/group/typo3/search/ansi
-				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 * @see mshop/group/manager/typo3/update/ansi
+				 * @see mshop/group/manager/typo3/newid/ansi
+				 * @see mshop/group/manager/typo3/delete/ansi
+				 * @see mshop/group/manager/typo3/search/ansi
+				 * @see mshop/group/manager/typo3/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/typo3/insert';
+				$path = 'mshop/group/manager/typo3/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/customer/manager/group/typo3/update/mysql
-				 * Updates an existing customer group record in the database
+				/** mshop/group/manager/typo3/update/mysql
+				 * Updates an existing group record in the database
 				 *
-				 * @see mshop/customer/manager/group/typo3/update/ansi
+				 * @see mshop/group/manager/typo3/update/ansi
 				 */
 
-				/** mshop/customer/manager/group/typo3/update/ansi
-				 * Updates an existing customer group record in the database
+				/** mshop/group/manager/typo3/update/ansi
+				 * Updates an existing group record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
 				 * be updated in the database.
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the customer group item to the statement before
+				 * the values from the group item to the statement before
 				 * they are sent to the database server. The order of the columns
 				 * must correspond to the order in the save() method, so the
 				 * correct values are bound to the columns.
@@ -270,13 +270,13 @@ class Typo3
 				 * @param string SQL statement for updating records
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/typo3/insert/ansi
-				 * @see mshop/customer/manager/group/typo3/newid/ansi
-				 * @see mshop/customer/manager/group/typo3/delete/ansi
-				 * @see mshop/customer/manager/group/typo3/search/ansi
-				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 * @see mshop/group/manager/typo3/insert/ansi
+				 * @see mshop/group/manager/typo3/newid/ansi
+				 * @see mshop/group/manager/typo3/delete/ansi
+				 * @see mshop/group/manager/typo3/search/ansi
+				 * @see mshop/group/manager/typo3/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/typo3/update';
+				$path = 'mshop/group/manager/typo3/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -303,13 +303,13 @@ class Typo3
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/customer/manager/group/typo3/newid/mysql
+				/** mshop/group/manager/typo3/newid/mysql
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
-				 * @see mshop/customer/manager/group/typo3/newid/ansi
+				 * @see mshop/group/manager/typo3/newid/ansi
 				 */
 
-				/** mshop/customer/manager/group/typo3/newid/ansi
+				/** mshop/group/manager/typo3/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -333,13 +333,13 @@ class Typo3
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/typo3/insert/ansi
-				 * @see mshop/customer/manager/group/typo3/update/ansi
-				 * @see mshop/customer/manager/group/typo3/delete/ansi
-				 * @see mshop/customer/manager/group/typo3/search/ansi
-				 * @see mshop/customer/manager/group/typo3/count/ansi
+				 * @see mshop/group/manager/typo3/insert/ansi
+				 * @see mshop/group/manager/typo3/update/ansi
+				 * @see mshop/group/manager/typo3/delete/ansi
+				 * @see mshop/group/manager/typo3/search/ansi
+				 * @see mshop/group/manager/typo3/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/typo3/newid';
+				$path = 'mshop/group/manager/typo3/newid';
 				$item->setId( $this->newId( $conn, $path ) );
 			}
 
@@ -353,7 +353,7 @@ class Typo3
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
 	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Group\Item\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
@@ -362,13 +362,13 @@ class Typo3
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-			$required = array( 'customer.group' );
+			$required = array( 'group' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
-			/** mshop/customer/manager/group/typo3/search
+			/** mshop/group/manager/typo3/search
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * Fetches the records matched by the given criteria from the customer
+			 * Fetches the records matched by the given criteria from the group
 			 * database. The records must be from one of the sites that are
 			 * configured via the context item. If the current site is part of
 			 * a tree of sites, the SELECT statement can retrieve all records
@@ -410,14 +410,14 @@ class Typo3
 			 * @param string SQL statement for searching items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/typo3/count
+			 * @see mshop/group/manager/typo3/count
 			 */
-			$cfgPathSearch = 'mshop/customer/manager/group/typo3/search';
+			$cfgPathSearch = 'mshop/group/manager/typo3/search';
 
-			/** mshop/customer/manager/group/typo3/count
+			/** mshop/group/manager/typo3/count
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * Counts all records matched by the given criteria from the customer
+			 * Counts all records matched by the given criteria from the group
 			 * database. The records must be from one of the sites that are
 			 * configured via the context item. If the current site is part of
 			 * a tree of sites, the statement can count all records from the
@@ -453,14 +453,14 @@ class Typo3
 			 * @param string SQL statement for counting items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/typo3/search
+			 * @see mshop/group/manager/typo3/search
 			 */
-			$cfgPathCount = 'mshop/customer/manager/group/typo3/count';
+			$cfgPathCount = 'mshop/group/manager/typo3/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== null ) {
-				$map[(string) $row['customer.group.id']] = $this->createItemBase( $row );
+				$map[(string) $row['group.id']] = $this->createItemBase( $row );
 			}
 
 		return map( $map );
@@ -468,23 +468,23 @@ class Typo3
 
 
 	/**
-	 * Creates a new customer item.
+	 * Creates a new group item.
 	 *
-	 * @param array $values List of attributes for customer item
-	 * @return \Aimeos\MShop\Customer\Item\Group\Iface New customer item
+	 * @param array $values List of attributes for group item
+	 * @return \Aimeos\MShop\Group\Item\Iface New group item
 	 */
-	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Customer\Item\Group\Iface
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Group\Item\Iface
 	{
-		$values['customer.group.siteid'] = $this->context()->locale()->getSiteId();
+		$values['group.siteid'] = $this->context()->locale()->getSiteId();
 
 		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['customer.group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
+			$values['group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
 		}
 
 		if( array_key_exists( 'crdate', $values ) ) {
-			$values['customer.group.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
+			$values['group.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
 		}
 
-		return new \Aimeos\MShop\Customer\Item\Group\Standard( $values );
+		return new \Aimeos\MShop\Group\Item\Standard( $values );
 	}
 }

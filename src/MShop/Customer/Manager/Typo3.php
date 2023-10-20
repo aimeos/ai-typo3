@@ -275,7 +275,7 @@ class Typo3
 		 *
 		 * @param int TYPO3 page ID
 		 * @since 2016.10
-		 * @see mshop/customer/manager/group/typo3/pid-default
+		 * @see mshop/group/manager/typo3/pid-default
 		 */
 		$this->pid = $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 
@@ -397,7 +397,7 @@ class Typo3
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'group', 'lists', 'property'];
+		$default = ['address', 'lists', 'property'];
 
 		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );

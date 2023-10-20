@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Manager\Group;
+namespace Aimeos\MShop\Group\Manager;
 
 
 class Typo3Test extends \PHPUnit\Framework\TestCase
@@ -20,7 +20,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::context();
 		$this->editor = $context->editor();
 
-		$this->object = new \Aimeos\MShop\Customer\Manager\Group\Typo3( $context );
+		$this->object = new \Aimeos\MShop\Group\Manager\Typo3( $context );
 	}
 
 
@@ -39,7 +39,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->create();
-		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Group\Iface::class, $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Group\Item\Iface::class, $item );
 	}
 
 
@@ -57,7 +57,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->assertContains( 'customer/group', $this->object->getResourceType() );
+		$this->assertContains( 'group', $this->object->getResourceType() );
 	}
 
 
@@ -128,7 +128,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSearchItem()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.group.label', 'Unitgroup' ) );
+		$search->setConditions( $search->compare( '==', 'group.label', 'Unitgroup' ) );
 		$search->slice( 0, 1 );
 
 		$total = 0;
