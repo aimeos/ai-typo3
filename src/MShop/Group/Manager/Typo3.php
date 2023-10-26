@@ -89,8 +89,8 @@ class Typo3
 		 * @since 2018.10
 		 * @see mshop/customer/manager/typo3/pid-default
 		 */
-		$this->pid = $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
-		$this->pid = $context->config()->get( 'mshop/group/manager/typo3/pid-default', $this->pid );
+		$this->pid = (int) $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+		$this->pid = (int) $context->config()->get( 'mshop/group/manager/typo3/pid-default', $this->pid );
 	}
 
 

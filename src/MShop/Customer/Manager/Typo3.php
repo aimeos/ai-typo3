@@ -277,7 +277,7 @@ class Typo3
 		 * @since 2016.10
 		 * @see mshop/group/manager/typo3/pid-default
 		 */
-		$this->pid = $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
+		$this->pid = (int) $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
 
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
