@@ -66,6 +66,7 @@ return array(
 			$table->string( 'static_info_country' )->length( 3 )->default( '' );
 			$table->float( 'longitude' )->null( true );
 			$table->float( 'latitude' )->null( true );
+			$table->date( 'vdate' )->null( true );
 
 			$table->index( ['pid', 'username'], 'fe_users_parent' );
 			$table->index( ['username'], 'fe_users_username' );

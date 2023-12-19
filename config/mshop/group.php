@@ -34,9 +34,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT
-						mgro."uid" AS "group.id", mgro."title" AS "group.code",
-						mgro."description" AS "group.label", mgro."crdate", mgro."tstamp", mgro.*
+					SELECT :columns
 					FROM "fe_groups" mgro
 					:joins
 					WHERE mgro."deleted" = 0 AND :cond
@@ -44,9 +42,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT
-						mgro."uid" AS "group.id", mgro."title" AS "group.code",
-						mgro."description" AS "group.label", mgro."crdate", mgro."tstamp", mgro.*
+					SELECT :columns
 					FROM "fe_groups" mgro
 					:joins
 					WHERE mgro."deleted" = 0 AND :cond

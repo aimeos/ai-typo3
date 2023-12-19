@@ -53,7 +53,7 @@ class Typo3
 		),
 		'group.editor'=> array(
 			'code' => 'group.editor',
-			'internalcode' => '1',
+			'internalcode' => '',
 			'label' => 'Group editor',
 			'type' => 'string',
 		),
@@ -477,12 +477,12 @@ class Typo3
 	{
 		$values['group.siteid'] = $this->context()->locale()->getSiteId();
 
-		if( array_key_exists( 'tstamp', $values ) ) {
-			$values['group.mtime'] = $this->reverse['tstamp']->reverse( $values['tstamp'] );
+		if( array_key_exists( 'group.mtime', $values ) ) {
+			$values['group.mtime'] = $this->reverse['tstamp']->reverse( $values['group.mtime'] );
 		}
 
-		if( array_key_exists( 'crdate', $values ) ) {
-			$values['group.ctime'] = $this->reverse['crdate']->reverse( $values['crdate'] );
+		if( array_key_exists( 'group.ctime', $values ) ) {
+			$values['group.ctime'] = $this->reverse['crdate']->reverse( $values['group.ctime'] );
 		}
 
 		return new \Aimeos\MShop\Group\Item\Standard( $values );

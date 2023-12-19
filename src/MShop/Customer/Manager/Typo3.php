@@ -210,6 +210,12 @@ class Typo3
 			'internalcode' => 'mcus."tstamp"',
 			'type' => 'datetime',
 		),
+		// TYPO3 specific
+		'customer.groups'=> array(
+			'label' => 'Customer groups',
+			'internalcode' => 'mcus."usergroup"',
+			'type' => 'string',
+		),
 		// not available
 		'customer.editor'=> array(
 			'label' => 'Customer editor',
