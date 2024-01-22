@@ -216,11 +216,10 @@ class Typo3
 			'internalcode' => 'mcus."usergroup"',
 			'type' => 'string',
 		),
-		// not available
 		'customer.editor'=> array(
 			'label' => 'Customer editor',
 			'code' => 'customer.editor',
-			'internalcode' => '',
+			'internalcode' => 'mcus."editor"',
 			'type' => 'string',
 		),
 		'customer:has' => array(
@@ -586,6 +585,7 @@ class Typo3
 			$stmt->bind( $idx++, $billingAddress->getCountryId() );
 			$stmt->bind( $idx++, implode( ',', $item->getGroups() ) );
 			$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // TYPO3 PID value
+			$stmt->bind( $idx++, $context->editor() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );

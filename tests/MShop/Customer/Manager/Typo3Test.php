@@ -120,7 +120,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
 
-		$this->assertEquals( '', $itemSaved->editor() );
+		$this->assertEquals( 'ai-typo3', $itemSaved->editor() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -132,7 +132,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
 
-		$this->assertEquals( '', $itemUpd->editor() );
+		$this->assertEquals( 'ai-typo3', $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertMatchesRegularExpression( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

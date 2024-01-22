@@ -67,6 +67,7 @@ return array(
 			$table->float( 'longitude' )->null( true );
 			$table->float( 'latitude' )->null( true );
 			$table->date( 'vdate' )->null( true );
+			$table->string( 'editor' )->default( '' );
 
 			$table->index( ['pid', 'username'], 'fe_users_parent' );
 			$table->index( ['username'], 'fe_users_username' );
