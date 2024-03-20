@@ -51,9 +51,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['setCreateAbsoluteUri', 'buildFrontendUri'] )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setCreateAbsoluteUri' )
-			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( true ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -68,9 +68,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['setNoCache', 'buildFrontendUri'] )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setNoCache' )
-			->with( $this->equalTo( true ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( true ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -85,9 +85,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['setTargetPageType', 'buildFrontendUri'] )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setTargetPageType' )
-			->with( $this->equalTo( 123 ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( 123 ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -102,9 +102,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['setFormat', 'buildFrontendUri'] )->getMock();
 
 		$mock->expects( $this->once() )->method( 'setFormat' )
-			->with( $this->equalTo( 'xml' ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( 'xml' ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -121,9 +121,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$param = ['eID' => 123, 'controller' => '', 'action' => null];
 
 		$mock->expects( $this->once() )->method( 'setArguments' )
-			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( $param ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -140,9 +140,9 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$param = ['L' => 'de', 'controller' => '', 'action' => null, 'locale' => 'de'];
 
 		$mock->expects( $this->once() )->method( 'setArguments' )
-			->with( $this->equalTo( $param ) )->will( $this->returnValue( $mock ) );
+			->with( $this->equalTo( $param ) )->willReturn( $mock );
 
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 
@@ -185,7 +185,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->onlyMethods( ['buildFrontendUri', 'getArgumentPrefix'] )->getMock();
 
 		$mock->expects( $this->once() )->method( 'buildFrontendUri' );
-		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->will( $this->returnValue( 'ai' ) );
+		$mock->expects( $this->once() )->method( 'getArgumentPrefix' )->willReturn( 'ai' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, ['site' => 'unittest'] );
 
@@ -200,8 +200,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
 			->onlyMethods( ['reset', 'buildFrontendUri'] )->getMock();
 
-		$mock->expects( $this->once() )->method( 'reset' )->will( $this->returnValue( $mock ) );
-		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->will( $this->returnValue( '' ) );
+		$mock->expects( $this->once() )->method( 'reset' )->willReturn( $mock );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( '' );
 
 		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
 

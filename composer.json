@@ -23,7 +23,7 @@
 	"require-dev": {
 		"typo3/cms-core": "~11.5||~12.3",
 		"typo3/cms-extbase": "~11.5||~12.3",
-		"phpunit/phpunit": "~9.0||~10.0"
+		"phpunit/phpunit": "~10.0||~11.0"
 	},
 	"autoload": {
 		"psr-4": {

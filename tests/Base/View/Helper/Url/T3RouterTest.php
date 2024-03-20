@@ -38,7 +38,7 @@ class T3RouterTest extends \PHPUnit\Framework\TestCase
 
 		$stub = $this->getMockBuilder( 'Psr\Http\Message\UriInterface' )->getMock();
 
-		$mock->expects( $this->once() )->method( 'generateUri' )->will( $this->returnValue( $stub ) );
+		$mock->expects( $this->once() )->method( 'generateUri' )->willReturn( $stub );
 
 		$object = new \Aimeos\Base\View\Helper\Url\T3Router( $this->view, $mock, [] );
 

@@ -73,7 +73,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( 'value' ) );
+			->with( $this->equalTo( 'key' ) )->willReturn( 'value' );
 
 		$this->assertEquals( 'value', $this->object->get( 'key', 'default' ) );
 	}
@@ -82,7 +82,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testGetMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
-			->will( $this->returnValue( 'value' ) );
+			->willReturn( 'value' );
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
 		$this->assertEquals( $expected, $this->object->getMultiple( array( 'key1', 'key2' ) ) );
@@ -91,7 +91,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testHas()
 	{
-		$this->mock->expects( $this->once() )->method( 'has' )->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'has' )->willReturn( true );
 		$this->assertTrue( $this->object->has( 'key' ) );
 	}
 

@@ -24,7 +24,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$view->expects( $this->once() )->method( 'setTemplatePathAndFilename' );
 		$view->expects( $this->once() )->method( 'assignMultiple' );
 		$view->expects( $this->once() )->method( 'assign' );
-		$view->expects( $this->once() )->method( 'render' )->will( $this->returnValue( 'test' ) );
+		$view->expects( $this->once() )->method( 'render' )->willReturn( 'test' );
 
 		$object = new \Aimeos\Base\View\Engine\Typo3( $view );
 		$v = new \Aimeos\Base\View\Standard( [] );

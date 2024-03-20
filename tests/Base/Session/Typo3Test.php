@@ -18,14 +18,14 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( !class_exists( '\TYPO3\CMS\Core\Authentication\AbstractUserAuthentication' ) ) {
-			$this->markTestSkipped( 'TYPO3 AbstractUserAuthentication not available' );
+		if( !class_exists( '\TYPO3\CMS\Core\Authentication\BackendUserAuthentication' ) ) {
+			$this->markTestSkipped( 'TYPO3 BackendUserAuthentication not available' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\TYPO3\CMS\Core\Authentication\AbstractUserAuthentication' )
+		$this->mock = $this->getMockBuilder( '\TYPO3\CMS\Core\Authentication\BackendUserAuthentication' )
 			->onlyMethods( ['getSessionData', 'setAndSaveSessionData'] )
 			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+			->getMock();
 
 		$this->object = new \Aimeos\Base\Session\Typo3( $this->mock );
 	}
@@ -49,7 +49,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$this->mock->expects( $this->once() )->method( 'getSessionData' )->will( $this->returnValue( '123456789' ) );
+		$this->mock->expects( $this->once() )->method( 'getSessionData' )->willReturn( '123456789' );
 
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
 	}
@@ -58,7 +58,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testPull()
 	{
 		$this->mock->expects( $this->once() )->method( 'setAndSaveSessionData' );
-		$this->mock->expects( $this->once() )->method( 'getSessionData' )->will( $this->returnValue( '123456789' ) );
+		$this->mock->expects( $this->once() )->method( 'getSessionData' )->willReturn( '123456789' );
 
 		$this->assertEquals( '123456789', $this->object->pull( 'test' ) );
 	}
