@@ -31,11 +31,11 @@ class T3Salutation implements \Aimeos\Base\Criteria\Plugin\Iface
 	{
 		switch( $value )
 		{
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR:
+			case 'mr':
 				return 0;
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS:
+			case 'ms':
 				return 1;
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY:
+			case 'company':
 				return 10;
 		}
 
@@ -55,13 +55,13 @@ class T3Salutation implements \Aimeos\Base\Criteria\Plugin\Iface
 		switch( $value )
 		{
 			case 0:
-				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR;
+				return 'mr';
 			case 1:
-				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS;
+				return 'ms';
 			case 10:
-				return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY;
+				return 'company';
 		}
 
-		return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN;
+		return '';
 	}
 }
