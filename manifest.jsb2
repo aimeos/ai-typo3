@@ -3,7 +3,7 @@
 	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
 	"pkgs": [{
 		"name": "Aimeos Admin TYPO3 CSS",
-		"file": "aimeos-typo3.css",
+		"file": "index-css",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "admin.css",
