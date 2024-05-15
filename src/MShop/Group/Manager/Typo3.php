@@ -198,150 +198,151 @@ class Typo3
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
+		$time = date_create_from_format( 'Y-m-d H:i:s', $context->datetime() )->getTimestamp();
 
-			$id = $item->getId();
-			$columns = $this->object()->getSaveAttributes();
+		$id = $item->getId();
+		$columns = $this->object()->getSaveAttributes();
 
-			if( $id === null )
-			{
-				/** mshop/group/manager/typo3/insert/mysql
-				 * Inserts a new group record into the database table
-				 *
-				 * @see mshop/group/manager/typo3/insert/ansi
-				 */
+		if( $id === null )
+		{
+			/** mshop/group/manager/typo3/insert/mysql
+			 * Inserts a new group record into the database table
+			 *
+			 * @see mshop/group/manager/typo3/insert/ansi
+			 */
 
-				/** mshop/group/manager/typo3/insert/ansi
-				 * Inserts a new group record into the database table
-				 *
-				 * Items with no ID yet (i.e. the ID is NULL) will be created in
-				 * the database and the newly created ID retrieved afterwards
-				 * using the "newid" SQL statement.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the group item to the statement before
-				 * they are sent to the database server. The number of question
-				 * marks must be the same as the number of columns listed in the
-				 * INSERT statement. The order of the columns must correspond to
-				 * the order in the save() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2015.08
-				 * @category Developer
-				 * @see mshop/group/manager/typo3/update/ansi
-				 * @see mshop/group/manager/typo3/newid/ansi
-				 * @see mshop/group/manager/typo3/delete/ansi
-				 * @see mshop/group/manager/typo3/search/ansi
-				 * @see mshop/group/manager/typo3/count/ansi
-				 */
-				$path = 'mshop/group/manager/typo3/insert';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
-			}
-			else
-			{
-				/** mshop/group/manager/typo3/update/mysql
-				 * Updates an existing group record in the database
-				 *
-				 * @see mshop/group/manager/typo3/update/ansi
-				 */
+			/** mshop/group/manager/typo3/insert/ansi
+			 * Inserts a new group record into the database table
+			 *
+			 * Items with no ID yet (i.e. the ID is NULL) will be created in
+			 * the database and the newly created ID retrieved afterwards
+			 * using the "newid" SQL statement.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the group item to the statement before
+			 * they are sent to the database server. The number of question
+			 * marks must be the same as the number of columns listed in the
+			 * INSERT statement. The order of the columns must correspond to
+			 * the order in the save() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2015.08
+			 * @category Developer
+			 * @see mshop/group/manager/typo3/update/ansi
+			 * @see mshop/group/manager/typo3/newid/ansi
+			 * @see mshop/group/manager/typo3/delete/ansi
+			 * @see mshop/group/manager/typo3/search/ansi
+			 * @see mshop/group/manager/typo3/count/ansi
+			 */
+			$path = 'mshop/group/manager/typo3/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		}
+		else
+		{
+			/** mshop/group/manager/typo3/update/mysql
+			 * Updates an existing group record in the database
+			 *
+			 * @see mshop/group/manager/typo3/update/ansi
+			 */
 
-				/** mshop/group/manager/typo3/update/ansi
-				 * Updates an existing group record in the database
-				 *
-				 * Items which already have an ID (i.e. the ID is not NULL) will
-				 * be updated in the database.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the group item to the statement before
-				 * they are sent to the database server. The order of the columns
-				 * must correspond to the order in the save() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2015.08
-				 * @category Developer
-				 * @see mshop/group/manager/typo3/insert/ansi
-				 * @see mshop/group/manager/typo3/newid/ansi
-				 * @see mshop/group/manager/typo3/delete/ansi
-				 * @see mshop/group/manager/typo3/search/ansi
-				 * @see mshop/group/manager/typo3/count/ansi
-				 */
-				$path = 'mshop/group/manager/typo3/update';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
-			}
+			/** mshop/group/manager/typo3/update/ansi
+			 * Updates an existing group record in the database
+			 *
+			 * Items which already have an ID (i.e. the ID is not NULL) will
+			 * be updated in the database.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the group item to the statement before
+			 * they are sent to the database server. The order of the columns
+			 * must correspond to the order in the save() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for updating records
+			 * @since 2015.08
+			 * @category Developer
+			 * @see mshop/group/manager/typo3/insert/ansi
+			 * @see mshop/group/manager/typo3/newid/ansi
+			 * @see mshop/group/manager/typo3/delete/ansi
+			 * @see mshop/group/manager/typo3/search/ansi
+			 * @see mshop/group/manager/typo3/count/ansi
+			 */
+			$path = 'mshop/group/manager/typo3/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		}
 
-			$idx = 1;
-			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+		$idx = 1;
+		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			foreach( $columns as $name => $entry ) {
-				$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
-			}
+		foreach( $columns as $name => $entry ) {
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
+		}
 
-			$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getCode() );
-			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, time(), \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // mtime
+		$stmt->bind( $idx++, $this->pid, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( $idx++, $item->getCode() );
+		$stmt->bind( $idx++, $item->getLabel() );
+		$stmt->bind( $idx++, $time, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // mtime
 
-			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id );
-			} else {
-				$stmt->bind( $idx++, time(), \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // ctime
-			}
+		if( $id !== null ) {
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$item->setId( $id );
+		} else {
+			$stmt->bind( $idx++, $time, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // ctime
+		}
 
-			$stmt->execute()->finish();
+		$stmt->execute()->finish();
 
-			if( $id === null && $fetch === true )
-			{
-				/** mshop/group/manager/typo3/newid/mysql
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * @see mshop/group/manager/typo3/newid/ansi
-				 */
+		if( $id === null && $fetch === true )
+		{
+			/** mshop/group/manager/typo3/newid/mysql
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * @see mshop/group/manager/typo3/newid/ansi
+			 */
 
-				/** mshop/group/manager/typo3/newid/ansi
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * As soon as a new record is inserted into the database table,
-				 * the database server generates a new and unique identifier for
-				 * that record. This ID can be used for retrieving, updating and
-				 * deleting that specific record from the table again.
-				 *
-				 * For MySQL:
-				 *  SELECT LAST_INSERT_ID()
-				 * For PostgreSQL:
-				 *  SELECT currval('seq_mcus_id')
-				 * For SQL Server:
-				 *  SELECT SCOPE_IDENTITY()
-				 * For Oracle:
-				 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
-				 *
-				 * There's no way to retrive the new ID by a SQL statements that
-				 * fits for most database servers as they implement their own
-				 * specific way.
-				 *
-				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2015.08
-				 * @category Developer
-				 * @see mshop/group/manager/typo3/insert/ansi
-				 * @see mshop/group/manager/typo3/update/ansi
-				 * @see mshop/group/manager/typo3/delete/ansi
-				 * @see mshop/group/manager/typo3/search/ansi
-				 * @see mshop/group/manager/typo3/count/ansi
-				 */
-				$path = 'mshop/group/manager/typo3/newid';
-				$item->setId( $this->newId( $conn, $path ) );
-			}
+			/** mshop/group/manager/typo3/newid/ansi
+			 * Retrieves the ID generated by the database when inserting a new record
+			 *
+			 * As soon as a new record is inserted into the database table,
+			 * the database server generates a new and unique identifier for
+			 * that record. This ID can be used for retrieving, updating and
+			 * deleting that specific record from the table again.
+			 *
+			 * For MySQL:
+			 *  SELECT LAST_INSERT_ID()
+			 * For PostgreSQL:
+			 *  SELECT currval('seq_mcus_id')
+			 * For SQL Server:
+			 *  SELECT SCOPE_IDENTITY()
+			 * For Oracle:
+			 *  SELECT "seq_mcus_id".CURRVAL FROM DUAL
+			 *
+			 * There's no way to retrive the new ID by a SQL statements that
+			 * fits for most database servers as they implement their own
+			 * specific way.
+			 *
+			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @since 2015.08
+			 * @category Developer
+			 * @see mshop/group/manager/typo3/insert/ansi
+			 * @see mshop/group/manager/typo3/update/ansi
+			 * @see mshop/group/manager/typo3/delete/ansi
+			 * @see mshop/group/manager/typo3/search/ansi
+			 * @see mshop/group/manager/typo3/count/ansi
+			 */
+			$path = 'mshop/group/manager/typo3/newid';
+			$item->setId( $this->newId( $conn, $path ) );
+		}
 
 		return $item;
 	}
