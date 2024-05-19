@@ -39,8 +39,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->object->create();
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $this->object->create() );
 	}
 
 
@@ -83,6 +82,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
 		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID() );
 		$this->assertEquals( $item->getTitle(), $itemSaved->getTitle() );
@@ -113,6 +113,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getSalutation(), $itemUpd->getSalutation() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
 		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID() );
@@ -162,6 +163,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$conditions = array(
 			$search->compare( '!=', 'customer.address.id', null ),
 			$search->compare( '!=', 'customer.address.parentid', null ),
+			$search->compare( '==', 'customer.address.type', 'delivery' ),
 			$search->compare( '==', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.vatid', 'DE999999999' ),
 			$search->compare( '==', 'customer.address.salutation', 'mr' ),

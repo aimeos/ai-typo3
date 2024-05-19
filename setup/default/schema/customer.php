@@ -16,6 +16,7 @@ return array(
 			$table->id()->primary( 'pk_t3feuad_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
+			$table->type()->default( 'delivery' );
 			$table->string( 'company', 100 );
 			$table->string( 'vatid', 32 );
 			$table->string( 'salutation', 8 );

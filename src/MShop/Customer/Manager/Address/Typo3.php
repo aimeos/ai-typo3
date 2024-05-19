@@ -44,6 +44,11 @@ class Typo3
 			'type' => 'int',
 			'public' => false,
 		),
+		'customer.address.type' => array(
+			'label' => 'Address type',
+			'code' => 'customer.address.type',
+			'internalcode' => 'mcusad."type"',
+		),
 		'customer.address.company' => array(
 			'label' => 'Customer address company',
 			'code' => 'customer.address.company',
