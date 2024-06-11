@@ -41,6 +41,6 @@ class Typo3 implements Iface
 	 */
 	public function get( string $name ) : \Aimeos\Base\Mail\Iface
 	{
-        return new \Aimeos\Base\Mail\Typo3( $this->closure );
+		return new \Aimeos\Base\Mail\Typo3( $this->closure );
 	}
 }
