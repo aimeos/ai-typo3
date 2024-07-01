@@ -35,11 +35,10 @@ class Typo3 implements Iface
 	/**
 	 * Returns the mailer for the given name
 	 *
-	 * @param string $name Key for the mailer
+	 * @param string|null $name Key for the mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
-	 * @throws \Aimeos\Base\Mail\Exception If an error occurs
 	 */
-	public function get( string $name ) : \Aimeos\Base\Mail\Iface
+	public function get( string $name = null ) : \Aimeos\Base\Mail\Iface
 	{
 		return new \Aimeos\Base\Mail\Typo3( $this->closure );
 	}
