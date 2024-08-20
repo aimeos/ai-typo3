@@ -157,6 +157,17 @@ class Typo3
 
 
 	/**
+	 * Returns the additional column/search definitions
+	 *
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\Base\Criteria\Attribute\Iface
+	 */
+	public function getSaveAttributes() : array
+	{
+		return [];
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching
 	 *
 	 * @param bool $withsub Return attributes of sub-managers too if true
@@ -486,6 +497,6 @@ class Typo3
 			$values['group.ctime'] = $this->reverse['crdate']->reverse( $values['group.ctime'] );
 		}
 
-		return new \Aimeos\MShop\Group\Item\Standard( $values );
+		return new \Aimeos\MShop\Group\Item\Standard( 'group.', $values );
 	}
 }
