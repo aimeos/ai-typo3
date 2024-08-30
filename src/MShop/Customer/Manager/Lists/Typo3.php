@@ -29,7 +29,7 @@ class Typo3
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'customer', 'lists/' . $manager, ( $name === null ? 'Typo3' : $name ) );
+		return parent::getSubManager( $manager, $name ?: 'Typo3' );
 	}
 
 
