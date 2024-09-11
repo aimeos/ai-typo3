@@ -711,14 +711,7 @@ class Typo3
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
 		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$helper = $this->getPasswordHelper();
-		$values = $this->transform( $values );
-
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $values );
-
-		return new \Aimeos\MShop\Customer\Item\Standard(
-			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper
-		);
+		return parent::createItemBase( $this->transform( $values ), $listItems, $refItems, $addrItems, $propItems );
 	}
 
 
@@ -727,6 +720,7 @@ class Typo3
 	 *
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
 	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
+	 * @deprecated 2025.01 Use \Aimeos\Base\Password\Iface instead
 	 */
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
