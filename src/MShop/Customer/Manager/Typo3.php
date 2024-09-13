@@ -21,230 +21,8 @@ namespace Aimeos\MShop\Customer\Manager;
 class Typo3
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
-	private array $searchConfig = array(
-		'customer.id' => array(
-			'label' => 'Customer ID',
-			'code' => 'customer.id',
-			'internalcode' => 'mcus."uid"',
-			'type' => 'int',
-			'public' => false,
-		),
-		'customer.siteid' => array(
-			'code' => 'customer.siteid',
-			'internalcode' => 'mcus."siteid"',
-			'label' => 'Customer site ID',
-			'type'=> 'string',
-			'public' => false,
-		),
-		'customer.code' => array(
-			'label' => 'Customer username',
-			'code' => 'customer.code',
-			'internalcode' => 'mcus."username"',
-			'type' => 'string',
-		),
-		'customer.label' => array(
-			'label' => 'Customer name',
-			'code' => 'customer.label',
-			'internalcode' => 'mcus."name"',
-			'type' => 'string',
-		),
-		'customer.salutation' => array(
-			'label' => 'Customer salutation',
-			'code' => 'customer.salutation',
-			'internalcode' => 'mcus."gender"',
-			'type' => 'string',
-		),
-		'customer.company'=> array(
-			'label' => 'Customer company',
-			'code' => 'customer.company',
-			'internalcode' => 'mcus."company"',
-			'type' => 'string',
-		),
-		'customer.vatid'=> array(
-			'label' => 'Customer VAT ID',
-			'code' => 'customer.vatid',
-			'internalcode' => 'mcus."vatid"',
-			'type' => 'string',
-		),
-		'customer.title' => array(
-			'label' => 'Customer title',
-			'code' => 'customer.title',
-			'internalcode' => 'mcus."title"',
-			'type' => 'string',
-		),
-		'customer.firstname' => array(
-			'label' => 'Customer firstname',
-			'code' => 'customer.firstname',
-			'internalcode' => 'mcus."first_name"',
-			'type' => 'string',
-		),
-		'customer.lastname' => array(
-			'label' => 'Customer lastname',
-			'code' => 'customer.lastname',
-			'internalcode' => 'mcus."last_name"',
-			'type' => 'string',
-		),
-		'customer.address1' => array(
-			'label' => 'Customer address part one',
-			'code' => 'customer.address1',
-			'internalcode' => 'mcus."address"',
-			'type' => 'string',
-		),
-		'customer.address2' => array(
-			'label' => 'Customer address part two',
-			'code' => 'customer.address2',
-			'internalcode' => 'mcus."address"',
-			'type' => 'string',
-		),
-		'customer.address3' => array(
-			'label' => 'Customer address part three',
-			'code' => 'customer.address3',
-			'internalcode' => 'mcus."address"',
-			'type' => 'string',
-		),
-		'customer.postal' => array(
-			'label' => 'Customer postal',
-			'code' => 'customer.postal',
-			'internalcode' => 'mcus."zip"',
-			'type' => 'string',
-		),
-		'customer.city' => array(
-			'label' => 'Customer city',
-			'code' => 'customer.city',
-			'internalcode' => 'mcus."city"',
-			'type' => 'string',
-		),
-		'customer.state' => array(
-			'label' => 'Customer state',
-			'code' => 'customer.state',
-			'internalcode' => 'mcus."zone"',
-			'type' => 'string',
-		),
-		'customer.languageid' => array(
-			'label' => 'Customer language',
-			'code' => 'customer.languageid',
-			'internalcode' => 'mcus."language"',
-			'type' => 'string',
-		),
-		'customer.countryid' => array(
-			'label' => 'Customer country',
-			'code' => 'customer.countryid',
-			'internalcode' => 'mcus."static_info_country"',
-			'type' => 'string',
-		),
-		'customer.telephone' => array(
-			'label' => 'Customer telephone',
-			'code' => 'customer.telephone',
-			'internalcode' => 'mcus."telephone"',
-			'type' => 'string',
-		),
-		'customer.telefax' => array(
-			'label' => 'Customer telefax',
-			'code' => 'customer.telefax',
-			'internalcode' => 'mcus."fax"',
-			'type' => 'string',
-		),
-		'customer.mobile' => array(
-			'label' => 'Customer mobile number',
-			'code' => 'customer.mobile',
-			'internalcode' => 'mcus."mobile"',
-			'type' => 'string',
-		),
-		'customer.email' => array(
-			'label' => 'Customer email',
-			'code' => 'customer.email',
-			'internalcode' => 'mcus."email"',
-			'type' => 'string',
-		),
-		'customer.website' => array(
-			'label' => 'Customer website',
-			'code' => 'customer.website',
-			'internalcode' => 'mcus."www"',
-			'type' => 'string',
-		),
-		'customer.longitude' => array(
-			'label' => 'Customer longitude',
-			'code' => 'customer.longitude',
-			'internalcode' => 'mcus."longitude"',
-			'type' => 'float',
-		),
-		'customer.latitude' => array(
-			'label' => 'Customer latitude',
-			'code' => 'customer.latitude',
-			'internalcode' => 'mcus."latitude"',
-			'type' => 'float',
-		),
-		'customer.birthday' => array(
-			'label' => 'Customer birthday',
-			'code' => 'customer.birthday',
-			'internalcode' => 'mcus."date_of_birth"',
-			'type' => 'date',
-		),
-		'customer.password'=> array(
-			'label' => 'Customer password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-		),
-		'customer.status'=> array(
-			'label' => 'Customer status',
-			'code' => 'customer.status',
-			'internalcode' => 'mcus."disable"',
-			'type' => 'int',
-		),
-		'customer.dateverified'=> array(
-			'label' => 'Customer verification date',
-			'code' => 'customer.dateverified',
-			'internalcode' => 'mcus."vdate"',
-			'type' => 'date',
-		),
-		'customer.ctime'=> array(
-			'label' => 'Customer creation time',
-			'code' => 'customer.ctime',
-			'internalcode' => 'mcus."crdate"',
-			'type' => 'datetime',
-		),
-		'customer.mtime'=> array(
-			'label' => 'Customer modification time',
-			'code' => 'customer.mtime',
-			'internalcode' => 'mcus."tstamp"',
-			'type' => 'datetime',
-		),
-		// TYPO3 specific
-		'customer.groups'=> array(
-			'label' => 'Customer groups',
-			'internalcode' => 'mcus."usergroup"',
-			'type' => 'string',
-		),
-		'customer.editor'=> array(
-			'label' => 'Customer editor',
-			'code' => 'customer.editor',
-			'internalcode' => 'mcus."editor"',
-			'type' => 'string',
-		),
-		'customer:has' => array(
-			'code' => 'customer:has()',
-			'internalcode' => ':site AND :key AND mcusli."id"',
-			'internaldeps' => ['LEFT JOIN "fe_users_list" AS mcusli ON ( mcusli."parentid" = mcus."uid" )'],
-			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-			'type' => 'null',
-			'public' => false,
-		),
-		'customer:prop' => array(
-			'code' => 'customer:prop()',
-			'internalcode' => ':site AND :key AND mcuspr."id"',
-			'internaldeps' => ['LEFT JOIN "fe_users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."uid" )'],
-			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
-			'type' => 'null',
-			'public' => false,
-		),
-	);
-
-
-	private ?\Aimeos\MShop\Common\Helper\Password\Iface $helper = null;
 	private array $plugins = [];
 	private int $pid;
-
 
 
 	/**
@@ -256,18 +34,12 @@ class Typo3
 	{
 		parent::__construct( $context );
 
-		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Salutation();
-		$this->plugins['customer.salutation'] = $plugin;
-
-		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Status();
-		$this->plugins['customer.status'] = $plugin;
-
-		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Date();
-		$this->plugins['customer.birthday'] = $plugin;
-
 		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Datetime();
 		$this->plugins['customer.ctime'] = $plugin;
 		$this->plugins['customer.mtime'] = $plugin;
+		$this->plugins['customer.salutation'] = new \Aimeos\Base\Criteria\Plugin\T3Salutation();
+		$this->plugins['customer.status'] = new \Aimeos\Base\Criteria\Plugin\T3Status();
+		$this->plugins['customer.birthday'] = new \Aimeos\Base\Criteria\Plugin\T3Date();
 
 		/** mshop/customer/manager/typo3/pid-default
 		 * Page ID the customer records are assigned to
@@ -283,47 +55,6 @@ class Typo3
 		 * @see mshop/group/manager/typo3/pid-default
 		 */
 		$this->pid = (int) $context->config()->get( 'mshop/customer/manager/typo3/pid-default', 0 );
-
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/customer/manager/sitemode', $level );
-
-
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-
-			foreach( (array) ( $params[1] ?? '' ) as $type ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-				}
-			}
-
-			$sitestr = $this->siteString( 'mcusli."siteid"', $level );
-			$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-
-
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-			foreach( (array) $langs as $lang ) {
-				foreach( (array) ( $params[2] ?? '' ) as $val ) {
-					$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-				}
-			}
-
-			$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
-			$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
 	}
 
 
@@ -402,9 +133,8 @@ class Typo3
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'lists', 'property'];
 
-		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -416,25 +146,24 @@ class Typo3
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Customer\Item\Iface New site item object
+	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['customer.siteid'] = $values['customer.siteid'] ?? $this->context()->locale()->getSiteId();
-		return $this->createItemBase( $values );
+		return parent::create( $this->transform( $values ) );
 	}
 
 
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/typo3/delete';
-		return $this->deleteItemsBase( $itemIds, $path, true, 'uid' )->deleteRefItems( $itemIds );
+		return $this->deleteItemsBase( $items, $path, true, 'uid' )->deleteRefItems( $items );
 	}
 
 
@@ -446,8 +175,147 @@ class Typo3
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$path = 'mshop/customer/manager/submanagers';
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address'], $withsub );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
+
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'customer.id' => [
+				'label' => 'ID',
+				'internalcode' => 'uid',
+				'type' => 'int',
+				'public' => false,
+			],
+			'customer.code' => [
+				'label' => 'Username',
+				'internalcode' => 'username',
+			],
+			'customer.label' => [
+				'label' => 'Label',
+				'internalcode' => 'name',
+			],
+			'customer.salutation' => [
+				'label' => 'Salutation',
+				'internalcode' => 'gender',
+			],
+			'customer.firstname' => [
+				'label' => 'Firstname',
+				'internalcode' => 'first_name',
+			],
+			'customer.lastname' => [
+				'label' => 'Lastname',
+				'internalcode' => 'last_name',
+			],
+			'customer.address1' => [
+				'label' => 'Address part one',
+				'internalcode' => 'address',
+			],
+			'customer.address2' => [
+				'label' => 'Address part two',
+				'internalcode' => 'address',
+			],
+			'customer.address3' => [
+				'label' => 'Address part three',
+				'internalcode' => 'address',
+			],
+			'customer.postal' => [
+				'label' => 'Postal',
+				'internalcode' => 'zip',
+			],
+			'customer.state' => [
+				'label' => 'State',
+				'internalcode' => 'zone',
+			],
+			'customer.languageid' => [
+				'label' => 'Language',
+				'internalcode' => 'language',
+			],
+			'customer.countryid' => [
+				'label' => 'Country',
+				'internalcode' => 'static_info_country',
+			],
+			'customer.telefax' => [
+				'label' => 'Facsimile',
+				'internalcode' => 'fax',
+			],
+			'customer.website' => [
+				'label' => 'Web site',
+				'internalcode' => 'www',
+			],
+			'customer.birthday' => [
+				'label' => 'Birthday',
+				'internalcode' => 'date_of_birth',
+			],
+			'customer.status' => [
+				'label' => 'Status',
+				'internalcode' => 'disable',
+				'type' => 'int',
+			],
+			'customer.ctime' => [
+				'label' => 'Create date/time',
+				'internalcode' => 'crdate',
+				'type' => 'datetime',
+				'public' => false,
+			],
+			'customer.mtime' => [
+				'label' => 'Modify date/time',
+				'internalcode' => 'tstamp',
+				'type' => 'datetime',
+				'public' => false,
+			],
+			'customer:has' => [
+				'code' => 'customer:has()',
+				'internalcode' => ':site AND :key AND mcusli."id"',
+				'internaldeps' => ['LEFT JOIN "fe_users_list" AS mcusli ON ( mcusli."parentid" = mcus."uid" )'],
+				'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+
+					foreach( (array) ( $params[1] ?? '' ) as $type ) {
+						foreach( (array) ( $params[2] ?? '' ) as $id ) {
+							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+						}
+					}
+
+					$sitestr = $this->siteString( 'mcusli."siteid"', $level );
+					$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			],
+			'customer:prop' => [
+				'code' => 'customer:prop()',
+				'internalcode' => ':site AND :key AND mcuspr."id"',
+				'internaldeps' => ['LEFT JOIN "fe_users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."uid" )'],
+				'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
+
+					foreach( (array) $langs as $lang ) {
+						foreach( (array) ( $params[2] ?? '' ) as $val ) {
+							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
+						}
+					}
+
+					$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
+					$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			],
+			// TYPO3 specific
+			'customer.groups' => [
+				'label' => 'Customer groups',
+				'internalcode' => 'mcus."usergroup"',
+				'type' => 'string',
+			]
+		] ) );
 	}
 
 
@@ -460,11 +328,8 @@ class Typo3
 	 */
 	protected function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		if( !$item->isModified() )
-		{
-			$item = $this->savePropertyItems( $item, 'customer' );
-			$item = $this->saveAddressItems( $item, 'customer' );
-			return $this->saveListItems( $item, 'customer' );
+		if( !$item->isModified() ) {
+			return $this->saveDeps( $item, $fetch );
 		}
 
 		$context = $this->context();
@@ -541,15 +406,11 @@ class Typo3
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
-		$address = $billingAddress->getAddress1();
-
-		if( ( $part = $billingAddress->getAddress2() ) != '' ) {
-			$address .= ' ' . $part;
-		}
-
-		if( ( $part = $billingAddress->getAddress3() ) != '' ) {
-			$address .= ' ' . $part;
-		}
+		$address = join( ' ', array_filter( [
+			$billingAddress->getAddress1(),
+			$billingAddress->getAddress2(),
+			$billingAddress->getAddress3(),
+		] ) );
 
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -633,55 +494,26 @@ class Typo3
 			 * @see mshop/customer/manager/typo3/count
 			 */
 			$path = 'mshop/customer/manager/typo3/newid';
-			$item->setId( $this->newId( $conn, $path ) );
+			$id = $this->newId( $conn, $path );
 		}
 
-		$item = $this->savePropertyItems( $item, 'customer' );
-		$item = $this->saveAddressItems( $item, 'customer' );
-		return $this->saveListItems( $item, 'customer' );
+		return $this->saveDeps( $item->setId( $id ), $fetch );
 	}
 
 
 	/**
-	 * Returns the item objects matched by the given search criteria.
+	 * Returns the full configuration key for the passed last part
 	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
-	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
+	 * @param string $name Configuration last part
+	 * @return string Full configuration key
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
-		$conn = $this->context()->db( $this->getResourceName() );
-		$map = [];
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
-
-		$cfgPathSearch = 'mshop/customer/manager/typo3/search';
-		$cfgPathCount = 'mshop/customer/manager/typo3/count';
-		$required = array( 'customer' );
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
-
-		while( ( $row = $results->fetch() ) !== null ) {
-			$map[(string) $row['customer.id']] = $row;
+		if( $this->context()->config()->get( 'mshop/customer/manager/typo3/' . $name ) ) {
+			return 'mshop/customer/manager/typo3/' . $name;
 		}
 
-
-		$addrItems = [];
-		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
-		}
-
-		$propItems = []; $name = 'customer/property';
-		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
-		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer', $propTypes );
-		}
-
-		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
+		return parent::getConfigKey( $name, $default );
 	}
 
 
@@ -699,19 +531,24 @@ class Typo3
 
 
 	/**
-	 * Creates a new customer item.
+	 * Returns the name of the used table
 	 *
-	 * @param array $values List of attributes for customer item
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of referenced address items
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
-	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
+	 * @return string Table name
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
+	protected function getTable() : string
 	{
-		return parent::createItemBase( $this->transform( $values ), $listItems, $refItems, $addrItems, $propItems );
+		return 'fe_users';
+	}
+
+
+	/**
+	 * Returns the search plugins for transforming the search criteria
+	 *
+	 * @return \Aimeos\MW\Criteria\Plugin\Iface[] List of search plugins
+	 */
+	protected function searchPlugins() : array
+	{
+		return $this->plugins;
 	}
 
 
@@ -724,11 +561,7 @@ class Typo3
 	 */
 	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
-		if( $this->helper === null ) {
-			$this->helper = new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->context()->password()] );
-		}
-
-		return $this->helper;
+		return new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->context()->password()] );
 	}
 
 
