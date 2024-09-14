@@ -38,7 +38,7 @@ class Typo3
 	 *
 	 * @return string Table name e.g. "mshop_product_list_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'fe_users_list_type';
 	}
