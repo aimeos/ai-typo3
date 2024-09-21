@@ -162,8 +162,7 @@ class Typo3
 	 */
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$path = 'mshop/customer/manager/typo3/delete';
-		return $this->deleteItemsBase( $items, $path, true, 'uid' )->deleteRefItems( $items );
+		return $this->deleteItemsBase( $items, 'mshop/customer/manager/typo3/delete', true, 'uid' );
 	}
 
 

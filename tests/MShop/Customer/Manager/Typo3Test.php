@@ -13,22 +13,25 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $editor;
 	private $item;
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->editor = $this->context->editor();
 		$this->context->config()->set( 'mshop/customer/manager/typo3/pid-default', 999999 );
+
 		$this->object = new \Aimeos\MShop\Customer\Manager\Typo3( $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Lists( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Property( $this->object, $this->context );
+		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Address( $this->object, $this->context );
+		$this->object->setObject( $this->object );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->item );
+		unset( $this->object, $this->item, $this->context );
 	}
 
 
@@ -198,7 +201,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.editor', $this->context->editor() );
 
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.company', 'Example company' );
@@ -264,7 +267,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.position', 0 );
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->context->editor() );
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 
 		$search->setConditions( $search->and( $expr ) );
