@@ -206,7 +206,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.title', 'Dr' );
 		$expr[] = $search->compare( '==', 'customer.firstname', 'Our' );
 		$expr[] = $search->compare( '==', 'customer.lastname', 'Unittest' );
-		$expr[] = $search->compare( '==', 'customer.address1', 'Pickhuben 2-4' );
+		$expr[] = $search->compare( '=~', 'customer.address1', 'Pickhuben' );
 		$expr[] = $search->compare( '==', 'customer.postal', '20457' );
 		$expr[] = $search->compare( '==', 'customer.city', 'Hamburg' );
 		$expr[] = $search->compare( '==', 'customer.state', 'Hamburg' );

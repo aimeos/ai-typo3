@@ -541,15 +541,11 @@ class Typo3
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
-		$address = $billingAddress->getAddress1();
-
-		if( ( $part = $billingAddress->getAddress2() ) != '' ) {
-			$address .= ' ' . $part;
-		}
-
-		if( ( $part = $billingAddress->getAddress3() ) != '' ) {
-			$address .= ' ' . $part;
-		}
+		$address = join( '|', array_filter( [
+			$billingAddress->getAddress1(),
+			$billingAddress->getAddress2(),
+			$billingAddress->getAddress3(),
+		] ) );
 
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -768,6 +764,14 @@ class Typo3
 
 		if( array_key_exists( 'customer.groups', $values ) && $values['customer.groups'] !== '' ) {
 			$values['customer.groups'] = explode( ',', $values['customer.groups'] );
+		}
+
+		if( array_key_exists( 'customer.address1', $values ) )
+		{
+			$parts = explode( '|', (string) $values['customer.address1'] );
+			$values['customer.address1'] = $parts[0] ?? '';
+			$values['customer.address2'] = $parts[1] ?? '';
+			$values['customer.address3'] = join( ', ', array_slice( $parts, 2 ) );
 		}
 
 		return $values;
