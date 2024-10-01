@@ -405,7 +405,7 @@ class Typo3
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
-		$address = join( ' ', array_filter( [
+		$address = join( '|', array_filter( [
 			$billingAddress->getAddress1(),
 			$billingAddress->getAddress2(),
 			$billingAddress->getAddress3(),
@@ -594,6 +594,14 @@ class Typo3
 
 		if( array_key_exists( 'customer.groups', $values ) && $values['customer.groups'] !== '' ) {
 			$values['customer.groups'] = explode( ',', $values['customer.groups'] );
+		}
+
+		if( array_key_exists( 'customer.address1', $values ) )
+		{
+			$parts = explode( '|', (string) $values['customer.address1'] );
+			$values['customer.address1'] = $parts[0] ?? '';
+			$values['customer.address2'] = $parts[1] ?? '';
+			$values['customer.address3'] = join( ', ', array_slice( $parts, 2 ) );
 		}
 
 		return $values;
