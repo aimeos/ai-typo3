@@ -592,8 +592,8 @@ class Typo3
 			$values['customer.ctime'] = $this->plugins['customer.ctime']->reverse( $values['customer.ctime'] );
 		}
 
-		if( array_key_exists( 'customer.groups', $values ) && $values['customer.groups'] !== '' ) {
-			$values['customer.groups'] = explode( ',', $values['customer.groups'] );
+		if( array_key_exists( 'customer.groups', $values ) ) {
+			$values['customer.groups'] = $values['customer.groups'] !== '' ? explode( ',', $values['customer.groups'] ) : [];
 		}
 
 		if( array_key_exists( 'customer.address1', $values ) )
