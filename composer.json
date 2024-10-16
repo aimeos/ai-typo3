@@ -21,8 +21,8 @@
 		"aimeos/aimeos-core": "2024.10.*"
 	},
 	"require-dev": {
-		"typo3/cms-core": "~11.5||~12.3",
-		"typo3/cms-extbase": "~11.5||~12.3",
+		"typo3/cms-core": "~12.3||~13.4",
+		"typo3/cms-extbase": "~12.3||~13.4",
 		"phpunit/phpunit": "~10.0||~11.0"
 	},
 	"autoload": {
