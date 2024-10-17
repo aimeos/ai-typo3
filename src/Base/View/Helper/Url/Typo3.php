@@ -78,7 +78,7 @@ class Typo3
 		$useCHash = (bool) $this->getValue( $config, 'chash', false );
 
 		$this->uriBuilder->reset()
-			->setTargetPageUid( (int) ( $target ?: ( $GLOBALS['TSFE']->id ?? 0 ) ) )
+			->setTargetPageUid( (int) $target )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
@@ -87,11 +87,12 @@ class Typo3
 			->setSection( join( '/', $trailing ) );
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
-			return (string) $this->uriBuilder->buildBackendUri();
+			$url = (string) $this->uriBuilder->buildBackendUri();
+			return array_key_exists( 'id', $params ) ? $url : preg_replace(  '/\&id=[0-9]+/', '', $url ); // workaround for TYPO3 bug
 		}
 
 		$url = (string) $this->uriBuilder->buildFrontendUri();
-		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url );
+		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url ); // wokaround for bad TYPO3 behavior
 	}
 
 
