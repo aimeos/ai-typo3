@@ -59,13 +59,21 @@ class Typo3
 		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
 		$locale = $this->getValue( $params, 'locale' );
-		$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
-		$params['action'] = $action;
+
+		if( (bool) $this->getValue( $config, 'BE', false ) === false ) {
+			$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
+			$params['action'] = $action;
+		}
 
 		if( $this->prefix != '' && (bool) $this->getValue( $config, 'namespace', true ) === true ) {
 			$params = [$this->prefix => $params];
 		}
 		$params += $this->fixed;
+
+		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
+			$params['controller'] = $controller !== null ? ucfirst( $controller ) : null;
+			$params['action'] = $action;
+		}
 
 		if( ( $eid = $this->getValue( $config, 'eID' ) ) !== null ) {
 			$params['eID'] = $eid;
@@ -87,8 +95,7 @@ class Typo3
 			->setSection( join( '/', $trailing ) );
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
-			$url = (string) $this->uriBuilder->buildBackendUri();
-			return array_key_exists( 'id', $params ) ? $url : preg_replace(  '/\&id=[0-9]+/', '', $url ); // workaround for TYPO3 bug
+			return (string) $this->uriBuilder->buildBackendUri();
 		}
 
 		$url = (string) $this->uriBuilder->buildFrontendUri();
