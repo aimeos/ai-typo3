@@ -79,7 +79,7 @@ class Typo3
 			$params['eID'] = $eid;
 		}
 
-		if( $locale !== null ) {
+		if( $locale !== null && (bool) $this->getValue( $config, 'BE', false ) === false ) {
 			$params['L'] = $locale;
 		}
 
