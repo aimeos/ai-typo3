@@ -86,13 +86,16 @@ class Typo3
 		$useCHash = (bool) $this->getValue( $config, 'chash', false );
 
 		$this->uriBuilder->reset()
-			->setTargetPageUid( (int) $target )
 			->setCreateAbsoluteUri( (bool) $this->getValue( $config, 'absoluteUri', false ) )
 			->setTargetPageType( (int) $this->getValue( $config, 'type', 0 ) )
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) )
 			->setSection( join( '/', $trailing ) );
+
+		if( $target ) {
+			$this->uriBuilder->setTargetPageUid( (int) $target );
+		}
 
 		if( (bool) $this->getValue( $config, 'BE', false ) === true ) {
 			return (string) $this->uriBuilder->buildBackendUri();
