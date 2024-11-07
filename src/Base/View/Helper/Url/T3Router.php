@@ -24,6 +24,7 @@ class T3Router
 	implements \Aimeos\Base\View\Helper\Url\Iface
 {
 	private \TYPO3\CMS\Core\Routing\RouterInterface $router;
+	private ?string $pageid;
 	private array $fixed;
 
 
@@ -33,12 +34,15 @@ class T3Router
 	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \TYPO3\CMS\Core\Routing\RouterInterface $router TYPO3 page router
 	 * @param array $fixed Fixed parameters that should be added to each URL
+	 * @param string|null $pageid ID of the current page as default value
 	 */
-	public function __construct( \Aimeos\Base\View\Iface $view, \TYPO3\CMS\Core\Routing\RouterInterface $router, array $fixed )
+	public function __construct( \Aimeos\Base\View\Iface $view, \TYPO3\CMS\Core\Routing\RouterInterface $router,
+		array $fixed, ?string $pageid = null )
 	{
 		parent::__construct( $view );
 
 		$this->router = clone $router;
+		$this->pageid = $pageid;
 		$this->fixed = $fixed;
 	}
 
@@ -66,6 +70,6 @@ class T3Router
 
 		$abs = !empty( $config['absoluteUri'] ) ? RouterInterface::ABSOLUTE_URL : RouterInterface::ABSOLUTE_PATH;
 
-		return (string) $this->router->generateUri( $target, ['ai' => $params] + $this->fixed, join( '/', $trailing ), $abs );
+		return (string) $this->router->generateUri( $target ?: $this->pageid, ['ai' => $params] + $this->fixed, join( '/', $trailing ), $abs );
 	}
 }
