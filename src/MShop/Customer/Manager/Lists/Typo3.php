@@ -27,7 +27,7 @@ class Typo3
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return parent::getSubManager( $manager, $name ?: 'Typo3' );
 	}

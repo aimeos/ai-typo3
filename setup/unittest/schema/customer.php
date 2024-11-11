@@ -64,8 +64,8 @@ return array(
 			$table->text( 'comments' )->default( '' );
 			$table->text( 'felogin_redirectPid' )->length( 0xff )->default( '' );
 			$table->string( 'static_info_country' )->length( 3 )->default( '' );
-			$table->float( 'longitude' )->null( true );
-			$table->float( 'latitude' )->null( true );
+			$table->float( 'longitude' )->null( true )->default( null );
+			$table->float( 'latitude' )->null( true )->default( null );
 			$table->date( 'vdate' )->null( true );
 			$table->string( 'editor' )->default( '' );
 

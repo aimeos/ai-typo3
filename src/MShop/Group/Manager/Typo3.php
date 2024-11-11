@@ -188,7 +188,7 @@ class Typo3
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'group/group', $manager, ( $name === null ? 'Typo3' : $name ) );
 	}
@@ -368,7 +368,7 @@ class Typo3
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Group\Item\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->context();
@@ -471,7 +471,7 @@ class Typo3
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
+			while( $row = $results->fetch() ) {
 				$map[(string) $row['group.id']] = $this->createItemBase( $row );
 			}
 
