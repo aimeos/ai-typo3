@@ -38,7 +38,7 @@ class Typo3 implements Iface
 	 * @param string|null $name Key for the mailer
 	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function get( string $name = null ) : \Aimeos\Base\Mail\Iface
+	public function get( ?string $name = null ) : \Aimeos\Base\Mail\Iface
 	{
 		return new \Aimeos\Base\Mail\Typo3( $this->closure );
 	}

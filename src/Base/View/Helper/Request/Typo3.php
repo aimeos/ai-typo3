@@ -36,7 +36,7 @@ class Typo3
 	 * @param array $cookies List of uploaded files like in $_COOKIES
 	 * @param array $server List of uploaded files like in $_SERVER
 	 */
-	public function __construct( \Aimeos\Base\View\Iface $view, string $target = null, array $files = [],
+	public function __construct( \Aimeos\Base\View\Iface $view, ?string $target = null, array $files = [],
 		array $query = [], array $post = [], array $cookies = [], array $server = [] )
 	{
 		$this->target = $target;
