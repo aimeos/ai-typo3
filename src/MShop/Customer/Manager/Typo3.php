@@ -450,7 +450,7 @@ class Typo3
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $this->getUser()?->getSiteId() );
+			$stmt->bind( $idx++, (string) $context->user()?->getSiteId() );
 			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$item->setId( $id );
 		} else {
@@ -548,19 +548,6 @@ class Typo3
 	protected function searchPlugins() : array
 	{
 		return $this->plugins;
-	}
-
-
-	/**
-	 * Returns a password helper object based on the configuration.
-	 *
-	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
-	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
-	 * @deprecated 2025.01 Use \Aimeos\Base\Password\Iface instead
-	 */
-	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
-	{
-		return new \Aimeos\MShop\Common\Helper\Password\Typo3( ['object' => $this->context()->password()] );
 	}
 
 
