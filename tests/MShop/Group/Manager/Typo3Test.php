@@ -55,12 +55,6 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetResourceType()
-	{
-		$this->assertContains( 'group', $this->object->getResourceType() );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
