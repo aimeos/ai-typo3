@@ -100,7 +100,7 @@ class Typo3
 		}
 
 		$headers = function_exists( 'getallheaders' ) ? getallheaders() : $creator::getHeadersFromServer( $server );
-		$body = fopen('php://input', 'r') ?: null;
+		$body = fopen( 'php://input', 'r' ) ?: null;
 
 		$request = $creator->fromArrays( $server, $headers, $cookies, $query, $post, $files, $body );
 		$psr7files = $request->getUploadedFiles();
