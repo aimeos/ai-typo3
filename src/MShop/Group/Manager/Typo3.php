@@ -77,7 +77,7 @@ class Typo3
 		$this->plugins['ctime'] = $this->reverse['crdate'] = $plugin;
 		$this->plugins['mtime'] = $this->reverse['tstamp'] = $plugin;
 
-		/** mshop/manager/typo3/pid-default
+		/** mshop/group/manager/typo3/pid-default
 		 * Page ID the group records are assigned to
 		 *
 		 * In TYPO3, you can assign fe_group records to different sysfolders based
