@@ -82,10 +82,6 @@ class Typo3
 	 */
 	protected function createRequest( array $files, array $query, array $post, array $cookies, array $server ) : \Psr\Http\Message\ServerRequestInterface
 	{
-		if( !isset( $server['HTTP_HOST'] ) ) {
-			$server['HTTP_HOST'] = 'localhost';
-		}
-
 		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 
 		$creator = new \Nyholm\Psr7Server\ServerRequestCreator(
@@ -95,6 +91,24 @@ class Typo3
 			$psr17Factory  // StreamFactory
 		);
 
-		return $creator->fromGlobals();
+		if( !isset( $server['HTTP_HOST'] ) ) {
+			$server['HTTP_HOST'] = 'localhost';
+		}
+
+		if( !isset( $server['REQUEST_METHOD'] ) ) {
+			$server['REQUEST_METHOD'] = 'GET';
+		}
+
+		$headers = function_exists( 'getallheaders' ) ? getallheaders() : $creator::getHeadersFromServer( $server );
+		$body = fopen('php://input', 'r') ?: null;
+
+		$request = $creator->fromArrays( $server, $headers, $cookies, $query, $post, $files, $body );
+		$psr7files = $request->getUploadedFiles();
+
+		if( isset( $psr7files['ai'] ) ) {
+			$request = $request->withUploadedFiles( $psr7files['ai'] );
+		}
+
+		return $request;
 	}
 }
