@@ -37,12 +37,8 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter();
-		$search->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No list type item found' );
-		}
+		$search = $this->object->filter()->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
@@ -51,10 +47,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestInit' );
@@ -115,12 +108,11 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.lists.type.editor', 'core' );
 
-		$search->setConditions( $search->and( $expr ) );
-		$search->slice( 0, 1 );
-
+		$search->add( $search->and( $expr ) )->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

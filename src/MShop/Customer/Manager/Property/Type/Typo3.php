@@ -31,15 +31,4 @@ class Typo3
 	{
 		return parent::getSubManager( $manager, $name ?: 'Typo3' );
 	}
-
-
-	/**
-	 * Returns the name of the used table
-	 *
-	 * @return string Table name e.g. "mshop_product_list_type"
-	 */
-	protected function table() : string
-	{
-		return 'fe_users_property_type';
-	}
 }

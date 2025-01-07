@@ -52,31 +52,17 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No property type item found.' );
-		}
-
-		$actual = $this->object->get( $item->getId() );
-
-		$this->assertEquals( $item, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.property.type.editor', $this->editor ) );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -137,20 +123,20 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.property.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
+		$expr[] = $search->compare( '==', 'customer.property.type.editor', 'core' );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 
 
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.type.editor', $this->editor )
+			$search->compare( '==', 'customer.property.type.editor', 'core' )
 		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 1 );
+		$search->add( $search->and( $conditions ) )->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
