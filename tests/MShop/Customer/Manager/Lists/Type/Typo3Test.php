@@ -31,7 +31,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->create();
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Type\Item\Iface::class, $item );
 	}
 
 
