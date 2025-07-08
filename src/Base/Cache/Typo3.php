@@ -202,6 +202,8 @@ class Typo3
 			$expires = date_create()->add( $expires )->getTimestamp() - time();
 		} elseif( is_string( $expires ) ) {
 			$expires = date_create( $expires )->getTimestamp() - time();
+		} elseif( is_numeric( $expires ) ) {
+			$expires = (int) max( min( $expires, 2147483647 ), 0 );
 		}
 
 		$tagList = [];
