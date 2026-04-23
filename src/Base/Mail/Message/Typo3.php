@@ -250,15 +250,8 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	 */
 	public function text( string $message ) : Iface
 	{
-		if( $message )
-		{
-			$class = '\Symfony\Component\Mime\Email';
-
-			if( class_exists( $class ) && $this->object instanceof $class ) {
-				$this->object->text( $message, $this->charset );
-			} elseif( class_exists( '\Swift_Mailer' ) ) {
-				$this->object->setBody( $message );
-			}
+		if( $message ) {
+			$this->object->text( $message, $this->charset );
 		}
 
 		return $this;
@@ -273,15 +266,8 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	 */
 	public function html( string $message ) : Iface
 	{
-		if( $message )
-		{
-			$class = '\Symfony\Component\Mime\Email';
-
-			if( class_exists( $class ) && $this->object instanceof $class ) {
-				$this->object->html( $message, $this->charset );
-			} elseif( class_exists( '\Swift_Mailer' ) ) {
-				$this->object->addPart( $message, 'text/html' );
-			}
+		if( $message ) {
+			$this->object->html( $message, $this->charset );
 		}
 
 		return $this;
@@ -301,24 +287,10 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	{
 		if( $data )
 		{
-			$class = '\Symfony\Component\Mime\Email';
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
-			if( class_exists( $class ) && $this->object instanceof $class )
-			{
-				$this->object->attach( $data, $filename, $mimetype );
-			}
-			elseif( class_exists( '\Swift_Attachment' ) )
-			{
-				$part = \Swift_Attachment::newInstance( $data, $filename, $mimetype );
-				$part->setDisposition( $disposition );
-				$this->object->attach( $part );
-			}
-			else
-			{
-				throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
-			}
+			$this->object->attach( $data, $filename, $mimetype );
 		}
 
 		return $this;
@@ -337,24 +309,11 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	{
 		if( $data )
 		{
-			$class = '\Symfony\Component\Mime\Email';
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
-			if( class_exists( $class ) && $this->object instanceof $class )
-			{
-				$this->object->embed( $data, $filename, $mimetype );
-				return 'cid:' . $filename;
-			}
-			elseif( class_exists( '\Swift_EmbeddedFile' ) )
-			{
-				$part = \Swift_EmbeddedFile::newInstance( $data, $filename, $mimetype );
-				return $this->object->embed( $part );
-			}
-			else
-			{
-				throw new \RuntimeException( 'Symfony mailer or Swiftmailer package missing' );
-			}
+			$this->object->embed( $data, $filename, $mimetype );
+			return 'cid:' . $filename;
 		}
 
 		return '';

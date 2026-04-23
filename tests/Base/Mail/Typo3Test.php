@@ -10,6 +10,7 @@
 namespace Aimeos\Base\Mail;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;

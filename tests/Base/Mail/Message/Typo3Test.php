@@ -10,6 +10,7 @@
 namespace Aimeos\Base\Mail\Message;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -129,13 +130,19 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testAttach()
 	{
-		$this->markTestIncomplete( 'Swift_Attachment::newInstance() is not testable' );
+		$this->mock->expects( $this->once() )->method( 'attach' );
+
+		$result = $this->object->attach( 'test', 'test.txt', 'text/plain' );
+		$this->assertSame( $this->object, $result );
 	}
 
 
 	public function testEmbed()
 	{
-		$this->markTestIncomplete( 'Swift_EmbeddedFile::newInstance() is not testable' );
+		$this->mock->expects( $this->once() )->method( 'embed' );
+
+		$result = $this->object->embed( 'test', 'test.txt', 'text/plain' );
+		$this->assertEquals( 'cid:test.txt', $result );
 	}
 
 

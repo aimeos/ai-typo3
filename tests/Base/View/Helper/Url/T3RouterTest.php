@@ -36,7 +36,7 @@ class T3RouterTest extends \PHPUnit\Framework\TestCase
 		$mock = $this->getMockBuilder( 'TYPO3\CMS\Core\Routing\RouterInterface' )
 			->onlyMethods( array( 'generateUri', 'matchRequest' ) )->getMock();
 
-		$stub = $this->getMockBuilder( 'Psr\Http\Message\UriInterface' )->getMock();
+		$stub = $this->createStub( \Psr\Http\Message\UriInterface::class );
 
 		$mock->expects( $this->once() )->method( 'generateUri' )->willReturn( $stub );
 

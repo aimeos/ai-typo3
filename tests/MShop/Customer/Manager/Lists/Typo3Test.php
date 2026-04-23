@@ -59,6 +59,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
+		$item->set( 'customer.lists.ctime', null );
 		$item->setDomain( 'unittest' );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );

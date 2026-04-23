@@ -14,7 +14,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "^8.0.11",
+		"php": "~8.1",
 		"ext-fileinfo": "*",
 		"nyholm/psr7": "~1.2",
 		"nyholm/psr7-server": "~1.0",
@@ -23,7 +23,7 @@
 	"require-dev": {
 		"typo3/cms-core": "~12.3||~13.4",
 		"typo3/cms-extbase": "~12.3||~13.4",
-		"phpunit/phpunit": "~10.0||~11.0"
+		"phpunit/phpunit": "~10.0||~11.0||~12.0"
 	},
 	"autoload": {
 		"psr-4": {
