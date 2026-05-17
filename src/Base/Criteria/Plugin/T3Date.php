@@ -29,7 +29,7 @@ class T3Date implements \Aimeos\Base\Criteria\Plugin\Iface
 	 */
 	public function translate( $value, $type = null )
 	{
-		return ( $value !== null ? strtotime( $value ) : 0 );
+		return ( $value !== null ? strtotime( $value ) ?: 0 : 0 );
 	}
 
 

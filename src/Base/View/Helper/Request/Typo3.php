@@ -29,7 +29,7 @@ class Typo3
 	 * Initializes the request view helper.
 	 *
 	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
-	 * @param string|null TYPO3 target page ID
+	 * @type string|null TYPO3 target page ID
 	 * @param array $files List of uploaded files like in $_FILES
 	 * @param array $query List of uploaded files like in $_GET
 	 * @param array $post List of uploaded files like in $_POST
@@ -55,7 +55,7 @@ class Typo3
 	 */
 	public function getClientAddress() : string
 	{
-		return $this->ip;
+		return $this->ip ?? '';
 	}
 
 
@@ -102,10 +102,12 @@ class Typo3
 		$headers = function_exists( 'getallheaders' ) ? getallheaders() : $creator::getHeadersFromServer( $server );
 		$body = fopen( 'php://input', 'r' ) ?: null;
 
+		// @phpstan-ignore argument.type
 		$request = $creator->fromArrays( $server, $headers, $cookies, $query, $post, $files, $body );
 		$psr7files = $request->getUploadedFiles();
 
 		if( isset( $psr7files['ai'] ) ) {
+			// @phpstan-ignore argument.type
 			$request = $request->withUploadedFiles( $psr7files['ai'] );
 		}
 

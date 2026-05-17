@@ -50,6 +50,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->addFrom( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 			} else {
@@ -74,6 +75,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->addTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 			} else {
@@ -98,6 +100,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->addCc( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 			} else {
@@ -123,9 +126,12 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 
 			foreach( (array) $email as $addr )
 			{
+				// @phpstan-ignore instanceof.alwaysTrue
 				if( class_exists( $class ) && $this->object instanceof $class ) {
+					// @phpstan-ignore argument.type
 					$this->object->addBcc( new \Symfony\Component\Mime\Address( $addr ) );
 				} else {
+					// @phpstan-ignore argument.type
 					$this->object->addBcc( $addr );
 				}
 			}
@@ -148,6 +154,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->addReplyTo( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 			} else {
@@ -172,6 +179,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->getHeaders()->add( new \Symfony\Component\Mime\Header\UnstructuredHeader( $name, $value ) );
 			} else {
@@ -208,7 +216,9 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
+				// @phpstan-ignore argument.type
 				$this->object->setSender( new \Symfony\Component\Mime\Address( $email, (string) $name ) );
 			} else {
 				$this->object->setSender( $email, $name );
@@ -231,6 +241,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 		{
 			$class = '\Symfony\Component\Mime\Email';
 
+			// @phpstan-ignore instanceof.alwaysTrue
 			if( class_exists( $class ) && $this->object instanceof $class ) {
 				$this->object->setSubject( $subject );
 			} else {
@@ -290,6 +301,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
+			// @phpstan-ignore argument.type
 			$this->object->attach( $data, $filename, $mimetype );
 		}
 
@@ -312,6 +324,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
+			// @phpstan-ignore argument.type
 			$this->object->embed( $data, $filename, $mimetype );
 			return 'cid:' . $filename;
 		}

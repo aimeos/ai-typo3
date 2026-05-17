@@ -59,7 +59,6 @@ class Typo3
 		),
 	);
 
-	private array $plugins = [];
 	private array $reverse = [];
 	private int $pid;
 
@@ -74,8 +73,8 @@ class Typo3
 		parent::__construct( $context );
 
 		$plugin = new \Aimeos\Base\Criteria\Plugin\T3Datetime();
-		$this->plugins['ctime'] = $this->reverse['crdate'] = $plugin;
-		$this->plugins['mtime'] = $this->reverse['tstamp'] = $plugin;
+		$this->reverse['crdate'] = $plugin;
+		$this->reverse['tstamp'] = $plugin;
 
 		/** mshop/group/manager/typo3/pid-default
 		 * Page ID the group records are assigned to
@@ -85,7 +84,7 @@ class Typo3
 		 * therefore, you need to assign the correct page ID to groups
 		 * created or modified by the Aimeos admin backend.
 		 *
-		 * @param int TYPO3 page ID
+		 * @type int TYPO3 page ID
 		 * @since 2018.10
 		 * @see mshop/customer/manager/typo3/pid-default
 		 */
@@ -98,13 +97,14 @@ class Typo3
 	 * Removes old entries from the database
 	 *
 	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
+	 * @return static Same object for fluent interface
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'mshop/group/manager/submanagers';
 
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
+			// @phpstan-ignore argument.type
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -116,9 +116,9 @@ class Typo3
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/group/manager/typo3/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -141,7 +141,7 @@ class Typo3
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting items
+		 * @type string SQL statement for deleting items
 		 * @since 2015.08
 		 * @category Developer
 		 * @see mshop/group/manager/typo3/insert/ansi
@@ -242,7 +242,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/update/ansi
@@ -252,6 +252,7 @@ class Typo3
 			 * @see mshop/group/manager/typo3/count/ansi
 			 */
 			$path = 'mshop/group/manager/typo3/insert';
+			// @phpstan-ignore argument.type
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 		}
 		else
@@ -279,7 +280,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/insert/ansi
@@ -289,6 +290,7 @@ class Typo3
 			 * @see mshop/group/manager/typo3/count/ansi
 			 */
 			$path = 'mshop/group/manager/typo3/update';
+			// @phpstan-ignore argument.type
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
@@ -296,6 +298,7 @@ class Typo3
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
+			// @phpstan-ignore argument.type
 			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
@@ -342,7 +345,7 @@ class Typo3
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @type string SQL statement for retrieving the last inserted record ID
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/insert/ansi
@@ -364,7 +367,7 @@ class Typo3
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Group\Item\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
@@ -419,7 +422,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for searching items
+			 * @type string SQL statement for searching items
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/count
@@ -462,7 +465,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for counting items
+			 * @type string SQL statement for counting items
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/search

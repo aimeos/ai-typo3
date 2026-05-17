@@ -91,6 +91,7 @@ class Typo3
 			->setNoCache( (bool) $this->getValue( $config, 'nocache', false ) )
 			->setFormat( (string) $this->getValue( $config, 'format', '' ) )
 			->setArguments( $this->sanitize( $params ) )
+			// @phpstan-ignore argument.type
 			->setSection( join( '/', $trailing ) );
 
 		if( $target ) {
@@ -102,7 +103,7 @@ class Typo3
 		}
 
 		$url = (string) $this->uriBuilder->buildFrontendUri();
-		return $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url ); // wokaround for bad TYPO3 behavior
+		return (string) ( $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url ) ); // wokaround for bad TYPO3 behavior
 	}
 
 

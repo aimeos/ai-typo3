@@ -41,7 +41,7 @@ class Typo3 implements \Aimeos\Base\Password\Iface
 	 */
 	public function hash( string $password ) : string
 	{
-		return $this->hasher->getHashedPassword( $password );
+		return (string) $this->hasher->getHashedPassword( $password );
 	}
 
 

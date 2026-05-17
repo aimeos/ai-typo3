@@ -42,6 +42,7 @@ class Typo3 implements \Aimeos\Base\Mail\Iface
 	public function create( string $charset = 'UTF-8' ) : \Aimeos\Base\Mail\Message\Iface
 	{
 		$closure = $this->closure;
+		// @phpstan-ignore argument.type
 		return new \Aimeos\Base\Mail\Message\Typo3( $closure(), $charset );
 	}
 
@@ -53,7 +54,7 @@ class Typo3 implements \Aimeos\Base\Mail\Iface
 	 */
 	public function send( \Aimeos\Base\Mail\Message\Iface $message ) : Iface
 	{
-		$message->object()->send();
+		$message->object()->send(); // @phpstan-ignore method.notFound
 		return $this;
 	}
 }

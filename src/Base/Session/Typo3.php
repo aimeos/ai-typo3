@@ -92,6 +92,7 @@ class Typo3 extends Base implements \Aimeos\Base\Session\Iface
 	public function remove( array $names ) : Iface
 	{
 		foreach( $names as $name ) {
+			// @phpstan-ignore argument.type
 			$this->user->setAndSaveSessionData( $name, null );
 		}
 

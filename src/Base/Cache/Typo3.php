@@ -92,6 +92,7 @@ class Typo3
 	public function deleteMultiple( iterable $keys ) : bool
 	{
 		foreach( $keys as $key ) {
+			// @phpstan-ignore argument.type
 			$this->object->remove( $key );
 		}
 
@@ -112,6 +113,7 @@ class Typo3
 	public function deleteByTags( iterable $tags ) : bool
 	{
 		foreach( $tags as $tag ) {
+			// @phpstan-ignore argument.type
 			$this->object->flushByTag( $tag );
 		}
 
@@ -156,6 +158,7 @@ class Typo3
 
 		foreach( $keys as $key )
 		{
+			// @phpstan-ignore argument.type
 			if( ( $entry = $this->object->get( $key ) ) !== false ) {
 				$result[$key] = $entry;
 			} else {
@@ -234,6 +237,7 @@ class Typo3
 	public function setMultiple( iterable $pairs, $expires = null, iterable $tags = [] ) : bool
 	{
 		foreach( $pairs as $key => $value ) {
+			// @phpstan-ignore argument.type
 			$this->set( $key, $value, $expires, $tags );
 		}
 

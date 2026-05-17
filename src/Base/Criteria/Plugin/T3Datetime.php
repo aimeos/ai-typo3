@@ -29,7 +29,7 @@ class T3Datetime implements \Aimeos\Base\Criteria\Plugin\Iface
 	 */
 	public function translate( $value, $type = null )
 	{
-		return ( $value != null ? strtotime( $value ) : 0 );
+		return ( $value != null ? strtotime( $value ) ?: 0 : 0 );
 	}
 
 
@@ -42,6 +42,6 @@ class T3Datetime implements \Aimeos\Base\Criteria\Plugin\Iface
 	 */
 	public function reverse( $value, $type = null )
 	{
-		return ( $value != 0 ? date( 'Y-m-d H:i:s', $value ) : null );
+		return ( $value != 0 ? date( 'Y-m-d H:i:s', $value ) : '' );
 	}
 }

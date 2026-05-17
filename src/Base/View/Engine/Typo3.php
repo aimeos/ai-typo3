@@ -20,7 +20,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
  */
 class Typo3 implements Iface
 {
-	private $view;
+	private \TYPO3Fluid\Fluid\View\ViewInterface $view;
 
 
 	/**
@@ -50,6 +50,6 @@ class Typo3 implements Iface
 		$fluid->assign( '_aimeos_view', $view );
 		$fluid->assignMultiple( $values );
 
-		return $fluid->render();
+		return (string) $fluid->render();
 	}
 }
