@@ -198,7 +198,9 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	 */
 	public function send() : Iface
 	{
-		$this->object->send();
+		\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        		\TYPO3\CMS\Core\Mail\Mailer::class
+		)->send($this->object);
 		return $this;
 	}
 
