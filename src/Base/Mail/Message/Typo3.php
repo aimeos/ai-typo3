@@ -21,6 +21,7 @@ namespace Aimeos\Base\Mail\Message;
 class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 {
 	private \TYPO3\CMS\Core\Mail\MailMessage $object;
+	private \Symfony\Component\Mailer\MailerInterface $mailer;
 	private string $charset;
 
 
@@ -28,11 +29,13 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	 * Initializes the message instance.
 	 *
 	 * @param \TYPO3\CMS\Core\Mail\MailMessage $object TYPO3 mail object
+	 * @param \Symfony\Component\Mailer\MailerInterface $mailer TYPO3 mailer for sending the message
 	 * @param string $charset Default charset of the message
 	 */
-	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object, string $charset )
+	public function __construct( \TYPO3\CMS\Core\Mail\MailMessage $object, \Symfony\Component\Mailer\MailerInterface $mailer, string $charset )
 	{
 		$this->charset = $charset;
+		$this->mailer = $mailer;
 		$this->object = $object;
 	}
 
@@ -190,7 +193,7 @@ class Typo3 implements \Aimeos\Base\Mail\Message\Iface
 	 */
 	public function send() : Iface
 	{
-		$this->object->send();
+		$this->mailer->send( $this->object );
 		return $this;
 	}
 

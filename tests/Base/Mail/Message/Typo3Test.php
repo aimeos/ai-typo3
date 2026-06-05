@@ -15,6 +15,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;
+	private $mailer;
 
 
 	protected function setUp() : void
@@ -27,13 +28,17 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\Base\Mail\Message\Typo3( $this->mock, 'UTF-8' );
+		$this->mailer = $this->getMockBuilder( 'Symfony\\Component\\Mailer\\MailerInterface' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this->object = new \Aimeos\Base\Mail\Message\Typo3( $this->mock, $this->mailer, 'UTF-8' );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->mock );
+		unset( $this->object, $this->mock, $this->mailer );
 	}
 
 
@@ -84,7 +89,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSend()
 	{
-		$this->mock->expects( $this->once() )->method( 'send' );
+		$this->mailer->expects( $this->once() )->method( 'send' )->with( $this->mock );
 		$this->assertSame( $this->object, $this->object->send() );
 	}
 
