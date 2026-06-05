@@ -13,6 +13,7 @@ namespace Aimeos\Base\Mail\Manager;
 class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
+	private $mailer;
 
 
 	protected function setUp() : void
@@ -24,12 +25,16 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$this->mock = $this->getMockBuilder( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->mailer = $this->getMockBuilder( 'Symfony\\Component\\Mailer\\MailerInterface' )
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 
 	public function testGet()
 	{
-		$object = new \Aimeos\Base\Mail\Manager\Typo3( fn() => $this->mock );
+		$object = new \Aimeos\Base\Mail\Manager\Typo3( fn() => $this->mock, $this->mailer );
 		$this->assertInstanceOf( \Aimeos\Base\Mail\Iface::class, $object->get( '' ) );
 	}
 }

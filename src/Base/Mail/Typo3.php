@@ -21,15 +21,18 @@ namespace Aimeos\Base\Mail;
 class Typo3 implements \Aimeos\Base\Mail\Iface
 {
 	private \Closure $closure;
+	private \Symfony\Component\Mailer\MailerInterface $mailer;
 
 	/**
 	 * Initializes the instance of the class.
 	 *
 	 * @param \Closure $closure Closure generating TYPO3 mail message objects
+	 * @param \Symfony\Component\Mailer\MailerInterface $mailer TYPO3 mailer for sending the messages
 	 */
-	public function __construct( \Closure $closure )
+	public function __construct( \Closure $closure, \Symfony\Component\Mailer\MailerInterface $mailer )
 	{
 		$this->closure = $closure;
+		$this->mailer = $mailer;
 	}
 
 
@@ -43,7 +46,7 @@ class Typo3 implements \Aimeos\Base\Mail\Iface
 	{
 		$closure = $this->closure;
 		// @phpstan-ignore argument.type
-		return new \Aimeos\Base\Mail\Message\Typo3( $closure(), $charset );
+		return new \Aimeos\Base\Mail\Message\Typo3( $closure(), $this->mailer, $charset );
 	}
 
 
@@ -54,7 +57,7 @@ class Typo3 implements \Aimeos\Base\Mail\Iface
 	 */
 	public function send( \Aimeos\Base\Mail\Message\Iface $message ) : Iface
 	{
-		$message->object()->send(); // @phpstan-ignore method.notFound
+		$this->mailer->send( $message->object() );
 		return $this;
 	}
 }

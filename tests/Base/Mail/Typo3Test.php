@@ -15,6 +15,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;
+	private $mailer;
 
 
 	protected function setUp() : void
@@ -27,7 +28,11 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\Base\Mail\Typo3( function() use ( $mock ) { return $mock; } );
+		$this->mailer = $this->getMockBuilder( 'Symfony\\Component\\Mailer\\MailerInterface' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this->object = new \Aimeos\Base\Mail\Typo3( function() use ( $mock ) { return $mock; }, $this->mailer );
 		$this->mock = $mock;
 	}
 
@@ -41,7 +46,7 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 
 	public function testSend()
 	{
-		$this->mock->expects( $this->once() )->method( 'send' );
+		$this->mailer->expects( $this->once() )->method( 'send' )->with( $this->mock );
 
 		$this->object->send( $this->object->create() );
 	}
