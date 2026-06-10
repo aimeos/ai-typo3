@@ -98,9 +98,9 @@ class Typo3
 	 * Removes old entries from the database
 	 *
 	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
+	 * @return static Same object for fluent interface
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'mshop/group/manager/submanagers';
 
@@ -116,9 +116,9 @@ class Typo3
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/group/manager/typo3/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
