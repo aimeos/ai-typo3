@@ -449,7 +449,8 @@ class Typo3
 		$stmt->bind( $idx++, $billingAddress->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 		$stmt->bind( $idx++, $this->plugins['customer.birthday']->translate( $billingAddress->getBirthday() ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( $idx++, $this->plugins['customer.status']->translate( $item->getStatus() ), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( $idx++, $item->getPassword() );
+		// Password hash is write-only, NULL keeps the stored one when updating
+		$stmt->bind( $idx++, $id === null ? $item->getPassword() : ( $item->getPassword() ?: null ) );
 		$stmt->bind( $idx++, $time, \Aimeos\Base\DB\Statement\Base::PARAM_INT ); // Modification time
 		$stmt->bind( $idx++, $billingAddress->getCountryId() );
 		// @phpstan-ignore argument.type
