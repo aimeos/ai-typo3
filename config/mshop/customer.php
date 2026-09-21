@@ -69,7 +69,7 @@ return array(
 						"name" = ?, "username" = ?, "gender" = ?, "company" = ?, "vatid" = ?, "title" = ?,
 						"first_name" = ?, "last_name" = ?, "address" = ?, "zip" = ?, "city" = ?, "zone" = ?,
 						"language" = ?, "telephone" = ?, "mobile" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
-						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
+						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = COALESCE( ?, "password" ), "tstamp" = ?,
 						"static_info_country" = ?, "usergroup" = ?, "pid" = ?, "editor" = ?
 					WHERE ( "siteid" LIKE ? OR siteid = ? ) AND "uid" = ?
 				',
