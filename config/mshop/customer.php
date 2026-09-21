@@ -667,7 +667,7 @@ return array(
 						"name" = ?, "username" = ?, "gender" = ?, "company" = ?, "vatid" = ?, "title" = ?,
 						"first_name" = ?, "last_name" = ?, "address" = ?, "zip" = ?, "city" = ?, "zone" = ?,
 						"language" = ?, "telephone" = ?, "mobile" = ?, "email" = ?, "fax" = ?, "www" = ?, "longitude" = ?,
-						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = ?, "tstamp" = ?,
+						"latitude" = ?, "date_of_birth" = ?, "disable" = ?, "password" = COALESCE( ?, "password" ), "tstamp" = ?,
 						"static_info_country" = ?, "usergroup" = ?, "pid" = ?
 					WHERE ( "siteid" LIKE ? OR siteid = ? ) AND "uid" = ?
 				',
@@ -686,7 +686,7 @@ return array(
 						mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
 						mcus."fax" AS "customer.telefax", mcus."www" AS "customer.website",
 						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
-						mcus."password" AS "customer.password", mcus."date_of_birth" AS "customer.birthday",
+						mcus."date_of_birth" AS "customer.birthday",
 						mcus."usergroup" as "customer.groups", mcus."pid" AS "typo3.pageid",
 						mcus."disable" AS "customer.status", mcus."crdate" AS "customer.ctime",
 						mcus."tstamp" AS "customer.mtime", mcus."mobile" AS "customer.mobile"
@@ -698,7 +698,7 @@ return array(
 						mcus."uid", mcus."siteid", mcus."name", mcus."gender", mcus."username", mcus."title",
 						mcus."company", mcus."vatid", mcus."first_name", mcus."last_name", mcus."address", mcus."zip",
 						mcus."city", mcus."zone", mcus."static_info_country", mcus."language", mcus."telephone", mcus."email",
-						mcus."fax", mcus."www", mcus."longitude", mcus."latitude", mcus."password", mcus."date_of_birth",
+						mcus."fax", mcus."www", mcus."longitude", mcus."latitude", mcus."date_of_birth",
 						mcus."usergroup", mcus."pid", mcus."disable", mcus."crdate", mcus."tstamp", mcus."mobile"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -716,7 +716,7 @@ return array(
 						mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
 						mcus."fax" AS "customer.telefax", mcus."www" AS "customer.website",
 						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
-						mcus."password" AS "customer.password", mcus."date_of_birth" AS "customer.birthday",
+						mcus."date_of_birth" AS "customer.birthday",
 						mcus."usergroup" as "customer.groups", mcus."pid" AS "typo3.pageid",
 						mcus."disable" AS "customer.status", mcus."crdate" AS "customer.ctime",
 						mcus."tstamp" AS "customer.mtime", mcus."mobile" AS "customer.mobile"
