@@ -5,9 +5,9 @@
 version: 2.1
 
 jobs:
-  "php80-mysql80":
+  "php83-mysql80":
     docker:
-      - image: aimeos/ci-php:8.0
+      - image: aimeos/ci-php:8.3
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
@@ -20,11 +20,11 @@ jobs:
       - run: cd .. && mv project aimeos-core/ext/ai-typo3 && mv aimeos-core project && cd project
       - restore_cache:
           keys:
-            - php80-{{ checksum "composer.json" }}
-      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
+            - php83-{{ checksum "composer.json" }}
+      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^6.4" "typo3/cms-core:^12.4"
       - run: composer update -n --no-plugins --prefer-dist
       - save_cache:
-          key: php80-{{ checksum "composer.json" }}
+          key: php83-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
@@ -46,7 +46,7 @@ jobs:
       - restore_cache:
           keys:
             - php81-{{ checksum "composer.json" }}
-      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
+      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^6.4" "typo3/cms-core:^12.4"
       - run: composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
@@ -72,7 +72,7 @@ jobs:
       - restore_cache:
           keys:
             - php82-{{ checksum "composer.json" }}
-      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
+      - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^6.4" "typo3/cms-core:^12.4"
       - run: composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php82-{{ checksum "composer.json" }}
@@ -86,6 +86,6 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php80-mysql80"
+      - "php83-mysql80"
       - "php81-mysql80"
       - "php82-mysql80"
