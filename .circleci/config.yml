@@ -22,7 +22,7 @@ jobs:
           keys:
             - php72-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php72-{{ checksum "composer.json" }}
           paths: [./vendor]
@@ -46,7 +46,7 @@ jobs:
           keys:
             - php73-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php73-{{ checksum "composer.json" }}
           paths: [./vendor]
@@ -71,7 +71,7 @@ jobs:
           keys:
             - php74-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^10.4"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
           paths: [./vendor]
@@ -96,7 +96,7 @@ jobs:
           keys:
             - php80-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php80-{{ checksum "composer.json" }}
           paths: [./vendor]
@@ -121,7 +121,7 @@ jobs:
           keys:
             - php81-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
           paths: [./vendor]
@@ -147,7 +147,7 @@ jobs:
           keys:
             - php82-{{ checksum "composer.json" }}
       - run: composer req --no-plugins --no-update "nyholm/psr7-server:^1.0" "nyholm/psr7:^1.2" "symfony/mailer:^5.0" "typo3/cms-core:^11.5"
-      - run: composer update -n --no-plugins --prefer-dist
+      - run: COMPOSER_NO_SECURITY_BLOCKING=1 composer update -n --no-plugins --prefer-dist
       - save_cache:
           key: php82-{{ checksum "composer.json" }}
           paths: [./vendor]
