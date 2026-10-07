@@ -105,6 +105,21 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testVerify()
+	{
+		$item = $this->object->save( $this->object->find( 'test@example.com' )->setId( null )->setCode( 'unitTest' )->setPassword( 'secret' ) );
+		$loaded = $this->object->get( $item->getId() );
+
+		$valid = $this->object->verify( $loaded, 'secret' );
+		$invalid = $this->object->verify( $loaded, 'wrong' );
+
+		$this->object->delete( $item->getId() );
+
+		$this->assertTrue( $valid );
+		$this->assertFalse( $invalid );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter();

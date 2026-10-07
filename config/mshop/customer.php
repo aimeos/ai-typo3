@@ -118,6 +118,11 @@ return array(
 					) AS list
 				',
 			),
+			'password' => array(
+				'ansi' => '
+					SELECT "password" FROM "fe_users" WHERE "uid" = ?
+				',
+			),
 			'newid' => array(
 				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 				'mysql' => 'SELECT LAST_INSERT_ID()',
