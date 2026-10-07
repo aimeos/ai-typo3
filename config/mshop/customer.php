@@ -11,7 +11,7 @@ return array(
 		'typo3' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("val") AS "count"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "fe_users" mcus
@@ -24,7 +24,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("val") AS "count"
+					SELECT :keys, :type("val") AS "value", COUNT(*) AS "_total"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "fe_users" mcus
