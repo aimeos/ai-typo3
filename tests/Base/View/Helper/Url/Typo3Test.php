@@ -230,4 +230,41 @@ class Typo3Test extends \PHPUnit\Framework\TestCase
 		$mock->expects( $this->never() )->method( 'reset' );
 		$this->assertEquals( '', $object->transform( null, null, null, [], [], [] ) );
 	}
+
+
+	public function testTransformRemoveCHash()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+			->onlyMethods( ['buildFrontendUri'] )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( $this->exactly( 3 ) )->method( 'buildFrontendUri' )->willReturnOnConsecutiveCalls(
+			'/shop?ai%5Bd_name%5D=test&cHash=' . str_repeat( 'a1', 16 ),
+			'/shop?ai%5Bd_name%5D=test&cHash=' . str_repeat( 'b2', 32 ) . '#section',
+			'/shop?cHash=' . str_repeat( 'c3', 32 )
+		);
+
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
+
+		$this->assertEquals( '/shop?ai%5Bd_name%5D=test', $object->transform() );
+		$this->assertEquals( '/shop?ai%5Bd_name%5D=test#section', $object->transform() );
+		$this->assertEquals( '/shop', $object->transform() );
+	}
+
+
+	public function testTransformKeepCHash()
+	{
+		$mock = $this->getMockBuilder( 'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder' )
+			->onlyMethods( ['buildFrontendUri'] )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$url = '/shop?ai%5Bd_name%5D=test&cHash=' . str_repeat( 'b2', 32 );
+		$mock->expects( $this->once() )->method( 'buildFrontendUri' )->willReturn( $url );
+
+		$object = new \Aimeos\Base\View\Helper\Url\Typo3( $this->view, $mock, [] );
+
+		$this->assertEquals( $url, $object->transform( null, null, null, [], [], ['chash' => true] ) );
+	}
 }

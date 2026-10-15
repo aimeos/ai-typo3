@@ -103,7 +103,7 @@ class Typo3
 		}
 
 		$url = (string) $this->uriBuilder->buildFrontendUri();
-		return (string) ( $useCHash ? $url : preg_replace( '/\&cHash=[0-9a-f]{32}/', '', $url ) ); // wokaround for bad TYPO3 behavior
+		return (string) ( $useCHash ? $url : preg_replace( '/[?&]cHash=[0-9a-f]+/', '', $url ) ); // wokaround for bad TYPO3 behavior
 	}
 
 
