@@ -50,7 +50,7 @@ class Typo3
 		 * to the user records so they are allowed to log in after they are created
 		 * or modified by Aimeos.
 		 *
-		 * @type int TYPO3 page ID
+		 * @param int TYPO3 page ID
 		 * @since 2016.10
 		 * @see mshop/group/manager/typo3/pid-default
 		 */
@@ -69,13 +69,13 @@ class Typo3
 	 */
 	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, ?string $value = null, ?string $type = null ) : \Aimeos\Map
 	{
-		/** mshop/customer/manager/typo3//aggregate/mysql
+		/** mshop/customer/manager/typo3/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
-		 * @see mshop/customer/manager/typo3//aggregate/ansi
+		 * @see mshop/customer/manager/typo3/aggregate/ansi
 		 */
 
-		/** mshop/customer/manager/typo3//aggregate/ansi
+		/** mshop/customer/manager/typo3/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -113,7 +113,7 @@ class Typo3
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for aggregating customer items
+		 * @param string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @category Developer
 		 * @see mshop/customer/manager/typo3//insert/ansi
@@ -371,7 +371,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
 			 * @see mshop/customer/manager/typo3/update
@@ -403,7 +403,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @category Developer
 			 * @see mshop/customer/manager/typo3/insert
@@ -498,7 +498,7 @@ class Typo3
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @type string SQL statement for retrieving the last inserted record ID
+			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @category Developer
 			 * @see mshop/customer/manager/typo3/insert

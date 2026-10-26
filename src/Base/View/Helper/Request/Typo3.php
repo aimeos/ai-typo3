@@ -29,7 +29,7 @@ class Typo3
 	 * Initializes the request view helper.
 	 *
 	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
-	 * @type string|null TYPO3 target page ID
+	 * @param string|null $target TYPO3 target page ID
 	 * @param array $files List of uploaded files like in $_FILES
 	 * @param array $query List of uploaded files like in $_GET
 	 * @param array $post List of uploaded files like in $_POST

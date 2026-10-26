@@ -84,7 +84,7 @@ class Typo3
 		 * therefore, you need to assign the correct page ID to groups
 		 * created or modified by the Aimeos admin backend.
 		 *
-		 * @type int TYPO3 page ID
+		 * @param int TYPO3 page ID
 		 * @since 2018.10
 		 * @see mshop/customer/manager/typo3/pid-default
 		 */
@@ -141,7 +141,7 @@ class Typo3
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for deleting items
+		 * @param string SQL statement for deleting items
 		 * @since 2015.08
 		 * @category Developer
 		 * @see mshop/group/manager/typo3/insert/ansi
@@ -242,7 +242,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/update/ansi
@@ -280,7 +280,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/insert/ansi
@@ -345,7 +345,7 @@ class Typo3
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @type string SQL statement for retrieving the last inserted record ID
+			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/insert/ansi
@@ -367,7 +367,7 @@ class Typo3
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domain items that should be fetched too
-	 * @type int|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Group\Item\Iface
 	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
@@ -422,7 +422,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for searching items
+			 * @param string SQL statement for searching items
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/count
@@ -465,7 +465,7 @@ class Typo3
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for counting items
+			 * @param string SQL statement for counting items
 			 * @since 2015.08
 			 * @category Developer
 			 * @see mshop/group/manager/typo3/search
